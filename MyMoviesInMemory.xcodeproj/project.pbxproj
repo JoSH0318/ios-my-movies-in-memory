@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		03124781295B711B00106F21 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03124780295B711B00106F21 /* Endpoint.swift */; };
 		03124783295B739000106F21 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03124782295B739000106F21 /* NetworkError.swift */; };
+		03124785295B74DC00106F21 /* NetworkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03124784295B74DC00106F21 /* NetworkProvider.swift */; };
 		03124787295B892100106F21 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03124786295B892100106F21 /* HTTPMethod.swift */; };
 		0397EEC529379E9800D1482E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0397EEC429379E9800D1482E /* AppDelegate.swift */; };
 		0397EEC729379E9800D1482E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0397EEC629379E9800D1482E /* SceneDelegate.swift */; };
@@ -21,6 +22,7 @@
 /* Begin PBXFileReference section */
 		03124780295B711B00106F21 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		03124782295B739000106F21 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		03124784295B74DC00106F21 /* NetworkProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProvider.swift; sourceTree = "<group>"; };
 		03124786295B892100106F21 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		0397EEC129379E9800D1482E /* MyMoviesInMemory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyMoviesInMemory.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0397EEC429379E9800D1482E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 		039F56662952119500353720 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				03124784295B74DC00106F21 /* NetworkProvider.swift */,
 				03124780295B711B00106F21 /* Endpoint.swift */,
 				03124786295B892100106F21 /* HTTPMethod.swift */,
 				03124782295B739000106F21 /* NetworkError.swift */,
@@ -257,6 +260,7 @@
 				03124781295B711B00106F21 /* Endpoint.swift in Sources */,
 				0397EEC729379E9800D1482E /* SceneDelegate.swift in Sources */,
 				03124783295B739000106F21 /* NetworkError.swift in Sources */,
+				03124785295B74DC00106F21 /* NetworkProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
