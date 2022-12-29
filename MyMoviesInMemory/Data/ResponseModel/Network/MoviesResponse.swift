@@ -37,4 +37,16 @@ struct MovieItem: Decodable {
         case title, link, subtitle, pubDate, director, actor, userRating
         case imageUrl = "image"
     }
+    
+    func toDomain() -> Movie {
+        return Movie(
+            title: self.title ?? "",
+            subtitle: self.subtitle ?? "",
+            imageUrl: self.imageUrl ?? "",
+            openingYear: self.pubDate ?? "",
+            director: self.director ?? "",
+            actor: self.actor ?? "",
+            userRating: self.userRating ?? ""
+        )
+    }
 }
