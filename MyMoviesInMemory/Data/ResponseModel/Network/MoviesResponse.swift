@@ -8,31 +8,30 @@
 import Foundation
 
 struct MoviesResponse: Decodable {
-    let lastBuildDate: String
-    let totalCount: Int
-    let startPage: Int
-    let moviesPerPage: Int
-    let movies: [Movie]
+    let lastBuildDate: String?
+    let totalCount: Int?
+    let startPage: Int?
+    let moviesPerPage: Int?
+    let items: [MovieItem]?
     
     enum CodingKeys: String, CodingKey {
-        case lastBuildDate
+        case lastBuildDate, items
         case totalCount = "total"
         case startPage = "start"
         case moviesPerPage = "display"
-        case movies = "items"
     }
 }
 
 // MARK: - Movie
-struct Movie: Decodable {
-    let title: String
-    let link: String
-    let imageUrl: String
-    let subtitle: String
-    let pubDate: String
-    let director: String
-    let actor: String
-    let userRating: String
+struct MovieItem: Decodable {
+    let title: String?
+    let link: String?
+    let imageUrl: String?
+    let subtitle: String?
+    let pubDate: String?
+    let director: String?
+    let actor: String?
+    let userRating: String?
     
     enum CodingKeys: String, CodingKey {
         case title, link, subtitle, pubDate, director, actor, userRating
