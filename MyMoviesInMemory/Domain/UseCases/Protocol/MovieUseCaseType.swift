@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RxSwift
 
 protocol MovieUseCaseType {
     func fetchMovies(title: String) -> Observable<[Movie]>
