@@ -12,6 +12,7 @@ enum NetworkError: Error {
     case invalidUrl
     case invalidResponse
     case invalidData
+    case decodedError
     
     var description: String {
         switch self {
@@ -23,6 +24,8 @@ enum NetworkError: Error {
             return "유효하지 않은 응답입니다."
         case .invalidData:
             return "유효하지 않은 정보입니다."
+        case .decodedError:
+            return "응답에 대한 Decoding에 실패했습니다."
         }
     }
 }
