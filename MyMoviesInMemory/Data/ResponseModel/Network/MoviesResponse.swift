@@ -22,7 +22,7 @@ struct MoviesResponse: Decodable {
     }
 }
 
-// MARK: - Movie
+// MARK: - MovieItem
 struct MovieItem: Decodable {
     let title: String?
     let link: String?
