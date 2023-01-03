@@ -87,6 +87,7 @@
 				0397EECD29379E9900D1482E /* Assets.xcassets */,
 				0397EECF29379E9900D1482E /* LaunchScreen.storyboard */,
 				0397EED229379E9900D1482E /* Info.plist */,
+				03FD0303295EDD5100BC72D7 /* Resource */,
 			);
 			path = MyMoviesInMemory;
 			sourceTree = "<group>";
@@ -195,6 +196,16 @@
 				03FD02ED295D9F0600BC72D7 /* Coordinator.swift */,
 			);
 			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		03FD0303295EDD5100BC72D7 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				0397EECD29379E9900D1482E /* Assets.xcassets */,
+				0397EECF29379E9900D1482E /* LaunchScreen.storyboard */,
+				0397EED229379E9900D1482E /* Info.plist */,
+			);
+			path = Resource;
 			sourceTree = "<group>";
 		};
 		13B7608845F7AF596F46B835 /* Frameworks */ = {
@@ -484,7 +495,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = H7XUJ59Z6C;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = MyMoviesInMemory/Info.plist;
+				INFOPLIST_FILE = MyMoviesInMemory/Resource/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -512,7 +523,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = H7XUJ59Z6C;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = MyMoviesInMemory/Info.plist;
+				INFOPLIST_FILE = MyMoviesInMemory/Resource/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
