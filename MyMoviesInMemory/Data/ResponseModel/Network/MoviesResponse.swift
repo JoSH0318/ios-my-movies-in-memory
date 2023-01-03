@@ -41,6 +41,7 @@ struct MovieItem: Decodable {
     func toDomain() -> Movie {
         return Movie(
             title: self.title ?? "",
+            id: self.link ?? "",
             subtitle: self.subtitle ?? "",
             imageUrl: self.imageUrl ?? "",
             openingYear: self.pubDate ?? "",

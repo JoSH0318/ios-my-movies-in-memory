@@ -9,6 +9,7 @@ import Foundation
 
 struct Movie {
     let title: String
+    let id: String
     let subtitle: String
     let imageUrl: String
     let openingYear: String
