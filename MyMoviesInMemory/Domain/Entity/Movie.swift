@@ -14,6 +14,6 @@ struct Movie {
     let imageUrl: String
     let openingYear: String
     let director: String
-    let actor: String
+    let actors: String
     let userRating: String
 }

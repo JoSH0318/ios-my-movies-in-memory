@@ -46,7 +46,7 @@ struct MovieItem: Decodable {
             imageUrl: self.imageUrl ?? "",
             openingYear: self.pubDate ?? "",
             director: self.director ?? "",
-            actor: self.actor ?? "",
+            actors: self.actor ?? "",
             userRating: self.userRating ?? ""
         )
     }
