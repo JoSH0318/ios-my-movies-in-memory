@@ -22,6 +22,7 @@
 		03FD02E8295D9AFF00BC72D7 /* MovieUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FD02E7295D9AFF00BC72D7 /* MovieUseCase.swift */; };
 		03FD02EB295D9C5400BC72D7 /* MovieUseCaseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FD02EA295D9C5400BC72D7 /* MovieUseCaseType.swift */; };
 		03FD02EE295D9F0600BC72D7 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FD02ED295D9F0600BC72D7 /* Coordinator.swift */; };
+		03FD02F2295DA0FD00BC72D7 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FD02F1295DA0FD00BC72D7 /* HomeViewModel.swift */; };
 		03FD02F6295DA11D00BC72D7 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FD02F5295DA11D00BC72D7 /* HomeView.swift */; };
 		03FD02FB295DA26200BC72D7 /* CoreDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FD02FA295DA26200BC72D7 /* CoreDataError.swift */; };
 		03FD02FD295DA35E00BC72D7 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FD02FC295DA35E00BC72D7 /* CoreDataManager.swift */; };
@@ -49,6 +50,7 @@
 		03FD02E7295D9AFF00BC72D7 /* MovieUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieUseCase.swift; sourceTree = "<group>"; };
 		03FD02EA295D9C5400BC72D7 /* MovieUseCaseType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieUseCaseType.swift; sourceTree = "<group>"; };
 		03FD02ED295D9F0600BC72D7 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		03FD02F1295DA0FD00BC72D7 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		03FD02F5295DA11D00BC72D7 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		03FD02FA295DA26200BC72D7 /* CoreDataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataError.swift; sourceTree = "<group>"; };
 		03FD02FC295DA35E00BC72D7 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
@@ -420,6 +422,7 @@
 				03124781295B711B00106F21 /* Endpoint.swift in Sources */,
 				0397EEC729379E9800D1482E /* SceneDelegate.swift in Sources */,
 				03124783295B739000106F21 /* NetworkError.swift in Sources */,
+				03FD02F2295DA0FD00BC72D7 /* HomeViewModel.swift in Sources */,
 				03FD02FB295DA26200BC72D7 /* CoreDataError.swift in Sources */,
 				03FD02E8295D9AFF00BC72D7 /* MovieUseCase.swift in Sources */,
 				03FD02DF295CCA5000BC72D7 /* Movie.swift in Sources */,
