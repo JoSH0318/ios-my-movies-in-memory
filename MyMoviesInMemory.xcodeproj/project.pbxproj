@@ -24,6 +24,7 @@
 		03FD02EE295D9F0600BC72D7 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FD02ED295D9F0600BC72D7 /* Coordinator.swift */; };
 		03FD02F2295DA0FD00BC72D7 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FD02F1295DA0FD00BC72D7 /* HomeViewModel.swift */; };
 		03FD02F6295DA11D00BC72D7 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FD02F5295DA11D00BC72D7 /* HomeView.swift */; };
+		03FD02F8295DA12800BC72D7 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FD02F7295DA12800BC72D7 /* HomeViewController.swift */; };
 		03FD02FB295DA26200BC72D7 /* CoreDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FD02FA295DA26200BC72D7 /* CoreDataError.swift */; };
 		03FD02FD295DA35E00BC72D7 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FD02FC295DA35E00BC72D7 /* CoreDataManager.swift */; };
 		03FD0306295EDE4100BC72D7 /* MMIMCoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 03FD0304295EDE4100BC72D7 /* MMIMCoreDataModel.xcdatamodeld */; };
@@ -52,6 +53,7 @@
 		03FD02ED295D9F0600BC72D7 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		03FD02F1295DA0FD00BC72D7 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		03FD02F5295DA11D00BC72D7 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		03FD02F7295DA12800BC72D7 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		03FD02FA295DA26200BC72D7 /* CoreDataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataError.swift; sourceTree = "<group>"; };
 		03FD02FC295DA35E00BC72D7 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		03FD0305295EDE4100BC72D7 /* MMIMCoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MMIMCoreDataModel.xcdatamodel; sourceTree = "<group>"; };
@@ -423,6 +425,7 @@
 				0397EEC729379E9800D1482E /* SceneDelegate.swift in Sources */,
 				03124783295B739000106F21 /* NetworkError.swift in Sources */,
 				03FD02F2295DA0FD00BC72D7 /* HomeViewModel.swift in Sources */,
+				03FD02F8295DA12800BC72D7 /* HomeViewController.swift in Sources */,
 				03FD02FB295DA26200BC72D7 /* CoreDataError.swift in Sources */,
 				03FD02E8295D9AFF00BC72D7 /* MovieUseCase.swift in Sources */,
 				03FD02DF295CCA5000BC72D7 /* Movie.swift in Sources */,
