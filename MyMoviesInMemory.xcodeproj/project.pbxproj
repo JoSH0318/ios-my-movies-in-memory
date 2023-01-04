@@ -22,6 +22,7 @@
 		03FD02E8295D9AFF00BC72D7 /* MovieUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FD02E7295D9AFF00BC72D7 /* MovieUseCase.swift */; };
 		03FD02EB295D9C5400BC72D7 /* MovieUseCaseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FD02EA295D9C5400BC72D7 /* MovieUseCaseType.swift */; };
 		03FD02EE295D9F0600BC72D7 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FD02ED295D9F0600BC72D7 /* Coordinator.swift */; };
+		03FD02F6295DA11D00BC72D7 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FD02F5295DA11D00BC72D7 /* HomeView.swift */; };
 		03FD02FB295DA26200BC72D7 /* CoreDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FD02FA295DA26200BC72D7 /* CoreDataError.swift */; };
 		03FD02FD295DA35E00BC72D7 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FD02FC295DA35E00BC72D7 /* CoreDataManager.swift */; };
 		03FD0306295EDE4100BC72D7 /* MMIMCoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 03FD0304295EDE4100BC72D7 /* MMIMCoreDataModel.xcdatamodeld */; };
@@ -48,6 +49,7 @@
 		03FD02E7295D9AFF00BC72D7 /* MovieUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieUseCase.swift; sourceTree = "<group>"; };
 		03FD02EA295D9C5400BC72D7 /* MovieUseCaseType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieUseCaseType.swift; sourceTree = "<group>"; };
 		03FD02ED295D9F0600BC72D7 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		03FD02F5295DA11D00BC72D7 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		03FD02FA295DA26200BC72D7 /* CoreDataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataError.swift; sourceTree = "<group>"; };
 		03FD02FC295DA35E00BC72D7 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		03FD0305295EDE4100BC72D7 /* MMIMCoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MMIMCoreDataModel.xcdatamodel; sourceTree = "<group>"; };
@@ -94,9 +96,7 @@
 				039F56602950C8FC00353720 /* Application */,
 				039F56612950C91C00353720 /* Data */,
 				03FD02DC295CC9EE00BC72D7 /* Domain */,
-				0397EECD29379E9900D1482E /* Assets.xcassets */,
-				0397EECF29379E9900D1482E /* LaunchScreen.storyboard */,
-				0397EED229379E9900D1482E /* Info.plist */,
+				03FD02EF295D9F4F00BC72D7 /* Presentation */,
 				03FD0303295EDD5100BC72D7 /* Resource */,
 			);
 			path = MyMoviesInMemory;
@@ -207,6 +207,42 @@
 				03FD02ED295D9F0600BC72D7 /* Coordinator.swift */,
 			);
 			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		03FD02EF295D9F4F00BC72D7 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				03FD02F0295DA0DF00BC72D7 /* Home */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		03FD02F0295DA0DF00BC72D7 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				03FD03242964A40700BC72D7 /* Coordinator */,
+				03FD02F4295DA10E00BC72D7 /* View */,
+				03FD02F3295DA10400BC72D7 /* ViewModel */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		03FD02F3295DA10400BC72D7 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				03FD02F1295DA0FD00BC72D7 /* HomeViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		03FD02F4295DA10E00BC72D7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				03FD02F5295DA11D00BC72D7 /* HomeView.swift */,
+				03FD02F7295DA12800BC72D7 /* HomeViewController.swift */,
+				03FD0301295EDD3000BC72D7 /* DummyMovies.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		03FD02F9295DA24800BC72D7 /* CoreData */ = {
@@ -373,6 +409,7 @@
 				03FD02E2295D8B9000BC72D7 /* NetworkRepository.swift in Sources */,
 				039F5665295208DC00353720 /* MoviesResponse.swift in Sources */,
 				03FD02EE295D9F0600BC72D7 /* Coordinator.swift in Sources */,
+				03FD02F6295DA11D00BC72D7 /* HomeView.swift in Sources */,
 				0397EEC529379E9800D1482E /* AppDelegate.swift in Sources */,
 				03124787295B892100106F21 /* HTTPMethod.swift in Sources */,
 				03FD03222960938800BC72D7 /* MovieDAO+CoreDataClass.swift in Sources */,
