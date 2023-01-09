@@ -15,7 +15,22 @@ final class ReviewRepository: CoreDataRepository {
         self.coreDataManager = coreDataManager
     }
     
-    func fetchReviews() -> Observable<[MovieDAO]> {
+    func save(_ review: Review) {
+        coreDataManager.create(with: review)
+    }
+    
+    func fetchReviews() -> Observable<[Review]> {
         return coreDataManager.fetch()
+            .map {
+                $0.map { $0.toDomain() }
+            }
+    }
+    
+    func update(_ review: Review) {
+        coreDataManager.update(with: review)
+    }
+    
+    func delete(_ review: Review) {
+        coreDataManager.delete(review)
     }
 }
