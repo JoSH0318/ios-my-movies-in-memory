@@ -65,7 +65,10 @@ final class SliderLayout: UICollectionViewFlowLayout {
     
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         guard let superAttributes = super.layoutAttributesForElements(in: rect),
-              let attributes = NSArray(array: superAttributes, copyItems: true) as? [UICollectionViewLayoutAttributes]
+              let attributes = NSArray(
+                array: superAttributes,
+                copyItems: true
+              ) as? [UICollectionViewLayoutAttributes]
         else {
             return nil
         }
@@ -101,8 +104,9 @@ final class SliderLayout: UICollectionViewFlowLayout {
         forProposedContentOffset proposedContentOffset: CGPoint,
         withScrollingVelocity velocity: CGPoint
     ) -> CGPoint {
-        guard let collectionView = collectionView , !collectionView.isPagingEnabled,
-              let layoutAttributes = self.layoutAttributesForElements(in: collectionView.bounds)
+        guard let collectionView = collectionView,
+              let layoutAttributes = self.layoutAttributesForElements(in: collectionView.bounds),
+              !collectionView.isPagingEnabled
         else {
             return super.targetContentOffset(forProposedContentOffset: proposedContentOffset)
         }
@@ -110,11 +114,16 @@ final class SliderLayout: UICollectionViewFlowLayout {
         let midSide = collectionView.bounds.size.width / 2
         let proposedContentOffsetCenterOrigin = proposedContentOffset.x + midSide
         
-        var targetContentOffset: CGPoint
-        let closest = layoutAttributes.sorted {
-            abs($0.center.x - proposedContentOffsetCenterOrigin) < abs($1.center.x - proposedContentOffsetCenterOrigin)
-        }.first ?? UICollectionViewLayoutAttributes()
-        targetContentOffset = CGPoint(x: floor(closest.center.x - midSide), y: proposedContentOffset.y)
+        let closest = layoutAttributes
+            .sorted {
+                abs($0.center.x - proposedContentOffsetCenterOrigin) < abs($1.center.x - proposedContentOffsetCenterOrigin)
+            }
+            .first ?? UICollectionViewLayoutAttributes()
+        
+        let targetContentOffset = CGPoint(
+            x: floor(closest.center.x - midSide),
+            y: proposedContentOffset.y
+        )
         
         return targetContentOffset
     }
