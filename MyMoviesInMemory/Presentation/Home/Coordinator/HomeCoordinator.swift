@@ -11,12 +11,12 @@ final class HomeCoordinator: Coordinator {
     var navigationController: UINavigationController
     var parentCoordinators: Coordinator?
     var childCoordinators: [Coordinator] = []
-    private let useCase: MovieUseCaseType
+    private let useCase: ReviewUseCaseType
     
     init(
         navigationController: UINavigationController,
         parentCoordinators: Coordinator,
-        useCase: MovieUseCaseType
+        useCase: ReviewUseCaseType
     ) {
         self.navigationController = navigationController
         self.parentCoordinators = parentCoordinators
@@ -24,7 +24,7 @@ final class HomeCoordinator: Coordinator {
     }
     
     func start() {
-        let homeViewModel = HomeViewModel(movieUseCase: useCase)
+        let homeViewModel = HomeViewModel(reviewUseCase: useCase)
         let homeViewController = HomeViewController(homeViewModel)
         self.navigationController.pushViewController(homeViewController, animated: true)
     }
