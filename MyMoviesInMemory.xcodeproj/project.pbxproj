@@ -27,7 +27,7 @@
 		03FD02F8295DA12800BC72D7 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FD02F7295DA12800BC72D7 /* HomeViewController.swift */; };
 		03FD02FB295DA26200BC72D7 /* CoreDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FD02FA295DA26200BC72D7 /* CoreDataError.swift */; };
 		03FD02FD295DA35E00BC72D7 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FD02FC295DA35E00BC72D7 /* CoreDataManager.swift */; };
-		03FD0302295EDD3000BC72D7 /* DummyMovies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FD0301295EDD3000BC72D7 /* DummyMovies.swift */; };
+		03FD0302295EDD3000BC72D7 /* DummyMovieReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FD0301295EDD3000BC72D7 /* DummyMovieReview.swift */; };
 		03FD0306295EDE4100BC72D7 /* MMIMCoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 03FD0304295EDE4100BC72D7 /* MMIMCoreDataModel.xcdatamodeld */; };
 		03FD03262964A41A00BC72D7 /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FD03252964A41A00BC72D7 /* HomeCoordinator.swift */; };
 		03FD03282965FADC00BC72D7 /* SliderLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FD03272965FADC00BC72D7 /* SliderLayout.swift */; };
@@ -64,7 +64,7 @@
 		03FD02F7295DA12800BC72D7 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		03FD02FA295DA26200BC72D7 /* CoreDataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataError.swift; sourceTree = "<group>"; };
 		03FD02FC295DA35E00BC72D7 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
-		03FD0301295EDD3000BC72D7 /* DummyMovies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyMovies.swift; sourceTree = "<group>"; };
+		03FD0301295EDD3000BC72D7 /* DummyMovieReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyMovieReview.swift; sourceTree = "<group>"; };
 		03FD0305295EDE4100BC72D7 /* MMIMCoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MMIMCoreDataModel.xcdatamodel; sourceTree = "<group>"; };
 		03FD03252964A41A00BC72D7 /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		03FD03272965FADC00BC72D7 /* SliderLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderLayout.swift; sourceTree = "<group>"; };
@@ -265,7 +265,7 @@
 			children = (
 				03FD02F5295DA11D00BC72D7 /* HomeView.swift */,
 				03FD02F7295DA12800BC72D7 /* HomeViewController.swift */,
-				03FD0301295EDD3000BC72D7 /* DummyMovies.swift */,
+				03FD0301295EDD3000BC72D7 /* DummyMovieReview.swift */,
 				03FD03272965FADC00BC72D7 /* SliderLayout.swift */,
 			);
 			path = View;
@@ -465,7 +465,7 @@
 				03FD0332296B55DF00BC72D7 /* ReviewUseCaseType.swift in Sources */,
 				03FD033F296C606500BC72D7 /* ReviewDAO+CoreDataProperties.swift in Sources */,
 				03FD03282965FADC00BC72D7 /* SliderLayout.swift in Sources */,
-				03FD0302295EDD3000BC72D7 /* DummyMovies.swift in Sources */,
+				03FD0302295EDD3000BC72D7 /* DummyMovieReview.swift in Sources */,
 				03FD02E5295D8DF600BC72D7 /* MovieRepository.swift in Sources */,
 				03FD033E296C606500BC72D7 /* ReviewDAO+CoreDataClass.swift in Sources */,
 				03124785295B74DC00106F21 /* NetworkProvider.swift in Sources */,
