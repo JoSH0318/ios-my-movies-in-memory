@@ -21,7 +21,7 @@ final class HomeViewModel {
     // MARK: - Output
     
     struct Output {
-        let reviews: Observable<[MovieDAO]>
+        let reviews: Observable<[Review]>
     }
     
     // MARK: - Properties
