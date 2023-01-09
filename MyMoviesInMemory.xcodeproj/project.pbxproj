@@ -35,6 +35,7 @@
 		03FD032E296B537300BC72D7 /* ReviewUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FD032D296B537300BC72D7 /* ReviewUseCase.swift */; };
 		03FD0330296B53C200BC72D7 /* CoreDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FD032F296B53C200BC72D7 /* CoreDataRepository.swift */; };
 		03FD0332296B55DF00BC72D7 /* ReviewUseCaseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FD0331296B55DF00BC72D7 /* ReviewUseCaseType.swift */; };
+		03FD0335296C1B5B00BC72D7 /* MovieReviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FD0334296C1B5B00BC72D7 /* MovieReviewCell.swift */; };
 		03FD033B296C4E8400BC72D7 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FD033A296C4E8400BC72D7 /* Review.swift */; };
 		03FD033E296C606500BC72D7 /* ReviewDAO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FD033C296C606500BC72D7 /* ReviewDAO+CoreDataClass.swift */; };
 		03FD033F296C606500BC72D7 /* ReviewDAO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FD033D296C606500BC72D7 /* ReviewDAO+CoreDataProperties.swift */; };
@@ -72,6 +73,7 @@
 		03FD032D296B537300BC72D7 /* ReviewUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewUseCase.swift; sourceTree = "<group>"; };
 		03FD032F296B53C200BC72D7 /* CoreDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataRepository.swift; sourceTree = "<group>"; };
 		03FD0331296B55DF00BC72D7 /* ReviewUseCaseType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewUseCaseType.swift; sourceTree = "<group>"; };
+		03FD0334296C1B5B00BC72D7 /* MovieReviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieReviewCell.swift; sourceTree = "<group>"; };
 		03FD033A296C4E8400BC72D7 /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
 		03FD033C296C606500BC72D7 /* ReviewDAO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ReviewDAO+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		03FD033D296C606500BC72D7 /* ReviewDAO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ReviewDAO+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
@@ -267,6 +269,7 @@
 				03FD02F7295DA12800BC72D7 /* HomeViewController.swift */,
 				03FD0301295EDD3000BC72D7 /* DummyMovieReview.swift */,
 				03FD03272965FADC00BC72D7 /* SliderLayout.swift */,
+				03FD0333296C1B2700BC72D7 /* Cell */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -307,6 +310,14 @@
 				03FD03252964A41A00BC72D7 /* HomeCoordinator.swift */,
 			);
 			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		03FD0333296C1B2700BC72D7 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				03FD0334296C1B5B00BC72D7 /* MovieReviewCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		13B7608845F7AF596F46B835 /* Frameworks */ = {
@@ -451,6 +462,7 @@
 				03124787295B892100106F21 /* HTTPMethod.swift in Sources */,
 				03FD0306295EDE4100BC72D7 /* MMIMCoreDataModel.xcdatamodeld in Sources */,
 				03FD02FD295DA35E00BC72D7 /* CoreDataManager.swift in Sources */,
+				03FD0335296C1B5B00BC72D7 /* MovieReviewCell.swift in Sources */,
 				03FD02EB295D9C5400BC72D7 /* MovieUseCaseType.swift in Sources */,
 				03124781295B711B00106F21 /* Endpoint.swift in Sources */,
 				0397EEC729379E9800D1482E /* SceneDelegate.swift in Sources */,
