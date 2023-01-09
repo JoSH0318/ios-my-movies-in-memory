@@ -15,7 +15,19 @@ final class ReviewUseCase: ReviewUseCaseType {
         self.repository = repository
     }
 
-    func fetchReviews() -> Observable<[MovieDAO]> {
+    func save(_ review: Review) {
+        repository.save(review)
+    }
+    
+    func fetchReviews() -> Observable<[Review]> {
         return repository.fetchReviews()
+    }
+    
+    func update(_ review: Review) {
+        repository.update(review)
+    }
+    
+    func delete(_ review: Review) {
+        repository.delete(review)
     }
 }
