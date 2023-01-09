@@ -37,15 +37,15 @@ final class CoreDataManager {
         }
     }
     
-    private func generateRequest(by id: String) -> NSFetchRequest<MovieDAO> {
-        let request: NSFetchRequest<MovieDAO> = MovieDAO.fetchRequest()
+    private func generateRequest(by id: String) -> NSFetchRequest<ReviewDAO> {
+        let request: NSFetchRequest<ReviewDAO> = ReviewDAO.fetchRequest()
         let predicate = NSPredicate(format: "id == %@", id)
         request.returnsObjectsAsFaults = false
         request.predicate = predicate
         return request
     }
     
-    private func fetchResult(from request: NSFetchRequest<MovieDAO>) -> MovieDAO? {
+    private func fetchResult(from request: NSFetchRequest<ReviewDAO>) -> ReviewDAO? {
         guard let fetchResult = try? context.fetch(request),
               let movieDAO = fetchResult.first
         else {
@@ -58,38 +58,38 @@ final class CoreDataManager {
 // MARK: - CRUD
 
 extension CoreDataManager {
-    func create(with movie: Movie, _ personalRating: Double) {
-        let request = generateRequest(by: movie.id)
+    func create(with review: Review) {
+        let request = generateRequest(by: review.id)
         
         if let objectToUpdate = fetchResult(from: request) {
-            objectToUpdate.title = movie.title
-            objectToUpdate.id = movie.id
-            objectToUpdate.subtitle = movie.subtitle
-            objectToUpdate.imageUrl = movie.imageUrl
-            objectToUpdate.openingYear = movie.openingYear
-            objectToUpdate.director = movie.director
-            objectToUpdate.actor = movie.actors
-            objectToUpdate.userRating = Double(movie.userRating) ?? 0
-            objectToUpdate.personalRating = personalRating
+            objectToUpdate.title = review.title
+            objectToUpdate.id = review.id
+            objectToUpdate.subtitle = review.subtitle
+            objectToUpdate.imageUrl = review.imageUrl
+            objectToUpdate.openingYear = review.openingYear
+            objectToUpdate.director = review.director
+            objectToUpdate.actor = review.actors
+            objectToUpdate.userRating = review.userRating
+            objectToUpdate.personalRating = review.personalRating
         } else {
-            let entity = MovieDAO(context: context)
-            entity.title = movie.title
-            entity.id = movie.id
-            entity.subtitle = movie.subtitle
-            entity.imageUrl = movie.imageUrl
-            entity.openingYear = movie.openingYear
-            entity.director = movie.director
-            entity.actor = movie.actors
-            entity.userRating = Double(movie.userRating) ?? 0
-            entity.personalRating = personalRating
+            let entity = ReviewDAO(context: context)
+            entity.title = review.title
+            entity.id = review.id
+            entity.subtitle = review.subtitle
+            entity.imageUrl = review.imageUrl
+            entity.openingYear = review.openingYear
+            entity.director = review.director
+            entity.actor = review.actors
+            entity.userRating = review.userRating
+            entity.personalRating = review.personalRating
         }
         
         saveContext()
     }
     
-    func fetch() -> Observable<[MovieDAO]> {
+    func fetch() -> Observable<[ReviewDAO]> {
         return Observable.create { [weak self] emitter in
-            let request = MovieDAO.fetchRequest()
+            let request = ReviewDAO.fetchRequest()
             guard let movies = try? self?.context.fetch(request) else {
                 emitter.onError(CoreDataError.readFail)
                 return Disposables.create()
@@ -102,24 +102,24 @@ extension CoreDataManager {
         }
     }
     
-    func update(with movie: Movie, _ personalRating: Double) {
-        let request = generateRequest(by: movie.id)
+    func update(with review: Review) {
+        let request = generateRequest(by: review.id)
         guard let objectToUpdate = fetchResult(from: request) else { return }
-        objectToUpdate.title = movie.title
-        objectToUpdate.id = movie.id
-        objectToUpdate.subtitle = movie.subtitle
-        objectToUpdate.imageUrl = movie.imageUrl
-        objectToUpdate.openingYear = movie.openingYear
-        objectToUpdate.director = movie.director
-        objectToUpdate.actor = movie.actors
-        objectToUpdate.userRating = Double(movie.userRating) ?? 0
-        objectToUpdate.personalRating = personalRating
+        objectToUpdate.title = review.title
+        objectToUpdate.id = review.id
+        objectToUpdate.subtitle = review.subtitle
+        objectToUpdate.imageUrl = review.imageUrl
+        objectToUpdate.openingYear = review.openingYear
+        objectToUpdate.director = review.director
+        objectToUpdate.actor = review.actors
+        objectToUpdate.userRating = review.userRating
+        objectToUpdate.personalRating = review.personalRating
         
         saveContext()
     }
     
-    func delete(_ movieDAO: MovieDAO) {
-        let request = generateRequest(by: movieDAO.id ?? "")
+    func delete(_ review: Review) {
+        let request = generateRequest(by: review.id)
         guard let objectToDelete = fetchResult(from: request) else { return }
         context.delete(objectToDelete)
         
