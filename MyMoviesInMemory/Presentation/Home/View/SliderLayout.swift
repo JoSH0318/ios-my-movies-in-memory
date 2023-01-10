@@ -22,7 +22,7 @@ final class SliderLayout: UICollectionViewFlowLayout {
         
         self.itemSize = CGSize(
             width: UIScreen.main.bounds.width * 0.7,
-            height: UIScreen.main.bounds.width
+            height: UIScreen.main.bounds.height * 0.5
         )
     }
     
