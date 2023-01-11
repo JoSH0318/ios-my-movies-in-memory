@@ -25,6 +25,7 @@ extension ReviewDAO {
     @NSManaged public var personalRating: Double
     @NSManaged public var id: String?
     @NSManaged public var commentary: String?
+    @NSManaged public var recordDate: String?
 
     func toDomain() -> Review {
         return Review(
@@ -37,7 +38,8 @@ extension ReviewDAO {
             actors: self.actor ?? "",
             userRating: self.userRating,
             personalRating: self.personalRating,
-            commentary: self.commentary ?? ""
+            commentary: self.commentary ?? "",
+            recordDate: self.recordDate ?? ""
         )
     }
 }

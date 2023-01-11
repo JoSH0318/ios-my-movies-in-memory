@@ -18,4 +18,5 @@ struct Review {
     let userRating: Double
     let personalRating: Double
     let commentary: String
+    let recordDate: String
 }
