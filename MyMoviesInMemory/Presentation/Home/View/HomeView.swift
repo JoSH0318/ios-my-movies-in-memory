@@ -21,7 +21,7 @@ final class HomeView: UIView {
     
     private(set) var reviewCollectionView = UICollectionView(
         frame: .zero,
-        collectionViewLayout: SliderLayout()
+        collectionViewLayout: CarouselLayout()
     )
     
     private let reviewDescriptionLabel: UILabel = {
