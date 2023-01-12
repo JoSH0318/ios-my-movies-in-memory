@@ -330,7 +330,6 @@
 		03FD0333296C1B2700BC72D7 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				03FD0334296C1B5B00BC72D7 /* MovieReviewCell.swift */,
 				03FD0377296F1F6900BC72D7 /* View */,
 				03FD0378296F1F7500BC72D7 /* ViewModel */,
 			);
@@ -365,6 +364,7 @@
 		03FD0377296F1F6900BC72D7 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				03FD0334296C1B5B00BC72D7 /* MovieReviewCell.swift */,
 				03FD036F296F0A6F00BC72D7 /* MovieTicketView.swift */,
 			);
 			path = View;
