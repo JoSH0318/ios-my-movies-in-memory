@@ -281,7 +281,6 @@
 			isa = PBXGroup;
 			children = (
 				03FD02F5295DA11D00BC72D7 /* HomeView.swift */,
-				03FD036F296F0A6F00BC72D7 /* MovieTicketView.swift */,
 				03FD02F7295DA12800BC72D7 /* HomeViewController.swift */,
 				03FD0301295EDD3000BC72D7 /* DummyMovieReview.swift */,
 				03FD03272965FADC00BC72D7 /* CarouselLayout.swift */,
@@ -332,6 +331,7 @@
 			isa = PBXGroup;
 			children = (
 				03FD0334296C1B5B00BC72D7 /* MovieReviewCell.swift */,
+				03FD0377296F1F6900BC72D7 /* View */,
 				03FD0378296F1F7500BC72D7 /* ViewModel */,
 			);
 			path = Cell;
@@ -360,6 +360,14 @@
 				03FD0372296F0AD900BC72D7 /* UIColor.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		03FD0377296F1F6900BC72D7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				03FD036F296F0A6F00BC72D7 /* MovieTicketView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		03FD0378296F1F7500BC72D7 /* ViewModel */ = {
