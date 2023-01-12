@@ -20,3 +20,20 @@ struct Review {
     let commentary: String
     let recordDate: String
 }
+
+extension Review {
+    func toCellViewModelItem() -> MovieReviewCellViewModelItem {
+        return MovieReviewCellViewModelItem(
+            title: self.title,
+            id: self.id,
+            subtitle: self.subtitle,
+            openingYear: self.openingYear,
+            director: self.director,
+            actors: self.actors,
+            userRating: String(self.userRating),
+            personalRating: String(self.personalRating),
+            commentary: self.commentary,
+            recordDate: self.recordDate
+        )
+    }
+}
