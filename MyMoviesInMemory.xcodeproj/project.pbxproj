@@ -306,7 +306,6 @@
 				03FD02F5295DA11D00BC72D7 /* HomeView.swift */,
 				03FD02F7295DA12800BC72D7 /* HomeViewController.swift */,
 				03FD0301295EDD3000BC72D7 /* DummyMovieReview.swift */,
-				03FD03272965FADC00BC72D7 /* CarouselLayout.swift */,
 				03FD0333296C1B2700BC72D7 /* Cell */,
 			);
 			path = View;
@@ -364,6 +363,7 @@
 			children = (
 				03FD0343296D5A0500BC72D7 /* ImageManager.swift */,
 				03FD0345296D5A1400BC72D7 /* ImageDownloader.swift */,
+				03FD03272965FADC00BC72D7 /* CarouselLayout.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
