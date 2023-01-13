@@ -13,14 +13,14 @@ final class MovieReviewCell: UICollectionViewCell {
     // MARK: - Constants
     
     private enum FontSize {
-        static let title: CGFloat = 18.0
+        static let title: CGFloat = 20.0
         static let subtitle: CGFloat = 16.0
         static let body: CGFloat = 12.0
     }
     
     private enum Design {
-        static let inset: CGFloat = 8
-        static let aspectRatio = 860 / 600
+        static let inset: CGFloat = 20.0
+        static let punchHoleRadius: CGFloat = 14.0
     }
     
     // MARK: - Properties
@@ -37,13 +37,6 @@ final class MovieReviewCell: UICollectionViewCell {
         return ticketView
     }()
     
-    private let mainStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.spacing = 16
-        return stackView
-    }()
-    
     private let posterImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -53,10 +46,21 @@ final class MovieReviewCell: UICollectionViewCell {
         return imageView
     }()
     
+    private let totalStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        return stackView
+    }()
+    
+    private let firstSectionStackView: UIStackView = {
+        let stackView = UIStackView()
+//        stackView.alignment = .bottom
+        return stackView
+    }()
+    
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: FontSize.title)
-        label.textAlignment = .center
+        label.font = .boldSystemFont(ofSize: FontSize.title)
         label.setContentHuggingPriority(.required, for: .vertical)
         return label
     }()
@@ -64,7 +68,7 @@ final class MovieReviewCell: UICollectionViewCell {
     private let personalRatingLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: FontSize.title)
-        label.textAlignment = .center
+        label.textAlignment = .right
         return label
     }()
     
@@ -72,14 +76,27 @@ final class MovieReviewCell: UICollectionViewCell {
         let label = UILabel()
         label.font = .systemFont(ofSize: FontSize.title)
         label.textAlignment = .center
+        label.numberOfLines = 0
         label.setContentHuggingPriority(.required, for: .vertical)
-        label.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
         return label
+    }()
+    
+    private let thirdSectionStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        return stackView
+    }()
+    
+    private let linerCodeImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage.linerCode
+        imageView.contentMode = .scaleToFill
+        return imageView
     }()
     
     private let recordDate: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: FontSize.subtitle)
+        label.font = .systemFont(ofSize: FontSize.body)
         label.textAlignment = .right
         label.textColor = .systemGray4
         return label
@@ -114,7 +131,7 @@ final class MovieReviewCell: UICollectionViewCell {
     
     // MARK: - Methods
     
-    func configureContents(_ review: Review) {
+    func bind(_ review: Review) {
         viewModel = MovieReviewCellViewModel()
         
         let review: Observable<Review> = Observable.just(review)
@@ -155,11 +172,16 @@ final class MovieReviewCell: UICollectionViewCell {
         
         contentView.addSubview(movieTicketView)
         movieTicketView.addSubview(posterImageView)
-        movieTicketView.addSubview(mainStackView)
-        mainStackView.addArrangedSubview(titleLabel)
-        mainStackView.addArrangedSubview(personalRatingLabel)
-        mainStackView.addArrangedSubview(commentaryLabel)
-        mainStackView.addArrangedSubview(recordDate)
+        movieTicketView.addSubview(totalStackView)
+        
+        totalStackView.addArrangedSubview(firstSectionStackView)
+        totalStackView.addArrangedSubview(commentaryLabel)
+        totalStackView.addArrangedSubview(thirdSectionStackView)
+        
+        firstSectionStackView.addArrangedSubview(titleLabel)
+        firstSectionStackView.addArrangedSubview(personalRatingLabel)
+        thirdSectionStackView.addArrangedSubview(linerCodeImageView)
+        thirdSectionStackView.addArrangedSubview(recordDate)
     }
     
     private func configureConstraints() {
@@ -168,15 +190,23 @@ final class MovieReviewCell: UICollectionViewCell {
         }
         
         posterImageView.snp.makeConstraints{
-            $0.height.equalTo(self.bounds.width * 1.1)
+            $0.height.equalTo(self.bounds.height * 0.5)
             $0.leading.top.trailing.equalToSuperview()
         }
         
-        mainStackView.snp.makeConstraints{
-            $0.top.equalTo(posterImageView.snp.bottom).offset(Design.inset * 2)
+        totalStackView.snp.makeConstraints{
+            $0.top.equalTo(posterImageView.snp.bottom)
             $0.leading.leading.equalToSuperview().offset(Design.inset)
-            $0.trailing.bottom.equalToSuperview().offset(-Design.inset)
+            $0.trailing.equalToSuperview().offset(-Design.inset)
+            $0.bottom.equalToSuperview()
+        }
+        
+        firstSectionStackView.snp.makeConstraints{
+            $0.height.equalTo(self.bounds.height * 0.1)
+        }
+        
+        thirdSectionStackView.snp.makeConstraints{
+            $0.height.equalTo(self.bounds.height * 0.1)
         }
     }
 }
-
