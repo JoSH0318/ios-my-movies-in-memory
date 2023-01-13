@@ -13,7 +13,8 @@ final class MovieTicketView: UIView {
     
     private enum Design {
         static let punchHoleRadius: CGFloat = 14.0
-        static let firstSectionRatio: CGFloat = 1.3
+        static let firstSectionRatio: CGFloat = 0.6
+        static let secondSectionRatio: CGFloat = 0.9
     }
     
     // MARK: - Initializer
@@ -31,30 +32,58 @@ final class MovieTicketView: UIView {
     // MARK: - Override Methods
     
     override func draw(_ rect: CGRect) {
+        let height = self.bounds.height
+        let width = self.bounds.width
+        
         let path = UIBezierPath()
         path.move(to: CGPoint(x: 0, y: 0))
-        path.addLine(to: CGPoint(x: 0, y: self.bounds.width * Design.firstSectionRatio - Design.punchHoleRadius))
+        path.addLine(to: CGPoint(x: 0, y: height * Design.firstSectionRatio - Design.punchHoleRadius))
         path.addArc(
-            withCenter: CGPoint(x: 0, y: self.bounds.width * Design.firstSectionRatio),
+            withCenter: CGPoint(x: 0, y: height * Design.firstSectionRatio),
             radius: Design.punchHoleRadius,
             startAngle: CGFloat(Double.pi + Double.pi / 2),
             endAngle: CGFloat(Double.pi / 2),
             clockwise: true
         )
-        path.addLine(to: CGPoint(x: 0, y: self.bounds.height))
-        path.addLine(to: CGPoint(x: self.bounds.width, y: self.bounds.height))
-        path.addLine(to: CGPoint(x: self.bounds.width, y: self.bounds.width * Design.firstSectionRatio + Design.punchHoleRadius))
+        path.addLine(to: CGPoint(x: 0, y: height * Design.secondSectionRatio - Design.punchHoleRadius))
         path.addArc(
-            withCenter: CGPoint(x: self.bounds.width, y: self.bounds.width * Design.firstSectionRatio),
+            withCenter: CGPoint(x: 0, y: height * Design.secondSectionRatio),
+            radius: Design.punchHoleRadius,
+            startAngle: CGFloat(Double.pi + Double.pi / 2),
+            endAngle: CGFloat(Double.pi / 2),
+            clockwise: true
+        )
+        path.addLine(to: CGPoint(x: 0, y: height))
+        path.addLine(to: CGPoint(x: width, y: height))
+        path.addLine(to: CGPoint(x: width, y: height * Design.secondSectionRatio + Design.punchHoleRadius))
+        path.addArc(
+            withCenter: CGPoint(x: width, y: height * Design.secondSectionRatio),
             radius: Design.punchHoleRadius,
             startAngle: CGFloat(Double.pi / 2),
             endAngle: CGFloat(Double.pi + Double.pi / 2),
             clockwise: true
         )
-        path.addLine(to: CGPoint(x: self.bounds.width, y: 0))
+        path.addLine(to: CGPoint(x: width, y: height * Design.firstSectionRatio + Design.punchHoleRadius))
+        path.addArc(
+            withCenter: CGPoint(x: width, y: height * Design.firstSectionRatio),
+            radius: Design.punchHoleRadius,
+            startAngle: CGFloat(Double.pi / 2),
+            endAngle: CGFloat(Double.pi + Double.pi / 2),
+            clockwise: true
+        )
+        path.addLine(to: CGPoint(x: width, y: 0))
         path.close()
         UIColor.MWhite?.set()
         path.fill()
+        
+        let dotLine = UIBezierPath()
+        dotLine.move(to: CGPoint(x: Design.punchHoleRadius, y: height * Design.firstSectionRatio))
+        dotLine.addLine(to: CGPoint(x: width - Design.punchHoleRadius, y: height * Design.firstSectionRatio))
+        dotLine.move(to: CGPoint(x: Design.punchHoleRadius, y: height * Design.secondSectionRatio))
+        dotLine.addLine(to: CGPoint(x: width - Design.punchHoleRadius, y: height * Design.secondSectionRatio))
+        dotLine.setLineDash([10, 10], count: 2, phase: 0)
+        UIColor.systemGray4.set()
+        dotLine.stroke()
     }
     
     // MARK: - Methods
