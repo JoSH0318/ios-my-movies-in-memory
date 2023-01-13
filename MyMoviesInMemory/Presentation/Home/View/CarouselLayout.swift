@@ -28,7 +28,7 @@ final class CarouselLayout: UICollectionViewFlowLayout {
         
         self.itemSize = CGSize(
             width: UIScreen.main.bounds.width * 0.7,
-            height: UIScreen.main.bounds.height * 0.6
+            height: UIScreen.main.bounds.height * 0.7
         )
     }
     
