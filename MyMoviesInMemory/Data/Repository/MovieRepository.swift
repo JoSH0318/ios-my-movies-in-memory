@@ -16,17 +16,10 @@ final class MovieRepository: NetworkRepository {
     }
     
     func fetchMovies(title: String) -> Observable<[Movie]> {
-        let endpoint = Endpoint(
-            baseUrl: "https://openapi.naver.com/v1",
-            path: "/search/movie.json",
-            method: .get,
-            header: [
-                "X-Naver-Client-Id": "Tkn0wA2s08hupRMoxlvP",
-                "X-Naver-Client-Secret": "Bre9iIzgOZ",
-                "Content-Type": "plain/text"
-            ],
-            queries: ["query" : title]
-        )
+        
+        let endpoint = EndpointStorage
+            .naverMovieAPI(title)
+            .asEndpoint
         
         return networkProvider.execute(endpoint: endpoint)
             .decode(type: MoviesResponse.self, decoder: JSONDecoder())
