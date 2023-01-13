@@ -6,6 +6,7 @@
 //
 
 import SnapKit
+import UIKit
 
 final class HomeView: UIView {
     
@@ -24,12 +25,6 @@ final class HomeView: UIView {
         collectionViewLayout: CarouselLayout()
     )
     
-    private let reviewDescriptionLabel: UILabel = {
-        let label = UILabel()
-        label.font = .systemFont(ofSize: FontSize.title)
-        return label
-    }()
-    
     // MARK: - Initializer
     
     override init(frame: CGRect) {
@@ -46,8 +41,10 @@ final class HomeView: UIView {
     // MARK: - Methods
     
     private func configureView() {
+        backgroundColor = UIColor(named: "MBeige")
+        reviewCollectionView.backgroundColor = UIColor(named: "MBeige")
+        
         addSubview(reviewCollectionView)
-        addSubview(reviewDescriptionLabel)
         
         reviewCollectionView.register(
             MovieReviewCell.self,
@@ -57,12 +54,9 @@ final class HomeView: UIView {
     
     private func configureConstraints() {
         reviewCollectionView.snp.makeConstraints{
-            $0.leading.top.trailing.equalTo(safeAreaLayoutGuide)
-        }
-        
-        reviewDescriptionLabel.snp.makeConstraints{
-            $0.top.equalTo(reviewCollectionView.snp.bottom).offset(32)
-            $0.leading.trailing.bottom.equalTo(safeAreaLayoutGuide)
+            $0.leading.trailing.equalTo(safeAreaLayoutGuide)
+            $0.top.equalToSuperview().offset(UIScreen.main.bounds.height * 0.1)
+            $0.bottom.equalToSuperview().offset(-UIScreen.main.bounds.height * 0.1)
         }
     }
 }
