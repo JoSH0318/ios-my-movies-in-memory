@@ -71,6 +71,8 @@ extension CoreDataManager {
             objectToUpdate.actor = review.actors
             objectToUpdate.userRating = review.userRating
             objectToUpdate.personalRating = review.personalRating
+            objectToUpdate.commentary = review.commentary
+            objectToUpdate.recordDate = review.recordDate
         } else {
             let entity = ReviewDAO(context: context)
             entity.title = review.title
@@ -82,6 +84,8 @@ extension CoreDataManager {
             entity.actor = review.actors
             entity.userRating = review.userRating
             entity.personalRating = review.personalRating
+            entity.commentary = review.commentary
+            entity.recordDate = review.recordDate
         }
         
         saveContext()
@@ -114,6 +118,8 @@ extension CoreDataManager {
         objectToUpdate.actor = review.actors
         objectToUpdate.userRating = review.userRating
         objectToUpdate.personalRating = review.personalRating
+        objectToUpdate.commentary = review.commentary
+        objectToUpdate.recordDate = review.recordDate
         
         saveContext()
     }
