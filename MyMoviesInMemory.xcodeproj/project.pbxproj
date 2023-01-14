@@ -246,6 +246,15 @@
 			path = Coordinator;
 			sourceTree = "<group>";
 		};
+		03E3585929731B6D008FFBFA /* ImageDownload */ = {
+			isa = PBXGroup;
+			children = (
+				03FD0343296D5A0500BC72D7 /* ImageManager.swift */,
+				03FD0345296D5A1400BC72D7 /* ImageDownloader.swift */,
+			);
+			path = ImageDownload;
+			sourceTree = "<group>";
+		};
 		03E3585A29731BC9008FFBFA /* Legacy */ = {
 			isa = PBXGroup;
 			children = (
@@ -410,8 +419,6 @@
 		03FD0342296D59CC00BC72D7 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				03FD0343296D5A0500BC72D7 /* ImageManager.swift */,
-				03FD0345296D5A1400BC72D7 /* ImageDownloader.swift */,
 				03FD03272965FADC00BC72D7 /* CarouselLayout.swift */,
 			);
 			path = Common;
@@ -420,6 +427,7 @@
 		03FD0371296F0AC500BC72D7 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				03E3585929731B6D008FFBFA /* ImageDownload */,
 				03E3583E2971887D008FFBFA /* UserInfo */,
 				03FD0374296F0BD300BC72D7 /* Extension */,
 			);

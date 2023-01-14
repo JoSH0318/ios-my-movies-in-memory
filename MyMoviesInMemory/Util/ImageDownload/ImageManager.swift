@@ -13,7 +13,8 @@ final class ImageManager {
     typealias Token = UInt
     
     static let shared = ImageManager()
-    private let downloader: ImageDownloader
+    private let downloader: ImageDownloaderType
+    private let networkProvider: NetworkProvider
     private let cache: NSCache<NSString, UIImage>
     
     private var taskQueue = [Token: URLSessionDataTask?]()
@@ -30,9 +31,22 @@ final class ImageManager {
     
     private init() {
         self.downloader = ImageDownloader()
+        self.networkProvider = MovieNetworkProvider()
         self.cache = NSCache()
         self.cache.countLimit = 350
         self.lock = NSLock()
+    }
+    
+    func fetchPosterImageUrl(_ subtitle: String) -> Observable<String> {
+        let endpoint = EndpointStorage
+            .OMDbMovieAPI(subtitle)
+            .asEndpoint
+        
+        return networkProvider.execute(endpoint: endpoint)
+            .decode(type: PosterResponse.self, decoder: JSONDecoder())
+            .map { response in
+                response.posterImageUrl
+            }
     }
     
     func downloadImage(_ urlString: String, _ token: Token) -> Single<UIImage?> {
