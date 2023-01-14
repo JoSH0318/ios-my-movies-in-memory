@@ -19,13 +19,13 @@ enum NetworkError: Error {
         case .errorIsOccurred(let error):
             return "\(error) 관련 오류가 발생했습니다."
         case .invalidUrl:
-            return "유효하지 않은 URL 입니다."
+            return "ERROR: Invalid URL"
         case .invalidResponse:
-            return "유효하지 않은 응답입니다."
+            return "ERROR: Invalid Response"
         case .invalidData:
-            return "유효하지 않은 정보입니다."
+            return "ERROR: Invalid Data"
         case .decodedError:
-            return "응답에 대한 Decoding에 실패했습니다."
+            return "ERROR: Decode Fail"
         }
     }
 }
