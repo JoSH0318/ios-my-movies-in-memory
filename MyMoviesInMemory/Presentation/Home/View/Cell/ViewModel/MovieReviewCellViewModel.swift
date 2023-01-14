@@ -40,12 +40,17 @@ final class MovieReviewCellViewModel {
         let setupCellEvent = input.setupCell
             .share()
         
-        let posterImage = setupCellEvent
-            .map { $0.imageUrl }
+        let posterImageUrl = setupCellEvent
             .withUnretained(self)
-            .flatMap { owner, urlString in
+            .flatMap { owner, review in
+                owner.imageManager.fetchPosterImageUrl(review.subtitle)
+            }
+        
+        let posterImage = posterImageUrl
+            .withUnretained(self)
+            .flatMap { owner, imageUrl in
                 owner.imageManager
-                    .downloadImage(urlString, owner.downloadTaskToken)
+                    .downloadImage(imageUrl, owner.downloadTaskToken)
                     .asObservable()
             }
         
