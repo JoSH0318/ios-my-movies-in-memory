@@ -149,6 +149,7 @@
 			children = (
 				039F56602950C8FC00353720 /* Application */,
 				03FD0371296F0AC500BC72D7 /* Util */,
+				03E3585A29731BC9008FFBFA /* Legacy */,
 				039F56612950C91C00353720 /* Data */,
 				03FD02DC295CC9EE00BC72D7 /* Domain */,
 				03FD02EF295D9F4F00BC72D7 /* Presentation */,
@@ -199,9 +200,6 @@
 			isa = PBXGroup;
 			children = (
 				03124784295B74DC00106F21 /* NetworkProvider.swift */,
-				03124780295B711B00106F21 /* Endpoint.swift */,
-				03E3584129718B75008FFBFA /* EndpointStorage.swift */,
-				03124786295B892100106F21 /* HTTPMethod.swift */,
 				03124782295B739000106F21 /* NetworkError.swift */,
 			);
 			path = Network;
@@ -248,6 +246,16 @@
 				03E3584B2971CD30008FFBFA /* SearchCoordinator.swift */,
 			);
 			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		03E3585A29731BC9008FFBFA /* Legacy */ = {
+			isa = PBXGroup;
+			children = (
+				03124780295B711B00106F21 /* Endpoint.swift */,
+				03E3584129718B75008FFBFA /* EndpointStorage.swift */,
+				03124786295B892100106F21 /* HTTPMethod.swift */,
+			);
+			path = Legacy;
 			sourceTree = "<group>";
 		};
 		03FD02DC295CC9EE00BC72D7 /* Domain */ = {

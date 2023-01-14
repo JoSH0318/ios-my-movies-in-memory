@@ -12,7 +12,7 @@ enum EndpointStorage {
     private enum Constant {
         static let naverBaseUrl = "https://openapi.naver.com/v1"
         static let naverSearchPath = "/search/movie.json"
-        static let OMDbBaseUrl = "http://www.omdbapi.com/"
+        static let OMDbBaseUrl = "https://www.omdbapi.com/"
         static let empty = ""
     }
     
@@ -36,14 +36,14 @@ extension EndpointStorage {
                 ],
                 queries: ["query" : title]
             )
-        case .OMDbMovieAPI(let imageTitle):
+        case .OMDbMovieAPI(let subtitle):
             return Endpoint(
                 baseUrl: Constant.OMDbBaseUrl,
                 path: Constant.empty,
                 method: .get,
                 queries: [
                     "i": "tt3896198",
-                    "t": imageTitle,
+                    "t": subtitle,
                     "apikey": UserInfo.OMDbClientKey
                 ]
             )
