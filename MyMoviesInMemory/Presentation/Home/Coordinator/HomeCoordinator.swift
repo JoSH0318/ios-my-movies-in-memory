@@ -26,6 +26,9 @@ final class HomeCoordinator: Coordinator {
     func start() {
         let homeViewModel = HomeViewModel(reviewUseCase: useCase)
         let homeViewController = HomeViewController(homeViewModel)
-        self.navigationController.pushViewController(homeViewController, animated: true)
+        self.navigationController.pushViewController(
+            homeViewController,
+            animated: true
+        )
     }
 }
