@@ -6,5 +6,41 @@
 //
 
 import Foundation
+import RxSwift
 
-final class SearchViewModel {}
+final class SearchViewModel {
+    
+    // MARK: - Input
+    
+    struct Input {
+        let didEndSearching: Observable<String>
+    }
+    
+    // MARK: - Output
+    
+    struct Output {
+        let movies: Observable<[Movie]>
+    }
+    
+    // MARK: - Properties
+    
+    private let movieUseCase: MovieUseCaseType
+    
+    // MARK: - Initializer
+    
+    init(movieUseCase: MovieUseCaseType) {
+        self.movieUseCase = movieUseCase
+    }
+    
+    // MARK: - Methods
+    
+    func transform(_ input: Input) -> Output {
+        let movies = input.didEndSearching
+            .withUnretained(self)
+            .flatMap { owner, title in
+                owner.movieUseCase.fetchMovies(title: title)
+            }
+        
+        return Output(movies: movies)
+    }
+}
