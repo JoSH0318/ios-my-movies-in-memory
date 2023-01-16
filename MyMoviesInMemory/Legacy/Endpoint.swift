@@ -40,7 +40,7 @@ final class Endpoint {
         return urlRequest
     }
     
-     func generateUrl() throws -> URL {
+    func generateUrl() throws -> URL {
         let urlString = baseUrl + path
         
         var component = URLComponents(string: urlString)
