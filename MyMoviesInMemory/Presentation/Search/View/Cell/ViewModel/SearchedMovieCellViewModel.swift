@@ -7,6 +7,7 @@
 
 import Foundation
 import RxSwift
+import UIKit
 
 final class SearchedMovieCellViewModel {
     
@@ -45,6 +46,7 @@ final class SearchedMovieCellViewModel {
             .flatMap { owner, movie in
                 owner.imageManager.fetchPosterImageUrl(movie.subtitle)
             }
+            .catch { _ in .just("") }
         
         let posterImage = posterImageUrl
             .withUnretained(self)
@@ -53,6 +55,7 @@ final class SearchedMovieCellViewModel {
                     .downloadImage(imageUrl, owner.downloadTaskToken)
                     .asObservable()
             }
+            .catch { _ in .just(UIImage(systemName: "film")) }
         
         return Output(posterImage: posterImage, movie: searchedMovie)
     }
