@@ -25,7 +25,7 @@ final class SearchedMovieCell: UICollectionViewCell {
     }
     
     private var viewModel: SearchedMovieCellViewModel?
-    private let disposeBag = DisposeBag()
+    private var disposeBag = DisposeBag()
     
     
     private let posterImageView: UIImageView = {
@@ -103,6 +103,14 @@ final class SearchedMovieCell: UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - PrepareForReuse
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        disposeBag = DisposeBag()
     }
     
     // MARK: - Methods
