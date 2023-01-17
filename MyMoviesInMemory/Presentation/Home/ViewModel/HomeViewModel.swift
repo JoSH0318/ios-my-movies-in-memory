@@ -37,6 +37,8 @@ final class HomeViewModel {
     // MARK: - Methods
     
     func transform(_ input: Input) -> Output {
+        reviewUseCase.save(DummyMovieReview().dummy1)
+        reviewUseCase.save(DummyMovieReview().dummy2)
         let reviews = Observable
             .merge(
                 input.viewDidLoadEvent,
@@ -46,6 +48,7 @@ final class HomeViewModel {
             .flatMap { owner, _ in
                 owner.reviewUseCase.fetchReviews()
             }
+            .filter { !$0.isEmpty }
         
         return Output(reviews: reviews)
     }
