@@ -14,7 +14,7 @@ final class MovieTicketView: UIView {
     private enum Design {
         static let punchHoleRadius: CGFloat = 14.0
         static let firstSectionRatio: CGFloat = 0.6
-        static let secondSectionRatio: CGFloat = 0.9
+        static let secondSectionRatio: CGFloat = 0.85
     }
     
     // MARK: - Initializer
@@ -94,7 +94,7 @@ final class MovieTicketView: UIView {
         self.clipsToBounds = true
         
         self.layer.shadowColor = UIColor.systemGray3.cgColor
-        self.layer.shadowOpacity = 0.2
+        self.layer.shadowOpacity = 0.3
         self.layer.shadowRadius = 10
         self.layer.shadowOffset = .zero
     }
