@@ -41,7 +41,6 @@ final class MovieReviewCell: UICollectionViewCell {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.setContentCompressionResistancePriority(.required, for: .vertical)
-        imageView.backgroundColor = .clear
         imageView.clipsToBounds = true
         return imageView
     }()
@@ -54,7 +53,6 @@ final class MovieReviewCell: UICollectionViewCell {
     
     private let firstSectionStackView: UIStackView = {
         let stackView = UIStackView()
-//        stackView.alignment = .bottom
         return stackView
     }()
     
@@ -206,7 +204,11 @@ final class MovieReviewCell: UICollectionViewCell {
         }
         
         thirdSectionStackView.snp.makeConstraints{
-            $0.height.equalTo(self.bounds.height * 0.1)
+            $0.height.equalTo(self.bounds.height * 0.15)
+        }
+        
+        linerCodeImageView.snp.makeConstraints{
+            $0.height.equalTo(self.bounds.height * 0.07)
         }
     }
 }
