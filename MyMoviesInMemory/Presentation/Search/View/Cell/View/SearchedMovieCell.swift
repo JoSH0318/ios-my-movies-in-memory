@@ -180,12 +180,14 @@ final class SearchedMovieCell: UICollectionViewCell {
     
     private func configureConstraints() {
         posterImageView.snp.makeConstraints{
-            $0.leading.top.bottom.equalToSuperview()
+            $0.leading.top.bottom.equalTo(contentView)
+            $0.width.equalTo(contentView.snp.width).dividedBy(3)
         }
         
         totalStackView.snp.makeConstraints{
             $0.leading.equalTo(posterImageView.snp.trailing).offset(16)
-            $0.top.trailing.bottom.equalToSuperview().offset(16)
+            $0.top.equalToSuperview().offset(16)
+            $0.trailing.bottom.equalToSuperview().offset(-16)
         }
     }
 }
