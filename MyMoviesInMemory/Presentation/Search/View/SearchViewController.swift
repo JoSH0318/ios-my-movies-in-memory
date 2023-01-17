@@ -32,6 +32,7 @@ class SearchViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
         
         configureCollectionView()
+        configureNavigationItem()
         bind()
     }
     
@@ -79,5 +80,10 @@ class SearchViewController: UIViewController {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.itemSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 0.2)
         return flowLayout
+    }
+    
+    private func configureNavigationItem() {
+        searchBar.placeholder = "Search Movie"
+        self.navigationItem.titleView = searchBar
     }
 }
