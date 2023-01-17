@@ -165,8 +165,8 @@ final class SearchedMovieCell: UICollectionViewCell {
     }
     
     private func configureCell() {
-        addSubview(posterImageView)
-        addSubview(totalStackView)
+        contentView.addSubview(posterImageView)
+        contentView.addSubview(totalStackView)
         
         subtitleStackView.addArrangedSubview(subtitleLabel)
         subtitleStackView.addArrangedSubview(openingYearLabel)
