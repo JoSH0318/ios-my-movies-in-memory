@@ -16,9 +16,9 @@ class SearchViewController: UIViewController {
     private let viewModel: SearchViewModel
     private let disposeBag = DisposeBag()
     private let searchBar = UISearchBar()
-    private let searchCollectionView = UICollectionView(
+    private lazy var searchCollectionView = UICollectionView(
         frame: .zero,
-        collectionViewLayout: UICollectionViewFlowLayout()
+        collectionViewLayout: configureCollectionViewLayout()
     )
     
     override func viewDidLoad() {
@@ -74,5 +74,11 @@ class SearchViewController: UIViewController {
         searchCollectionView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
+    }
+    
+    private func configureCollectionViewLayout() -> UICollectionViewFlowLayout {
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.itemSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 0.2)
+        return flowLayout
     }
 }
