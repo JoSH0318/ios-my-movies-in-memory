@@ -41,8 +41,8 @@ final class HomeView: UIView {
     // MARK: - Methods
     
     private func configureView() {
-        backgroundColor = UIColor(named: "MBeige")
-        reviewCollectionView.backgroundColor = UIColor(named: "MBeige")
+        backgroundColor = UIColor.MBeige
+        reviewCollectionView.backgroundColor = UIColor.MBeige
         
         addSubview(reviewCollectionView)
         
