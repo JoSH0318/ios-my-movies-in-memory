@@ -36,6 +36,7 @@ final class SearchViewModel {
     
     func transform(_ input: Input) -> Output {
         let movies = input.didEndSearching
+            .filter { !$0.isEmpty }
             .withUnretained(self)
             .flatMap { owner, title in
                 owner.movieUseCase.fetchMovies(title: title)
