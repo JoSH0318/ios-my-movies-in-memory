@@ -8,7 +8,5 @@
 import Foundation
 
 struct UserInfo {
-    static let naverClientId = "Tkn0wA2s08hupRMoxlvP"
-    static let naverClientSecret = "Bre9iIzgOZ"
-    static let OMDbClientKey = "f5a69f4d"
+    static let apiKey = "597aba22b61799147197f4f0776ade4a"
 }
