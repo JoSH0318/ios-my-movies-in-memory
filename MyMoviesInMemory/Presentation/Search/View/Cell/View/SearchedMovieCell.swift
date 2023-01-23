@@ -14,8 +14,7 @@ final class SearchedMovieCell: UICollectionViewCell {
     
     private enum FontSize {
         static let title: CGFloat = 20.0
-        static let subtitle: CGFloat = 16.0
-        static let body: CGFloat = 12.0
+        static let body: CGFloat = 14.0
     }
     
     // MARK: - Properties
@@ -27,7 +26,6 @@ final class SearchedMovieCell: UICollectionViewCell {
     private var viewModel: SearchedMovieCellViewModel?
     private var disposeBag = DisposeBag()
     
-    
     private let posterImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
@@ -35,7 +33,7 @@ final class SearchedMovieCell: UICollectionViewCell {
         return imageView
     }()
     
-    private let totalStackView: UIStackView = {
+    private let informationStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.spacing = 8
@@ -49,47 +47,86 @@ final class SearchedMovieCell: UICollectionViewCell {
         return label
     }()
     
-    private let subtitleStackView: UIStackView = {
+    private let originalTitleLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .left
+        label.font = .systemFont(ofSize: FontSize.body)
+        label.textColor = .systemGray3
+        return label
+    }()
+    
+    private let summaryStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.spacing = 8
         return stackView
     }()
     
-    private let subtitleLabel: UILabel = {
+    private let summaryNameLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
-        label.font = .systemFont(ofSize: FontSize.subtitle)
+        label.font = .systemFont(ofSize: FontSize.body)
+        label.textColor = .systemGray
+        label.text = "개요"
         return label
     }()
     
-    private let openingYearLabel: UILabel = {
+    private let summaryLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
-        label.font = .systemFont(ofSize: FontSize.subtitle)
-        label.textColor = .systemGray3
-        label.setContentHuggingPriority(.required, for: .horizontal)
+        label.font = .systemFont(ofSize: FontSize.body)
+        label.setContentHuggingPriority(.init(rawValue: 1), for: .horizontal)
+        return label
+    }()
+    
+    private let releaseDateStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.spacing = 8
+        return stackView
+    }()
+    
+    private let releaseDateNameLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .left
+        label.font = .systemFont(ofSize: FontSize.body)
+        label.textColor = .systemGray
+        label.text = "개봉일"
+        return label
+    }()
+    
+    private let releaseDateLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .left
+        label.font = .systemFont(ofSize: FontSize.body)
+        return label
+    }()
+    
+    private let userRatingStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.spacing = 8
+        return stackView
+    }()
+    
+    private let userRatingNameLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .left
+        label.font = .systemFont(ofSize: FontSize.body)
+        label.textColor = .systemGray
+        label.text = "평점"
         return label
     }()
     
     private let userRatingLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
-        label.font = .systemFont(ofSize: FontSize.subtitle)
+        label.font = .systemFont(ofSize: FontSize.body)
         return label
     }()
     
-    private let directorLabel: UILabel = {
+    private let overviewLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
-        label.font = .systemFont(ofSize: FontSize.subtitle)
-        return label
-    }()
-    
-    private let actorsLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .left
-        label.font = .systemFont(ofSize: FontSize.subtitle)
-        label.numberOfLines = 2
+        label.font = .systemFont(ofSize: FontSize.body)
+        label.numberOfLines = 0
         return label
     }()
     
@@ -124,58 +161,65 @@ final class SearchedMovieCell: UICollectionViewCell {
         
         viewModel?.transform(input)
             .posterImage
+            .observe(on: MainScheduler.instance)
             .bind(to: posterImageView.rx.image)
             .disposed(by: disposeBag)
         
         viewModel?.transform(input)
             .movie
             .map { $0.title }
+            .observe(on: MainScheduler.instance)
             .bind(to: titleLabel.rx.text)
             .disposed(by: disposeBag)
         
         viewModel?.transform(input)
             .movie
-            .map { $0.subtitle }
-            .bind(to: subtitleLabel.rx.text)
+            .map { $0.originalTitle }
+            .bind(to: originalTitleLabel.rx.text)
             .disposed(by: disposeBag)
         
         viewModel?.transform(input)
             .movie
-            .map { $0.openingYear }
-            .bind(to: openingYearLabel.rx.text)
+            .map { "\($0.genreIDs) | \($0.originalLanguage)" }
+            .bind(to: summaryLabel.rx.text)
             .disposed(by: disposeBag)
         
+        viewModel?.transform(input)
+            .movie
+            .map { String($0.releaseDate) }
+            .bind(to: releaseDateLabel.rx.text)
+            .disposed(by: disposeBag)
+
         viewModel?.transform(input)
             .movie
             .compactMap { String($0.userRating) }
-            .bind(to: titleLabel.rx.text)
+            .bind(to: userRatingLabel.rx.text)
             .disposed(by: disposeBag)
         
         viewModel?.transform(input)
             .movie
-            .map { $0.director }
-            .bind(to: directorLabel.rx.text)
-            .disposed(by: disposeBag)
-        
-        viewModel?.transform(input)
-            .movie
-            .map { $0.actors }
-            .bind(to: actorsLabel.rx.text)
+            .map { $0.overview }
+            .bind(to: overviewLabel.rx.text)
             .disposed(by: disposeBag)
     }
     
     private func configureCell() {
         contentView.addSubview(posterImageView)
-        contentView.addSubview(totalStackView)
+        contentView.addSubview(informationStackView)
         
-        subtitleStackView.addArrangedSubview(subtitleLabel)
-        subtitleStackView.addArrangedSubview(openingYearLabel)
+        summaryStackView.addArrangedSubview(summaryNameLabel)
+        summaryStackView.addArrangedSubview(summaryLabel)
         
-        totalStackView.addArrangedSubview(titleLabel)
-        totalStackView.addArrangedSubview(subtitleStackView)
-        totalStackView.addArrangedSubview(userRatingLabel)
-        totalStackView.addArrangedSubview(directorLabel)
-        totalStackView.addArrangedSubview(actorsLabel)
+        releaseDateStackView.addArrangedSubview(releaseDateNameLabel)
+        releaseDateStackView.addArrangedSubview(releaseDateLabel)
+        
+        userRatingStackView.addArrangedSubview(userRatingNameLabel)
+        userRatingStackView.addArrangedSubview(userRatingLabel)
+        
+        informationStackView.addArrangedSubview(summaryStackView)
+        informationStackView.addArrangedSubview(releaseDateStackView)
+        informationStackView.addArrangedSubview(userRatingStackView)
+        informationStackView.addArrangedSubview(overviewLabel)
     }
     
     private func configureConstraints() {
@@ -184,7 +228,7 @@ final class SearchedMovieCell: UICollectionViewCell {
             $0.width.equalTo(contentView.snp.width).dividedBy(3)
         }
         
-        totalStackView.snp.makeConstraints{
+        informationStackView.snp.makeConstraints{
             $0.leading.equalTo(posterImageView.snp.trailing).offset(16)
             $0.top.equalToSuperview().offset(16)
             $0.trailing.bottom.equalToSuperview().offset(-16)

@@ -41,21 +41,11 @@ final class SearchedMovieCellViewModel {
         let searchedMovie = input.setupCell
             .share()
         
-        let posterImageUrl = searchedMovie
+        let posterImage = searchedMovie
             .withUnretained(self)
             .flatMap { owner, movie in
-                owner.imageManager.fetchPosterImageUrl(movie.subtitle)
+                owner.imageManager.downloadImage(movie.posterPath, owner.downloadTaskToken)
             }
-            .catch { _ in .just("") }
-        
-        let posterImage = posterImageUrl
-            .withUnretained(self)
-            .flatMap { owner, imageUrl in
-                owner.imageManager
-                    .downloadImage(imageUrl, owner.downloadTaskToken)
-                    .asObservable()
-            }
-            .catch { _ in .just(UIImage(systemName: "film")) }
         
         return Output(posterImage: posterImage, movie: searchedMovie)
     }
