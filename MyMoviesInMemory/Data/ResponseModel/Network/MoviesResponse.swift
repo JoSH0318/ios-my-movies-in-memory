@@ -6,49 +6,66 @@
 //
 
 import Foundation
+import RxSwift
 
-struct MoviesResponse: Decodable {
-    let lastBuildDate: String?
-    let totalCount: Int?
-    let startPage: Int?
-    let moviesPerPage: Int?
-    let items: [MovieItem]?
-    
+// MARK: - MoviesResponse
+
+struct MoviesResponse: Codable {
+    let page: Int?
+    let movieResults: [MovieResult]?
+    let totalPages, totalResults: Int?
+
     enum CodingKeys: String, CodingKey {
-        case lastBuildDate, items
-        case totalCount = "total"
-        case startPage = "start"
-        case moviesPerPage = "display"
+        case page
+        case movieResults = "results"
+        case totalPages = "total_pages"
+        case totalResults = "total_results"
     }
 }
 
-// MARK: - MovieItem
+// MARK: - MovieResult
 
-struct MovieItem: Decodable {
-    let title: String?
-    let link: String?
-    let imageUrl: String?
-    let subtitle: String?
-    let pubDate: String?
-    let director: String?
-    let actor: String?
-    let userRating: String?
-    
+struct MovieResult: Codable {
+    let adult: Bool?
+    let backdropPath: String?
+    let genreIDs: [Int]?
+    let id: Int?
+    let originalLanguage, originalTitle, overview: String?
+    let popularity: Double?
+    let posterPath, releaseDate, title: String?
+    let video: Bool?
+    let voteAverage: Double?
+    let voteCount: Int?
+
     enum CodingKeys: String, CodingKey {
-        case title, link, subtitle, pubDate, director, actor, userRating
-        case imageUrl = "image"
+        case adult
+        case backdropPath = "backdrop_path"
+        case genreIDs = "genre_ids"
+        case id
+        case originalLanguage = "original_language"
+        case originalTitle = "original_title"
+        case overview, popularity
+        case posterPath = "poster_path"
+        case releaseDate = "release_date"
+        case title, video
+        case voteAverage = "vote_average"
+        case voteCount = "vote_count"
     }
-    
+}
+
+extension MovieResult {
     func toDomain() -> Movie {
         return Movie(
+            id: self.id ?? -1,
             title: self.title ?? "",
-            id: self.link ?? "",
-            subtitle: self.subtitle ?? "",
-            imageUrl: self.imageUrl ?? "",
-            openingYear: self.pubDate ?? "",
-            director: self.director ?? "",
-            actors: self.actor ?? "",
-            userRating: self.userRating ?? ""
+            originalTitle: self.originalTitle ?? "",
+            posterPath: self.posterPath ?? "",
+            genreIDs: self.genreIDs ?? [],
+            releaseDate: self.releaseDate ?? "",
+            userRating: self.voteAverage ?? 0.0,
+            originalLanguage: self.originalLanguage ?? "",
+            overview: self.overview ?? ""
         )
     }
 }
+
