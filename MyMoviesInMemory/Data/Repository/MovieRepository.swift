@@ -18,13 +18,13 @@ final class MovieRepository: NetworkRepository {
     func fetchMovies(title: String) -> Observable<[Movie]> {
         
         let endpoint = EndpointStorage
-            .naverMovieAPI(title)
+            .searchMovie(title)
             .asEndpoint
         
         return networkProvider.execute(endpoint: endpoint)
             .decode(type: MoviesResponse.self, decoder: JSONDecoder())
             .map { response in
-                guard let movies = response.items else { throw NetworkError.decodedError }
+                guard let movies = response.movieResults else { throw NetworkError.decodedError }
                 return movies.compactMap { $0.toDomain() }
             }
     }
