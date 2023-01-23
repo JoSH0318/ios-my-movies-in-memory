@@ -37,29 +37,19 @@ final class ImageManager {
         self.lock = NSLock()
     }
     
-    func fetchPosterImageUrl(_ subtitle: String) -> Observable<String> {
-        let endpoint = EndpointStorage
-            .OMDbMovieAPI(subtitle)
-            .asEndpoint
-        
-        return networkProvider.execute(endpoint: endpoint)
-            .decode(type: PosterResponse.self, decoder: JSONDecoder())
-            .map { response in
-                response.posterImageUrl
-            }
-    }
-    
     func downloadImage(_ urlString: String, _ token: Token) -> Single<UIImage?> {
+        let posterUrl = "https://image.tmdb.org/t/p/w300" + urlString + "?" + UserInfo.apiKey
+        
         return Single.create { [weak self] single in
-            if let cachedImage = self?.cache.object(forKey: urlString as NSString) {
+            if let cachedImage = self?.cache.object(forKey: posterUrl as NSString) {
                 single(.success(cachedImage))
                 return Disposables.create()
             }
             
-            let task = self?.downloader.requestImage(urlString) { result in
+            let task = self?.downloader.requestImage(posterUrl) { result in
                 switch result {
                 case .success(let image):
-                    self?.cache.setObject(image, forKey: urlString as NSString)
+                    self?.cache.setObject(image, forKey: posterUrl as NSString)
                     single(.success(image))
                 case .failure:
                     single(.success(UIImage()))
