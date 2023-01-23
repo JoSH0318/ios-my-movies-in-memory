@@ -29,11 +29,11 @@ final class MovieReviewCell: UICollectionViewCell {
         return String(describing: self)
     }
     
-    private var viewModel: MovieReviewCellViewModel?
+    private var viewModel: ReviewCellViewModel?
     private let disposeBag = DisposeBag()
     
-    private let movieTicketView: MovieTicketView = {
-        let ticketView = MovieTicketView()
+    private let movieTicketView: TicketView = {
+        let ticketView = TicketView()
         return ticketView
     }()
     
@@ -130,19 +130,19 @@ final class MovieReviewCell: UICollectionViewCell {
     // MARK: - Methods
     
     func bind(_ review: Review) {
-        viewModel = MovieReviewCellViewModel()
+        viewModel = ReviewCellViewModel()
         
         let review: Observable<Review> = Observable.just(review)
-        let input = MovieReviewCellViewModel.Input(setupCell: review)
-        
-        viewModel?.transform(input)
-            .posterImage
-            .bind(to: posterImageView.rx.image)
-            .disposed(by: disposeBag)
+        let input = ReviewCellViewModel.Input(setupCell: review)
         
         let reviewCellViewModelItem = viewModel?.transform(input)
-            .review
+            .reviewItem
             .share()
+        
+        reviewCellViewModelItem?
+            .map { $0.posterImage }
+            .bind(to: posterImageView.rx.image)
+            .disposed(by: disposeBag)
         
         reviewCellViewModelItem?
             .map { $0.title }

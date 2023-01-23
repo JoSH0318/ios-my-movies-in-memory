@@ -1,5 +1,5 @@
 //
-//  MovieTicketView.swift
+//  TicketView.swift
 //  MyMoviesInMemory
 //
 //  Created by 조성훈 on 2023/01/12.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class MovieTicketView: UIView {
+final class TicketView: UIView {
     
     // MARK: - Constants
     

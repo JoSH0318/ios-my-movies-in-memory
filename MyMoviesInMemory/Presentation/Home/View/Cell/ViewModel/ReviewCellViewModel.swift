@@ -1,5 +1,5 @@
 //
-//  MovieReviewCellViewModel.swift
+//  ReviewCellViewModel.swift
 //  MyMoviesInMemory
 //
 //  Created by 조성훈 on 2023/01/10.
@@ -8,7 +8,7 @@
 import UIKit
 import RxSwift
 
-final class MovieReviewCellViewModel {
+final class ReviewCellViewModel {
     
     // MARK: - Input
     
@@ -19,8 +19,7 @@ final class MovieReviewCellViewModel {
     // MARK: - Output
     
     struct Output {
-        let posterImage: Observable<UIImage?>
-        let review: Observable<MovieReviewCellViewModelItem>
+        let reviewItem: Observable<ReviewCellViewModelItem>
     }
     
     // MARK: - Properties
@@ -40,24 +39,24 @@ final class MovieReviewCellViewModel {
         let setupCellEvent = input.setupCell
             .share()
         
-        let posterImageUrl = setupCellEvent
+        let posterImage = setupCellEvent
             .withUnretained(self)
             .flatMap { owner, review in
-                owner.imageManager.fetchPosterImageUrl(review.subtitle)
-            }
-        
-        let posterImage = posterImageUrl
-            .withUnretained(self)
-            .flatMap { owner, imageUrl in
                 owner.imageManager
-                    .downloadImage(imageUrl, owner.downloadTaskToken)
+                    .downloadImage(review.imageUrl, owner.downloadTaskToken)
                     .asObservable()
             }
         
-        let review = setupCellEvent
-            .map { $0.toCellViewModelItem() }
+        let reviewItem = Observable
+            .combineLatest(
+                setupCellEvent,
+                posterImage
+            )
+            .map { review, image in
+                review.toCellViewModelItem(with: image)
+            }
         
-        return Output(posterImage: posterImage, review: review)
+        return Output(reviewItem: reviewItem)
     }
     
     func onPrepareForReuse() {
