@@ -10,41 +10,26 @@ import Foundation
 enum EndpointStorage {
     
     private enum Constant {
-        static let naverBaseUrl = "https://openapi.naver.com/v1"
-        static let naverSearchPath = "/search/movie.json"
-        static let OMDbBaseUrl = "https://www.omdbapi.com/"
-        static let empty = ""
+        static let baseUrl = "https://api.themoviedb.org/3/search/"
+        static let path = "movie"
     }
     
-    case naverMovieAPI(String)
-    case OMDbMovieAPI(String)
+    case searchMovie(String)
 }
 
 extension EndpointStorage {
     
     var asEndpoint: Endpoint {
         switch self {
-        case .naverMovieAPI(let title):
+        case .searchMovie(let title):
             return Endpoint(
-                baseUrl: Constant.naverBaseUrl,
-                path: Constant.naverSearchPath,
-                method: .get,
-                header: [
-                    "X-Naver-Client-Id": UserInfo.naverClientId,
-                    "X-Naver-Client-Secret": UserInfo.naverClientSecret,
-                    "Content-Type": "plain/text"
-                ],
-                queries: ["query" : title]
-            )
-        case .OMDbMovieAPI(let subtitle):
-            return Endpoint(
-                baseUrl: Constant.OMDbBaseUrl,
-                path: Constant.empty,
+                baseUrl: Constant.baseUrl,
+                path: Constant.path,
                 method: .get,
                 queries: [
-                    "i": "tt3896198",
-                    "t": subtitle,
-                    "apikey": UserInfo.OMDbClientKey
+                    "api_key" : UserInfo.apiKey,
+                    "query" : title,
+                    "language" : "ko-KR"
                 ]
             )
         }

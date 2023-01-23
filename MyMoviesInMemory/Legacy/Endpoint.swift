@@ -11,20 +11,17 @@ final class Endpoint {
     private let baseUrl: String
     private let path: String
     private let method: HTTPMethod
-    private let header: [String: String]
     private let queries: [String: Any]
     
     init(
         baseUrl: String,
         path: String,
         method: HTTPMethod,
-        header: [String : String] = [:],
         queries: [String : Any] = [:]
     ) {
         self.baseUrl = baseUrl
         self.path = path
         self.method = method
-        self.header = header
         self.queries = queries
     }
     
@@ -32,10 +29,6 @@ final class Endpoint {
         let url = try generateUrl()
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = method.description
-        
-        header.forEach {
-            urlRequest.addValue($0.value, forHTTPHeaderField: $0.key)
-        }
         
         return urlRequest
     }
