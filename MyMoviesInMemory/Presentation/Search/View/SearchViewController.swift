@@ -13,6 +13,7 @@ class SearchViewController: UIViewController {
     
     // MARK: - Properties
     
+    private let coordinator: SearchCoordinator
     private let viewModel: SearchViewModel
     private let disposeBag = DisposeBag()
     private let searchBar = UISearchBar()
@@ -60,6 +61,13 @@ class SearchViewController: UIViewController {
             )) { index, item, cell in
                 cell.bind(item)
             }
+            .disposed(by: disposeBag)
+        
+        searchCollectionView.rx.modelSelected(Movie.self)
+            .withUnretained(self)
+            .bind(onNext: { owner, movie in
+                owner.coordinator.presentSearchDetailView(with: movie)
+            })
             .disposed(by: disposeBag)
     }
     
