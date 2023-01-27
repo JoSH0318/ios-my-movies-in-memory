@@ -31,4 +31,14 @@ final class SearchCoordinator: Coordinator {
             animated: true
         )
     }
+    
+    func presentSearchDetailView(with movie: Movie) {
+        let searchDetailCoordinator = SearchDetailCoordinator(
+            navigationController: self.navigationController,
+            parentCoordinator: self,
+            useCase: useCase
+        )
+        self.childCoordinators.append(searchDetailCoordinator)
+        searchDetailCoordinator.start(with: movie)
+    }
 }
