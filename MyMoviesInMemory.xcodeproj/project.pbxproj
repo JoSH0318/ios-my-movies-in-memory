@@ -16,6 +16,7 @@
 		03806B572976EECC00235282 /* ReviewDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03806B562976EECC00235282 /* ReviewDetailCoordinator.swift */; };
 		03806B592976EEF800235282 /* ReviewDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03806B582976EEF800235282 /* ReviewDetailViewController.swift */; };
 		03806B5B2976EF0700235282 /* ReviewDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03806B5A2976EF0700235282 /* ReviewDetailViewModel.swift */; };
+		03806B612977D3A000235282 /* SearchDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03806B602977D3A000235282 /* SearchDetailCoordinator.swift */; };
 		03806B632977D3E800235282 /* SearchDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03806B622977D3E800235282 /* SearchDetailViewController.swift */; };
 		03806B652977D43E00235282 /* SearchDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03806B642977D43E00235282 /* SearchDetailViewModel.swift */; };
 		03806B6C297EC73C00235282 /* SearchDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03806B6B297EC73C00235282 /* SearchDetailView.swift */; };
@@ -74,6 +75,7 @@
 		03806B562976EECC00235282 /* ReviewDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDetailCoordinator.swift; sourceTree = "<group>"; };
 		03806B582976EEF800235282 /* ReviewDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDetailViewController.swift; sourceTree = "<group>"; };
 		03806B5A2976EF0700235282 /* ReviewDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDetailViewModel.swift; sourceTree = "<group>"; };
+		03806B602977D3A000235282 /* SearchDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDetailCoordinator.swift; sourceTree = "<group>"; };
 		03806B622977D3E800235282 /* SearchDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDetailViewController.swift; sourceTree = "<group>"; };
 		03806B642977D43E00235282 /* SearchDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDetailViewModel.swift; sourceTree = "<group>"; };
 		03806B6B297EC73C00235282 /* SearchDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDetailView.swift; sourceTree = "<group>"; };
@@ -222,6 +224,14 @@
 				03806B6B297EC73C00235282 /* SearchDetailView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		03806B5F2977D38900235282 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				03806B602977D3A000235282 /* SearchDetailCoordinator.swift */,
+			);
+			path = Coordinator;
 			sourceTree = "<group>";
 		};
 		0397EEB829379E9800D1482E = {
@@ -736,6 +746,7 @@
 				03806B6C297EC73C00235282 /* SearchDetailView.swift in Sources */,
 				03E3584C2971CD30008FFBFA /* SearchCoordinator.swift in Sources */,
 				03FD02DF295CCA5000BC72D7 /* Movie.swift in Sources */,
+				03806B612977D3A000235282 /* SearchDetailCoordinator.swift in Sources */,
 				03FD0332296B55DF00BC72D7 /* ReviewUseCaseType.swift in Sources */,
 				03FD03282965FADC00BC72D7 /* CarouselLayout.swift in Sources */,
 				03FD0346296D5A1400BC72D7 /* ImageDownloader.swift in Sources */,
