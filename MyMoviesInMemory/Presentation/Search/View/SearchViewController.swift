@@ -27,7 +27,11 @@ class SearchViewController: UIViewController {
     
     // MARK: - Initializer
     
-    init(_ viewModel: SearchViewModel) {
+    init(
+        _ viewModel: SearchViewModel,
+        _ coordinator: SearchCoordinator
+    ) {
+        self.coordinator = coordinator
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
         
