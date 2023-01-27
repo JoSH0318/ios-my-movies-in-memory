@@ -49,7 +49,10 @@ class SearchViewController: UIViewController {
     
     private func bind() {
         let searchedMovie = searchBar.rx.text.orEmpty
-            .debounce(RxTimeInterval.microseconds(10), scheduler: MainScheduler.instance)
+            .debounce(
+                RxTimeInterval.microseconds(10),
+                scheduler: MainScheduler.instance
+            )
             .distinctUntilChanged()
         let input = SearchViewModel.Input(didEndSearching: searchedMovie)
 
