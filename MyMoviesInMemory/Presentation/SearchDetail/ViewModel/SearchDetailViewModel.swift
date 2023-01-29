@@ -14,6 +14,7 @@ final class SearchDetailViewModel {
     
     struct Input {
         let didShowView: Observable<Void>
+        let didTapEditButton: Observable<Void>
     }
     
     // MARK: - Output
@@ -50,12 +51,15 @@ final class SearchDetailViewModel {
                 )
             }
         
-        let output = input.didShowView
+        let movie = Observable.merge(
+            input.didShowView,
+            input.didTapEditButton
+        )
             .withUnretained(self)
-            .flatMap { owner, _ in
-                Observable.just(owner.movie)
+            .map { owner, _ in
+                owner.movie
             }
         
-        return Output(posterImage: posterImage, movie: output)
+        return Output(posterImage: posterImage, movie: movie)
     }
 }
