@@ -31,7 +31,7 @@ final class AppCoordinator: Coordinator {
             image: UIImage(systemName: "film"),
             tag: 0
         )
-        homeNavigationController.navigationBar.tintColor = .label
+        homeNavigationController.navigationBar.tintColor = .MGreen
         
         let searchNavigationController = UINavigationController()
         searchNavigationController.tabBarItem = UITabBarItem(
@@ -39,7 +39,7 @@ final class AppCoordinator: Coordinator {
             image: UIImage(systemName: "magnifyingglass"),
             tag: 1
         )
-        searchNavigationController.navigationBar.tintColor = .label
+        searchNavigationController.navigationBar.tintColor = .MGreen
         
         tabBarController.viewControllers = [
             homeNavigationController,
