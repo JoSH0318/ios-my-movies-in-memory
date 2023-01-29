@@ -16,6 +16,11 @@ final class SearchDetailViewController: UIViewController {
     private let viewModel: SearchDetailViewModel
     private let disposeBag = DisposeBag()
     private let searchDetailView = SearchDetailView()
+    private let editBarButton: UIBarButtonItem = {
+        let barButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: nil, action: nil)
+        barButtonItem.tintColor = .MGreen
+        return barButtonItem
+    }()
     
     // MARK: - Initializer
     
@@ -28,6 +33,7 @@ final class SearchDetailViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
         
         bind()
+        configureEditButton()
     }
     
     required init?(coder: NSCoder) {
@@ -48,7 +54,11 @@ final class SearchDetailViewController: UIViewController {
     
     func bind() {
         let didShowViewEvent = Observable.just(())
-        let input = SearchDetailViewModel.Input(didShowView: didShowViewEvent)
+        let didTapEditButtonEvent = editBarButton.rx.tap.asObservable()
+        let input = SearchDetailViewModel.Input(
+            didShowView: didShowViewEvent,
+            didTapEditButton: didTapEditButtonEvent
+        )
         
         viewModel.transform(input)
             .posterImage
@@ -66,5 +76,19 @@ final class SearchDetailViewController: UIViewController {
                 owner.searchDetailView.configureContents(movie)
             })
             .disposed(by: disposeBag)
+        
+        viewModel.transform(input)
+            .movie
+            .observe(on: MainScheduler.instance)
+            .withUnretained(self)
+            .bind(onNext: { owner, movie in
+//                owner.coordinator.
+//                coordinator를 통해서 Edit 화면으로 이동하는 로직
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func configureEditButton() {
+        navigationItem.rightBarButtonItem = editBarButton
     }
 }
