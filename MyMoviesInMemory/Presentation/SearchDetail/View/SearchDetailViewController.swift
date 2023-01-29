@@ -15,10 +15,7 @@ final class SearchDetailViewController: UIViewController {
     private let coordinator: SearchDetailCoordinator
     private let viewModel: SearchDetailViewModel
     private let disposeBag = DisposeBag()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
+    private let searchDetailView = SearchDetailView()
     
     // MARK: - Initializer
     
@@ -29,19 +26,45 @@ final class SearchDetailViewController: UIViewController {
         self.viewModel = viewModel
         self.coordinator = coordinator
         super.init(nibName: nil, bundle: nil)
+        
+        bind()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - LifeCycle
+    
+    override func loadView() {
+        view = searchDetailView
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    
     // MARK: - Methods
     
     func bind() {
-//        let input = Observable.just(())
-//        viewModel.transform(input)
-//            .movie
-//            .
+        let didShowViewEvent = Observable.just(())
+        let input = SearchDetailViewModel.Input(didShowView: didShowViewEvent)
+        
+        viewModel.transform(input)
+            .posterImage
+            .withUnretained(self)
+            .bind(onNext: { owner, image in
+                owner.searchDetailView.configurePosterImage(image)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.transform(input)
+            .movie
+            .observe(on: MainScheduler.instance)
+            .withUnretained(self)
+            .bind(onNext: { owner, movie in
+                owner.searchDetailView.configureContents(movie)
+            })
+            .disposed(by: disposeBag)
     }
-    
 }
