@@ -25,6 +25,7 @@
 		0397EECE29379E9900D1482E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0397EECD29379E9900D1482E /* Assets.xcassets */; };
 		0397EED129379E9900D1482E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0397EECF29379E9900D1482E /* LaunchScreen.storyboard */; };
 		039F5665295208DC00353720 /* MoviesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039F5664295208DC00353720 /* MoviesResponse.swift */; };
+		03C8985C2986E552008E1F84 /* EditCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C8985B2986E552008E1F84 /* EditCoordinator.swift */; };
 		03C8985E2986E662008E1F84 /* EditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C8985D2986E662008E1F84 /* EditViewModel.swift */; };
 		03C898622987E1A5008E1F84 /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C898612987E1A5008E1F84 /* EditViewController.swift */; };
 		03E3583D29707D3C008FFBFA /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E3583C29707D3C008FFBFA /* UIImage.swift */; };
@@ -88,6 +89,7 @@
 		0397EED029379E9900D1482E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0397EED229379E9900D1482E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		039F5664295208DC00353720 /* MoviesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesResponse.swift; sourceTree = "<group>"; };
+		03C8985B2986E552008E1F84 /* EditCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCoordinator.swift; sourceTree = "<group>"; };
 		03C8985D2986E662008E1F84 /* EditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewModel.swift; sourceTree = "<group>"; };
 		03C898612987E1A5008E1F84 /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
 		03E3583C29707D3C008FFBFA /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
@@ -325,6 +327,14 @@
 				03C898592986E533008E1F84 /* ViewModel */,
 			);
 			path = Edit;
+			sourceTree = "<group>";
+		};
+		03C898582986E524008E1F84 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				03C8985B2986E552008E1F84 /* EditCoordinator.swift */,
+			);
+			path = Coordinator;
 			sourceTree = "<group>";
 		};
 		03C898592986E533008E1F84 /* ViewModel */ = {
@@ -791,6 +801,7 @@
 				03E3584629719017008FFBFA /* PosterResponse.swift in Sources */,
 				03FD02E5295D8DF600BC72D7 /* MovieRepository.swift in Sources */,
 				03124785295B74DC00106F21 /* NetworkProvider.swift in Sources */,
+				03C8985C2986E552008E1F84 /* EditCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
