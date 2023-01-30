@@ -9,23 +9,23 @@ import UIKit
 
 final class EditCoordinator: Coordinator {
     var navigationController: UINavigationController
-    var parentCoordinators: Coordinator?
+    var parentCoordinator: Coordinator?
     var childCoordinators: [Coordinator] = []
-    private let useCase: ReviewUseCaseType
+    private let reviewUseCase: ReviewUseCaseType
     
     init(
         navigationController: UINavigationController,
         parentCoordinator: Coordinator,
-        useCase: ReviewUseCaseType
+        reviewUseCase: ReviewUseCaseType
     ) {
         self.navigationController = navigationController
-        self.parentCoordinators = parentCoordinator
-        self.useCase = useCase
+        self.parentCoordinator = parentCoordinator
+        self.reviewUseCase = reviewUseCase
     }
     
     func start(with movie: Movie, _ posterImage: UIImage?) {
         let editViewModel = EditViewModel(
-            reviewUseCase: useCase,
+            reviewUseCase: reviewUseCase,
             movie: movie,
             posterImage: posterImage
         )

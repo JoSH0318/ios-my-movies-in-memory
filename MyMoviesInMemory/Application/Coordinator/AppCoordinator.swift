@@ -9,7 +9,7 @@ import UIKit
 
 final class AppCoordinator: Coordinator {
     var navigationController: UINavigationController
-    var parentCoordinators: Coordinator?
+    var parentCoordinator: Coordinator?
     var childCoordinators: [Coordinator] = []
     private let reviewUseCase: ReviewUseCaseType = ReviewUseCase(
         repository: ReviewRepository(coreDataManager: CoreDataManager()))
@@ -50,14 +50,15 @@ final class AppCoordinator: Coordinator {
         
         let homeCoordinator = HomeCoordinator(
             navigationController: homeNavigationController,
-            parentCoordinators: self,
-            useCase: self.reviewUseCase
+            parentCoordinator: self,
+            useCase: reviewUseCase
         )
         
         let searchCoordinator = SearchCoordinator(
             navigationController: searchNavigationController,
-            parentCoordinators: self,
-            useCase: self.movieUseCase
+            parentCoordinator: self,
+            movieUseCase: movieUseCase,
+            reviewUseCase: reviewUseCase
         )
         
         childCoordinators.append(homeCoordinator)

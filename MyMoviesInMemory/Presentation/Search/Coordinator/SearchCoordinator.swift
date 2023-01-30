@@ -9,22 +9,25 @@ import UIKit
 
 final class SearchCoordinator: Coordinator {
     var navigationController: UINavigationController
-    var parentCoordinators: Coordinator?
+    var parentCoordinator: Coordinator?
     var childCoordinators: [Coordinator] = []
-    private let useCase: MovieUseCaseType
+    private let movieUseCase: MovieUseCaseType
+    private let reviewUseCase: ReviewUseCaseType
     
     init(
         navigationController: UINavigationController,
-        parentCoordinators: Coordinator,
-        useCase: MovieUseCaseType
+        parentCoordinator: Coordinator,
+        movieUseCase: MovieUseCaseType,
+        reviewUseCase: ReviewUseCaseType
     ) {
         self.navigationController = navigationController
-        self.parentCoordinators = parentCoordinators
-        self.useCase = useCase
+        self.parentCoordinator = parentCoordinator
+        self.movieUseCase = movieUseCase
+        self.reviewUseCase = reviewUseCase
     }
     
     func start() {
-        let searchViewModel = SearchViewModel(movieUseCase: useCase)
+        let searchViewModel = SearchViewModel(movieUseCase: movieUseCase)
         let searchViewController = SearchViewController(searchViewModel, self)
         self.navigationController.pushViewController(
             searchViewController,
@@ -36,7 +39,8 @@ final class SearchCoordinator: Coordinator {
         let searchDetailCoordinator = SearchDetailCoordinator(
             navigationController: self.navigationController,
             parentCoordinator: self,
-            useCase: useCase
+            movieUseCase: movieUseCase,
+            reviewUseCase: reviewUseCase
         )
         self.childCoordinators.append(searchDetailCoordinator)
         searchDetailCoordinator.start(with: movie)
