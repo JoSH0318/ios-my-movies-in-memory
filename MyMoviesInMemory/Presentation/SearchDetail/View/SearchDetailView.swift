@@ -160,11 +160,15 @@ final class SearchDetailView: UIView {
     
     // MARK: - Methods
     
-    func configurePosterImage(_ posterImage: UIImage?) {
-        posterImageView.image = posterImage
-    }
+//    func configurePosterImage(_ posterImage: UIImage?) {
+//        posterImageView.image = posterImage
+//    }
     
-    func configureContents(_ movie: Movie) {
+    func configureContents(
+        _ posterImage: UIImage?,
+        _ movie: Movie)
+    {
+        posterImageView.image = posterImage
         titleLabel.text = movie.title
         originalTitleLabel.text = movie.originalTitle
         summaryLabel.text = "\(movie.genreIDs) | \(movie.originalLanguage)"
