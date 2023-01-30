@@ -212,7 +212,7 @@ final class SearchDetailView: UIView {
         informationView.snp.makeConstraints {
             $0.top.equalTo(posterImageView.snp.bottom).offset(16)
             $0.leading.equalToSuperview().offset(32)
-            $0.trailing.equalTo(self.safeAreaLayoutGuide).offset(-16)
+            $0.trailing.equalToSuperview().offset(-32)
         }
         
         informationStackView.snp.makeConstraints {
