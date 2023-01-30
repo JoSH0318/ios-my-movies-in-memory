@@ -61,19 +61,15 @@ final class SearchDetailViewController: UIViewController {
         )
         
         viewModel.transform(input)
-            .posterImage
-            .withUnretained(self)
-            .bind(onNext: { owner, image in
-                owner.searchDetailView.configurePosterImage(image)
-            })
-            .disposed(by: disposeBag)
-        
-        viewModel.transform(input)
-            .movie
+            .movieWithPoster
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
-            .bind(onNext: { owner, movie in
-                owner.searchDetailView.configureContents(movie)
+            .bind(onNext: { owner, movieWithPoster in
+                owner.searchDetailView
+                    .configureContents(
+                        movieWithPoster.0,
+                        movieWithPoster.1
+                    )
             })
             .disposed(by: disposeBag)
         
