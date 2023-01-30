@@ -12,8 +12,8 @@ final class SearchDetailViewController: UIViewController {
     
     // MARK: - Properties
     
-    private let coordinator: SearchDetailCoordinator
     private let viewModel: SearchDetailViewModel
+    private let coordinator: SearchDetailCoordinator
     private let disposeBag = DisposeBag()
     private let searchDetailView = SearchDetailView()
     private let editBarButton: UIBarButtonItem = {
