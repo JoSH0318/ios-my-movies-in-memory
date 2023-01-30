@@ -20,8 +20,8 @@ final class SearchDetailViewModel {
     // MARK: - Output
     
     struct Output {
-        let posterImage: Observable<UIImage?>
-        let movie: Observable<Movie>
+        let movieWithPoster: Observable<(UIImage?, Movie)>
+        let movieToSend: Observable<(UIImage?, Movie)>
     }
     
     // MARK: - Properties
@@ -33,7 +33,10 @@ final class SearchDetailViewModel {
     
     // MARK: - Initializer
     
-    init(movieUseCase: MovieUseCaseType, movie: Movie) {
+    init(
+        movieUseCase: MovieUseCaseType,
+        movie: Movie
+    ) {
         self.movieUseCase = movieUseCase
         self.downloadTaskToken = imageManager.nextToken()
         self.movie = movie
@@ -49,17 +52,28 @@ final class SearchDetailViewModel {
                     owner.movie.posterPath,
                     owner.downloadTaskToken
                 )
+                .asObservable()
             }
         
-        let movie = Observable.merge(
-            input.didShowView,
-            input.didTapEditButton
-        )
+        let movie = input.didShowView
             .withUnretained(self)
             .map { owner, _ in
                 owner.movie
             }
         
-        return Output(posterImage: posterImage, movie: movie)
+        let movieWithPoster = Observable.combineLatest(
+            posterImage,
+            movie
+        )
+        
+        let movieToSend = input.didTapEditButton
+            .withLatestFrom(movieWithPoster)
+        
+        return Output(movieWithPoster: movieWithPoster, movieToSend: movieToSend)
     }
+}
+
+enum SomeEvent {
+    case didShow
+    case didTap
 }
