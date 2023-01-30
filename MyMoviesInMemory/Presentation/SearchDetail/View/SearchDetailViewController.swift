@@ -74,12 +74,15 @@ final class SearchDetailViewController: UIViewController {
             .disposed(by: disposeBag)
         
         viewModel.transform(input)
-            .movie
+            .movieToSend
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
-            .bind(onNext: { owner, movie in
-//                owner.coordinator.
-//                coordinator를 통해서 Edit 화면으로 이동하는 로직
+            .bind(onNext: { owner, movieWithPoster in
+                owner.coordinator
+                    .presentEditView(
+                        with: movieWithPoster.0,
+                        movieWithPoster.1
+                    )
             })
             .disposed(by: disposeBag)
     }
