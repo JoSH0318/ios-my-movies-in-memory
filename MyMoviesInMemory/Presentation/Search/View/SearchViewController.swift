@@ -93,7 +93,10 @@ class SearchViewController: UIViewController {
     
     private func configureCollectionViewLayout() -> UICollectionViewFlowLayout {
         let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.itemSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 0.2)
+        flowLayout.itemSize = CGSize(
+            width: UIScreen.main.bounds.width - 40,
+            height: UIScreen.main.bounds.height * 0.2
+        )
         return flowLayout
     }
     
