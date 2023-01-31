@@ -12,9 +12,8 @@ final class SummaryView: UIView {
     // MARK: - Constants
     
     private enum FontSize {
-        static let title: CGFloat = 18.0
-        static let body: CGFloat = 14.0
-        static let body2: CGFloat = 12.0
+        static let title: CGFloat = 16.0
+        static let body: CGFloat = 12.0
     }
     
     // MARK: - Properties
@@ -36,8 +35,8 @@ final class SummaryView: UIView {
     private let originalTitleLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
-        label.font = .systemFont(ofSize: FontSize.body2)
-        label.textColor = .systemGray3
+        label.font = .systemFont(ofSize: FontSize.body)
+        label.textColor = .systemGray2
         return label
     }()
     
@@ -109,14 +108,6 @@ final class SummaryView: UIView {
         return label
     }()
     
-    private let overviewLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .left
-        label.font = .systemFont(ofSize: FontSize.body)
-        label.numberOfLines = 0
-        return label
-    }()
-    
     // MARK: - Initializer
     
     override init(frame: CGRect) {
@@ -144,7 +135,6 @@ final class SummaryView: UIView {
         addSubview(titleLabel)
         addSubview(originalTitleLabel)
         addSubview(totalInfoStackView)
-        addSubview(overviewLabel)
         
         totalInfoStackView.addArrangedSubview(nameTagStackView)
         totalInfoStackView.addArrangedSubview(movieInfoStackView)
@@ -172,20 +162,18 @@ final class SummaryView: UIView {
         
         originalTitleLabel.snp.makeConstraints {
             $0.leading.equalTo(posterImageView.snp.trailing).offset(16)
-            $0.top.equalTo(titleLabel.snp.bottom).offset(4)
+            $0.top.equalTo(titleLabel.snp.bottom).offset(2)
             $0.trailing.equalToSuperview().offset(-16)
         }
         
         totalInfoStackView.snp.makeConstraints {
             $0.leading.equalTo(posterImageView.snp.trailing).offset(16)
-            $0.top.equalTo(titleLabel.snp.bottom).offset(8)
-            $0.trailing.equalToSuperview().offset(-16)
+            $0.top.equalTo(originalTitleLabel.snp.bottom).offset(8)
+            $0.trailing.bottom.equalToSuperview().offset(-16)
         }
         
-        overviewLabel.snp.makeConstraints {
-            $0.leading.equalTo(posterImageView.snp.trailing).offset(16)
-            $0.top.equalTo(totalInfoStackView.snp.bottom).offset(8)
-            $0.trailing.bottom.equalToSuperview().offset(-16)
+        nameTagStackView.snp.makeConstraints {
+            $0.width.equalTo(self.snp.width).dividedBy(10)
         }
     }
 }
