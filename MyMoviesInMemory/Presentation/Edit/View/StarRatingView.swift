@@ -9,7 +9,7 @@ import SnapKit
 
 final class StarRatingView: UIView {
     
-    // MARK: - properties
+    // MARK: - Properties
     
     private let firstStarImageView: UIImageView = {
         let imageView = UIImageView()
