@@ -12,6 +12,7 @@ class EditViewController: UIViewController {
 
     // MARK: - Properties
     
+    private let editView = EditView()
     private let viewModel: EditViewModel
     private let coordinator: EditCoordinator
     private let disposeBag = DisposeBag()
@@ -34,6 +35,11 @@ class EditViewController: UIViewController {
     }
     
     // MARK: - LifeCycle
+    
+    override func loadView() {
+        view = editView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
