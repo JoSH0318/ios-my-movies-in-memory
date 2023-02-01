@@ -14,6 +14,7 @@ final class SummaryView: UIView {
     private enum FontSize {
         static let title: CGFloat = 16.0
         static let body: CGFloat = 12.0
+        static let body2: CGFloat = 10.0
     }
     
     // MARK: - Properties
@@ -108,6 +109,15 @@ final class SummaryView: UIView {
         return label
     }()
     
+    private let overviewLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .left
+        label.font = .systemFont(ofSize: FontSize.body2)
+        label.numberOfLines = 0
+        label.setContentHuggingPriority(.init(1), for: .vertical)
+        return label
+    }()
+    
     // MARK: - Initializer
     
     override init(frame: CGRect) {
@@ -135,6 +145,7 @@ final class SummaryView: UIView {
         addSubview(titleLabel)
         addSubview(originalTitleLabel)
         addSubview(totalInfoStackView)
+        addSubview(overviewLabel)
         
         totalInfoStackView.addArrangedSubview(nameTagStackView)
         totalInfoStackView.addArrangedSubview(movieInfoStackView)
@@ -174,6 +185,12 @@ final class SummaryView: UIView {
         
         nameTagStackView.snp.makeConstraints {
             $0.width.equalTo(self.snp.width).dividedBy(10)
+        }
+        
+        overviewLabel.snp.makeConstraints {
+            $0.leading.equalTo(posterImageView.snp.trailing).offset(16)
+            $0.top.equalTo(totalInfoStackView.snp.bottom).offset(8)
+            $0.trailing.bottom.equalToSuperview().offset(-16)
         }
     }
 }
