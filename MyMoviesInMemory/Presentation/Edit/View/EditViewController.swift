@@ -43,6 +43,26 @@ class EditViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    
     // MARK: - Methods
-    func bind() {}
+    func bind() {
+        let draggedValue = editView.starRatingView
+            .starRatingSlider.rx.value
+            .asObservable()
+        
+        let input = EditViewModel.Input(
+            didShowView: .never(),
+            didDragStarRating: draggedValue,
+            didTapSaveButton: .never()
+        )
+        
+        viewModel.transform(input)
+            .starRating
+            .observe(on: MainScheduler.instance)
+            .withUnretained(self)
+            .bind(onNext: { owner, rating in
+                owner.editView.dragStarSlider(rating)
+            })
+            .disposed(by: disposeBag)
+    }
 }
