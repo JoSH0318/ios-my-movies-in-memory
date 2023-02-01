@@ -51,7 +51,7 @@ final class StarRatingView: UIView {
         return imageView
     }()
     
-    private let starRatingSlider: StarRatingSlider = {
+    private(set) var starRatingSlider: StarRatingSlider = {
         let slider = StarRatingSlider()
         slider.minimumValue = 0
         slider.maximumValue = 10
@@ -73,8 +73,8 @@ final class StarRatingView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        onDragStarSlider()
         configureView()
+        configureUI()
         configureConstraints()
     }
     
@@ -84,14 +84,12 @@ final class StarRatingView: UIView {
     
     // MARK: - Methods
     
-    private func onDragStarSlider() {
-        let intValue = Int(floor(starRatingSlider.value))
-        
+    func dragStarSlider(_ rating: Int) {
         for draggedValue in 1...5 {
             if let starImage = viewWithTag(draggedValue) as? UIImageView {
-                if draggedValue <= intValue / 2 {
+                if draggedValue <= rating / 2 {
                     starImage.image = UIImage(systemName: "star.fill")
-                } else if (2 * draggedValue - intValue) <= 1 {
+                } else if (2 * draggedValue - rating) <= 1 {
                     starImage.image = UIImage(systemName: "star.leadinghalf.filled")
                 } else {
                     starImage.image = UIImage(systemName: "star")
@@ -102,35 +100,45 @@ final class StarRatingView: UIView {
     
     private func configureView() {
         backgroundColor = .MWhite
-        
+        layer.cornerRadius = 16
+        clipsToBounds = true
+    }
+    
+    private func configureUI() {
         addSubview(starStackView)
         addSubview(starRatingSlider)
+        
+        starStackView.addArrangedSubview(firstStarImageView)
+        starStackView.addArrangedSubview(secondStarImageView)
+        starStackView.addArrangedSubview(thirdStarImageView)
+        starStackView.addArrangedSubview(fourthStarImageView)
+        starStackView.addArrangedSubview(fifthStarImageView)
     }
     
     private func configureConstraints() {
         firstStarImageView.snp.makeConstraints {
             $0.height.equalToSuperview()
-            $0.width.equalTo(firstStarImageView.snp.height)
+            $0.width.equalTo(firstStarImageView.snp.height).multipliedBy(1.1)
         }
         
         secondStarImageView.snp.makeConstraints {
             $0.height.equalToSuperview()
-            $0.width.equalTo(secondStarImageView.snp.height)
+            $0.width.equalTo(secondStarImageView.snp.height).multipliedBy(1.1)
         }
         
         thirdStarImageView.snp.makeConstraints {
             $0.height.equalToSuperview()
-            $0.width.equalTo(thirdStarImageView.snp.height)
+            $0.width.equalTo(thirdStarImageView.snp.height).multipliedBy(1.1)
         }
         
         fourthStarImageView.snp.makeConstraints {
             $0.height.equalToSuperview()
-            $0.width.equalTo(fourthStarImageView.snp.height)
+            $0.width.equalTo(fourthStarImageView.snp.height).multipliedBy(1.1)
         }
         
         fifthStarImageView.snp.makeConstraints {
             $0.height.equalToSuperview()
-            $0.width.equalTo(fifthStarImageView.snp.height)
+            $0.width.equalTo(fifthStarImageView.snp.height).multipliedBy(1.1)
         }
         
         starStackView.snp.makeConstraints {
@@ -141,7 +149,7 @@ final class StarRatingView: UIView {
         
         starRatingSlider.snp.makeConstraints {
             $0.leading.equalTo(starStackView.snp.leading)
-            $0.trailing.equalTo(starStackView.snp.leading)
+            $0.trailing.equalTo(starStackView.snp.trailing)
             $0.centerY.equalTo(starStackView.snp.centerY)
         }
     }
