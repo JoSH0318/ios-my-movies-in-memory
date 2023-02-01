@@ -19,21 +19,21 @@ final class SummaryView: UIView {
     
     // MARK: - Properties
     
-    private let posterImageView: UIImageView = {
+    private(set) var posterImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.setContentCompressionResistancePriority(.required, for: .horizontal)
         return imageView
     }()
     
-    private let titleLabel: UILabel = {
+    private(set) var titleLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
         label.font = .systemFont(ofSize: FontSize.title, weight: .bold)
         return label
     }()
     
-    private let originalTitleLabel: UILabel = {
+    private(set) var originalTitleLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
         label.font = .systemFont(ofSize: FontSize.body)
@@ -88,28 +88,28 @@ final class SummaryView: UIView {
         return stackView
     }()
     
-    private let genreLabel: UILabel = {
+    private(set) var genreLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
         label.font = .systemFont(ofSize: FontSize.body)
         return label
     }()
     
-    private let releaseLabel: UILabel = {
+    private(set) var releaseLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
         label.font = .systemFont(ofSize: FontSize.body)
         return label
     }()
     
-    private let ratingLabel: UILabel = {
+    private(set) var ratingLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
         label.font = .systemFont(ofSize: FontSize.body)
         return label
     }()
     
-    private let overviewLabel: UILabel = {
+    private(set) var overviewLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
         label.font = .systemFont(ofSize: FontSize.body2)
@@ -180,7 +180,7 @@ final class SummaryView: UIView {
         totalInfoStackView.snp.makeConstraints {
             $0.leading.equalTo(posterImageView.snp.trailing).offset(16)
             $0.top.equalTo(originalTitleLabel.snp.bottom).offset(8)
-            $0.trailing.bottom.equalToSuperview().offset(-16)
+            $0.trailing.equalToSuperview().offset(-16)
         }
         
         nameTagStackView.snp.makeConstraints {
