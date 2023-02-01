@@ -13,12 +13,14 @@ final class EditViewModel {
     
     struct Input {
         let didShowView: Observable<Void>
+        let didDragStarRating: Observable<Float>
         let didTapSaveButton: Observable<Review>
     }
     
     // MARK: - Output
     
     struct Output {
+        let starRating: Observable<Int>
     }
     
     // MARK: - Properties
@@ -42,7 +44,13 @@ final class EditViewModel {
     // MARK: - Methods
     
     func transform(_ input: Input) -> Output {
-        return Output()
+        let rating = input.didDragStarRating
+            .withUnretained(self)
+            .map { owner, value in
+                Int(floor(value))
+            }
+        
+        return Output(starRating: rating)
     }
 }
 // 일단 movie 에서 review로 바꾸는 과정은 필요하니 movie가 필요함
