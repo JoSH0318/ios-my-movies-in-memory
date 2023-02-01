@@ -34,7 +34,6 @@
 		03E3583D29707D3C008FFBFA /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E3583C29707D3C008FFBFA /* UIImage.swift */; };
 		03E358402971889A008FFBFA /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E3583F2971889A008FFBFA /* UserInfo.swift */; };
 		03E3584229718B76008FFBFA /* EndpointStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E3584129718B75008FFBFA /* EndpointStorage.swift */; };
-		03E3584629719017008FFBFA /* PosterResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E3584529719017008FFBFA /* PosterResponse.swift */; };
 		03E3584C2971CD30008FFBFA /* SearchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E3584B2971CD30008FFBFA /* SearchCoordinator.swift */; };
 		03E358502971CD86008FFBFA /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E3584F2971CD86008FFBFA /* SearchViewController.swift */; };
 		03E358522971CD97008FFBFA /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E358512971CD97008FFBFA /* SearchViewModel.swift */; };
@@ -101,7 +100,6 @@
 		03E3583C29707D3C008FFBFA /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		03E3583F2971889A008FFBFA /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		03E3584129718B75008FFBFA /* EndpointStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointStorage.swift; sourceTree = "<group>"; };
-		03E3584529719017008FFBFA /* PosterResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosterResponse.swift; sourceTree = "<group>"; };
 		03E3584B2971CD30008FFBFA /* SearchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCoordinator.swift; sourceTree = "<group>"; };
 		03E3584F2971CD86008FFBFA /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		03E358512971CD97008FFBFA /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
@@ -311,7 +309,6 @@
 			isa = PBXGroup;
 			children = (
 				039F5664295208DC00353720 /* MoviesResponse.swift */,
-				03E3584529719017008FFBFA /* PosterResponse.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -809,7 +806,6 @@
 				03FD0302295EDD3000BC72D7 /* DummyMovieReview.swift in Sources */,
 				03806B652977D43E00235282 /* SearchDetailViewModel.swift in Sources */,
 				03E3583D29707D3C008FFBFA /* UIImage.swift in Sources */,
-				03E3584629719017008FFBFA /* PosterResponse.swift in Sources */,
 				03FD02E5295D8DF600BC72D7 /* MovieRepository.swift in Sources */,
 				03C8986429881C62008E1F84 /* StarRatingView.swift in Sources */,
 				03124785295B74DC00106F21 /* NetworkProvider.swift in Sources */,
