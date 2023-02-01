@@ -356,8 +356,6 @@
 			children = (
 				03C898612987E1A5008E1F84 /* EditViewController.swift */,
 				03C8986729898EF1008E1F84 /* EditView.swift */,
-				03C89865298856EF008E1F84 /* SummaryView.swift */,
-				03C8986329881C62008E1F84 /* StarRatingView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -582,6 +580,8 @@
 			isa = PBXGroup;
 			children = (
 				03FD03272965FADC00BC72D7 /* CarouselLayout.swift */,
+				03C89865298856EF008E1F84 /* SummaryView.swift */,
+				03C8986329881C62008E1F84 /* StarRatingView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
