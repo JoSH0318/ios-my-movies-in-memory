@@ -60,7 +60,18 @@ final class EditView: UIView {
     
     // MARK: - Methods
     
-    func bind() {}
+    func configureContents(
+        _ posterImage: UIImage?,
+        _ movie: Movie)
+    {
+        summaryView.posterImageView.image = posterImage
+        summaryView.titleLabel.text = movie.title
+        summaryView.originalTitleLabel.text = movie.originalTitle
+        summaryView.genreLabel.text = "\(movie.genreIDs)"
+        summaryView.releaseLabel.text = "\(movie.releaseDate) | \(movie.originalLanguage)"
+        summaryView.ratingLabel.text = "\(movie.userRating)"
+        summaryView.overviewLabel.text = movie.overview
+    }
     
     func dragStarSlider(_ rating: Int) {
         starRatingView.dragStarSlider(rating)
