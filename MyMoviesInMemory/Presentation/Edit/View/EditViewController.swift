@@ -46,15 +46,29 @@ class EditViewController: UIViewController {
     
     // MARK: - Methods
     func bind() {
+        let didShowViewEvent = Observable.just(())
         let draggedValue = editView.starRatingView
             .starRatingSlider.rx.value
             .asObservable()
         
         let input = EditViewModel.Input(
-            didShowView: .never(),
+            didShowView: didShowViewEvent,
             didDragStarRating: draggedValue,
             didTapSaveButton: .never()
         )
+        
+        viewModel.transform(input)
+            .movieWithPoster
+            .observe(on: MainScheduler.instance)
+            .withUnretained(self)
+            .bind(onNext: { owner, movieWithPoster in
+                owner.editView
+                    .configureContents(
+                        movieWithPoster.0,
+                        movieWithPoster.1
+                    )
+            })
+            .disposed(by: disposeBag)
         
         viewModel.transform(input)
             .starRating

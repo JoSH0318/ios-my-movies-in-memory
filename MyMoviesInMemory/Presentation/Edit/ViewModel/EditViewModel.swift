@@ -20,6 +20,7 @@ final class EditViewModel {
     // MARK: - Output
     
     struct Output {
+        let movieWithPoster: Observable<(UIImage?, Movie)>
         let starRating: Observable<Int>
     }
     
@@ -44,13 +45,22 @@ final class EditViewModel {
     // MARK: - Methods
     
     func transform(_ input: Input) -> Output {
+        let movieWithPoster = input.didShowView
+            .withUnretained(self)
+            .map { owner, _ in
+                (owner.posterImage, owner.movie)
+            }
+        
         let rating = input.didDragStarRating
             .withUnretained(self)
             .map { owner, value in
                 Int(floor(value))
             }
         
-        return Output(starRating: rating)
+        return Output(
+            movieWithPoster: movieWithPoster,
+            starRating: rating
+        )
     }
 }
 // 일단 movie 에서 review로 바꾸는 과정은 필요하니 movie가 필요함

@@ -160,10 +160,6 @@ final class SearchDetailView: UIView {
     
     // MARK: - Methods
     
-//    func configurePosterImage(_ posterImage: UIImage?) {
-//        posterImageView.image = posterImage
-//    }
-    
     func configureContents(
         _ posterImage: UIImage?,
         _ movie: Movie)
