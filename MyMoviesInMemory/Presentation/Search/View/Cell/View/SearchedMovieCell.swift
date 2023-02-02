@@ -69,7 +69,7 @@ final class SearchedMovieCell: UICollectionViewCell {
         
         viewModel?.transform(input)
             .movie
-            .map { "\($0.genreIDs)" }
+            .map { "\($0.genres)" }
             .bind(to: summaryView.genreLabel.rx.text)
             .disposed(by: disposeBag)
         

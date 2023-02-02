@@ -42,9 +42,9 @@ extension MovieResult {
             title: self.title ?? "",
             originalTitle: self.originalTitle ?? "",
             posterPath: self.posterPath ?? "",
-            genreIDs: toGenre(self.genreIDs) ?? [],
+            genres: toGenre(self.genreIDs) ?? [],
             releaseDate: self.releaseDate ?? "",
-            userRating: self.voteAverage ?? 0.0,
+            userRating: (self.voteAverage ?? 0.0) / 2,
             originalLanguage: self.originalLanguage ?? "",
             overview: self.overview ?? ""
         )

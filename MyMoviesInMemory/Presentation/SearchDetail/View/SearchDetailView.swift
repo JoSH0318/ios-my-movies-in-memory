@@ -167,7 +167,7 @@ final class SearchDetailView: UIView {
         posterImageView.image = posterImage
         titleLabel.text = movie.title
         originalTitleLabel.text = movie.originalTitle
-        summaryLabel.text = "\(movie.genreIDs) | \(movie.originalLanguage)"
+        summaryLabel.text = "\(movie.genres) | \(movie.originalLanguage)"
         releaseDateLabel.text = movie.releaseDate
         userRatingLabel.text = "\(movie.userRating)"
         overviewLabel.text = movie.overview

@@ -12,7 +12,7 @@ struct Movie {
     let title: String
     let originalTitle: String
     let posterPath: String
-    let genreIDs: [String]
+    let genres: [String]
     let releaseDate: String
     let userRating: Double
     let originalLanguage: String

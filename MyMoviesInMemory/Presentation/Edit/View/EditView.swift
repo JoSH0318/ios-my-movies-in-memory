@@ -73,7 +73,7 @@ final class EditView: UIView {
         summaryView.posterImageView.image = posterImage
         summaryView.titleLabel.text = movie.title
         summaryView.originalTitleLabel.text = movie.originalTitle
-        summaryView.genreLabel.text = "\(movie.genreIDs)"
+        summaryView.genreLabel.text = "\(movie.genres)"
         summaryView.releaseLabel.text = "\(movie.releaseDate) | \(movie.originalLanguage)"
         summaryView.ratingLabel.text = "\(movie.userRating)"
         summaryView.overviewLabel.text = movie.overview
