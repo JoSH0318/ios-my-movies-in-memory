@@ -16,6 +16,11 @@ class EditViewController: UIViewController {
     private let viewModel: EditViewModel
     private let coordinator: EditCoordinator
     private let disposeBag = DisposeBag()
+    private let saveBarButton: UIBarButtonItem = {
+        let barButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: nil, action: nil)
+        barButtonItem.tintColor = .MGreen
+        return barButtonItem
+    }()
     
     // MARK: - Initializer
     
@@ -78,5 +83,9 @@ class EditViewController: UIViewController {
                 owner.editView.dragStarSlider(rating)
             })
             .disposed(by: disposeBag)
+    }
+    
+    private func configureEditButton() {
+        navigationItem.rightBarButtonItem = saveBarButton
     }
 }
