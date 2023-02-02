@@ -27,6 +27,7 @@ enum Genre: Int {
     case thriller = 53
     case western = 37
     case adventure = 12
+    case etc = -1
     
     var description: String {
         switch self {
@@ -68,8 +69,8 @@ enum Genre: Int {
             return "서부극"
         case .adventure:
             return "어드벤처"
-        default:
-            return "기타"
+        case .etc:
+            return ""
         }
     }
 }
