@@ -42,7 +42,7 @@ extension MovieResult {
             title: self.title ?? "",
             originalTitle: self.originalTitle ?? "",
             posterPath: self.posterPath ?? "",
-            genres: toGenre(self.genreIDs) ?? [],
+            genres: toGenres(self.genreIDs),
             releaseDate: self.releaseDate ?? "",
             userRating: (self.voteAverage ?? 0.0) / 2,
             originalLanguage: self.originalLanguage ?? "",
@@ -50,12 +50,14 @@ extension MovieResult {
         )
     }
     
-    private func toGenre(_ genreIDs: [Int]?) -> [String]? {
-        let genres = self.genreIDs?
-            .map { genreID in
-                Genre(rawValue: genreID)?.description ?? ""
-            }
+    private func toGenres(_ genreIDs: [Int]?) -> String {
+        guard let genreIDs = genreIDs else { return "" }
+        let firstGenreID = genreIDs[safe: 0]
+        let secondGenreID = genreIDs[safe: 1]
         
-        return genres
+        guard let firstGenre = Genre(rawValue: firstGenreID ?? -1)?.description else { return "" }
+        guard let secondGenre = Genre(rawValue: secondGenreID ?? -1)?.description else { return "" }
+        
+        return firstGenre + " " + secondGenre
     }
 }
