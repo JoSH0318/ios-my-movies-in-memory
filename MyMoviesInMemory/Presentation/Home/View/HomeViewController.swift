@@ -16,11 +16,13 @@ final class HomeViewController: UIViewController {
     private let homeView = HomeView()
     private let viewModel: HomeViewModel
     private let disposeBag = DisposeBag()
+    private let homeCoordinator: HomeCoordinator
     
     // MARK: - Initializer
     
-    init(_ viewModel: HomeViewModel) {
+    init(_ viewModel: HomeViewModel, homeCoordinator: HomeCoordinator) {
         self.viewModel = viewModel
+        self.homeCoordinator = homeCoordinator
         super.init(nibName: nil, bundle: nil)
         
         bind()
@@ -41,8 +43,7 @@ final class HomeViewController: UIViewController {
     private func bind() {
         let viewDidLoadEvent = Observable.just(())
         let input = HomeViewModel.Input(
-            viewDidLoadEvent: viewDidLoadEvent,
-            didTapRefreshButton: .never()
+            viewDidLoadEvent: viewDidLoadEvent
         )
         
         viewModel.transform(input)

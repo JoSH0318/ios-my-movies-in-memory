@@ -7,6 +7,6 @@
 
 import Foundation
 
-final class ReviewDetailCoordinator: Coordinator {
-    
-}
+//final class ReviewDetailCoordinator: Coordinator {
+//    
+//}
