@@ -47,19 +47,31 @@ class EditViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        bind()
+        configureEditButton()
     }
     
     // MARK: - Methods
+    
     func bind() {
         let didShowViewEvent = Observable.just(())
         let draggedValue = editView.starRatingView
             .starRatingSlider.rx.value
             .asObservable()
+        let didTapSaveButtonEvent = saveBarButton.rx.tap
+            .withUnretained(self)
+            .map { owner, _ in
+                (
+                    owner.editView.oneLineCommentTextField.text,
+                    owner.editView.movieReportTextField.text
+                )
+            }
         
         let input = EditViewModel.Input(
             didShowView: didShowViewEvent,
             didDragStarRating: draggedValue,
-            didTapSaveButton: .never()
+            didTapSaveButton: didTapSaveButtonEvent
         )
         
         viewModel.transform(input)
