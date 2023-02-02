@@ -14,7 +14,7 @@ final class EditViewModel {
     struct Input {
         let didShowView: Observable<Void>
         let didDragStarRating: Observable<Float>
-        let didTapSaveButton: Observable<Review>
+        let didTapSaveButton: Observable<(String?, String?)>
     }
     
     // MARK: - Output
@@ -63,5 +63,3 @@ final class EditViewModel {
         )
     }
 }
-// 일단 movie 에서 review로 바꾸는 과정은 필요하니 movie가 필요함
-// view에 뿌려질 데이터는 제목정도?
