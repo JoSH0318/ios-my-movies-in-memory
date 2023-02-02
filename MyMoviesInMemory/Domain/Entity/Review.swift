@@ -5,7 +5,7 @@
 //  Created by 조성훈 on 2023/01/09.
 //
 
-import Foundation
+import UIKit
 
 struct Review {
     let title: String
@@ -22,9 +22,10 @@ struct Review {
 }
 
 extension Review {
-    func toCellViewModelItem() -> MovieReviewCellViewModelItem {
-        return MovieReviewCellViewModelItem(
+    func toCellViewModelItem(with posterImage: UIImage?) -> ReviewCellViewModelItem {
+        return ReviewCellViewModelItem(
             title: self.title,
+            posterImage: posterImage,
             id: self.id,
             subtitle: self.subtitle,
             openingYear: self.openingYear,
