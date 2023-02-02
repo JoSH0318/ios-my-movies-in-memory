@@ -34,6 +34,7 @@
 		03C8986829898EF1008E1F84 /* EditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C8986729898EF1008E1F84 /* EditView.swift */; };
 		03C8986A298AFEC1008E1F84 /* MovieResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C89869298AFEC1008E1F84 /* MovieResult.swift */; };
 		03C8986C298AFEFA008E1F84 /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C8986B298AFEFA008E1F84 /* Genre.swift */; };
+		03C8986E298C394D008E1F84 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C8986D298C394D008E1F84 /* Collection.swift */; };
 		03E3583D29707D3C008FFBFA /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E3583C29707D3C008FFBFA /* UIImage.swift */; };
 		03E358402971889A008FFBFA /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E3583F2971889A008FFBFA /* UserInfo.swift */; };
 		03E3584229718B76008FFBFA /* EndpointStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E3584129718B75008FFBFA /* EndpointStorage.swift */; };
@@ -103,6 +104,7 @@
 		03C8986729898EF1008E1F84 /* EditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditView.swift; sourceTree = "<group>"; };
 		03C89869298AFEC1008E1F84 /* MovieResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieResult.swift; sourceTree = "<group>"; };
 		03C8986B298AFEFA008E1F84 /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
+		03C8986D298C394D008E1F84 /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
 		03E3583C29707D3C008FFBFA /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		03E3583F2971889A008FFBFA /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		03E3584129718B75008FFBFA /* EndpointStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointStorage.swift; sourceTree = "<group>"; };
@@ -615,6 +617,7 @@
 			children = (
 				03FD0372296F0AD900BC72D7 /* UIColor.swift */,
 				03E3583C29707D3C008FFBFA /* UIImage.swift */,
+				03C8986D298C394D008E1F84 /* Collection.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -777,6 +780,7 @@
 				03FD02EE295D9F0600BC72D7 /* Coordinator.swift in Sources */,
 				03806B4F29733CA300235282 /* SearchedMovieCellViewModel.swift in Sources */,
 				03FD0341296C6BF200BC72D7 /* AppCoordinator.swift in Sources */,
+				03C8986E298C394D008E1F84 /* Collection.swift in Sources */,
 				03E3584229718B76008FFBFA /* EndpointStorage.swift in Sources */,
 				03FD02F6295DA11D00BC72D7 /* HomeView.swift in Sources */,
 				03FD0376296F17AD00BC72D7 /* ReviewCellViewModelItem.swift in Sources */,
