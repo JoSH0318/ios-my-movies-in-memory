@@ -28,19 +28,25 @@ final class EditView: UIView {
     
     private(set) var starRatingView = StarRatingView()
     
-    private let oneLineCommentTextField: UITextField = {
+    private(set) var oneLineCommentTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "📝 나만의 영화 한 줄평을 적어보세요"
         textField.font = .systemFont(ofSize: FontSize.title)
+        textField.layer.cornerRadius = 16
+        textField.backgroundColor = .MWhite
+        textField.clipsToBounds = true
         return textField
     }()
     
-    private let movieReportTextField: UITextField = {
+    private(set) var movieReportTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "📝 영화의 감상평을 적어보세요."
         textField.textAlignment = .left
         textField.font = .systemFont(ofSize: FontSize.title)
         textField.setContentHuggingPriority(.init(1), for: .vertical)
+        textField.layer.cornerRadius = 16
+        textField.backgroundColor = .MWhite
+        textField.clipsToBounds = true
         return textField
     }()
     
@@ -94,7 +100,7 @@ final class EditView: UIView {
         mainStackView.snp.makeConstraints {
             $0.top.equalTo(safeAreaLayoutGuide)
             $0.leading.equalToSuperview().offset(20)
-            $0.trailing.bottom.equalToSuperview().offset(-20)
+            $0.trailing.bottom.equalTo(self.safeAreaLayoutGuide).offset(-20)
         }
         
         summaryView.snp.makeConstraints {
