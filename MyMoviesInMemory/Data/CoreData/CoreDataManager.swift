@@ -62,29 +62,27 @@ extension CoreDataManager {
         let request = generateRequest(by: review.id)
         
         if let objectToUpdate = fetchResult(from: request) {
-            objectToUpdate.title = review.title
             objectToUpdate.id = review.id
-            objectToUpdate.subtitle = review.subtitle
-            objectToUpdate.imageUrl = review.imageUrl
-            objectToUpdate.openingYear = review.openingYear
-            objectToUpdate.director = review.director
-            objectToUpdate.actor = review.actors
+            objectToUpdate.title = review.title
+            objectToUpdate.originalTitle = review.originalTitle
+            objectToUpdate.posterPath = review.posterPath
+            objectToUpdate.releaseDate = review.releaseDate
             objectToUpdate.userRating = review.userRating
             objectToUpdate.personalRating = review.personalRating
-            objectToUpdate.commentary = review.commentary
+            objectToUpdate.shortComment = review.shortComment
+            objectToUpdate.comment = review.comment
             objectToUpdate.recordDate = review.recordDate
         } else {
             let entity = ReviewDAO(context: context)
-            entity.title = review.title
             entity.id = review.id
-            entity.subtitle = review.subtitle
-            entity.imageUrl = review.imageUrl
-            entity.openingYear = review.openingYear
-            entity.director = review.director
-            entity.actor = review.actors
+            entity.title = review.title
+            entity.originalTitle = review.originalTitle
+            entity.posterPath = review.posterPath
+            entity.releaseDate = review.releaseDate
             entity.userRating = review.userRating
             entity.personalRating = review.personalRating
-            entity.commentary = review.commentary
+            entity.shortComment = review.shortComment
+            entity.comment = review.comment
             entity.recordDate = review.recordDate
         }
         
@@ -109,16 +107,15 @@ extension CoreDataManager {
     func update(with review: Review) {
         let request = generateRequest(by: review.id)
         guard let objectToUpdate = fetchResult(from: request) else { return }
-        objectToUpdate.title = review.title
         objectToUpdate.id = review.id
-        objectToUpdate.subtitle = review.subtitle
-        objectToUpdate.imageUrl = review.imageUrl
-        objectToUpdate.openingYear = review.openingYear
-        objectToUpdate.director = review.director
-        objectToUpdate.actor = review.actors
+        objectToUpdate.title = review.title
+        objectToUpdate.originalTitle = review.originalTitle
+        objectToUpdate.posterPath = review.posterPath
+        objectToUpdate.releaseDate = review.releaseDate
         objectToUpdate.userRating = review.userRating
         objectToUpdate.personalRating = review.personalRating
-        objectToUpdate.commentary = review.commentary
+        objectToUpdate.shortComment = review.shortComment
+        objectToUpdate.comment = review.comment
         objectToUpdate.recordDate = review.recordDate
         
         saveContext()

@@ -2,12 +2,13 @@
 //  ReviewDAO+CoreDataProperties.swift
 //  MyMoviesInMemory
 //
-//  Created by 조성훈 on 2023/01/12.
+//  Created by 조성훈 on 2023/02/03.
 //
 //
 
 import Foundation
 import CoreData
+
 
 extension ReviewDAO {
 
@@ -15,35 +16,42 @@ extension ReviewDAO {
         return NSFetchRequest<ReviewDAO>(entityName: "ReviewDAO")
     }
 
-    @NSManaged public var title: String?
-    @NSManaged public var subtitle: String?
-    @NSManaged public var imageUrl: String?
-    @NSManaged public var openingYear: String?
-    @NSManaged public var director: String?
-    @NSManaged public var actor: String?
-    @NSManaged public var userRating: Double
-    @NSManaged public var personalRating: Double
     @NSManaged public var id: String?
-    @NSManaged public var commentary: String?
+    @NSManaged public var title: String?
+    @NSManaged public var originalTitle: String?
+    @NSManaged public var posterPath: String?
+    @NSManaged public var genres: String?
+    @NSManaged public var releaseDate: String?
+    @NSManaged public var userRating: Double
+    @NSManaged public var originalLanguage: String?
+    @NSManaged public var overview: String?
+    @NSManaged public var personalRating: Double
+    @NSManaged public var shortComment: String?
+    @NSManaged public var comment: String?
     @NSManaged public var recordDate: String?
 
+}
+
+extension ReviewDAO {
     func toDomain() -> Review {
         return Review(
-            title: self.title ?? "",
             id: self.id ?? "",
-            subtitle: self.subtitle ?? "",
-            imageUrl: self.imageUrl ?? "",
-            openingYear: self.openingYear ?? "",
-            director: self.director ?? "",
-            actors: self.actor ?? "",
+            title: self.title ?? "",
+            originalTitle: self.originalTitle ?? "",
+            posterPath: self.posterPath ?? "",
+            genres: self.genres ?? "",
+            releaseDate: self.recordDate ?? "",
             userRating: self.userRating,
+            originalLanguage: self.originalLanguage ?? "",
+            overview: self.overview ?? "",
             personalRating: self.personalRating,
-            commentary: self.commentary ?? "",
+            shortComment: self.shortComment ?? "",
+            comment: self.comment ?? "",
             recordDate: self.recordDate ?? ""
         )
     }
 }
 
-extension ReviewDAO : Identifiable {
+extension ReviewDAO: Identifiable {
 
 }

@@ -8,33 +8,17 @@
 import UIKit
 
 struct Review {
-    let title: String
     let id: String
-    let subtitle: String
-    let imageUrl: String
-    let openingYear: String
-    let director: String
-    let actors: String
+    let title: String
+    let originalTitle: String
+    let posterPath: String
+    let genres: String
+    let releaseDate: String
     let userRating: Double
+    let originalLanguage: String
+    let overview: String
     let personalRating: Double
-    let commentary: String
+    let shortComment: String
+    let comment: String
     let recordDate: String
-}
-
-extension Review {
-    func toCellViewModelItem(with posterImage: UIImage?) -> ReviewCellViewModelItem {
-        return ReviewCellViewModelItem(
-            title: self.title,
-            posterImage: posterImage,
-            id: self.id,
-            subtitle: self.subtitle,
-            openingYear: self.openingYear,
-            director: self.director,
-            actors: self.actors,
-            userRating: String(self.userRating),
-            personalRating: String(self.personalRating),
-            commentary: self.commentary,
-            recordDate: self.recordDate
-        )
-    }
 }
