@@ -35,7 +35,7 @@ final class HomeCoordinator: Coordinator {
         )
     }
     
-    func pushReviewDetailView(_ ReviewItem: ReviewCellViewModelItem) {
+    func pushReviewDetailView(_ Review: Review) {
         let reviewDetailModel = ReviewDetailViewModel()
         let reviewDetailViewController = ReviewDetailViewController()
         self.navigationController.pushViewController(reviewDetailViewController, animated: true)
