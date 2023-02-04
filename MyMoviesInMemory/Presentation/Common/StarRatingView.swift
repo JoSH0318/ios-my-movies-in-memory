@@ -9,6 +9,12 @@ import SnapKit
 
 final class StarRatingView: UIView {
     
+    // MARK: - Name Space
+    
+    private enum Design {
+        static let inset = 16.0
+    }
+    
     // MARK: - Properties
     
     private let firstStarImageView: UIImageView = {
@@ -118,33 +124,33 @@ final class StarRatingView: UIView {
     private func configureConstraints() {
         firstStarImageView.snp.makeConstraints {
             $0.height.equalToSuperview()
-            $0.width.equalTo(firstStarImageView.snp.height).multipliedBy(1.1)
+            $0.width.equalTo(firstStarImageView.snp.height)
         }
         
         secondStarImageView.snp.makeConstraints {
             $0.height.equalToSuperview()
-            $0.width.equalTo(secondStarImageView.snp.height).multipliedBy(1.1)
+            $0.width.equalTo(secondStarImageView.snp.height)
         }
         
         thirdStarImageView.snp.makeConstraints {
             $0.height.equalToSuperview()
-            $0.width.equalTo(thirdStarImageView.snp.height).multipliedBy(1.1)
+            $0.width.equalTo(thirdStarImageView.snp.height)
         }
         
         fourthStarImageView.snp.makeConstraints {
             $0.height.equalToSuperview()
-            $0.width.equalTo(fourthStarImageView.snp.height).multipliedBy(1.1)
+            $0.width.equalTo(fourthStarImageView.snp.height)
         }
         
         fifthStarImageView.snp.makeConstraints {
             $0.height.equalToSuperview()
-            $0.width.equalTo(fifthStarImageView.snp.height).multipliedBy(1.1)
+            $0.width.equalTo(fifthStarImageView.snp.height)
         }
         
         starStackView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(16)
+            $0.top.equalToSuperview().offset(Design.inset)
             $0.centerX.equalToSuperview()
-            $0.bottom.equalToSuperview().offset(-16)
+            $0.bottom.equalToSuperview().offset(-Design.inset)
         }
         
         starRatingSlider.snp.makeConstraints {

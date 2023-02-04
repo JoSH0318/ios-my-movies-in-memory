@@ -30,12 +30,9 @@ final class MovieReviewCell: UICollectionViewCell {
     }
     
     private var viewModel: ReviewCellViewModel?
-    private let disposeBag = DisposeBag()
+    private var disposeBag = DisposeBag()
     
-    private let movieTicketView: TicketView = {
-        let ticketView = TicketView()
-        return ticketView
-    }()
+    private let movieTicketView = TicketView()
     
     private let posterImageView: UIImageView = {
         let imageView = UIImageView()
@@ -45,32 +42,41 @@ final class MovieReviewCell: UICollectionViewCell {
         return imageView
     }()
     
-    private let totalStackView: UIStackView = {
+    private let titleStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        return stackView
-    }()
-    
-    private let firstSectionStackView: UIStackView = {
-        let stackView = UIStackView()
         return stackView
     }()
     
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = .boldSystemFont(ofSize: FontSize.title)
-        label.setContentHuggingPriority(.required, for: .vertical)
+        label.setContentCompressionResistancePriority(.required, for: .vertical)
         return label
     }()
     
-    private let personalRatingLabel: UILabel = {
+    private let originalTitleLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: FontSize.title)
-        label.textAlignment = .right
+        label.font = .systemFont(ofSize: FontSize.subtitle)
+        label.textColor = .systemGray3
+        label.setContentHuggingPriority(.init(1), for: .vertical)
         return label
     }()
     
-    private let commentaryLabel: UILabel = {
+    private let reviewSectionStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        return stackView
+    }()
+    
+    private let starRatingView: StarRatingView = {
+        let starRatingView = StarRatingView()
+        starRatingView.starRatingSlider.isUserInteractionEnabled = false
+        starRatingView.backgroundColor = .clear
+        return starRatingView
+    }()
+    
+    private let shortCommentLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: FontSize.title)
         label.textAlignment = .center
@@ -79,9 +85,10 @@ final class MovieReviewCell: UICollectionViewCell {
         return label
     }()
     
-    private let thirdSectionStackView: UIStackView = {
+    private let barcodeSectionStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
+        stackView.spacing = 8
         return stackView
     }()
     
@@ -121,7 +128,8 @@ final class MovieReviewCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        // 여기에서도 viewModel transform/bind를 해줘야 하는지?
+        
+        disposeBag = DisposeBag()
         viewModel?.onPrepareForReuse()
         posterImageView.image = nil
         titleLabel.text = nil
@@ -135,32 +143,41 @@ final class MovieReviewCell: UICollectionViewCell {
         let review: Observable<Review> = Observable.just(review)
         let input = ReviewCellViewModel.Input(setupCell: review)
         
-        let reviewCellViewModelItem = viewModel?.transform(input)
-            .reviewItem
+        let reviewWithPoster = viewModel?.transform(input)
+            .reviewWithPoster
             .share()
         
-        reviewCellViewModelItem?
-            .map { $0.posterImage }
+        reviewWithPoster?
+            .map { $0.0 }
             .bind(to: posterImageView.rx.image)
             .disposed(by: disposeBag)
         
-        reviewCellViewModelItem?
-            .map { $0.title }
+        reviewWithPoster?
+            .map { $0.1.title }
             .bind(to: titleLabel.rx.text)
             .disposed(by: disposeBag)
         
-        reviewCellViewModelItem?
-            .map { $0.personalRating }
-            .bind(to: personalRatingLabel.rx.text)
+        reviewWithPoster?
+            .map { $0.1.originalTitle }
+            .bind(to: originalTitleLabel.rx.text)
             .disposed(by: disposeBag)
         
-        reviewCellViewModelItem?
-            .map { $0.commentary }
-            .bind(to: commentaryLabel.rx.text)
+        reviewWithPoster?
+            .compactMap { Int($0.1.personalRating * 2.0) }
+            .observe(on: MainScheduler.instance)
+            .withUnretained(self)
+            .bind(onNext: { owner, rating in
+                owner.starRatingView.dragStarSlider(rating)
+            })
             .disposed(by: disposeBag)
         
-        reviewCellViewModelItem?
-            .map { $0.recordDate }
+        reviewWithPoster?
+            .map { $0.1.shortComment }
+            .bind(to: shortCommentLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        reviewWithPoster?
+            .map { $0.1.recordDate }
             .bind(to: recordDate.rx.text)
             .disposed(by: disposeBag)
         }
@@ -169,17 +186,20 @@ final class MovieReviewCell: UICollectionViewCell {
         backgroundColor = .clear
         
         contentView.addSubview(movieTicketView)
+        
         movieTicketView.addSubview(posterImageView)
-        movieTicketView.addSubview(totalStackView)
+        movieTicketView.addSubview(titleStackView)
+        movieTicketView.addSubview(reviewSectionStackView)
+        movieTicketView.addSubview(barcodeSectionStackView)
         
-        totalStackView.addArrangedSubview(firstSectionStackView)
-        totalStackView.addArrangedSubview(commentaryLabel)
-        totalStackView.addArrangedSubview(thirdSectionStackView)
+        titleStackView.addArrangedSubview(titleLabel)
+        titleStackView.addArrangedSubview(originalTitleLabel)
         
-        firstSectionStackView.addArrangedSubview(titleLabel)
-        firstSectionStackView.addArrangedSubview(personalRatingLabel)
-        thirdSectionStackView.addArrangedSubview(linerCodeImageView)
-        thirdSectionStackView.addArrangedSubview(recordDate)
+        reviewSectionStackView.addArrangedSubview(starRatingView)
+        reviewSectionStackView.addArrangedSubview(shortCommentLabel)
+        
+        barcodeSectionStackView.addArrangedSubview(barcodeImageView)
+        barcodeSectionStackView.addArrangedSubview(recordDate)
     }
     
     private func configureConstraints() {
@@ -188,27 +208,43 @@ final class MovieReviewCell: UICollectionViewCell {
         }
         
         posterImageView.snp.makeConstraints{
-            $0.height.equalTo(self.bounds.height * 0.5)
+            $0.height.equalTo(movieTicketView.snp.height).multipliedBy(0.5)
             $0.leading.top.trailing.equalToSuperview()
         }
         
-        totalStackView.snp.makeConstraints{
-            $0.top.equalTo(posterImageView.snp.bottom)
-            $0.leading.leading.equalToSuperview().offset(Design.inset)
-            $0.trailing.equalToSuperview().offset(-Design.inset)
-            $0.bottom.equalToSuperview()
+        titleStackView.snp.makeConstraints {
+            $0.top.equalTo(movieTicketView.snp.top)
+                .offset(self.bounds.height * 0.5 + 4)
+            $0.leading.equalToSuperview().offset(32)
+            $0.trailing.equalToSuperview().offset(-32)
+            $0.bottom.equalTo(movieTicketView.snp.bottom)
+                .offset(-self.bounds.height * 0.4 - 16)
         }
         
-        firstSectionStackView.snp.makeConstraints{
-            $0.height.equalTo(self.bounds.height * 0.1)
+        reviewSectionStackView.snp.makeConstraints {
+            $0.top.equalTo(movieTicketView.snp.top)
+                .offset(self.bounds.height * 0.6)
+            $0.leading.equalToSuperview().offset(16)
+            $0.trailing.equalToSuperview().offset(-16)
+            $0.bottom.equalTo(movieTicketView.snp.bottom)
+                .offset(-self.bounds.height * 0.15 - 16)
         }
         
-        thirdSectionStackView.snp.makeConstraints{
-            $0.height.equalTo(self.bounds.height * 0.15)
+        starRatingView.snp.makeConstraints {
+            $0.height.equalToSuperview().multipliedBy(0.4)
+            $0.centerX.equalToSuperview().offset(40)
         }
         
-        linerCodeImageView.snp.makeConstraints{
-            $0.height.equalTo(self.bounds.height * 0.07)
+        barcodeSectionStackView.snp.makeConstraints {
+            $0.top.equalTo(movieTicketView.snp.top)
+                .offset(self.bounds.height * 0.85 + 32)
+            $0.leading.equalToSuperview().offset(16)
+            $0.trailing.equalToSuperview().offset(-16)
+            $0.bottom.equalToSuperview().offset(-8)
+        }
+        
+        barcodeImageView.snp.makeConstraints {
+            $0.height.equalToSuperview().multipliedBy(0.4)
         }
     }
 }
