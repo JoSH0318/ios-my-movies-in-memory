@@ -40,4 +40,9 @@ final class EditCoordinator: Coordinator {
             animated: true
         )
     }
+    
+    func popEditView() {
+        self.navigationController.popViewController(animated: true)
+        self.parentCoordinator?.removeChildCoordinator(child: self)
+    }
 }
