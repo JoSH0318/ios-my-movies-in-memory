@@ -14,7 +14,7 @@ final class StarRatingView: UIView {
     private let firstStarImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.tag = 1
-        imageView.image = UIImage(systemName: "star")
+        imageView.image = .emptyStar
         imageView.tintColor = .systemYellow
         return imageView
     }()
@@ -22,7 +22,7 @@ final class StarRatingView: UIView {
     private let secondStarImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.tag = 2
-        imageView.image = UIImage(systemName: "star")
+        imageView.image = .emptyStar
         imageView.tintColor = .systemYellow
         return imageView
     }()
@@ -30,7 +30,7 @@ final class StarRatingView: UIView {
     private let thirdStarImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.tag = 3
-        imageView.image = UIImage(systemName: "star")
+        imageView.image = .emptyStar
         imageView.tintColor = .systemYellow
         return imageView
     }()
@@ -38,7 +38,7 @@ final class StarRatingView: UIView {
     private let fourthStarImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.tag = 4
-        imageView.image = UIImage(systemName: "star")
+        imageView.image = .emptyStar
         imageView.tintColor = .systemYellow
         return imageView
     }()
@@ -46,7 +46,7 @@ final class StarRatingView: UIView {
     private let fifthStarImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.tag = 5
-        imageView.image = UIImage(systemName: "star")
+        imageView.image = .emptyStar
         imageView.tintColor = .systemYellow
         return imageView
     }()
@@ -88,11 +88,11 @@ final class StarRatingView: UIView {
         for draggedValue in 1...5 {
             if let starImage = viewWithTag(draggedValue) as? UIImageView {
                 if draggedValue <= rating / 2 {
-                    starImage.image = UIImage(systemName: "star.fill")
+                    starImage.image = .fullStar
                 } else if (2 * draggedValue - rating) <= 1 {
-                    starImage.image = UIImage(systemName: "star.leadinghalf.filled")
+                    starImage.image = .halfStar
                 } else {
-                    starImage.image = UIImage(systemName: "star")
+                    starImage.image = .emptyStar
                 }
             }
         }

@@ -85,10 +85,10 @@ final class MovieReviewCell: UICollectionViewCell {
         return stackView
     }()
     
-    private let linerCodeImageView: UIImageView = {
+    private let barcodeImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage.linerCode
-        imageView.contentMode = .scaleToFill
+        imageView.image = .barcode
+        imageView.contentMode = .scaleAspectFill
         return imageView
     }()
     

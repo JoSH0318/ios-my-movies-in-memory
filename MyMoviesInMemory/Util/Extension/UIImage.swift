@@ -8,5 +8,8 @@
 import UIKit
 
 extension UIImage {
-    static let linerCode = UIImage(named: "LinerCode")
+    static let barcode = UIImage(named: "Barcode")
+    static let emptyStar = UIImage(named: "EmptyStar")
+    static let halfStar = UIImage(named: "HalfStar")
+    static let fullStar = UIImage(named: "FullStar")
 }
