@@ -65,5 +65,13 @@ final class HomeViewController: UIViewController {
                 cell.bind(item)
             }
             .disposed(by: disposeBag)
+
+        homeView.reviewCollectionView.rx.modelSelected(Review.self)
+            .observe(on: MainScheduler.instance)
+            .withUnretained(self)
+            .bind(onNext: { owner, item in
+                owner.coordinator.presentSearchDetailView(with: item)
+            })
+            .disposed(by: disposeBag)
     }
 }
