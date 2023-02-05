@@ -40,7 +40,7 @@ extension ReviewDAO {
             originalTitle: self.originalTitle ?? "",
             posterPath: self.posterPath ?? "",
             genres: self.genres ?? "",
-            releaseDate: self.recordDate ?? "",
+            releaseDate: self.releaseDate ?? "",
             userRating: self.userRating,
             originalLanguage: self.originalLanguage ?? "",
             overview: self.overview ?? "",
