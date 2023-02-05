@@ -97,7 +97,7 @@ final class EditView: UIView {
     
     // MARK: - Methods
     
-    func configureContents(
+    func setupContents(
         _ posterImage: UIImage?,
         _ movie: Movie)
     {

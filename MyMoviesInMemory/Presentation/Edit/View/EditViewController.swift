@@ -109,7 +109,7 @@ class EditViewController: UIViewController {
             .withUnretained(self)
             .bind(onNext: { owner, movieWithPoster in
                 owner.editView
-                    .configureContents(
+                    .setupContents(
                         movieWithPoster.0,
                         movieWithPoster.1
                     )
