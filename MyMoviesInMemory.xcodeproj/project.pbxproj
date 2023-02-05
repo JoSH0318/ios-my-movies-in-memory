@@ -377,6 +377,16 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		03C89879298FF50F008E1F84 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				03FD03272965FADC00BC72D7 /* CarouselLayout.swift */,
+				03C89865298856EF008E1F84 /* SummaryView.swift */,
+				03C8986329881C62008E1F84 /* StarRatingView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		03E3583E2971887D008FFBFA /* UserInfo */ = {
 			isa = PBXGroup;
 			children = (
@@ -595,9 +605,7 @@
 		03FD0342296D59CC00BC72D7 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				03FD03272965FADC00BC72D7 /* CarouselLayout.swift */,
-				03C89865298856EF008E1F84 /* SummaryView.swift */,
-				03C8986329881C62008E1F84 /* StarRatingView.swift */,
+				03C89879298FF50F008E1F84 /* View */,
 			);
 			path = Common;
 			sourceTree = "<group>";
