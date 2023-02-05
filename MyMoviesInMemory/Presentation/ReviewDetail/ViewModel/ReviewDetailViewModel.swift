@@ -24,19 +24,19 @@ final class ReviewDetailViewModel {
     // MARK: - Properties
     
     private let reviewUseCase: ReviewUseCaseType
+    private let imageManager = ImageManager.shared
+    private let downloadTaskToken: UInt
     private let review: Review
-    private let posterImage: UIImage?
     
     // MARK: - Initializer
     
     init(
         reviewUseCase: ReviewUseCaseType,
-        review: Review,
-        posterImage: UIImage?
+        review: Review
     ) {
         self.reviewUseCase = reviewUseCase
+        self.downloadTaskToken = imageManager.nextToken()
         self.review = review
-        self.posterImage = posterImage
     }
     
     // MARK: - Methods
@@ -44,8 +44,12 @@ final class ReviewDetailViewModel {
     func transform(_ input: Input) -> Output {
         let posterImage = input.didShowView
             .withUnretained(self)
-            .map { owner, _ in
-                owner.posterImage
+            .flatMap { owner, _ in
+                owner.imageManager.downloadImage(
+                    owner.review.posterPath,
+                    owner.downloadTaskToken
+                )
+                .asObservable()
             }
         
         let review = input.didShowView
