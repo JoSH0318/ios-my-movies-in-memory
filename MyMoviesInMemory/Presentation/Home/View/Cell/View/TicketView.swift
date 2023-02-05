@@ -15,6 +15,7 @@ final class TicketView: UIView {
         static let punchHoleRadius: CGFloat = 14.0
         static let firstSectionRatio: CGFloat = 0.6
         static let secondSectionRatio: CGFloat = 0.85
+        static let lineDashLength: CGFloat = 10
     }
     
     // MARK: - Initializer
@@ -37,7 +38,10 @@ final class TicketView: UIView {
         
         let path = UIBezierPath()
         path.move(to: CGPoint(x: 0, y: 0))
-        path.addLine(to: CGPoint(x: 0, y: height * Design.firstSectionRatio - Design.punchHoleRadius))
+        path.addLine(to: CGPoint(
+            x: 0,
+            y: height * Design.firstSectionRatio - Design.punchHoleRadius)
+        )
         path.addArc(
             withCenter: CGPoint(x: 0, y: height * Design.firstSectionRatio),
             radius: Design.punchHoleRadius,
@@ -45,7 +49,10 @@ final class TicketView: UIView {
             endAngle: CGFloat(Double.pi / 2),
             clockwise: true
         )
-        path.addLine(to: CGPoint(x: 0, y: height * Design.secondSectionRatio - Design.punchHoleRadius))
+        path.addLine(to: CGPoint(
+            x: 0,
+            y: height * Design.secondSectionRatio - Design.punchHoleRadius)
+        )
         path.addArc(
             withCenter: CGPoint(x: 0, y: height * Design.secondSectionRatio),
             radius: Design.punchHoleRadius,
@@ -55,7 +62,10 @@ final class TicketView: UIView {
         )
         path.addLine(to: CGPoint(x: 0, y: height))
         path.addLine(to: CGPoint(x: width, y: height))
-        path.addLine(to: CGPoint(x: width, y: height * Design.secondSectionRatio + Design.punchHoleRadius))
+        path.addLine(to: CGPoint(
+            x: width,
+            y: height * Design.secondSectionRatio + Design.punchHoleRadius)
+        )
         path.addArc(
             withCenter: CGPoint(x: width, y: height * Design.secondSectionRatio),
             radius: Design.punchHoleRadius,
@@ -63,7 +73,10 @@ final class TicketView: UIView {
             endAngle: CGFloat(Double.pi + Double.pi / 2),
             clockwise: true
         )
-        path.addLine(to: CGPoint(x: width, y: height * Design.firstSectionRatio + Design.punchHoleRadius))
+        path.addLine(to: CGPoint(
+            x: width,
+            y: height * Design.firstSectionRatio + Design.punchHoleRadius)
+        )
         path.addArc(
             withCenter: CGPoint(x: width, y: height * Design.firstSectionRatio),
             radius: Design.punchHoleRadius,
@@ -77,11 +90,27 @@ final class TicketView: UIView {
         path.fill()
         
         let dotLine = UIBezierPath()
-        dotLine.move(to: CGPoint(x: Design.punchHoleRadius, y: height * Design.firstSectionRatio))
-        dotLine.addLine(to: CGPoint(x: width - Design.punchHoleRadius, y: height * Design.firstSectionRatio))
-        dotLine.move(to: CGPoint(x: Design.punchHoleRadius, y: height * Design.secondSectionRatio))
-        dotLine.addLine(to: CGPoint(x: width - Design.punchHoleRadius, y: height * Design.secondSectionRatio))
-        dotLine.setLineDash([10, 10], count: 2, phase: 0)
+        dotLine.move(to: CGPoint(
+            x: Design.punchHoleRadius,
+            y: height * Design.firstSectionRatio)
+        )
+        dotLine.addLine(to: CGPoint(
+            x: width - Design.punchHoleRadius,
+            y: height * Design.firstSectionRatio)
+        )
+        dotLine.move(to: CGPoint(
+            x: Design.punchHoleRadius,
+            y: height * Design.secondSectionRatio)
+        )
+        dotLine.addLine(to: CGPoint(
+            x: width - Design.punchHoleRadius,
+            y: height * Design.secondSectionRatio)
+        )
+        dotLine.setLineDash(
+            [Design.lineDashLength, Design.lineDashLength],
+            count: 2,
+            phase: 0
+        )
         UIColor.systemGray4.set()
         dotLine.stroke()
     }
