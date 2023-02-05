@@ -14,7 +14,7 @@ final class HomeViewModel {
     // MARK: - Input
     
     struct Input {
-        let viewDidLoadEvent: Observable<Void>
+        let didShowView: Observable<Void>
     }
     
     // MARK: - Output
@@ -36,9 +36,7 @@ final class HomeViewModel {
     // MARK: - Methods
     
     func transform(_ input: Input) -> Output {
-        reviewUseCase.save(DummyMovieReview().dummy1)
-        reviewUseCase.save(DummyMovieReview().dummy2)
-        let reviews = input.viewDidLoadEvent
+        let reviews = input.didShowView
             .withUnretained(self)
             .flatMap { owner, _ in
                 owner.reviewUseCase.fetchReviews()
