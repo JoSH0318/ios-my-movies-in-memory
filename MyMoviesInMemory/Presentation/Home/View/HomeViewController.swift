@@ -15,17 +15,20 @@ final class HomeViewController: UIViewController {
     
     private let homeView = HomeView()
     private let viewModel: HomeViewModel
-    private let disposeBag = DisposeBag()
+    private var disposeBag = DisposeBag()
     private let homeCoordinator: HomeCoordinator
     
     // MARK: - Initializer
     
-    init(_ viewModel: HomeViewModel, homeCoordinator: HomeCoordinator) {
+    init(
+        _ viewModel: HomeViewModel,
+        homeCoordinator: HomeCoordinator
+    ) {
         self.viewModel = viewModel
         self.homeCoordinator = homeCoordinator
         super.init(nibName: nil, bundle: nil)
         
-        bind()
+//        bind()
     }
     
     required init?(coder: NSCoder) {
@@ -38,13 +41,18 @@ final class HomeViewController: UIViewController {
         view = homeView
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        disposeBag = DisposeBag()
+        bind()
+    }
+    
     // MARK: - Bind
     
     private func bind() {
-        let viewDidLoadEvent = Observable.just(())
-        let input = HomeViewModel.Input(
-            viewDidLoadEvent: viewDidLoadEvent
-        )
+        let didShowViewEvent = Observable.just(())
+        let input = HomeViewModel.Input(didShowView: didShowViewEvent)
         
         viewModel.transform(input)
             .reviews
