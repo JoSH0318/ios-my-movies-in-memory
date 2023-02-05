@@ -16,19 +16,17 @@ final class HomeViewController: UIViewController {
     private let homeView = HomeView()
     private let viewModel: HomeViewModel
     private var disposeBag = DisposeBag()
-    private let homeCoordinator: HomeCoordinator
+    private let coordinator: HomeCoordinator
     
     // MARK: - Initializer
     
     init(
         _ viewModel: HomeViewModel,
-        homeCoordinator: HomeCoordinator
+        _ coordinator: HomeCoordinator
     ) {
         self.viewModel = viewModel
-        self.homeCoordinator = homeCoordinator
+        self.coordinator = coordinator
         super.init(nibName: nil, bundle: nil)
-        
-//        bind()
     }
     
     required init?(coder: NSCoder) {
