@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+struct EditViewModelItem {
+    let personalRating: Float
+    let shortComment: String?
+    let comment: String?
+}
