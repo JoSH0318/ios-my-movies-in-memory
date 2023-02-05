@@ -13,8 +13,8 @@ final class MovieReviewCell: UICollectionViewCell {
     // MARK: - Constants
     
     private enum FontSize {
-        static let title: CGFloat = 20.0
-        static let subtitle: CGFloat = 16.0
+        static let title: CGFloat = 18.0
+        static let subtitle: CGFloat = 14.0
         static let body: CGFloat = 12.0
     }
     
