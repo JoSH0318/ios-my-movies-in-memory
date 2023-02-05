@@ -10,6 +10,11 @@ import RxSwift
 
 class EditViewController: UIViewController {
 
+    private enum PlaceHolder {
+        static let shortCommentPlaceHolder = "📝 나만의 한줄평 📝"
+        static let commentPlaceHolder = "📝 나만의 영화 감상평을 작성해보세요 📝"
+    }
+    
     // MARK: - Properties
     
     private let editView = EditView()
@@ -48,30 +53,54 @@ class EditViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        bind()
         configureEditButton()
+        setupPlaceHolder()
+        bind()
     }
     
     // MARK: - Methods
     
     func bind() {
         let didShowViewEvent = Observable.just(())
+        
         let draggedValue = editView.starRatingView
             .starRatingSlider.rx.value
             .asObservable()
+        
         let didTapSaveButtonEvent = saveBarButton.rx.tap
             .withUnretained(self)
             .map { owner, _ in
-                (
-                    owner.editView.oneLineCommentTextField.text,
-                    owner.editView.movieReportTextField.text
+                EditViewModelItem(
+                    personalRating: owner.editView.starRatingView.starRatingSlider.value / 2,
+                    shortComment: owner.editView.shortCommentTextView.text,
+                    comment: owner.editView.commentTextView.text
                 )
+            }
+        
+        let didEditCommentViewEvent = editView
+            .commentTextView.rx.didBeginEditing
+            .withUnretained(self)
+            .map { owner, _ in
+                let commentText = owner.editView.commentTextView.text
+                let placeHolder = PlaceHolder.commentPlaceHolder
+                return (commentText, placeHolder)
+            }
+        
+        let didEditShortCommentViewEvent = editView
+            .shortCommentTextView.rx.didBeginEditing
+            .withUnretained(self)
+            .map { owner, _ in
+                let shortCommentText = owner.editView.commentTextView.text
+                let placeHolder = PlaceHolder.commentPlaceHolder
+                return (shortCommentText, placeHolder)
             }
         
         let input = EditViewModel.Input(
             didShowView: didShowViewEvent,
             didDragStarRating: draggedValue,
-            didTapSaveButton: didTapSaveButtonEvent
+            didTapSaveButton: didTapSaveButtonEvent,
+            didEditCommentView: didEditCommentViewEvent,
+            didEditShortCommentView: didEditShortCommentViewEvent
         )
         
         viewModel.transform(input)
@@ -95,9 +124,40 @@ class EditViewController: UIViewController {
                 owner.editView.dragStarSlider(rating)
             })
             .disposed(by: disposeBag)
+        
+        viewModel.transform(input)
+            .commentViewEditingStatus
+            .withUnretained(self)
+            .bind(onNext: { owner, _ in
+                owner.editView.commentTextView.text = nil
+                owner.editView.commentTextView.textColor = .black
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.transform(input)
+            .shortCommentViewEditingStatus
+            .withUnretained(self)
+            .bind(onNext: { owner, _ in
+                owner.editView.shortCommentTextView.text = nil
+                owner.editView.shortCommentTextView.textColor = .black
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.transform(input)
+            .popEditViewTrigger
+            .withUnretained(self)
+            .bind(onNext: { owner, _ in
+                owner.coordinator.popEditView()
+            })
+            .disposed(by: disposeBag)
     }
     
     private func configureEditButton() {
         navigationItem.rightBarButtonItem = saveBarButton
+    }
+    
+    private func setupPlaceHolder() {
+        editView.shortCommentTextView.text = PlaceHolder.shortCommentPlaceHolder
+        editView.commentTextView.text = PlaceHolder.commentPlaceHolder
     }
 }
