@@ -92,12 +92,13 @@ extension CoreDataManager {
     func fetch() -> Observable<[ReviewDAO]> {
         return Observable.create { [weak self] emitter in
             let request = ReviewDAO.fetchRequest()
-            guard let movies = try? self?.context.fetch(request) else {
+            guard let movies = try? self?.context.fetch(request).reversed() else {
                 emitter.onError(CoreDataError.readFail)
                 return Disposables.create()
             }
+            let moviesArray = Array(movies)
             
-            emitter.onNext(movies)
+            emitter.onNext(moviesArray)
             emitter.onCompleted()
             
             return Disposables.create()
