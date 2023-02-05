@@ -19,8 +19,8 @@ final class ReviewDetailViewController: UIViewController {
     // MARK: - Initializer
     
     init(
-        _ viewModel: ReviewDetailViewModel,
-        _ coordinator: ReviewDetailCoordinator
+        viewModel: ReviewDetailViewModel,
+        coordinator: ReviewDetailCoordinator
     ) {
         self.viewModel = viewModel
         self.coordinator = coordinator

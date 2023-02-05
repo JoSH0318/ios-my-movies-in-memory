@@ -31,8 +31,8 @@ final class ReviewDetailCoordinator: Coordinator {
         )
         
         let reviewDetailViewController = ReviewDetailViewController(
-            reviewDetailViewModel,
-            self
+            viewModel: reviewDetailViewModel,
+            coordinator: self
         )
         
         self.navigationController.pushViewController(
