@@ -35,9 +35,13 @@ final class HomeCoordinator: Coordinator {
         )
     }
     
-    func pushReviewDetailView(_ Review: Review) {
-        let reviewDetailModel = ReviewDetailViewModel()
-        let reviewDetailViewController = ReviewDetailViewController()
-        self.navigationController.pushViewController(reviewDetailViewController, animated: true)
+    func presentSearchDetailView(with review: Review, posterImage: UIImage?) {
+        let reviewDetailCoordinator = ReviewDetailCoordinator(
+            navigationController: self.navigationController,
+            parentCoordinator: self,
+            reviewUseCase: reviewUseCase
+        )
+        self.childCoordinators.append(reviewDetailCoordinator)
+        reviewDetailCoordinator.start(with: review, posterImage)
     }
 }
