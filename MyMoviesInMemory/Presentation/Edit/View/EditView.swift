@@ -28,26 +28,57 @@ final class EditView: UIView {
     
     private(set) var starRatingView = StarRatingView()
     
-    private(set) var oneLineCommentTextField: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "📝 나만의 영화 한 줄평을 적어보세요"
-        textField.font = .systemFont(ofSize: FontSize.title)
-        textField.layer.cornerRadius = 16
-        textField.backgroundColor = .MWhite
-        textField.clipsToBounds = true
-        return textField
+    private(set) var shortCommentTextView: UITextView = {
+        let textView = UITextView()
+        textView.textAlignment = .left
+        textView.textColor = .systemGray
+        textView.font = .systemFont(ofSize: FontSize.title)
+        textView.textContainerInset = .init(
+            top: 16,
+            left: 16,
+            bottom: 16,
+            right: 16
+        )
+        textView.layer.cornerRadius = 16
+        textView.backgroundColor = .MWhite
+        textView.clipsToBounds = true
+        return textView
     }()
     
-    private(set) var movieReportTextField: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "📝 영화의 감상평을 적어보세요."
-        textField.textAlignment = .left
-        textField.font = .systemFont(ofSize: FontSize.title)
-        textField.setContentHuggingPriority(.init(1), for: .vertical)
-        textField.layer.cornerRadius = 16
-        textField.backgroundColor = .MWhite
-        textField.clipsToBounds = true
-        return textField
+    private(set) var shortCommentTextCountLabel: UILabel = {
+        let label = UILabel()
+        label.text = "0/20"
+        label.font = .systemFont(ofSize: FontSize.title)
+        label.textColor = .systemGray3
+        label.textAlignment = .center
+        return label
+    }()
+    
+    private(set) var commentTextView: UITextView = {
+        let textView = UITextView()
+        textView.textAlignment = .left
+        textView.textColor = .systemGray
+        textView.font = .systemFont(ofSize: FontSize.title)
+        textView.textContainerInset = .init(
+            top: 16,
+            left: 16,
+            bottom: 16,
+            right: 16
+        )
+        textView.layer.cornerRadius = 16
+        textView.backgroundColor = .MWhite
+        textView.clipsToBounds = true
+        textView.setContentHuggingPriority(.init(1), for: .vertical)
+        return textView
+    }()
+        
+    private(set) var commentTextCountLabel: UILabel = {
+        let label = UILabel()
+        label.text = "0/700"
+        label.font = .systemFont(ofSize: FontSize.title)
+        label.textColor = .systemGray3
+        label.textAlignment = .center
+        return label
     }()
     
     // MARK: - Initializer
@@ -92,8 +123,11 @@ final class EditView: UIView {
 
         mainStackView.addArrangedSubview(summaryView)
         mainStackView.addArrangedSubview(starRatingView)
-        mainStackView.addArrangedSubview(oneLineCommentTextField)
-        mainStackView.addArrangedSubview(movieReportTextField)
+        mainStackView.addArrangedSubview(shortCommentTextView)
+        mainStackView.addArrangedSubview(commentTextView)
+        
+        shortCommentTextView.addSubview(shortCommentTextCountLabel)
+        commentTextView.addSubview(commentTextCountLabel)
     }
     
     private func configureConstraints() {
@@ -111,8 +145,16 @@ final class EditView: UIView {
             $0.height.equalTo(self.snp.height).multipliedBy(0.07)
         }
         
-        oneLineCommentTextField.snp.makeConstraints {
+        shortCommentTextView.snp.makeConstraints {
             $0.height.equalTo(self.snp.height).multipliedBy(0.1)
+        }
+        
+        shortCommentTextCountLabel.snp.makeConstraints {
+            $0.trailing.bottom.equalToSuperview().offset(-8)
+        }
+        
+        commentTextCountLabel.snp.makeConstraints {
+            $0.trailing.bottom.equalToSuperview().offset(-8)
         }
     }
 }
