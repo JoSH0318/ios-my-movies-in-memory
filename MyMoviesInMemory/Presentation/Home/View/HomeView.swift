@@ -10,14 +10,6 @@ import UIKit
 
 final class HomeView: UIView {
     
-    // MARK: - NameSpace
-    
-    private enum FontSize {
-        static let title: CGFloat = 18.0
-        static let subtitle: CGFloat = 16.0
-        static let body: CGFloat = 12.0
-    }
-    
     // MARK: - Properties
     
     private(set) var reviewCollectionView = UICollectionView(
