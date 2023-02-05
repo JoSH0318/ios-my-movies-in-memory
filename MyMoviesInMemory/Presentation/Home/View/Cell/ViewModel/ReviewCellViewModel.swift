@@ -47,7 +47,10 @@ final class ReviewCellViewModel {
                     .asObservable()
             }
         
-        let reviewWithPoster = Observable.combineLatest(posterImage, review)
+        let reviewWithPoster = Observable.combineLatest(
+            posterImage,
+            review
+        )
         
         return Output(reviewWithPoster: reviewWithPoster)
     }
