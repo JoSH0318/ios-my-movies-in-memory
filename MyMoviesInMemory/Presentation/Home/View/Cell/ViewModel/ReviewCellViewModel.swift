@@ -19,7 +19,7 @@ final class ReviewCellViewModel {
     // MARK: - Output
     
     struct Output {
-        let reviewItem: Observable<ReviewCellViewModelItem>
+        let reviewWithPoster: Observable<(UIImage?, Review)>
     }
     
     // MARK: - Properties
@@ -36,27 +36,20 @@ final class ReviewCellViewModel {
     // MARK: - Methods
     
     func transform(_ input: Input) -> Output {
-        let setupCellEvent = input.setupCell
+        let review = input.setupCell
             .share()
         
-        let posterImage = setupCellEvent
+        let posterImage = review
             .withUnretained(self)
             .flatMap { owner, review in
                 owner.imageManager
-                    .downloadImage(review.imageUrl, owner.downloadTaskToken)
+                    .downloadImage(review.posterPath, owner.downloadTaskToken)
                     .asObservable()
             }
         
-        let reviewItem = Observable
-            .combineLatest(
-                setupCellEvent,
-                posterImage
-            )
-            .map { review, image in
-                review.toCellViewModelItem(with: image)
-            }
+        let reviewWithPoster = Observable.combineLatest(posterImage, review)
         
-        return Output(reviewItem: reviewItem)
+        return Output(reviewWithPoster: reviewWithPoster)
     }
     
     func onPrepareForReuse() {
