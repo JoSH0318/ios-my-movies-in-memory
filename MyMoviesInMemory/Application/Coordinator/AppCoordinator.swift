@@ -51,7 +51,7 @@ final class AppCoordinator: Coordinator {
         let homeCoordinator = HomeCoordinator(
             navigationController: homeNavigationController,
             parentCoordinator: self,
-            useCase: reviewUseCase
+            reviewUseCase: reviewUseCase
         )
         
         let searchCoordinator = SearchCoordinator(

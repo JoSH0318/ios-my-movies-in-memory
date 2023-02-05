@@ -11,23 +11,23 @@ final class HomeCoordinator: Coordinator {
     var navigationController: UINavigationController
     var parentCoordinator: Coordinator?
     var childCoordinators: [Coordinator] = []
-    private let useCase: ReviewUseCaseType
+    private let reviewUseCase: ReviewUseCaseType
     
     init(
         navigationController: UINavigationController,
         parentCoordinator: Coordinator,
-        useCase: ReviewUseCaseType
+        reviewUseCase: ReviewUseCaseType
     ) {
         self.navigationController = navigationController
         self.parentCoordinator = parentCoordinator
-        self.useCase = useCase
+        self.reviewUseCase = reviewUseCase
     }
     
     func start() {
-        let homeViewModel = HomeViewModel(reviewUseCase: useCase)
+        let homeViewModel = HomeViewModel(reviewUseCase: reviewUseCase)
         let homeViewController = HomeViewController(
             homeViewModel,
-            homeCoordinator: self
+            self
         )
         self.navigationController.pushViewController(
             homeViewController,
