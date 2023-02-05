@@ -86,7 +86,7 @@ final class EditViewModel {
                     personalRating: Double(data.personalRating),
                     shortComment: data.shortComment ?? "",
                     comment: data.comment ?? "",
-                    recordDate: String(Date().timeIntervalSince1970)
+                    recordDate: MMIMDateFormatter.shared.toDateString(Date())
                 )
                 owner.reviewUseCase.save(dataToSave)
             }
