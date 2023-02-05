@@ -35,13 +35,13 @@ final class HomeCoordinator: Coordinator {
         )
     }
     
-    func presentSearchDetailView(with review: Review, posterImage: UIImage?) {
+    func presentSearchDetailView(with review: Review) {
         let reviewDetailCoordinator = ReviewDetailCoordinator(
             navigationController: self.navigationController,
             parentCoordinator: self,
             reviewUseCase: reviewUseCase
         )
         self.childCoordinators.append(reviewDetailCoordinator)
-        reviewDetailCoordinator.start(with: review, posterImage)
+        reviewDetailCoordinator.start(with: review)
     }
 }

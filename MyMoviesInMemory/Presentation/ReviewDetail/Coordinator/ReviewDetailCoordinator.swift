@@ -23,11 +23,10 @@ final class ReviewDetailCoordinator: Coordinator {
         self.reviewUseCase = reviewUseCase
     }
     
-    func start(with review: Review, _ posterImage: UIImage?) {
+    func start(with review: Review) {
         let reviewDetailViewModel = ReviewDetailViewModel(
             reviewUseCase: reviewUseCase,
-            review: review,
-            posterImage: posterImage
+            review: review
         )
         
         let reviewDetailViewController = ReviewDetailViewController(
