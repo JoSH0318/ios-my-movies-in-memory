@@ -14,7 +14,9 @@ final class EditViewModel {
     struct Input {
         let didShowView: Observable<Void>
         let didDragStarRating: Observable<Float>
-        let didTapSaveButton: Observable<(String?, String?)>
+        let didTapSaveButton: Observable<EditViewModelItem>
+        let didEditCommentView: Observable<(String?, String)>
+        let didEditShortCommentView: Observable<(String?, String)>
     }
     
     // MARK: - Output
@@ -22,6 +24,9 @@ final class EditViewModel {
     struct Output {
         let movieWithPoster: Observable<(UIImage?, Movie)>
         let starRating: Observable<Int>
+        let commentViewEditingStatus: Observable<Void>
+        let shortCommentViewEditingStatus: Observable<Void>
+        let popEditViewTrigger: Observable<Void>
     }
     
     // MARK: - Properties
@@ -57,9 +62,41 @@ final class EditViewModel {
                 Int(floor(value))
             }
         
+        let isBeginEditingCommentView = input.didEditCommentView
+            .filter { $0.0 == $0.1 }
+            .map { _ in }
+        
+        let isBeginEditingShortCommentView = input.didEditShortCommentView
+            .filter { $0.0 == $0.1 }
+            .map { _ in }
+        
+        let popEditViewTrigger = input.didTapSaveButton
+            .withUnretained(self)
+            .map { owner, data in
+                let dataToSave = Review(
+                    id: String(owner.movie.id),
+                    title: owner.movie.title,
+                    originalTitle: owner.movie.originalTitle,
+                    posterPath: owner.movie.posterPath,
+                    genres: owner.movie.genres,
+                    releaseDate: owner.movie.releaseDate,
+                    userRating: owner.movie.userRating,
+                    originalLanguage: owner.movie.originalLanguage,
+                    overview: owner.movie.overview,
+                    personalRating: Double(data.personalRating),
+                    shortComment: data.shortComment ?? "",
+                    comment: data.comment ?? "",
+                    recordDate: String(Date().timeIntervalSince1970)
+                )
+                owner.reviewUseCase.save(dataToSave)
+            }
+        
         return Output(
             movieWithPoster: movieWithPoster,
-            starRating: rating
+            starRating: rating,
+            commentViewEditingStatus: isBeginEditingCommentView,
+            shortCommentViewEditingStatus: isBeginEditingShortCommentView,
+            popEditViewTrigger: popEditViewTrigger
         )
     }
 }
