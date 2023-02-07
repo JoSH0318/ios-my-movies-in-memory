@@ -122,7 +122,7 @@ final class TicketView: UIView {
         self.layer.cornerRadius = Design.punchHoleRadius
         self.clipsToBounds = true
         
-        self.layer.shadowColor = UIColor.systemGray3.cgColor
+        self.layer.shadowColor = UIColor.systemGray.cgColor
         self.layer.shadowOpacity = 0.3
         self.layer.shadowRadius = 10
         self.layer.shadowOffset = .zero
