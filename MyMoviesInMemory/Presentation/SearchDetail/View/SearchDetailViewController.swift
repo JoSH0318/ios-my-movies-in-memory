@@ -5,7 +5,7 @@
 //  Created by 조성훈 on 2023/01/18.
 //
 
-import UIKit
+import SnapKit
 import RxSwift
 
 final class SearchDetailViewController: UIViewController {
@@ -31,9 +31,6 @@ final class SearchDetailViewController: UIViewController {
         self.viewModel = viewModel
         self.coordinator = coordinator
         super.init(nibName: nil, bundle: nil)
-        
-        bind()
-        configureEditButton()
     }
     
     required init?(coder: NSCoder) {
@@ -48,6 +45,10 @@ final class SearchDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        configureConstraints()
+        configureEditButton()
+        bind()
     }
     
     // MARK: - Methods
@@ -66,7 +67,7 @@ final class SearchDetailViewController: UIViewController {
             .withUnretained(self)
             .bind(onNext: { owner, movieWithPoster in
                 owner.searchDetailView
-                    .configureContents(
+                    .setupContents(
                         movieWithPoster.0,
                         movieWithPoster.1
                     )
@@ -89,5 +90,10 @@ final class SearchDetailViewController: UIViewController {
     
     private func configureEditButton() {
         navigationItem.rightBarButtonItem = editBarButton
+    }
+    
+    private func configureConstraints() {
+        
+        
     }
 }

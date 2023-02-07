@@ -6,86 +6,123 @@
 //
 
 import SnapKit
-import UIKit
 
 final class SearchDetailView: UIView {
     
     // MARK: - Constants
     
     private enum FontSize {
-        static let title: CGFloat = 20.0
-        static let subtitle: CGFloat = 18.0
+        static let title: CGFloat = 18.0
+        static let subtitle: CGFloat = 16.0
         static let body: CGFloat = 14.0
+    }
+    
+    private enum Design {
+        static let posterRatioRadius = 840 / 600
     }
     
     // MARK: - Properties
     
+    private let detailScrollView = UIScrollView()
+    
+    private let detailView = UIView()
+    
     private let posterImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
-        imageView.layer.cornerRadius = 10
-        imageView.clipsToBounds = false
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         return imageView
     }()
     
-    private let informationView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .MWhite
-        view.layer.cornerRadius = 16
-        return view
+    private let informationStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.backgroundColor = .MWhite
+        stackView.layer.cornerRadius = 16
+        stackView.spacing = 16
+        stackView.isLayoutMarginsRelativeArrangement = true
+        stackView.layoutMargins = UIEdgeInsets(
+            top: 16,
+            left: 16,
+            bottom: 16,
+            right: 16
+        )
+        return stackView
     }()
     
-    private let informationStackView: UIStackView = {
+    private let titleStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 4
+        return stackView
+    }()
+    
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .left
+        label.font = .systemFont(ofSize: FontSize.title, weight: .bold)
+        return label
+    }()
+    
+    private let originalTitleLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .left
+        label.font = .systemFont(ofSize: FontSize.body)
+        return label
+    }()
+    
+    private let genreStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.spacing = 16
         return stackView
     }()
     
-    private let nameTagStackView: UIStackView = {
+    private let genreTagLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .left
+        label.font = .systemFont(ofSize: FontSize.subtitle, weight: .bold)
+        label.textColor = .systemGray
+        label.text = "장르"
+        label.setContentHuggingPriority(.required, for: .horizontal)
+        return label
+    }()
+    
+    private let genreLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .left
+        label.font = .systemFont(ofSize: FontSize.subtitle)
+        return label
+    }()
+    
+    private let releaseStackView: UIStackView = {
         let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.alignment = .leading
-        stackView.spacing = 8
+        stackView.spacing = 16
         return stackView
     }()
     
-    private let titleNameTagLabel: UILabel = {
+    private let releaseTagLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
         label.font = .systemFont(ofSize: FontSize.subtitle, weight: .bold)
         label.textColor = .systemGray
-        label.text = "제목"
+        label.text = "개봉"
         return label
     }()
     
-    private let originalTitleNameTagLabel: UILabel = {
+    private let releaseLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
-        label.font = .systemFont(ofSize: FontSize.subtitle, weight: .bold)
-        label.textColor = .systemGray
-        label.text = "원제"
+        label.font = .systemFont(ofSize: FontSize.subtitle)
         return label
     }()
     
-    private let summaryNameLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .left
-        label.font = .systemFont(ofSize: FontSize.subtitle, weight: .bold)
-        label.textColor = .systemGray
-        label.text = "개요"
-        return label
+    private let ratingStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.spacing = 16
+        return stackView
     }()
     
-    private let releaseDateNameLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .left
-        label.font = .systemFont(ofSize: FontSize.subtitle, weight: .bold)
-        label.textColor = .systemGray
-        label.text = "개봉일"
-        return label
-    }()
-    
-    private let userRatingNameLabel: UILabel = {
+    private let ratingTagLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
         label.font = .systemFont(ofSize: FontSize.subtitle, weight: .bold)
@@ -94,43 +131,7 @@ final class SearchDetailView: UIView {
         return label
     }()
     
-    private let contentStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.alignment = .leading
-        stackView.spacing = 8
-        return stackView
-    }()
-    
-    private let titleLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .left
-        label.font = .systemFont(ofSize: FontSize.subtitle, weight: .bold)
-        return label
-    }()
-    
-    private let originalTitleLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .left
-        label.font = .systemFont(ofSize: FontSize.subtitle)
-        return label
-    }()
-    
-    private let summaryLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .left
-        label.font = .systemFont(ofSize: FontSize.subtitle)
-        return label
-    }()
-    
-    private let releaseDateLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .left
-        label.font = .systemFont(ofSize: FontSize.subtitle)
-        return label
-    }()
-    
-    private let userRatingLabel: UILabel = {
+    private let ratingLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
         label.font = .systemFont(ofSize: FontSize.subtitle)
@@ -160,67 +161,67 @@ final class SearchDetailView: UIView {
     
     // MARK: - Methods
     
-    func configureContents(
+    func setupContents(
         _ posterImage: UIImage?,
         _ movie: Movie)
     {
         posterImageView.image = posterImage
         titleLabel.text = movie.title
         originalTitleLabel.text = movie.originalTitle
-        summaryLabel.text = "\(movie.genres) | \(movie.originalLanguage)"
-        releaseDateLabel.text = movie.releaseDate
-        userRatingLabel.text = "\(movie.userRating)"
+        genreLabel.text = movie.genres
+        releaseLabel.text = "\(movie.releaseDate) | \(movie.originalLanguage)"
+        ratingLabel.text = "\(movie.userRating)"
         overviewLabel.text = movie.overview
     }
     
     private func configureView() {
         backgroundColor = .MBeige
         
-        addSubview(posterImageView)
-        addSubview(informationView)
+        addSubview(detailScrollView)
+        detailScrollView.addSubview(detailView)
+       
+        detailView.addSubview(posterImageView)
+        detailView.addSubview(informationStackView)
         
-        informationView.addSubview(informationStackView)
-        informationView.addSubview(overviewLabel)
+        informationStackView.addArrangedSubview(titleStackView)
+        informationStackView.addArrangedSubview(genreStackView)
+        informationStackView.addArrangedSubview(releaseStackView)
+        informationStackView.addArrangedSubview(ratingStackView)
+        informationStackView.addArrangedSubview(overviewLabel)
         
-        informationStackView.addArrangedSubview(nameTagStackView)
-        informationStackView.addArrangedSubview(contentStackView)
+        titleStackView.addArrangedSubview(titleLabel)
+        titleStackView.addArrangedSubview(originalTitleLabel)
         
-        nameTagStackView.addArrangedSubview(titleNameTagLabel)
-        nameTagStackView.addArrangedSubview(originalTitleNameTagLabel)
-        nameTagStackView.addArrangedSubview(summaryNameLabel)
-        nameTagStackView.addArrangedSubview(releaseDateNameLabel)
-        nameTagStackView.addArrangedSubview(userRatingNameLabel)
+        genreStackView.addArrangedSubview(genreTagLabel)
+        genreStackView.addArrangedSubview(genreLabel)
         
-        contentStackView.addArrangedSubview(titleLabel)
-        contentStackView.addArrangedSubview(originalTitleLabel)
-        contentStackView.addArrangedSubview(summaryLabel)
-        contentStackView.addArrangedSubview(releaseDateLabel)
-        contentStackView.addArrangedSubview(userRatingLabel)
+        releaseStackView.addArrangedSubview(releaseTagLabel)
+        releaseStackView.addArrangedSubview(releaseLabel)
+        
+        ratingStackView.addArrangedSubview(ratingTagLabel)
+        ratingStackView.addArrangedSubview(ratingLabel)
     }
     
     private func configureConstraints() {
-        posterImageView.snp.makeConstraints {
-            $0.height.equalTo(self.snp.height).dividedBy(2.5)
-            $0.leading.trailing.equalToSuperview()
-            $0.top.equalTo(self.safeAreaLayoutGuide)
+        detailScrollView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
         }
         
-        informationView.snp.makeConstraints {
-            $0.top.equalTo(posterImageView.snp.bottom).offset(16)
-            $0.leading.equalToSuperview().offset(32)
-            $0.trailing.equalToSuperview().offset(-32)
+        detailView.snp.makeConstraints {
+            $0.edges.equalTo(detailScrollView.contentLayoutGuide)
+            $0.height.greaterThanOrEqualTo(self.snp.height).priority(.low)
+            $0.width.equalTo(detailScrollView.snp.width)
+        }
+        
+        posterImageView.snp.makeConstraints {
+            $0.height.equalTo(detailScrollView.frameLayoutGuide.snp.height).multipliedBy(0.6)
+            $0.leading.top.trailing.equalToSuperview()
         }
         
         informationStackView.snp.makeConstraints {
-            $0.leading.top.equalToSuperview().offset(16)
-            $0.trailing.equalToSuperview().offset(-16)
-        }
-        
-        overviewLabel.snp.makeConstraints {
-            $0.top.equalTo(informationStackView.snp.bottom).offset(8)
+            $0.top.equalTo(posterImageView.snp.bottom).offset(16)
             $0.leading.equalToSuperview().offset(16)
-            $0.trailing.equalToSuperview().offset(-16)
-            $0.bottom.greaterThanOrEqualToSuperview().offset(-16)
+            $0.trailing.bottom.equalToSuperview().offset(-16)
         }
     }
 }
