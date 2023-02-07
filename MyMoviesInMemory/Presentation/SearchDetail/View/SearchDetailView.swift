@@ -152,6 +152,7 @@ final class SearchDetailView: UIView {
         super.init(frame: frame)
         
         configureView()
+        configureUI()
         configureConstraints()
     }
     
@@ -176,7 +177,13 @@ final class SearchDetailView: UIView {
     
     private func configureView() {
         backgroundColor = .MBeige
-        
+        layer.shadowColor = UIColor.systemGray.cgColor
+        layer.shadowOpacity = 0.5
+        layer.shadowRadius = 16
+        layer.shadowOffset = .zero
+    }
+    
+    private func configureUI() {
         addSubview(detailScrollView)
         detailScrollView.addSubview(detailView)
        
