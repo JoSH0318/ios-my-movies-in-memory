@@ -61,7 +61,7 @@ final class StarRatingView: UIView {
         let slider = StarRatingSlider()
         slider.minimumValue = 0
         slider.maximumValue = 10
-        slider.tintColor = .clear
+//        slider.tintColor = .clear
         slider.thumbTintColor = .clear
         slider.minimumTrackTintColor = .clear
         slider.maximumTrackTintColor = .clear
