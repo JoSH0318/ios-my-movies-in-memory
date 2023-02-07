@@ -22,8 +22,8 @@ final class AppCoordinator: Coordinator {
     
     func start() {
         let tabBarController = UITabBarController()
-        tabBarController.tabBar.backgroundColor = UIColor.MGreen
-        tabBarController.tabBar.tintColor = UIColor.MWhite
+        tabBarController.tabBar.backgroundColor = .MGreen
+        tabBarController.tabBar.tintColor = .MWhite
         
         let homeNavigationController = UINavigationController()
         homeNavigationController.tabBarItem = UITabBarItem(
