@@ -29,7 +29,25 @@ final class SearchDetailView: UIView {
     
     private let posterImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleAspectFit
+        imageView.layer.cornerRadius = 16
+        imageView.layer.shadowColor = UIColor.black.cgColor
+        imageView.layer.shadowRadius = 10
+        imageView.layer.shadowOffset = .zero
+        imageView.layer.shadowOpacity = 0.6
+        return imageView
+    }()
+    
+    private let backgroundImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleToFill
+        
+        let blurEffect = UIBlurEffect(style: .systemChromeMaterialDark)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = imageView.bounds
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        
+        imageView.addSubview(blurEffectView)
         imageView.clipsToBounds = true
         return imageView
     }()
@@ -167,6 +185,7 @@ final class SearchDetailView: UIView {
         _ movie: Movie)
     {
         posterImageView.image = posterImage
+        backgroundImageView.image = posterImage
         titleLabel.text = movie.title
         originalTitleLabel.text = movie.originalTitle
         genreLabel.text = movie.genres
@@ -184,9 +203,11 @@ final class SearchDetailView: UIView {
     }
     
     private func configureUI() {
+        addSubview(backgroundImageView)
         addSubview(detailScrollView)
+
         detailScrollView.addSubview(detailView)
-       
+
         detailView.addSubview(posterImageView)
         detailView.addSubview(informationStackView)
         
@@ -211,20 +232,29 @@ final class SearchDetailView: UIView {
     
     private func configureConstraints() {
         detailScrollView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.edges.equalTo(self.safeAreaLayoutGuide.snp.edges)
         }
-        
+
         detailView.snp.makeConstraints {
             $0.edges.equalTo(detailScrollView.contentLayoutGuide)
             $0.height.greaterThanOrEqualTo(self.snp.height).priority(.low)
             $0.width.equalTo(detailScrollView.snp.width)
         }
-        
+
+        backgroundImageView.snp.makeConstraints {
+            $0.leading.top.trailing.equalToSuperview()
+            $0.height.lessThanOrEqualTo(detailScrollView.frameLayoutGuide.snp.height)
+                .multipliedBy(0.7)
+                .priority(.low)
+            $0.bottom.lessThanOrEqualTo(posterImageView.snp.bottom).priority(.high)
+        }
+
         posterImageView.snp.makeConstraints {
-            $0.height.equalTo(detailScrollView.frameLayoutGuide.snp.height).multipliedBy(0.6)
+            $0.height.equalTo(detailScrollView.frameLayoutGuide.snp.height)
+                .multipliedBy(0.6)
             $0.leading.top.trailing.equalToSuperview()
         }
-        
+
         informationStackView.snp.makeConstraints {
             $0.top.equalTo(posterImageView.snp.bottom).offset(16)
             $0.leading.equalToSuperview().offset(16)
