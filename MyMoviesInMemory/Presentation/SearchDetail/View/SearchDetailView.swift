@@ -11,15 +11,7 @@ final class SearchDetailView: UIView {
     
     // MARK: - Constants
     
-    private enum FontSize {
-        static let title: CGFloat = 18.0
-        static let subtitle: CGFloat = 16.0
-        static let body: CGFloat = 14.0
-    }
-    
-    private enum Design {
-        static let posterRatioRadius = 840 / 600
-    }
+    private enum Design {}
     
     // MARK: - Properties
     
@@ -31,10 +23,7 @@ final class SearchDetailView: UIView {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.layer.cornerRadius = 16
-        imageView.layer.shadowColor = UIColor.black.cgColor
-        imageView.layer.shadowRadius = 10
-        imageView.layer.shadowOffset = .zero
-        imageView.layer.shadowOpacity = 0.6
+        imageView.layer.applyShadow()
         return imageView
     }()
     
@@ -56,8 +45,9 @@ final class SearchDetailView: UIView {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.backgroundColor = .MWhite
-        stackView.layer.cornerRadius = 16
         stackView.spacing = 16
+        stackView.layer.cornerRadius = 16
+        stackView.layer.applyShadow()
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.layoutMargins = UIEdgeInsets(
             top: 16,
@@ -78,14 +68,15 @@ final class SearchDetailView: UIView {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
-        label.font = .systemFont(ofSize: FontSize.title, weight: .bold)
+        label.font = UIFont().fontWith(.large, .heavy)
         return label
     }()
     
     private let originalTitleLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
-        label.font = .systemFont(ofSize: FontSize.body)
+        label.textColor = .systemGray2
+        label.font = UIFont().fontWith(.small)
         return label
     }()
     
@@ -98,7 +89,7 @@ final class SearchDetailView: UIView {
     private let genreTagLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
-        label.font = .systemFont(ofSize: FontSize.subtitle, weight: .bold)
+        label.font = UIFont().fontWith(.medium, .bold)
         label.textColor = .systemGray
         label.text = "장르"
         label.setContentHuggingPriority(.required, for: .horizontal)
@@ -108,7 +99,7 @@ final class SearchDetailView: UIView {
     private let genreLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
-        label.font = .systemFont(ofSize: FontSize.subtitle)
+        label.font = UIFont().fontWith(.medium)
         return label
     }()
     
@@ -121,7 +112,7 @@ final class SearchDetailView: UIView {
     private let releaseTagLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
-        label.font = .systemFont(ofSize: FontSize.subtitle, weight: .bold)
+        label.font = UIFont().fontWith(.medium, .bold)
         label.textColor = .systemGray
         label.text = "개봉"
         return label
@@ -130,7 +121,7 @@ final class SearchDetailView: UIView {
     private let releaseLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
-        label.font = .systemFont(ofSize: FontSize.subtitle)
+        label.font = UIFont().fontWith(.medium)
         return label
     }()
     
@@ -143,7 +134,7 @@ final class SearchDetailView: UIView {
     private let ratingTagLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
-        label.font = .systemFont(ofSize: FontSize.subtitle, weight: .bold)
+        label.font = UIFont().fontWith(.medium, .bold)
         label.textColor = .systemGray
         label.text = "평점"
         return label
@@ -152,14 +143,14 @@ final class SearchDetailView: UIView {
     private let ratingLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
-        label.font = .systemFont(ofSize: FontSize.subtitle)
+        label.font = UIFont().fontWith(.medium)
         return label
     }()
     
     private let overviewLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
-        label.font = .systemFont(ofSize: FontSize.body)
+        label.font = UIFont().fontWith(.medium)
         label.numberOfLines = 0
         return label
     }()
@@ -196,10 +187,6 @@ final class SearchDetailView: UIView {
     
     private func configureView() {
         backgroundColor = .MBeige
-        layer.shadowColor = UIColor.systemGray.cgColor
-        layer.shadowOpacity = 0.5
-        layer.shadowRadius = 16
-        layer.shadowOffset = .zero
     }
     
     private func configureUI() {
