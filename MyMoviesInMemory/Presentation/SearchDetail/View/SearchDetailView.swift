@@ -7,12 +7,18 @@
 
 import SnapKit
 
-final class SearchDetailView: DetailView {
+final class SearchDetailView: UIView {
+    
+    // MARK: - Properties
+    
+    private let detailView = DetailView()
     
     // MARK: - Initializer
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
+        configureView()
     }
     
     required init?(coder: NSCoder) {
@@ -25,13 +31,21 @@ final class SearchDetailView: DetailView {
         _ posterImage: UIImage?,
         _ movie: Movie)
     {
-        posterImageView.image = posterImage
-        backgroundImageView.image = posterImage
-        titleLabel.text = movie.title
-        originalTitleLabel.text = movie.originalTitle
-        genreLabel.text = movie.genres
-        releaseLabel.text = "\(movie.releaseDate) | \(movie.originalLanguage)"
-        ratingLabel.text = "\(movie.userRating)"
-        overviewLabel.text = movie.overview
+        detailView.posterImageView.image = posterImage
+        detailView.backgroundImageView.image = posterImage
+        detailView.titleLabel.text = movie.title
+        detailView.originalTitleLabel.text = movie.originalTitle
+        detailView.genreLabel.text = movie.genres
+        detailView.releaseLabel.text = "\(movie.releaseDate) | \(movie.originalLanguage)"
+        detailView.ratingLabel.text = "\(movie.userRating)"
+        detailView.overviewLabel.text = movie.overview
+    }
+    
+    private func configureView() {
+        addSubview(detailView)
+        
+        detailView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
     }
 }
