@@ -17,7 +17,7 @@ class DetailView: UIView {
     
     private let detailScrollView = UIScrollView()
     
-    private let detailView = UIView()
+    private let detailContentView = UIView()
     
     private(set) var posterImageView: UIImageView = {
         let imageView = UIImageView()
@@ -39,6 +39,12 @@ class DetailView: UIView {
         imageView.addSubview(blurEffectView)
         imageView.clipsToBounds = true
         return imageView
+    }()
+    
+    private(set) var totalStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        return stackView
     }()
     
     private(set) var informationStackView: UIStackView = {
@@ -179,10 +185,11 @@ class DetailView: UIView {
         addSubview(backgroundImageView)
         addSubview(detailScrollView)
 
-        detailScrollView.addSubview(detailView)
+        detailScrollView.addSubview(detailContentView)
 
-        detailView.addSubview(posterImageView)
-        detailView.addSubview(informationStackView)
+        detailContentView.addSubview(posterImageView)
+        detailContentView.addSubview(totalStackView)
+        totalStackView.addArrangedSubview(informationStackView)
         
         informationStackView.addArrangedSubview(titleStackView)
         informationStackView.addArrangedSubview(genreStackView)
@@ -208,7 +215,7 @@ class DetailView: UIView {
             $0.edges.equalTo(self.safeAreaLayoutGuide.snp.edges)
         }
 
-        detailView.snp.makeConstraints {
+        detailContentView.snp.makeConstraints {
             $0.edges.equalTo(detailScrollView.contentLayoutGuide)
             $0.height.greaterThanOrEqualTo(self.snp.height).priority(.low)
             $0.width.equalTo(detailScrollView.snp.width)
@@ -228,9 +235,13 @@ class DetailView: UIView {
             $0.leading.top.trailing.equalToSuperview()
         }
 
-        informationStackView.snp.makeConstraints {
+        totalStackView.snp.makeConstraints {
             $0.top.equalTo(posterImageView.snp.bottom).offset(16)
-            $0.leading.equalToSuperview().offset(16)
+            $0.leading.trailing.bottom.equalToSuperview()
+        }
+        
+        informationStackView.snp.makeConstraints {
+            $0.leading.top.equalToSuperview().offset(16)
             $0.trailing.bottom.equalToSuperview().offset(-16)
         }
     }
