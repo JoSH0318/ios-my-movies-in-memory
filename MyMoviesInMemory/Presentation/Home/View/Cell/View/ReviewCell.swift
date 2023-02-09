@@ -134,34 +134,32 @@ final class MovieReviewCell: UICollectionViewCell {
         titleLabel.text = nil
     }
     
-    // MARK: - Methods
+    // MARK: - Bind
     
     func bind(_ review: Review) {
         viewModel = ReviewCellViewModel()
         
         let review: Observable<Review> = Observable.just(review)
         let input = ReviewCellViewModel.Input(setupCell: review)
-        
-        let reviewWithPoster = viewModel?.transform(input)
+        let output = viewModel?.transform(input)
             .reviewWithPoster
-            .share()
         
-        reviewWithPoster?
+        output?
             .map { $0.0 }
             .bind(to: posterImageView.rx.image)
             .disposed(by: disposeBag)
         
-        reviewWithPoster?
+        output?
             .map { $0.1.title }
             .bind(to: titleLabel.rx.text)
             .disposed(by: disposeBag)
         
-        reviewWithPoster?
+        output?
             .map { $0.1.originalTitle }
             .bind(to: originalTitleLabel.rx.text)
             .disposed(by: disposeBag)
         
-        reviewWithPoster?
+        output?
             .compactMap { Int($0.1.personalRating * 2.0) }
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
@@ -170,16 +168,18 @@ final class MovieReviewCell: UICollectionViewCell {
             })
             .disposed(by: disposeBag)
         
-        reviewWithPoster?
+        output?
             .map { $0.1.shortComment }
             .bind(to: shortCommentLabel.rx.text)
             .disposed(by: disposeBag)
         
-        reviewWithPoster?
+        output?
             .map { $0.1.recordDate }
             .bind(to: recordDate.rx.text)
             .disposed(by: disposeBag)
         }
+    
+    // MARK: - Methods
     
     private func configureLayout() {
         backgroundColor = .clear

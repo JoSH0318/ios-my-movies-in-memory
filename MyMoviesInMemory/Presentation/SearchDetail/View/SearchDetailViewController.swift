@@ -51,7 +51,7 @@ final class SearchDetailViewController: UIViewController {
         bind()
     }
     
-    // MARK: - Methods
+    // MARK: - Bind
     
     func bind() {
         let didShowViewEvent = Observable.just(())
@@ -60,8 +60,9 @@ final class SearchDetailViewController: UIViewController {
             didShowView: didShowViewEvent,
             didTapEditButton: didTapEditButtonEvent
         )
+        let output = viewModel.transform(input)
         
-        viewModel.transform(input)
+        output
             .movieWithPoster
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
@@ -74,7 +75,7 @@ final class SearchDetailViewController: UIViewController {
             })
             .disposed(by: disposeBag)
         
-        viewModel.transform(input)
+        output
             .movieToSend
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
@@ -87,6 +88,8 @@ final class SearchDetailViewController: UIViewController {
             })
             .disposed(by: disposeBag)
     }
+    
+    // MARK: - Methods
     
     private func configureEditButton() {
         navigationItem.rightBarButtonItem = editBarButton

@@ -58,9 +58,9 @@ class EditViewController: UIViewController {
         bind()
     }
     
-    // MARK: - Methods
+    // MARK: - Bind
     
-    func bind() {
+    private func bind() {
         let didShowViewEvent = Observable.just(())
         
         let draggedValue = editView.starRatingView
@@ -102,8 +102,9 @@ class EditViewController: UIViewController {
             didEditCommentView: didEditCommentViewEvent,
             didEditShortCommentView: didEditShortCommentViewEvent
         )
+        let output = viewModel.transform(input)
         
-        viewModel.transform(input)
+        output
             .movieWithPoster
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
@@ -116,7 +117,7 @@ class EditViewController: UIViewController {
             })
             .disposed(by: disposeBag)
         
-        viewModel.transform(input)
+        output
             .starRating
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
@@ -125,7 +126,7 @@ class EditViewController: UIViewController {
             })
             .disposed(by: disposeBag)
         
-        viewModel.transform(input)
+        output
             .commentViewEditingStatus
             .withUnretained(self)
             .bind(onNext: { owner, _ in
@@ -134,7 +135,7 @@ class EditViewController: UIViewController {
             })
             .disposed(by: disposeBag)
         
-        viewModel.transform(input)
+        output
             .shortCommentViewEditingStatus
             .withUnretained(self)
             .bind(onNext: { owner, _ in
@@ -143,7 +144,7 @@ class EditViewController: UIViewController {
             })
             .disposed(by: disposeBag)
         
-        viewModel.transform(input)
+        output
             .popEditViewTrigger
             .withUnretained(self)
             .bind(onNext: { owner, _ in
@@ -151,6 +152,8 @@ class EditViewController: UIViewController {
             })
             .disposed(by: disposeBag)
     }
+    
+    // MARK: - Methods
     
     private func configureEditButton() {
         navigationItem.rightBarButtonItem = saveBarButton

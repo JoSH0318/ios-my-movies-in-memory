@@ -55,8 +55,9 @@ final class HomeViewController: UIViewController {
     private func bind() {
         let didShowViewEvent = Observable.just(())
         let input = HomeViewModel.Input(didShowView: didShowViewEvent)
+        let output = viewModel.transform(input)
         
-        viewModel.transform(input)
+        output
             .reviews
             .bind(to: homeView.reviewCollectionView.rx.items(
                 cellIdentifier: MovieReviewCell.identifier,

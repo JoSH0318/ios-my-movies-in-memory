@@ -48,7 +48,7 @@ class SearchViewController: UIViewController {
         bind()
     }
     
-    // MARK: - Binding
+    // MARK: - Bind
     
     private func bind() {
         let searchedMovie = searchBar.rx.text.orEmpty
@@ -58,8 +58,9 @@ class SearchViewController: UIViewController {
             )
             .distinctUntilChanged()
         let input = SearchViewModel.Input(didEndSearching: searchedMovie)
-
-        viewModel.transform(input)
+        let output = viewModel.transform(input)
+        
+        output
             .movies
             .bind(to: searchCollectionView.rx.items(
                 cellIdentifier: SearchedMovieCell.identifier,

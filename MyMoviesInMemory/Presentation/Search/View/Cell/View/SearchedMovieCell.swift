@@ -39,57 +39,60 @@ final class SearchedMovieCell: UICollectionViewCell {
         disposeBag = DisposeBag()
     }
     
-    // MARK: - Methods
+    // MARK: - Bind
     
     func bind(_ searchedMovie: Movie) {
         viewModel = SearchedMovieCellViewModel()
         
         let searchedMovie: Observable<Movie> = Observable.just(searchedMovie)
         let input = SearchedMovieCellViewModel.Input(setupCell: searchedMovie)
+        let output = viewModel?.transform(input)
         
-        viewModel?.transform(input)
+        output?
             .posterImage
             .observe(on: MainScheduler.instance)
             .bind(to: summaryView.posterImageView.rx.image)
             .disposed(by: disposeBag)
         
-        viewModel?.transform(input)
+        output?
             .movie
             .map { $0.title }
             .observe(on: MainScheduler.instance)
             .bind(to: summaryView.titleLabel.rx.text)
             .disposed(by: disposeBag)
         
-        viewModel?.transform(input)
+        output?
             .movie
             .map { $0.originalTitle }
             .bind(to: summaryView.originalTitleLabel.rx.text)
             .disposed(by: disposeBag)
         
-        viewModel?.transform(input)
+        output?
             .movie
             .map { "\($0.genres)" }
             .bind(to: summaryView.genreLabel.rx.text)
             .disposed(by: disposeBag)
         
-        viewModel?.transform(input)
+        output?
             .movie
             .map { "\($0.releaseDate) | \($0.originalLanguage)" }
             .bind(to: summaryView.releaseLabel.rx.text)
             .disposed(by: disposeBag)
 
-        viewModel?.transform(input)
+        output?
             .movie
             .compactMap { "\($0.userRating)" }
             .bind(to: summaryView.ratingLabel.rx.text)
             .disposed(by: disposeBag)
         
-        viewModel?.transform(input)
+        output?
             .movie
             .map { $0.overview }
             .bind(to: summaryView.overviewLabel.rx.text)
             .disposed(by: disposeBag)
     }
+    
+    // MARK: - Methods
     
     private func configureLayout() {
         contentView.addSubview(summaryView)
