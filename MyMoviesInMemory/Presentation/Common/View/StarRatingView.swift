@@ -61,7 +61,6 @@ final class StarRatingView: UIView {
         let slider = StarRatingSlider()
         slider.minimumValue = 0
         slider.maximumValue = 10
-//        slider.tintColor = .clear
         slider.thumbTintColor = .clear
         slider.minimumTrackTintColor = .clear
         slider.maximumTrackTintColor = .clear
@@ -107,7 +106,6 @@ final class StarRatingView: UIView {
     private func configureView() {
         backgroundColor = .MWhite
         layer.cornerRadius = 16
-        clipsToBounds = true
     }
     
     private func configureUI() {
