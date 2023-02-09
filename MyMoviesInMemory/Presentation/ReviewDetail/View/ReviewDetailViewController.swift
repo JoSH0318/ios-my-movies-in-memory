@@ -12,6 +12,7 @@ final class ReviewDetailViewController: UIViewController {
     
     // MARK: - Properties
     
+    private let reviewDetailView = ReviewDetailView()
     private let viewModel: ReviewDetailViewModel
     private var disposeBag = DisposeBag()
     private let coordinator: ReviewDetailCoordinator
@@ -29,6 +30,10 @@ final class ReviewDetailViewController: UIViewController {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func loadView() {
+        view = reviewDetailView
     }
     
     override func viewDidLoad() {
