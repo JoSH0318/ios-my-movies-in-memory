@@ -38,5 +38,25 @@ final class ReviewDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        bind()
+    }
+    
+    private func bind() {
+        let didShowEvent = Observable.just(())
+        let input = ReviewDetailViewModel.Input(didShowView: didShowEvent)
+        let output = viewModel.transform(input)
+        
+        output.reviewWithPoster
+            .observe(on: MainScheduler.instance)
+            .withUnretained(self)
+            .bind(onNext: { owner, reviewWithPoster in
+                owner.reviewDetailView
+                    .setupContents(
+                        reviewWithPoster.0,
+                        reviewWithPoster.1
+                    )
+            })
+            .disposed(by: disposeBag)
     }
 }
