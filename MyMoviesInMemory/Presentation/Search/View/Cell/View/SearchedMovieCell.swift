@@ -95,7 +95,14 @@ final class SearchedMovieCell: UICollectionViewCell {
     // MARK: - Methods
     
     private func configureLayout() {
-        contentView.addSubview(summaryView)
+        let shadowView = ShadowView()
+        
+        shadowView.addSubview(summaryView)
+        contentView.addSubview(shadowView)
+        
+        shadowView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
         
         summaryView.snp.makeConstraints {
             $0.edges.equalToSuperview()
