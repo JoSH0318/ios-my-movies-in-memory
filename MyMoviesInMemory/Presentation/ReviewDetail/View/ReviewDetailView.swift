@@ -88,7 +88,6 @@ final class ReviewDetailView: UIView {
         label.font = UIFont().fontWith(.medium, .bold)
         label.textColor = .systemGray
         label.text = "장르"
-        label.setContentHuggingPriority(.required, for: .horizontal)
         return label
     }()
     
@@ -96,6 +95,7 @@ final class ReviewDetailView: UIView {
         let label = UILabel()
         label.textAlignment = .left
         label.font = UIFont().fontWith(.medium)
+        label.setContentHuggingPriority(.init(1), for: .horizontal)
         return label
     }()
     
@@ -118,6 +118,7 @@ final class ReviewDetailView: UIView {
         let label = UILabel()
         label.textAlignment = .left
         label.font = UIFont().fontWith(.medium)
+        label.setContentHuggingPriority(.init(1), for: .horizontal)
         return label
     }()
     
@@ -140,6 +141,7 @@ final class ReviewDetailView: UIView {
         let label = UILabel()
         label.textAlignment = .left
         label.font = UIFont().fontWith(.medium)
+        label.setContentHuggingPriority(.init(1), for: .horizontal)
         return label
     }()
     
