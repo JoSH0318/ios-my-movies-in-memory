@@ -22,8 +22,8 @@ final class HomeView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        configureView()
-        configureConstraints()
+        registerCell()
+        configureLayout()
     }
     
     required init?(coder: NSCoder) {
@@ -32,19 +32,19 @@ final class HomeView: UIView {
     
     // MARK: - Methods
     
-    private func configureView() {
-        backgroundColor = UIColor.MBeige
-        reviewCollectionView.backgroundColor = UIColor.MBeige
-        
-        addSubview(reviewCollectionView)
-        
+    private func registerCell() {
         reviewCollectionView.register(
             MovieReviewCell.self,
             forCellWithReuseIdentifier: MovieReviewCell.identifier
         )
     }
     
-    private func configureConstraints() {
+    private func configureLayout() {
+        backgroundColor = .MBeige
+        reviewCollectionView.backgroundColor = .MBeige
+        
+        addSubview(reviewCollectionView)
+        
         reviewCollectionView.snp.makeConstraints{
             $0.leading.trailing.equalTo(safeAreaLayoutGuide)
             $0.top.equalToSuperview().offset(UIScreen.main.bounds.height * 0.1)

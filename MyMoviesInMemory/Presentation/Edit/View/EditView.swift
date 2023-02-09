@@ -86,9 +86,7 @@ final class EditView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        configureView()
-        configureUI()
-        configureConstraints()
+        configureLayout()
     }
     
     required init?(coder: NSCoder) {
@@ -114,13 +112,11 @@ final class EditView: UIView {
         starRatingView.dragStarSlider(rating)
     }
     
-    private func configureView() {
+    private func configureLayout() {
         backgroundColor = .MBeige
-    }
-    
-    private func configureUI() {
+        
         addSubview(mainStackView)
-
+        
         mainStackView.addArrangedSubview(summaryView)
         mainStackView.addArrangedSubview(starRatingView)
         mainStackView.addArrangedSubview(shortCommentTextView)
@@ -128,9 +124,7 @@ final class EditView: UIView {
         
         shortCommentTextView.addSubview(shortCommentTextCountLabel)
         commentTextView.addSubview(commentTextCountLabel)
-    }
-    
-    private func configureConstraints() {
+        
         mainStackView.snp.makeConstraints {
             $0.top.equalTo(safeAreaLayoutGuide)
             $0.leading.equalToSuperview().offset(20)

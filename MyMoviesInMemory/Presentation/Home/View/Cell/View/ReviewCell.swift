@@ -112,8 +112,7 @@ final class MovieReviewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        configureCell()
-        configureConstraints()
+        configureLayout()
     }
     
     required init?(coder: NSCoder) {
@@ -182,7 +181,7 @@ final class MovieReviewCell: UICollectionViewCell {
             .disposed(by: disposeBag)
         }
     
-    private func configureCell() {
+    private func configureLayout() {
         backgroundColor = .clear
         
         contentView.addSubview(movieTicketView)
@@ -200,9 +199,7 @@ final class MovieReviewCell: UICollectionViewCell {
         
         barcodeSectionStackView.addArrangedSubview(barcodeImageView)
         barcodeSectionStackView.addArrangedSubview(recordDate)
-    }
-    
-    private func configureConstraints() {
+        
         movieTicketView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }

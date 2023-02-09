@@ -22,10 +22,6 @@ class SearchViewController: UIViewController {
         collectionViewLayout: configureCollectionViewLayout()
     )
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
     // MARK: - Initializer
     
     init(
@@ -35,14 +31,21 @@ class SearchViewController: UIViewController {
         self.coordinator = coordinator
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-        
-        configureCollectionView()
-        configureNavigationItem()
-        bind()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Life Cycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        registerCell()
+        configureLayout()
+        configureNavigationItem()
+        bind()
     }
     
     // MARK: - Binding
@@ -76,13 +79,15 @@ class SearchViewController: UIViewController {
     
     // MARK: - Methods
     
-    private func configureCollectionView() {
+    private func registerCell() {
         searchCollectionView.register(
             SearchedMovieCell.self,
             forCellWithReuseIdentifier: SearchedMovieCell.identifier
         )
-        
-        searchCollectionView.backgroundColor = UIColor.MBeige
+    }
+    
+    private func configureLayout() {
+        searchCollectionView.backgroundColor = .MBeige
         
         view.addSubview(searchCollectionView)
         

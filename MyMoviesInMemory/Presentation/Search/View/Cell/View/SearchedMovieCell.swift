@@ -24,8 +24,7 @@ final class SearchedMovieCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        configureUI()
-        configureConstraints()
+        configureLayout()
     }
     
     required init?(coder: NSCoder) {
@@ -92,11 +91,9 @@ final class SearchedMovieCell: UICollectionViewCell {
             .disposed(by: disposeBag)
     }
     
-    private func configureUI() {
+    private func configureLayout() {
         contentView.addSubview(summaryView)
-    }
-    
-    private func configureConstraints() {
+        
         summaryView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
