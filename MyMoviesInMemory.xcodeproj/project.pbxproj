@@ -42,6 +42,7 @@
 		03C8987C299020D7008E1F84 /* ReviewDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C8987B299020D7008E1F84 /* ReviewDetailView.swift */; };
 		03C8987E2992CFCA008E1F84 /* CALayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C8987D2992CFCA008E1F84 /* CALayer.swift */; };
 		03C898802992D260008E1F84 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C8987F2992D260008E1F84 /* UIFont.swift */; };
+		03C89884299522E6008E1F84 /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C89883299522E6008E1F84 /* ShadowView.swift */; };
 		03E3583D29707D3C008FFBFA /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E3583C29707D3C008FFBFA /* UIImage.swift */; };
 		03E358402971889A008FFBFA /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E3583F2971889A008FFBFA /* UserInfo.swift */; };
 		03E3584229718B76008FFBFA /* EndpointStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E3584129718B75008FFBFA /* EndpointStorage.swift */; };
@@ -115,6 +116,7 @@
 		03C8987B299020D7008E1F84 /* ReviewDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDetailView.swift; sourceTree = "<group>"; };
 		03C8987D2992CFCA008E1F84 /* CALayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CALayer.swift; sourceTree = "<group>"; };
 		03C8987F2992D260008E1F84 /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
+		03C89883299522E6008E1F84 /* ShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
 		03E3583C29707D3C008FFBFA /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		03E3583F2971889A008FFBFA /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		03E3584129718B75008FFBFA /* EndpointStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointStorage.swift; sourceTree = "<group>"; };
@@ -390,6 +392,7 @@
 				03FD03272965FADC00BC72D7 /* CarouselLayout.swift */,
 				03C89865298856EF008E1F84 /* SummaryView.swift */,
 				03C8986329881C62008E1F84 /* StarRatingView.swift */,
+				03C89883299522E6008E1F84 /* ShadowView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -812,6 +815,7 @@
 				03FD02FD295DA35E00BC72D7 /* CoreDataManager.swift in Sources */,
 				03806B5B2976EF0700235282 /* ReviewDetailViewModel.swift in Sources */,
 				03C89866298856EF008E1F84 /* SummaryView.swift in Sources */,
+				03C89884299522E6008E1F84 /* ShadowView.swift in Sources */,
 				03FD0373296F0AD900BC72D7 /* UIColor.swift in Sources */,
 				03FD0335296C1B5B00BC72D7 /* ReviewCell.swift in Sources */,
 				03C898622987E1A5008E1F84 /* EditViewController.swift in Sources */,
