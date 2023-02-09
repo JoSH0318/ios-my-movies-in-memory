@@ -66,8 +66,11 @@ extension CoreDataManager {
             objectToUpdate.title = review.title
             objectToUpdate.originalTitle = review.originalTitle
             objectToUpdate.posterPath = review.posterPath
+            objectToUpdate.genres = review.genres
             objectToUpdate.releaseDate = review.releaseDate
             objectToUpdate.userRating = review.userRating
+            objectToUpdate.originalLanguage = review.originalLanguage
+            objectToUpdate.overview = review.overview
             objectToUpdate.personalRating = review.personalRating
             objectToUpdate.shortComment = review.shortComment
             objectToUpdate.comment = review.comment
@@ -78,8 +81,11 @@ extension CoreDataManager {
             entity.title = review.title
             entity.originalTitle = review.originalTitle
             entity.posterPath = review.posterPath
+            entity.genres = review.genres
             entity.releaseDate = review.releaseDate
             entity.userRating = review.userRating
+            entity.originalLanguage = review.originalLanguage
+            entity.overview = review.overview
             entity.personalRating = review.personalRating
             entity.shortComment = review.shortComment
             entity.comment = review.comment
@@ -112,8 +118,11 @@ extension CoreDataManager {
         objectToUpdate.title = review.title
         objectToUpdate.originalTitle = review.originalTitle
         objectToUpdate.posterPath = review.posterPath
+        objectToUpdate.genres = review.genres
         objectToUpdate.releaseDate = review.releaseDate
         objectToUpdate.userRating = review.userRating
+        objectToUpdate.originalLanguage = review.originalLanguage
+        objectToUpdate.overview = review.overview
         objectToUpdate.personalRating = review.personalRating
         objectToUpdate.shortComment = review.shortComment
         objectToUpdate.comment = review.comment
