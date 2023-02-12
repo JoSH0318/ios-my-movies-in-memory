@@ -13,12 +13,14 @@ final class ReviewDetailViewModel {
     
     struct Input {
         let didShowView: Observable<Void>
+        let didTapAlertButton: Observable<AlertActionType>
     }
     
     // MARK: - Output
     
     struct Output {
         let reviewWithPoster: Observable<(UIImage?, Review)>
+        let alertAction: Observable<AlertActionType>
     }
     
     // MARK: - Properties
@@ -63,6 +65,19 @@ final class ReviewDetailViewModel {
             review
         )
         
-        return Output(reviewWithPoster: reviewWithPoster)
+        let alertAction = input.didTapAlertButton
+            .withUnretained(self)
+            .map { owner, action in
+                if action == .delete {
+                    owner.reviewUseCase.delete(owner.review)
+                }
+                
+                return action
+            }
+        
+        return Output(
+            reviewWithPoster: reviewWithPoster,
+            alertAction: alertAction
+        )
     }
 }

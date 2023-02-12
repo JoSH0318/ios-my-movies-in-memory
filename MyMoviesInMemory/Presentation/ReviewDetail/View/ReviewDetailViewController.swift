@@ -16,6 +16,17 @@ final class ReviewDetailViewController: UIViewController {
     private let viewModel: ReviewDetailViewModel
     private var disposeBag = DisposeBag()
     private let coordinator: ReviewDetailCoordinator
+    private let deleteBarButton: UIBarButtonItem = {
+        let deleteImage = UIImage(systemName: "trash")
+        let barButtonItem = UIBarButtonItem(
+            image: deleteImage,
+            style: .plain,
+            target: nil,
+            action: nil
+        )
+        barButtonItem.tintColor = .MGreen
+        return barButtonItem
+    }()
     
     // MARK: - Initializer
     
@@ -32,6 +43,8 @@ final class ReviewDetailViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Life Cycle
+    
     override func loadView() {
         view = reviewDetailView
     }
@@ -39,12 +52,24 @@ final class ReviewDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        configureNavigationBar()
         bind()
     }
     
+    // MARK: - Bind
+    
     private func bind() {
         let didShowEvent = Observable.just(())
-        let input = ReviewDetailViewModel.Input(didShowView: didShowEvent)
+        let didTapAlertButton = deleteBarButton.rx.tap
+            .withUnretained(self)
+            .flatMap { owner, _ in
+                owner.coordinator.showDeleteAlert()
+            }
+        
+        let input = ReviewDetailViewModel.Input(
+            didShowView: didShowEvent,
+            didTapAlertButton: didTapAlertButton
+        )
         let output = viewModel.transform(input)
         
         output.reviewWithPoster
@@ -58,5 +83,24 @@ final class ReviewDetailViewController: UIViewController {
                     )
             })
             .disposed(by: disposeBag)
+        
+        output.alertAction
+            .observe(on: MainScheduler.instance)
+            .withUnretained(self)
+            .bind(onNext: { owner, action in
+                switch action {
+                case .delete:
+                    owner.coordinator.dismissReviewDetailView()
+                default:
+                    break
+                }
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    // MARK: - Methods
+    
+    private func configureNavigationBar() {
+        navigationItem.rightBarButtonItems = [deleteBarButton]
     }
 }
