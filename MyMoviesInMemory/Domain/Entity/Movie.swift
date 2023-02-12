@@ -18,3 +18,23 @@ struct Movie {
     let originalLanguage: String
     let overview: String
 }
+
+extension Movie {
+    func toDefaultReview() -> Review {
+        return Review(
+            id: String(self.id),
+            title: self.title,
+            originalTitle: self.originalTitle,
+            posterPath: self.posterPath,
+            genres: self.genres,
+            releaseDate: self.releaseDate,
+            userRating: self.userRating,
+            originalLanguage: self.originalLanguage,
+            overview: self.overview,
+            personalRating: 0.0,
+            shortComment: "",
+            comment: "",
+            recordDate: ""
+        )
+    }
+}
