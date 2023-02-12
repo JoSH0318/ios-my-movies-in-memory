@@ -69,11 +69,9 @@ final class SearchDetailViewModel {
         let movieToSend = input.didTapEditButton
             .withLatestFrom(movieWithPoster)
         
-        return Output(movieWithPoster: movieWithPoster, movieToSend: movieToSend)
+        return Output(
+            movieWithPoster: movieWithPoster,
+            movieToSend: movieToSend
+        )
     }
-}
-
-enum SomeEvent {
-    case didShow
-    case didTap
 }
