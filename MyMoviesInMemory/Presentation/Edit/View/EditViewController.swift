@@ -160,6 +160,8 @@ class EditViewController: UIViewController {
     }
     
     private func setupPlaceHolder() {
+        editView.shortCommentTextView.textColor = .systemGray
+        editView.commentTextView.textColor = .systemGray
         editView.shortCommentTextView.text = PlaceHolder.shortCommentPlaceHolder
         editView.commentTextView.text = PlaceHolder.commentPlaceHolder
     }
