@@ -78,4 +78,21 @@ final class ReviewDetailCoordinator: Coordinator {
             }
         }
     }
+    
+    func presentModificationView(
+        posterImage: UIImage?,
+        review: Review
+    ) {
+        let modificationCoordinator = ModificationCoordinator(
+            navigationController: self.navigationController,
+            parentCoordinator: self,
+            reviewUseCase: reviewUseCase
+        )
+        self.childCoordinators.append(modificationCoordinator)
+        
+        modificationCoordinator.start(
+            review: review,
+            posterImage: posterImage
+        )
+    }
 }
