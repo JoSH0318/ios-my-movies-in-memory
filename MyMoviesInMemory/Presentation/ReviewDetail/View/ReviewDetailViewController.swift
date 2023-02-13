@@ -27,6 +27,17 @@ final class ReviewDetailViewController: UIViewController {
         barButtonItem.tintColor = .MGreen
         return barButtonItem
     }()
+    private let modificationBarButton: UIBarButtonItem = {
+        let modificationImage = UIImage(systemName: "square.and.pencil")
+        let barButtonItem = UIBarButtonItem(
+            image: modificationImage,
+            style: .plain,
+            target: nil,
+            action: nil
+        )
+        barButtonItem.tintColor = .MGreen
+        return barButtonItem
+    }()
     
     // MARK: - Initializer
     
@@ -60,15 +71,18 @@ final class ReviewDetailViewController: UIViewController {
     
     private func bind() {
         let didShowEvent = Observable.just(())
-        let didTapAlertButton = deleteBarButton.rx.tap
+        let didTapDeleteButton = deleteBarButton.rx.tap
             .withUnretained(self)
             .flatMap { owner, _ in
                 owner.coordinator.showDeleteAlert()
             }
+        let didTapModificationButton = modificationBarButton.rx.tap
+            .asObservable()
         
         let input = ReviewDetailViewModel.Input(
             didShowView: didShowEvent,
-            didTapAlertButton: didTapAlertButton
+            didTapDeleteButton: didTapDeleteButton,
+            didTapModificationButton: didTapModificationButton
         )
         let output = viewModel.transform(input)
         
@@ -84,7 +98,7 @@ final class ReviewDetailViewController: UIViewController {
             })
             .disposed(by: disposeBag)
         
-        output.alertAction
+        output.deleteAlertAction
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
             .bind(onNext: { owner, action in
@@ -96,11 +110,22 @@ final class ReviewDetailViewController: UIViewController {
                 }
             })
             .disposed(by: disposeBag)
+        
+        output.reviewToSend
+            .observe(on: MainScheduler.instance)
+            .withUnretained(self)
+            .bind(onNext: { owner, reviewToSend in
+                owner.coordinator.presentModificationView(
+                    posterImage: reviewToSend.0,
+                    review: reviewToSend.1
+                )
+            })
+            .disposed(by: disposeBag)
     }
     
     // MARK: - Methods
     
     private func configureNavigationBar() {
-        navigationItem.rightBarButtonItems = [deleteBarButton]
+        navigationItem.rightBarButtonItems = [modificationBarButton, deleteBarButton]
     }
 }

@@ -13,14 +13,16 @@ final class ReviewDetailViewModel {
     
     struct Input {
         let didShowView: Observable<Void>
-        let didTapAlertButton: Observable<AlertActionType>
+        let didTapDeleteButton: Observable<AlertActionType>
+        let didTapModificationButton: Observable<Void>
     }
     
     // MARK: - Output
     
     struct Output {
         let reviewWithPoster: Observable<(UIImage?, Review)>
-        let alertAction: Observable<AlertActionType>
+        let deleteAlertAction: Observable<AlertActionType>
+        let reviewToSend: Observable<(UIImage?, Review)>
     }
     
     // MARK: - Properties
@@ -64,8 +66,9 @@ final class ReviewDetailViewModel {
             posterImage,
             review
         )
+            .share()
         
-        let alertAction = input.didTapAlertButton
+        let deleteAlertAction = input.didTapDeleteButton
             .withUnretained(self)
             .map { owner, action in
                 if action == .delete {
@@ -75,9 +78,16 @@ final class ReviewDetailViewModel {
                 return action
             }
         
+        let reviewToSend = input.didTapModificationButton
+            .withUnretained(self)
+            .flatMap { owner, _ in
+                reviewWithPoster
+            }
+        
         return Output(
             reviewWithPoster: reviewWithPoster,
-            alertAction: alertAction
+            deleteAlertAction: deleteAlertAction,
+            reviewToSend: reviewToSend
         )
     }
 }
