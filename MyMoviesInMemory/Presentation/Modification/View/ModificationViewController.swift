@@ -52,7 +52,17 @@ class ModificationViewController: UIViewController {
     
     private func bind() {
         let viewDidLoadEvent = Observable.just(())
-        let input = ModificationViewModel.Input(didShowView: viewDidLoadEvent)
+        let didDragStarRatingEvent = modificationView
+            .starRatingView
+            .starRatingSlider
+            .rx
+            .value
+            .asObservable()
+
+        let input = ModificationViewModel.Input(
+            didShowView: viewDidLoadEvent,
+            didDragStarRating: didDragStarRatingEvent
+        )
         let output = viewModel.transform(input)
         
         output
@@ -60,8 +70,30 @@ class ModificationViewController: UIViewController {
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
             .bind(onNext: { owner, reviewWithPoster in
-                owner.modificationView.setupSummary(reviewWithPoster.0, reviewWithPoster.1)
+                owner.modificationView.setupSummary(
+                    reviewWithPoster.0,
+                    reviewWithPoster.1
+                )
                 owner.modificationView.setupReview(reviewWithPoster.1)
+            })
+            .disposed(by: disposeBag)
+        
+        output
+            .reviewWithPoster
+            .compactMap { Float($0.1.personalRating) }
+            .observe(on: MainScheduler.instance)
+            .withUnretained(self)
+            .bind(onNext: { owner, rating in
+                owner.modificationView.starRatingView.starRatingSlider.value = rating
+            })
+            .disposed(by: disposeBag)
+        
+        output
+            .starRating
+            .observe(on: MainScheduler.instance)
+            .withUnretained(self)
+            .bind(onNext: { owner, rating in
+                owner.modificationView.dragStarSlider(rating)
             })
             .disposed(by: disposeBag)
     }

@@ -13,12 +13,14 @@ final class ModificationViewModel {
     
     struct Input {
         let didShowView: Observable<Void>
+        let didDragStarRating: Observable<Float>
     }
     
     // MARK: - Output
     
     struct Output {
         let reviewWithPoster: Observable<(UIImage?, Review)>
+        let starRating: Observable<Int>
     }
     
     // MARK: - Properties
@@ -57,6 +59,15 @@ final class ModificationViewModel {
             review
         )
         
-        return Output(reviewWithPoster: reviewWithPoster)
+        let starRating = input.didDragStarRating
+            .withUnretained(self)
+            .map { owner, rating in
+                Int(rating)
+            }
+                
+        return Output(
+            reviewWithPoster: reviewWithPoster,
+            starRating: starRating
+        )
     }
 }
