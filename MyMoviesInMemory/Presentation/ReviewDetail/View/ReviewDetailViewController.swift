@@ -126,6 +126,9 @@ final class ReviewDetailViewController: UIViewController {
     // MARK: - Methods
     
     private func configureNavigationBar() {
-        navigationItem.rightBarButtonItems = [modificationBarButton, deleteBarButton]
+        navigationItem.rightBarButtonItems = [
+            modificationBarButton,
+            deleteBarButton
+        ]
     }
 }

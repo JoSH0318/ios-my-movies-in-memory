@@ -16,7 +16,11 @@ class ModificationViewController: UIViewController {
     private let coordinator: ModificationCoordinator
     private let disposeBag = DisposeBag()
     private let saveBarButton: UIBarButtonItem = {
-        let barButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: nil, action: nil)
+        let barButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .edit,
+            target: nil,
+            action: nil
+        )
         barButtonItem.tintColor = .MGreen
         return barButtonItem
     }()
