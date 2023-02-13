@@ -41,13 +41,18 @@ final class SearchDetailCoordinator: Coordinator {
         )
     }
     
-    func presentEditView(with posterImage: UIImage?, _ movie: Movie) {
+    func presentEditView(posterImage: UIImage?, movie: Movie) {
         let editCoordinator = EditCoordinator(
             navigationController: self.navigationController,
             parentCoordinator: self,
             reviewUseCase: reviewUseCase
         )
+        let defaultReview = movie.toDefaultReview()
+        
         self.childCoordinators.append(editCoordinator)
-        editCoordinator.start(with: movie, posterImage)
+        editCoordinator.start(
+            review: defaultReview,
+            posterImage: posterImage
+        )
     }
 }

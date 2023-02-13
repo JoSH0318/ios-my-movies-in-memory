@@ -82,8 +82,8 @@ final class SearchDetailViewController: UIViewController {
             .bind(onNext: { owner, movieWithPoster in
                 owner.coordinator
                     .presentEditView(
-                        with: movieWithPoster.0,
-                        movieWithPoster.1
+                        posterImage: movieWithPoster.0,
+                        movie: movieWithPoster.1
                     )
             })
             .disposed(by: disposeBag)
