@@ -31,7 +31,6 @@ final class EditView: UIView {
     private(set) var shortCommentTextView: UITextView = {
         let textView = UITextView()
         textView.textAlignment = .left
-        textView.textColor = .systemGray
         textView.font = .systemFont(ofSize: FontSize.title)
         textView.textContainerInset = .init(
             top: 16,
@@ -57,7 +56,6 @@ final class EditView: UIView {
     private(set) var commentTextView: UITextView = {
         let textView = UITextView()
         textView.textAlignment = .left
-        textView.textColor = .systemGray
         textView.font = .systemFont(ofSize: FontSize.title)
         textView.textContainerInset = .init(
             top: 16,
@@ -109,7 +107,6 @@ final class EditView: UIView {
     }
     
     func setupReview(_ review: Review) {
-        starRatingView.dragStarSlider(Int(review.personalRating * 2))
         shortCommentTextView.text = review.shortComment
         commentTextView.text = review.comment
     }
