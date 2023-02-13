@@ -22,7 +22,7 @@ final class EditViewModel {
     // MARK: - Output
     
     struct Output {
-        let movieWithPoster: Observable<(UIImage?, Movie)>
+        let movieWithPoster: Observable<(UIImage?, Review)>
         let starRating: Observable<Int>
         let commentViewEditingStatus: Observable<Void>
         let shortCommentViewEditingStatus: Observable<Void>
@@ -32,18 +32,18 @@ final class EditViewModel {
     // MARK: - Properties
     
     private let reviewUseCase: ReviewUseCaseType
-    private let movie: Movie
+    private let review: Review
     private let posterImage: UIImage?
     
     // MARK: - Initializer
     
     init(
         reviewUseCase: ReviewUseCaseType,
-        movie: Movie,
+        review: Review,
         posterImage: UIImage?
     ) {
         self.reviewUseCase = reviewUseCase
-        self.movie = movie
+        self.review = review
         self.posterImage = posterImage
     }
     
@@ -53,7 +53,7 @@ final class EditViewModel {
         let movieWithPoster = input.didShowView
             .withUnretained(self)
             .map { owner, _ in
-                (owner.posterImage, owner.movie)
+                (owner.posterImage, owner.review)
             }
         
         let rating = input.didDragStarRating
@@ -74,15 +74,15 @@ final class EditViewModel {
             .withUnretained(self)
             .map { owner, data in
                 let dataToSave = Review(
-                    id: String(owner.movie.id),
-                    title: owner.movie.title,
-                    originalTitle: owner.movie.originalTitle,
-                    posterPath: owner.movie.posterPath,
-                    genres: owner.movie.genres,
-                    releaseDate: owner.movie.releaseDate,
-                    userRating: owner.movie.userRating,
-                    originalLanguage: owner.movie.originalLanguage,
-                    overview: owner.movie.overview,
+                    id: String(owner.review.id),
+                    title: owner.review.title,
+                    originalTitle: owner.review.originalTitle,
+                    posterPath: owner.review.posterPath,
+                    genres: owner.review.genres,
+                    releaseDate: owner.review.releaseDate,
+                    userRating: owner.review.userRating,
+                    originalLanguage: owner.review.originalLanguage,
+                    overview: owner.review.overview,
                     personalRating: Double(data.personalRating),
                     shortComment: data.shortComment ?? "",
                     comment: data.comment ?? "",

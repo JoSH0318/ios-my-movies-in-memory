@@ -10,6 +10,8 @@ import RxSwift
 
 class EditViewController: UIViewController {
 
+    // MARK: - Contant
+    
     private enum PlaceHolder {
         static let shortCommentPlaceHolder = "📝 나만의 한줄평 📝"
         static let commentPlaceHolder = "📝 나만의 영화 감상평을 작성해보세요 📝"
@@ -36,8 +38,6 @@ class EditViewController: UIViewController {
         self.viewModel = viewModel
         self.coordinator = coordinator
         super.init(nibName: nil, bundle: nil)
-        
-        bind()
     }
     
     required init?(coder: NSCoder) {
@@ -110,7 +110,7 @@ class EditViewController: UIViewController {
             .withUnretained(self)
             .bind(onNext: { owner, movieWithPoster in
                 owner.editView
-                    .setupContents(
+                    .setupSummary(
                         movieWithPoster.0,
                         movieWithPoster.1
                     )

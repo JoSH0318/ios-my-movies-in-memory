@@ -23,10 +23,10 @@ final class EditCoordinator: Coordinator {
         self.reviewUseCase = reviewUseCase
     }
     
-    func start(with movie: Movie, _ posterImage: UIImage?) {
+    func start(review: Review, posterImage: UIImage?) {
         let editViewModel = EditViewModel(
             reviewUseCase: reviewUseCase,
-            movie: movie,
+            review: review,
             posterImage: posterImage
         )
         
