@@ -43,7 +43,10 @@ final class ReviewCellViewModel {
             .withUnretained(self)
             .flatMap { owner, review in
                 owner.imageManager
-                    .downloadImage(review.posterPath, owner.downloadTaskToken)
+                    .downloadImage(
+                        review.posterPath,
+                        owner.downloadTaskToken
+                    )
                     .asObservable()
             }
         
