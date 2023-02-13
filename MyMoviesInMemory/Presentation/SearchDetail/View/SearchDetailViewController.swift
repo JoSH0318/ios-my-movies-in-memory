@@ -81,7 +81,7 @@ final class SearchDetailViewController: UIViewController {
             .withUnretained(self)
             .bind(onNext: { owner, movieWithPoster in
                 owner.coordinator
-                    .presentEditView(
+                    .presentRecordView(
                         posterImage: movieWithPoster.0,
                         movie: movieWithPoster.1
                     )

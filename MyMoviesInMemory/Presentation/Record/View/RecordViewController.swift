@@ -8,7 +8,7 @@
 import UIKit
 import RxSwift
 
-class EditViewController: UIViewController {
+class RecordViewController: UIViewController {
 
     // MARK: - Contant
     
@@ -20,8 +20,8 @@ class EditViewController: UIViewController {
     // MARK: - Properties
     
     private let editView = EditView()
-    private let viewModel: EditViewModel
-    private let coordinator: EditCoordinator
+    private let viewModel: RecordViewModel
+    private let coordinator: RecordCoordinator
     private let disposeBag = DisposeBag()
     private let saveBarButton: UIBarButtonItem = {
         let barButtonItem = UIBarButtonItem(
@@ -36,8 +36,8 @@ class EditViewController: UIViewController {
     // MARK: - Initializer
     
     init(
-        _ viewModel: EditViewModel,
-        _ coordinator: EditCoordinator
+        _ viewModel: RecordViewModel,
+        _ coordinator: RecordCoordinator
     ) {
         self.viewModel = viewModel
         self.coordinator = coordinator
@@ -99,7 +99,7 @@ class EditViewController: UIViewController {
                 return (shortCommentText, placeHolder)
             }
         
-        let input = EditViewModel.Input(
+        let input = RecordViewModel.Input(
             didShowView: didShowViewEvent,
             didDragStarRating: draggedValue,
             didTapSaveButton: didTapSaveButtonEvent,

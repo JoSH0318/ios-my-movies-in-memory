@@ -26,9 +26,9 @@
 		0397EECE29379E9900D1482E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0397EECD29379E9900D1482E /* Assets.xcassets */; };
 		0397EED129379E9900D1482E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0397EECF29379E9900D1482E /* LaunchScreen.storyboard */; };
 		039F5665295208DC00353720 /* MoviesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039F5664295208DC00353720 /* MoviesResponse.swift */; };
-		03C8985C2986E552008E1F84 /* EditCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C8985B2986E552008E1F84 /* EditCoordinator.swift */; };
-		03C8985E2986E662008E1F84 /* EditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C8985D2986E662008E1F84 /* EditViewModel.swift */; };
-		03C898622987E1A5008E1F84 /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C898612987E1A5008E1F84 /* EditViewController.swift */; };
+		03C8985C2986E552008E1F84 /* RecordCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C8985B2986E552008E1F84 /* RecordCoordinator.swift */; };
+		03C8985E2986E662008E1F84 /* RecordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C8985D2986E662008E1F84 /* RecordViewModel.swift */; };
+		03C898622987E1A5008E1F84 /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C898612987E1A5008E1F84 /* RecordViewController.swift */; };
 		03C8986429881C62008E1F84 /* StarRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C8986329881C62008E1F84 /* StarRatingView.swift */; };
 		03C89866298856EF008E1F84 /* SummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C89865298856EF008E1F84 /* SummaryView.swift */; };
 		03C8986829898EF1008E1F84 /* EditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C8986729898EF1008E1F84 /* EditView.swift */; };
@@ -105,9 +105,9 @@
 		0397EED029379E9900D1482E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0397EED229379E9900D1482E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		039F5664295208DC00353720 /* MoviesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesResponse.swift; sourceTree = "<group>"; };
-		03C8985B2986E552008E1F84 /* EditCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCoordinator.swift; sourceTree = "<group>"; };
-		03C8985D2986E662008E1F84 /* EditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewModel.swift; sourceTree = "<group>"; };
-		03C898612987E1A5008E1F84 /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
+		03C8985B2986E552008E1F84 /* RecordCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCoordinator.swift; sourceTree = "<group>"; };
+		03C8985D2986E662008E1F84 /* RecordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewModel.swift; sourceTree = "<group>"; };
+		03C898612987E1A5008E1F84 /* RecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
 		03C8986329881C62008E1F84 /* StarRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarRatingView.swift; sourceTree = "<group>"; };
 		03C89865298856EF008E1F84 /* SummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryView.swift; sourceTree = "<group>"; };
 		03C8986729898EF1008E1F84 /* EditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditView.swift; sourceTree = "<group>"; };
@@ -360,20 +360,20 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
-		03C898572986E4CF008E1F84 /* Edit */ = {
+		03C898572986E4CF008E1F84 /* Record */ = {
 			isa = PBXGroup;
 			children = (
 				03C898582986E524008E1F84 /* Coordinator */,
 				03C8985A2986E53D008E1F84 /* View */,
 				03C898592986E533008E1F84 /* ViewModel */,
 			);
-			path = Edit;
+			path = Record;
 			sourceTree = "<group>";
 		};
 		03C898582986E524008E1F84 /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
-				03C8985B2986E552008E1F84 /* EditCoordinator.swift */,
+				03C8985B2986E552008E1F84 /* RecordCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -381,7 +381,7 @@
 		03C898592986E533008E1F84 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				03C8985D2986E662008E1F84 /* EditViewModel.swift */,
+				03C8985D2986E662008E1F84 /* RecordViewModel.swift */,
 				03C89873298EC82A008E1F84 /* EditViewModelItem.swift */,
 			);
 			path = ViewModel;
@@ -390,8 +390,7 @@
 		03C8985A2986E53D008E1F84 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				03C898612987E1A5008E1F84 /* EditViewController.swift */,
-				03C8986729898EF1008E1F84 /* EditView.swift */,
+				03C898612987E1A5008E1F84 /* RecordViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -399,12 +398,10 @@
 		03C89879298FF50F008E1F84 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				03FD03272965FADC00BC72D7 /* CarouselLayout.swift */,
 				03C89865298856EF008E1F84 /* SummaryView.swift */,
 				03C8986329881C62008E1F84 /* StarRatingView.swift */,
 				03C89883299522E6008E1F84 /* ShadowView.swift */,
-				03FFCBE52997F998005F74B8 /* AlertBuilder.swift */,
-				03FFCBE729990EA9005F74B8 /* AlertActionType.swift */,
+				03C8986729898EF1008E1F84 /* EditView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -545,7 +542,7 @@
 				03FFCBE929995BD4005F74B8 /* Modification */,
 				03E358472971CCE7008FFBFA /* Search */,
 				03806B5C2977D35300235282 /* SearchDetail */,
-				03C898572986E4CF008E1F84 /* Edit */,
+				03C898572986E4CF008E1F84 /* Record */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -838,7 +835,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				03C8985E2986E662008E1F84 /* EditViewModel.swift in Sources */,
+				03C8985E2986E662008E1F84 /* RecordViewModel.swift in Sources */,
 				03FD02E2295D8B9000BC72D7 /* NetworkRepository.swift in Sources */,
 				03806B632977D3E800235282 /* SearchDetailViewController.swift in Sources */,
 				039F5665295208DC00353720 /* MoviesResponse.swift in Sources */,
@@ -867,7 +864,7 @@
 				03C89884299522E6008E1F84 /* ShadowView.swift in Sources */,
 				03FD0373296F0AD900BC72D7 /* UIColor.swift in Sources */,
 				03FD0335296C1B5B00BC72D7 /* ReviewCell.swift in Sources */,
-				03C898622987E1A5008E1F84 /* EditViewController.swift in Sources */,
+				03C898622987E1A5008E1F84 /* RecordViewController.swift in Sources */,
 				03FD02EB295D9C5400BC72D7 /* MovieUseCaseType.swift in Sources */,
 				03C8986829898EF1008E1F84 /* EditView.swift in Sources */,
 				03124781295B711B00106F21 /* Endpoint.swift in Sources */,
@@ -908,7 +905,7 @@
 				03FD02E5295D8DF600BC72D7 /* MovieRepository.swift in Sources */,
 				03C8986429881C62008E1F84 /* StarRatingView.swift in Sources */,
 				03124785295B74DC00106F21 /* NetworkProvider.swift in Sources */,
-				03C8985C2986E552008E1F84 /* EditCoordinator.swift in Sources */,
+				03C8985C2986E552008E1F84 /* RecordCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

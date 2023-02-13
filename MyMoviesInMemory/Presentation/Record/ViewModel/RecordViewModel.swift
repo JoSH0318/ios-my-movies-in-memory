@@ -7,7 +7,7 @@
 
 import RxSwift
 
-final class EditViewModel {
+final class RecordViewModel {
     
     // MARK: - Input
     

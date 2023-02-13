@@ -1,5 +1,5 @@
 //
-//  EditCoordinator.swift
+//  RecordCoordinator.swift
 //  MyMoviesInMemory
 //
 //  Created by 조성훈 on 2023/01/30.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class EditCoordinator: Coordinator {
+final class RecordCoordinator: Coordinator {
     var navigationController: UINavigationController
     var parentCoordinator: Coordinator?
     var childCoordinators: [Coordinator] = []
@@ -24,19 +24,19 @@ final class EditCoordinator: Coordinator {
     }
     
     func start(review: Review, posterImage: UIImage?) {
-        let editViewModel = EditViewModel(
+        let recordViewModel = RecordViewModel(
             reviewUseCase: reviewUseCase,
             review: review,
             posterImage: posterImage
         )
         
-        let editViewController = EditViewController(
-            editViewModel,
+        let recordViewController = RecordViewController(
+            recordViewModel,
             self
         )
         
         self.navigationController.pushViewController(
-            editViewController,
+            recordViewController,
             animated: true
         )
     }
