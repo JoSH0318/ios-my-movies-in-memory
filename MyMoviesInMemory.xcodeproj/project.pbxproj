@@ -626,6 +626,8 @@
 			isa = PBXGroup;
 			children = (
 				03C89879298FF50F008E1F84 /* View */,
+				03FFCBF3299A821D005F74B8 /* Alert */,
+				03FFCBF4299A822C005F74B8 /* CollectionLayout */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -702,6 +704,23 @@
 				03FFCBF129995C2E005F74B8 /* ModificationViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		03FFCBF3299A821D005F74B8 /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				03FFCBE52997F998005F74B8 /* AlertBuilder.swift */,
+				03FFCBE729990EA9005F74B8 /* AlertActionType.swift */,
+			);
+			path = Alert;
+			sourceTree = "<group>";
+		};
+		03FFCBF4299A822C005F74B8 /* CollectionLayout */ = {
+			isa = PBXGroup;
+			children = (
+				03FD03272965FADC00BC72D7 /* CarouselLayout.swift */,
+			);
+			path = CollectionLayout;
 			sourceTree = "<group>";
 		};
 		13B7608845F7AF596F46B835 /* Frameworks */ = {
