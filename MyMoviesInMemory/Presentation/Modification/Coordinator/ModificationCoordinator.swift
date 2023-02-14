@@ -39,4 +39,9 @@ final class ModificationCoordinator: Coordinator {
             animated: true
         )
     }
+    
+    func popModificationView() {
+        self.navigationController.popViewController(animated: true)
+        self.parentCoordinator?.removeChildCoordinator(child: self)
+    }
 }
