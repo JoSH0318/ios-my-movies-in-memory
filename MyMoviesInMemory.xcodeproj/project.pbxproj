@@ -70,8 +70,6 @@
 		03FD0335296C1B5B00BC72D7 /* ReviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FD0334296C1B5B00BC72D7 /* ReviewCell.swift */; };
 		03FD033B296C4E8400BC72D7 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FD033A296C4E8400BC72D7 /* Review.swift */; };
 		03FD0341296C6BF200BC72D7 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FD0340296C6BF200BC72D7 /* AppCoordinator.swift */; };
-		03FD0344296D5A0500BC72D7 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FD0343296D5A0500BC72D7 /* ImageManager.swift */; };
-		03FD0346296D5A1400BC72D7 /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FD0345296D5A1400BC72D7 /* ImageDownloader.swift */; };
 		03FD0348296D5B7D00BC72D7 /* ReviewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FD0347296D5B7D00BC72D7 /* ReviewCellViewModel.swift */; };
 		03FD0370296F0A6F00BC72D7 /* TicketView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FD036F296F0A6F00BC72D7 /* TicketView.swift */; };
 		03FD0373296F0AD900BC72D7 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FD0372296F0AD900BC72D7 /* UIColor.swift */; };
@@ -156,8 +154,6 @@
 		03FD0334296C1B5B00BC72D7 /* ReviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCell.swift; sourceTree = "<group>"; };
 		03FD033A296C4E8400BC72D7 /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
 		03FD0340296C6BF200BC72D7 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
-		03FD0343296D5A0500BC72D7 /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
-		03FD0345296D5A1400BC72D7 /* ImageDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloader.swift; sourceTree = "<group>"; };
 		03FD0347296D5B7D00BC72D7 /* ReviewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCellViewModel.swift; sourceTree = "<group>"; };
 		03FD036F296F0A6F00BC72D7 /* TicketView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketView.swift; sourceTree = "<group>"; };
 		03FD0372296F0AD900BC72D7 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
@@ -468,8 +464,6 @@
 		03E3585929731B6D008FFBFA /* ImageCacheManager */ = {
 			isa = PBXGroup;
 			children = (
-				03FD0343296D5A0500BC72D7 /* ImageManager.swift */,
-				03FD0345296D5A1400BC72D7 /* ImageDownloader.swift */,
 				03FFCC09299C0341005F74B8 /* ImageCacheManager.swift */,
 			);
 			path = ImageCacheManager;
@@ -948,7 +942,6 @@
 				03FD03282965FADC00BC72D7 /* CarouselLayout.swift in Sources */,
 				03FFCBF7299ABA4B005F74B8 /* Reactive.swift in Sources */,
 				03C89871298C5064008E1F84 /* ReviewDAO+CoreDataClass.swift in Sources */,
-				03FD0346296D5A1400BC72D7 /* ImageDownloader.swift in Sources */,
 				03FFCBFB299B7A70005F74B8 /* ReviewCellViewModelItem.swift in Sources */,
 				03E358402971889A008FFBFA /* UserInfo.swift in Sources */,
 				03806B572976EECC00235282 /* ReviewDetailCoordinator.swift in Sources */,
