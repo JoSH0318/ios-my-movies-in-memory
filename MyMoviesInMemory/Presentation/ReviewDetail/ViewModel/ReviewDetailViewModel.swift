@@ -66,7 +66,7 @@ final class ReviewDetailViewModel {
             posterImage,
             review
         )
-            .share()
+//            .share()
         
         let deleteAlertAction = input.didTapDeleteButton
             .withUnretained(self)
