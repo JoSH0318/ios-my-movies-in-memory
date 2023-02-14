@@ -26,7 +26,7 @@ final class RecordViewModel {
         let starRating: Observable<Int>
         let commentViewEditingStatus: Observable<Void>
         let shortCommentViewEditingStatus: Observable<Void>
-        let popEditViewTrigger: Observable<Void>
+        let popRecordViewTrigger: Observable<Void>
     }
     
     // MARK: - Properties
@@ -70,7 +70,7 @@ final class RecordViewModel {
             .filter { $0.0 == $0.1 }
             .map { _ in }
         
-        let popEditViewTrigger = input.didTapSaveButton
+        let popRecordViewTrigger = input.didTapSaveButton
             .withUnretained(self)
             .map { owner, data in
                 let dataToSave = Review(
@@ -96,7 +96,7 @@ final class RecordViewModel {
             starRating: rating,
             commentViewEditingStatus: isBeginEditingCommentView,
             shortCommentViewEditingStatus: isBeginEditingShortCommentView,
-            popEditViewTrigger: popEditViewTrigger
+            popRecordViewTrigger: popRecordViewTrigger
         )
     }
 }

@@ -149,7 +149,7 @@ class RecordViewController: UIViewController {
             .disposed(by: disposeBag)
         
         output
-            .popEditViewTrigger
+            .popRecordViewTrigger
             .withUnretained(self)
             .bind(onNext: { owner, _ in
                 owner.coordinator.popEditView()
