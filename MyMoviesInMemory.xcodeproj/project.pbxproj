@@ -80,6 +80,7 @@
 		03FFCBEE29995C16005F74B8 /* ModificationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FFCBED29995C16005F74B8 /* ModificationCoordinator.swift */; };
 		03FFCBF029995C24005F74B8 /* ModificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FFCBEF29995C24005F74B8 /* ModificationViewController.swift */; };
 		03FFCBF229995C2E005F74B8 /* ModificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FFCBF129995C2E005F74B8 /* ModificationViewModel.swift */; };
+		03FFCBF9299ABAAF005F74B8 /* ReviewCellViewModelItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FFCBF8299ABAAF005F74B8 /* ReviewCellViewModelItem.swift */; };
 		CC41655F8052C8CD51C9D214 /* Pods_MyMoviesInMemory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D749669A526FE1399E397142 /* Pods_MyMoviesInMemory.framework */; };
 /* End PBXBuildFile section */
 
@@ -159,6 +160,7 @@
 		03FFCBED29995C16005F74B8 /* ModificationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModificationCoordinator.swift; sourceTree = "<group>"; };
 		03FFCBEF29995C24005F74B8 /* ModificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModificationViewController.swift; sourceTree = "<group>"; };
 		03FFCBF129995C2E005F74B8 /* ModificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModificationViewModel.swift; sourceTree = "<group>"; };
+		03FFCBF8299ABAAF005F74B8 /* ReviewCellViewModelItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCellViewModelItem.swift; sourceTree = "<group>"; };
 		D749669A526FE1399E397142 /* Pods_MyMoviesInMemory.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyMoviesInMemory.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA081CEB078E6F1CF7C2F1FA /* Pods-MyMoviesInMemory.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMoviesInMemory.debug.xcconfig"; path = "Target Support Files/Pods-MyMoviesInMemory/Pods-MyMoviesInMemory.debug.xcconfig"; sourceTree = "<group>"; };
 		FFBC40EF504A889691A1A002 /* Pods-MyMoviesInMemory.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyMoviesInMemory.release.xcconfig"; path = "Target Support Files/Pods-MyMoviesInMemory/Pods-MyMoviesInMemory.release.xcconfig"; sourceTree = "<group>"; };
@@ -382,7 +384,6 @@
 			isa = PBXGroup;
 			children = (
 				03C8985D2986E662008E1F84 /* RecordViewModel.swift */,
-				03C89873298EC82A008E1F84 /* EditViewModelItem.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -626,6 +627,7 @@
 			isa = PBXGroup;
 			children = (
 				03C89879298FF50F008E1F84 /* View */,
+				03FFCBF5299A961A005F74B8 /* ViewModel */,
 				03FFCBF3299A821D005F74B8 /* Alert */,
 				03FFCBF4299A822C005F74B8 /* CollectionLayout */,
 			);
@@ -668,6 +670,7 @@
 			isa = PBXGroup;
 			children = (
 				03FD0347296D5B7D00BC72D7 /* ReviewCellViewModel.swift */,
+				03FFCBF8299ABAAF005F74B8 /* ReviewCellViewModelItem.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -721,6 +724,14 @@
 				03FD03272965FADC00BC72D7 /* CarouselLayout.swift */,
 			);
 			path = CollectionLayout;
+			sourceTree = "<group>";
+		};
+		03FFCBF5299A961A005F74B8 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				03C89873298EC82A008E1F84 /* EditViewModelItem.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		13B7608845F7AF596F46B835 /* Frameworks */ = {
@@ -916,6 +927,7 @@
 				03FD03282965FADC00BC72D7 /* CarouselLayout.swift in Sources */,
 				03C89871298C5064008E1F84 /* ReviewDAO+CoreDataClass.swift in Sources */,
 				03FD0346296D5A1400BC72D7 /* ImageDownloader.swift in Sources */,
+				03FFCBF9299ABAAF005F74B8 /* ReviewCellViewModelItem.swift in Sources */,
 				03E358402971889A008FFBFA /* UserInfo.swift in Sources */,
 				03806B572976EECC00235282 /* ReviewDetailCoordinator.swift in Sources */,
 				03806B652977D43E00235282 /* SearchDetailViewModel.swift in Sources */,
