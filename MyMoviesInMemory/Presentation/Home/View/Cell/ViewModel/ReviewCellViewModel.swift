@@ -13,52 +13,24 @@ final class ReviewCellViewModel {
     // MARK: - Input
     
     struct Input {
-        let setupCell: Observable<Review>
+        let didShowCell: Observable<Review>
     }
     
     // MARK: - Output
     
     struct Output {
-        let reviewWithPoster: Observable<(UIImage?, Review)>
-    }
-    
-    // MARK: - Properties
-    
-    private let imageManager = ImageManager.shared
-    private let downloadTaskToken: UInt
-    
-    // MARK: - Initializer
-    
-    init() {
-        self.downloadTaskToken = imageManager.nextToken()
+        let reviewCellViewModelItem: Observable<ReviewCellViewModelItem>
     }
     
     // MARK: - Methods
     
     func transform(_ input: Input) -> Output {
-        let review = input.setupCell
-            .share()
-        
-        let posterImage = review
+        let reviewCellViewModelItem = input.didShowCell
             .withUnretained(self)
-            .flatMap { owner, review in
-                owner.imageManager
-                    .downloadImage(
-                        review.posterPath,
-                        owner.downloadTaskToken
-                    )
-                    .asObservable()
+            .map { owner, review in
+                ReviewCellViewModelItem(review: review)
             }
         
-        let reviewWithPoster = Observable.combineLatest(
-            posterImage,
-            review
-        )
-        
-        return Output(reviewWithPoster: reviewWithPoster)
-    }
-    
-    func onPrepareForReuse() {
-        imageManager.cancelTask(downloadTaskToken)
+        return Output(reviewCellViewModelItem: reviewCellViewModelItem)
     }
 }

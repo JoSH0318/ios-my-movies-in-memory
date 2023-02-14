@@ -58,8 +58,8 @@ class RecordViewController: UIViewController {
         super.viewDidLoad()
         
         configureEditButton()
-        setupPlaceHolder()
         bind()
+        setupPlaceHolder()
     }
     
     // MARK: - Bind
@@ -74,10 +74,10 @@ class RecordViewController: UIViewController {
         let didTapSaveButtonEvent = saveBarButton.rx.tap
             .withUnretained(self)
             .map { owner, _ in
-                EditViewModelItem(
-                    personalRating: owner.editView.starRatingView.starRatingSlider.value / 2,
-                    shortComment: owner.editView.shortCommentTextView.text,
-                    comment: owner.editView.commentTextView.text
+                (
+                    owner.editView.starRatingView.starRatingSlider.value,
+                    owner.editView.shortCommentTextView.text,
+                    owner.editView.commentTextView.text
                 )
             }
         
@@ -109,15 +109,11 @@ class RecordViewController: UIViewController {
         let output = viewModel.transform(input)
         
         output
-            .movieWithPoster
+            .editViewModelItem
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
-            .bind(onNext: { owner, movieWithPoster in
-                owner.editView
-                    .setupSummary(
-                        movieWithPoster.0,
-                        movieWithPoster.1
-                    )
+            .bind(onNext: { owner, item in
+                owner.editView.setupContents(item)
             })
             .disposed(by: disposeBag)
         

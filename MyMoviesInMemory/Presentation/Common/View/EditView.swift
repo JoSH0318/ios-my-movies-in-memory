@@ -93,22 +93,16 @@ final class EditView: UIView {
     
     // MARK: - Methods
     
-    func setupSummary(
-        _ posterImage: UIImage?,
-        _ review: Review)
-    {
-        summaryView.posterImageView.image = posterImage
-        summaryView.titleLabel.text = review.title
-        summaryView.originalTitleLabel.text = review.originalTitle
-        summaryView.genreLabel.text = "\(review.genres)"
-        summaryView.releaseLabel.text = "\(review.releaseDate) | \(review.originalLanguage)"
-        summaryView.ratingLabel.text = "\(review.userRating)"
-        summaryView.overviewLabel.text = review.overview
-    }
-    
-    func setupReview(_ review: Review) {
-        shortCommentTextView.text = review.shortComment
-        commentTextView.text = review.comment
+    func setupContents(_ item: EditViewModelItem) {
+        summaryView.posterImageView.setImage(urlString: item.posterPath)
+        summaryView.titleLabel.text = item.title
+        summaryView.originalTitleLabel.text = item.originalTitle
+        summaryView.genreLabel.text = item.genres
+        summaryView.releaseLabel.text = item.release
+        summaryView.ratingLabel.text = item.rating
+        summaryView.overviewLabel.text = item.overview
+        shortCommentTextView.text = item.shortComment
+        commentTextView.text = item.comment
     }
     
     func dragStarSlider(_ rating: Int) {

@@ -79,10 +79,7 @@ final class ReviewDetailCoordinator: Coordinator {
         }
     }
     
-    func presentModificationView(
-        posterImage: UIImage?,
-        review: Review
-    ) {
+    func presentModificationView(review: Review) {
         let modificationCoordinator = ModificationCoordinator(
             navigationController: self.navigationController,
             parentCoordinator: self,
@@ -90,9 +87,6 @@ final class ReviewDetailCoordinator: Coordinator {
         )
         self.childCoordinators.append(modificationCoordinator)
         
-        modificationCoordinator.start(
-            review: review,
-            posterImage: posterImage
-        )
+        modificationCoordinator.start(with: review)
     }
 }

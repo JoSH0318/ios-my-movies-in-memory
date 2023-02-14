@@ -66,14 +66,13 @@ class ModificationViewController: UIViewController {
         let didTapSaveButtonEvent = saveBarButton.rx.tap
             .withUnretained(self)
             .map { owner, _ in
-                EditViewModelItem(
-                    personalRating: owner.modificationView.starRatingView.starRatingSlider.value / 2,
-                    shortComment: owner.modificationView.shortCommentTextView.text,
-                    comment: owner.modificationView.commentTextView.text
+                (
+                    owner.modificationView.starRatingView.starRatingSlider.value,
+                    owner.modificationView.shortCommentTextView.text,
+                    owner.modificationView.commentTextView.text
                 )
             }
         
-
         let input = ModificationViewModel.Input(
             didShowView: viewDidLoadEvent,
             didDragStarRating: draggedValue,
@@ -82,25 +81,21 @@ class ModificationViewController: UIViewController {
         let output = viewModel.transform(input)
         
         output
-            .reviewWithPoster
+            .modificationViewModelItem
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
-            .bind(onNext: { owner, reviewWithPoster in
-                owner.modificationView.setupSummary(
-                    reviewWithPoster.0,
-                    reviewWithPoster.1
-                )
-                owner.modificationView.setupReview(reviewWithPoster.1)
+            .bind(onNext: { owner, item in
+                owner.modificationView.setupContents(item)
             })
             .disposed(by: disposeBag)
         
         output
-            .reviewWithPoster
-            .compactMap { Float($0.1.personalRating) }
+            .modificationViewModelItem
+            .compactMap { Float($0.personalRatingOnTen) }
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
             .bind(onNext: { owner, rating in
-                owner.modificationView.starRatingView.starRatingSlider.value = rating * 2
+                owner.modificationView.starRatingView.starRatingSlider.value = rating
             })
             .disposed(by: disposeBag)
         

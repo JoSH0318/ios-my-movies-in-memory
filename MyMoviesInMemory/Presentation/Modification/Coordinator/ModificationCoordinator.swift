@@ -23,11 +23,10 @@ final class ModificationCoordinator: Coordinator {
         self.reviewUseCase = reviewUseCase
     }
     
-    func start(review: Review, posterImage: UIImage?) {
+    func start(with review: Review) {
         let modificationViewModel = ModificationViewModel(
             reviewUseCase: reviewUseCase,
-            review: review,
-            posterImage: posterImage
+            review: review
         )
         let modificationViewController = ModificationViewController(
             modificationViewModel,

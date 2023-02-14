@@ -235,20 +235,17 @@ final class ReviewDetailView: UIView {
     
     // MARK: - Methods
     
-    func setupContents(
-        _ posterImage: UIImage?,
-        _ review: Review)
-    {
-        posterImageView.image = posterImage
-        backgroundImageView.image = posterImage
+    func setupContents(_ review: ReviewDetailViewModelItem) {
+        posterImageView.setImage(urlString: review.posterPath) 
+        backgroundImageView.image = posterImageView.image
         titleLabel.text = review.title
         originalTitleLabel.text = review.originalTitle
         genreLabel.text = review.genres
-        releaseLabel.text = "\(review.releaseDate) | \(review.originalLanguage)"
-        ratingLabel.text = "\(review.userRating)"
+        releaseLabel.text = review.release
+        ratingLabel.text = review.rating
         overviewLabel.text = review.overview
 
-        starRatingView.dragStarSlider(Int(review.personalRating * 2))
+        starRatingView.dragStarSlider(review.personalRatingOnTen)
         shortCommentLabel.text = review.shortComment
         commentLabel.text = review.comment
     }

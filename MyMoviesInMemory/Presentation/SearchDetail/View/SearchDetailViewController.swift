@@ -63,15 +63,12 @@ final class SearchDetailViewController: UIViewController {
         let output = viewModel.transform(input)
         
         output
-            .movieWithPoster
+            .searchDetailViewModelItem
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
-            .bind(onNext: { owner, movieWithPoster in
+            .bind(onNext: { owner, item in
                 owner.searchDetailView
-                    .setupContents(
-                        movieWithPoster.0,
-                        movieWithPoster.1
-                    )
+                    .setupContents(item)
             })
             .disposed(by: disposeBag)
         
@@ -79,12 +76,9 @@ final class SearchDetailViewController: UIViewController {
             .movieToSend
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
-            .bind(onNext: { owner, movieWithPoster in
+            .bind(onNext: { owner, movieToSend in
                 owner.coordinator
-                    .presentRecordView(
-                        posterImage: movieWithPoster.0,
-                        movie: movieWithPoster.1
-                    )
+                    .presentRecordView(movie: movieToSend)
             })
             .disposed(by: disposeBag)
     }

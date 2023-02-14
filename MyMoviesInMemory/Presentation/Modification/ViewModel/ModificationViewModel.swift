@@ -14,13 +14,13 @@ final class ModificationViewModel {
     struct Input {
         let didShowView: Observable<Void>
         let didDragStarRating: Observable<Float>
-        let didTapSaveButton: Observable<EditViewModelItem>
+        let didTapSaveButton: Observable<(Float, String?, String?)>
     }
     
     // MARK: - Output
     
     struct Output {
-        let reviewWithPoster: Observable<(UIImage?, Review)>
+        let modificationViewModelItem: Observable<EditViewModelItem>
         let starRating: Observable<Int>
         let popModificationViewTrigger: Observable<Void>
     }
@@ -29,37 +29,23 @@ final class ModificationViewModel {
     
     private let reviewUseCase: ReviewUseCaseType
     private let review: Review
-    private let posterImage: UIImage?
     
     // MARK: - Initializer
     
     init(
         reviewUseCase: ReviewUseCaseType,
-        review: Review,
-        posterImage: UIImage?
+        review: Review
     ) {
         self.reviewUseCase = reviewUseCase
         self.review = review
-        self.posterImage = posterImage
     }
     
     func transform(_ input: Input) -> Output {
-        let posterImage = input.didShowView
+        let modificationViewModelItem = input.didShowView
             .withUnretained(self)
             .map { owner, _ in
-                owner.posterImage
+                EditViewModelItem(review: owner.review)
             }
-        
-        let review = input.didShowView
-            .withUnretained(self)
-            .map { owner, _ in
-                owner.review
-            }
-        
-        let reviewWithPoster = Observable.combineLatest(
-            posterImage,
-            review
-        )
         
         let starRating = input.didDragStarRating
             .withUnretained(self)
@@ -80,16 +66,16 @@ final class ModificationViewModel {
                     userRating: owner.review.userRating,
                     originalLanguage: owner.review.originalLanguage,
                     overview: owner.review.overview,
-                    personalRating: Double(data.personalRating),
-                    shortComment: data.shortComment ?? "",
-                    comment: data.comment ?? "",
+                    personalRating: Double(data.0 / 2),
+                    shortComment: data.1 ?? "",
+                    comment: data.2 ?? "",
                     recordDate: MMIMDateFormatter.shared.toDateString(Date())
                 )
                 owner.reviewUseCase.update(dataToUpdate)
             }
         
         return Output(
-            reviewWithPoster: reviewWithPoster,
+            modificationViewModelItem: modificationViewModelItem,
             starRating: starRating,
             popModificationViewTrigger: popModificationViewTrigger
         )

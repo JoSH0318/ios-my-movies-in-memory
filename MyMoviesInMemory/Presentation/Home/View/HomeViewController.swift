@@ -21,8 +21,8 @@ final class HomeViewController: UIViewController {
     // MARK: - Initializer
     
     init(
-        _ viewModel: HomeViewModel,
-        _ coordinator: HomeCoordinator
+        viewModel: HomeViewModel,
+        coordinator: HomeCoordinator
     ) {
         self.viewModel = viewModel
         self.coordinator = coordinator

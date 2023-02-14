@@ -165,18 +165,15 @@ final class SearchDetailView: UIView {
     
     // MARK: - Methods
     
-    func setupContents(
-        _ posterImage: UIImage?,
-        _ movie: Movie)
-    {
-        posterImageView.image = posterImage
-        backgroundImageView.image = posterImage
-        titleLabel.text = movie.title
-        originalTitleLabel.text = movie.originalTitle
-        genreLabel.text = movie.genres
-        releaseLabel.text = "\(movie.releaseDate) | \(movie.originalLanguage)"
-        ratingLabel.text = "\(movie.userRating)"
-        overviewLabel.text = movie.overview
+    func setupContents(_ item: SearchDetailViewModelItem) {
+        posterImageView.setImage(urlString: item.posterPath)
+        backgroundImageView.image = posterImageView.image
+        titleLabel.text = item.title
+        originalTitleLabel.text = item.originalTitle
+        genreLabel.text = item.genres
+        releaseLabel.text = item.release
+        ratingLabel.text = item.rating
+        overviewLabel.text = item.overview
     }
     
     private func configureLayout() {

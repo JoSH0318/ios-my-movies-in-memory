@@ -41,7 +41,7 @@ final class SearchDetailCoordinator: Coordinator {
         )
     }
     
-    func presentRecordView(posterImage: UIImage?, movie: Movie) {
+    func presentRecordView(movie: Movie) {
         let recordCoordinator = RecordCoordinator(
             navigationController: self.navigationController,
             parentCoordinator: self,
@@ -50,9 +50,6 @@ final class SearchDetailCoordinator: Coordinator {
         let defaultReview = movie.toDefaultReview()
         
         self.childCoordinators.append(recordCoordinator)
-        recordCoordinator.start(
-            review: defaultReview,
-            posterImage: posterImage
-        )
+        recordCoordinator.start(with: defaultReview)
     }
 }

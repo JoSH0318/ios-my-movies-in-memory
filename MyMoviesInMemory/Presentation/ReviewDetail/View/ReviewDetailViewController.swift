@@ -86,15 +86,11 @@ final class ReviewDetailViewController: UIViewController {
         )
         let output = viewModel.transform(input)
         
-        output.reviewWithPoster
+        output.reviewCellViewModelItem
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
-            .bind(onNext: { owner, reviewWithPoster in
-                owner.reviewDetailView
-                    .setupContents(
-                        reviewWithPoster.0,
-                        reviewWithPoster.1
-                    )
+            .bind(onNext: { owner, item in
+                owner.reviewDetailView.setupContents(item)
             })
             .disposed(by: disposeBag)
         
@@ -115,10 +111,7 @@ final class ReviewDetailViewController: UIViewController {
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
             .bind(onNext: { owner, reviewToSend in
-                owner.coordinator.presentModificationView(
-                    posterImage: reviewToSend.0,
-                    review: reviewToSend.1
-                )
+                owner.coordinator.presentModificationView(review: reviewToSend)
             })
             .disposed(by: disposeBag)
     }

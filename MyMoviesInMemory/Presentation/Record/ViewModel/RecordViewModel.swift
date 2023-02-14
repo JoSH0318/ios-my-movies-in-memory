@@ -14,7 +14,7 @@ final class RecordViewModel {
     struct Input {
         let didShowView: Observable<Void>
         let didDragStarRating: Observable<Float>
-        let didTapSaveButton: Observable<EditViewModelItem>
+        let didTapSaveButton: Observable<(Float, String?, String?)>
         let didEditCommentView: Observable<(String?, String)>
         let didEditShortCommentView: Observable<(String?, String)>
     }
@@ -22,7 +22,7 @@ final class RecordViewModel {
     // MARK: - Output
     
     struct Output {
-        let movieWithPoster: Observable<(UIImage?, Review)>
+        let editViewModelItem: Observable<EditViewModelItem>
         let starRating: Observable<Int>
         let commentViewEditingStatus: Observable<Void>
         let shortCommentViewEditingStatus: Observable<Void>
@@ -33,27 +33,24 @@ final class RecordViewModel {
     
     private let reviewUseCase: ReviewUseCaseType
     private let review: Review
-    private let posterImage: UIImage?
     
     // MARK: - Initializer
     
     init(
         reviewUseCase: ReviewUseCaseType,
-        review: Review,
-        posterImage: UIImage?
+        review: Review
     ) {
         self.reviewUseCase = reviewUseCase
         self.review = review
-        self.posterImage = posterImage
     }
     
     // MARK: - Methods
     
     func transform(_ input: Input) -> Output {
-        let movieWithPoster = input.didShowView
+        let editViewModelItem = input.didShowView
             .withUnretained(self)
             .map { owner, _ in
-                (owner.posterImage, owner.review)
+                EditViewModelItem(review: owner.review)
             }
         
         let rating = input.didDragStarRating
@@ -83,16 +80,16 @@ final class RecordViewModel {
                     userRating: owner.review.userRating,
                     originalLanguage: owner.review.originalLanguage,
                     overview: owner.review.overview,
-                    personalRating: Double(data.personalRating),
-                    shortComment: data.shortComment ?? "",
-                    comment: data.comment ?? "",
+                    personalRating: Double(data.0 / 2),
+                    shortComment: data.1 ?? "",
+                    comment: data.2 ?? "",
                     recordDate: MMIMDateFormatter.shared.toDateString(Date())
                 )
                 owner.reviewUseCase.save(dataToSave)
             }
         
         return Output(
-            movieWithPoster: movieWithPoster,
+            editViewModelItem: editViewModelItem,
             starRating: rating,
             commentViewEditingStatus: isBeginEditingCommentView,
             shortCommentViewEditingStatus: isBeginEditingShortCommentView,

@@ -8,7 +8,7 @@
 import SnapKit
 import RxSwift
 
-final class SearchedMovieCell: UICollectionViewCell {
+final class SearchCell: UICollectionViewCell {
     
     // MARK: - Properties
     
@@ -16,7 +16,7 @@ final class SearchedMovieCell: UICollectionViewCell {
         return String(describing: self)
     }
     private let summaryView = SummaryView()
-    private var viewModel: SearchedMovieCellViewModel?
+    private var viewModel: SearchCellViewModel?
     private var disposeBag = DisposeBag()
     
     // MARK: - Initializer
@@ -42,51 +42,50 @@ final class SearchedMovieCell: UICollectionViewCell {
     // MARK: - Bind
     
     func bind(_ searchedMovie: Movie) {
-        viewModel = SearchedMovieCellViewModel()
+        viewModel = SearchCellViewModel()
         
         let searchedMovie: Observable<Movie> = Observable.just(searchedMovie)
-        let input = SearchedMovieCellViewModel.Input(setupCell: searchedMovie)
+        let input = SearchCellViewModel.Input(setupCell: searchedMovie)
         let output = viewModel?.transform(input)
+            .searchCellViewModelItem
         
         output?
-            .posterImage
+            .map { $0.posterPath }
             .observe(on: MainScheduler.instance)
-            .bind(to: summaryView.posterImageView.rx.image)
+            .withUnretained(self)
+            .bind(onNext: { owner, posterPath in
+                owner.summaryView.posterImageView
+                    .setImage(urlString: posterPath)
+            })
             .disposed(by: disposeBag)
         
         output?
-            .movie
             .map { $0.title }
             .observe(on: MainScheduler.instance)
             .bind(to: summaryView.titleLabel.rx.text)
             .disposed(by: disposeBag)
         
         output?
-            .movie
             .map { $0.originalTitle }
             .bind(to: summaryView.originalTitleLabel.rx.text)
             .disposed(by: disposeBag)
         
         output?
-            .movie
-            .map { "\($0.genres)" }
+            .map { $0.genres }
             .bind(to: summaryView.genreLabel.rx.text)
             .disposed(by: disposeBag)
         
         output?
-            .movie
-            .map { "\($0.releaseDate) | \($0.originalLanguage)" }
+            .map { $0.release }
             .bind(to: summaryView.releaseLabel.rx.text)
             .disposed(by: disposeBag)
 
         output?
-            .movie
-            .compactMap { "\($0.userRating)" }
+            .map { $0.userRating }
             .bind(to: summaryView.ratingLabel.rx.text)
             .disposed(by: disposeBag)
         
         output?
-            .movie
             .map { $0.overview }
             .bind(to: summaryView.overviewLabel.rx.text)
             .disposed(by: disposeBag)

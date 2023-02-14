@@ -63,8 +63,8 @@ class SearchViewController: UIViewController {
         output
             .movies
             .bind(to: searchCollectionView.rx.items(
-                cellIdentifier: SearchedMovieCell.identifier,
-                cellType: SearchedMovieCell.self
+                cellIdentifier: SearchCell.identifier,
+                cellType: SearchCell.self
             )) { index, item, cell in
                 cell.bind(item)
             }
@@ -82,8 +82,8 @@ class SearchViewController: UIViewController {
     
     private func registerCell() {
         searchCollectionView.register(
-            SearchedMovieCell.self,
-            forCellWithReuseIdentifier: SearchedMovieCell.identifier
+            SearchCell.self,
+            forCellWithReuseIdentifier: SearchCell.identifier
         )
     }
     

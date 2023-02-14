@@ -23,11 +23,10 @@ final class RecordCoordinator: Coordinator {
         self.reviewUseCase = reviewUseCase
     }
     
-    func start(review: Review, posterImage: UIImage?) {
+    func start(with review: Review) {
         let recordViewModel = RecordViewModel(
             reviewUseCase: reviewUseCase,
-            review: review,
-            posterImage: posterImage
+            review: review
         )
         
         let recordViewController = RecordViewController(

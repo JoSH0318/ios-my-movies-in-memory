@@ -29,10 +29,10 @@ final class MovieReviewCell: UICollectionViewCell {
         return String(describing: self)
     }
     
+    private let movieTicketView = TicketView()
     private var viewModel: ReviewCellViewModel?
     private var disposeBag = DisposeBag()
-    
-    private let movieTicketView = TicketView()
+    private var task: URLSessionDataTask?
     
     private let posterImageView: UIImageView = {
         let imageView = UIImageView()
@@ -128,10 +128,10 @@ final class MovieReviewCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        disposeBag = DisposeBag()
-        viewModel?.onPrepareForReuse()
+        cancelTask()
         posterImageView.image = nil
         titleLabel.text = nil
+        disposeBag = DisposeBag()
     }
     
     // MARK: - Bind
@@ -140,28 +140,39 @@ final class MovieReviewCell: UICollectionViewCell {
         viewModel = ReviewCellViewModel()
         
         let review: Observable<Review> = Observable.just(review)
-        let input = ReviewCellViewModel.Input(setupCell: review)
+        let input = ReviewCellViewModel.Input(didShowCell: review)
         let output = viewModel?.transform(input)
-            .reviewWithPoster
         
         output?
-            .map { $0.0 }
-            .bind(to: posterImageView.rx.image)
+            .reviewCellViewModelItem
+            .observe(on: MainScheduler.instance)
+            .map { $0.posterPath }
+            .withUnretained(self)
+            .bind(onNext: { owner, posterPath in
+                owner.task = owner
+                    .posterImageView
+                    .setImage(urlString: posterPath)
+            })
             .disposed(by: disposeBag)
         
         output?
-            .map { $0.1.title }
+            .reviewCellViewModelItem
+            .observe(on: MainScheduler.instance)
+            .map { $0.title }
             .bind(to: titleLabel.rx.text)
             .disposed(by: disposeBag)
         
         output?
-            .map { $0.1.originalTitle }
+            .reviewCellViewModelItem
+            .observe(on: MainScheduler.instance)
+            .map { $0.originalTitle }
             .bind(to: originalTitleLabel.rx.text)
             .disposed(by: disposeBag)
         
         output?
-            .compactMap { Int($0.1.personalRating * 2.0) }
+            .reviewCellViewModelItem
             .observe(on: MainScheduler.instance)
+            .map { $0.personalRating }
             .withUnretained(self)
             .bind(onNext: { owner, rating in
                 owner.starRatingView.dragStarSlider(rating)
@@ -169,17 +180,26 @@ final class MovieReviewCell: UICollectionViewCell {
             .disposed(by: disposeBag)
         
         output?
-            .map { $0.1.shortComment }
+            .reviewCellViewModelItem
+            .observe(on: MainScheduler.instance)
+            .map { $0.shortComment }
             .bind(to: shortCommentLabel.rx.text)
             .disposed(by: disposeBag)
         
         output?
-            .map { $0.1.recordDate }
+            .reviewCellViewModelItem
+            .observe(on: MainScheduler.instance)
+            .map { $0.recordDate }
             .bind(to: recordDate.rx.text)
             .disposed(by: disposeBag)
         }
     
     // MARK: - Methods
+    
+    private func cancelTask() {
+        task?.suspend()
+        task?.cancel()
+    }
     
     private func configureLayout() {
         backgroundColor = .clear
