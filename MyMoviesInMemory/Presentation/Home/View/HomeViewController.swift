@@ -55,8 +55,8 @@ final class HomeViewController: UIViewController {
         output
             .reviews
             .bind(to: homeView.reviewCollectionView.rx.items(
-                cellIdentifier: MovieReviewCell.identifier,
-                cellType: MovieReviewCell.self
+                cellIdentifier: ReviewCell.identifier,
+                cellType: ReviewCell.self
             )) { index, item, cell in
                 cell.bind(item)
             }

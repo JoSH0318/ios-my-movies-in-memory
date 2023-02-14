@@ -8,7 +8,7 @@
 import SnapKit
 import RxSwift
 
-final class MovieReviewCell: UICollectionViewCell {
+final class ReviewCell: UICollectionViewCell {
     
     // MARK: - Constants
     
@@ -24,10 +24,6 @@ final class MovieReviewCell: UICollectionViewCell {
     }
     
     // MARK: - Properties
-    
-    static var identifier: String {
-        return String(describing: self)
-    }
     
     private let movieTicketView = TicketView()
     private var viewModel: ReviewCellViewModel?

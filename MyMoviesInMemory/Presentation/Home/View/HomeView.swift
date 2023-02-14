@@ -34,8 +34,8 @@ final class HomeView: UIView {
     
     private func registerCell() {
         reviewCollectionView.register(
-            MovieReviewCell.self,
-            forCellWithReuseIdentifier: MovieReviewCell.identifier
+            ReviewCell.self,
+            forCellWithReuseIdentifier: ReviewCell.identifier
         )
     }
     
