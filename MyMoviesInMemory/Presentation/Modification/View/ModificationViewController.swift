@@ -49,6 +49,7 @@ class ModificationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        configureEditButton()
         bind()
     }
     
@@ -100,5 +101,7 @@ class ModificationViewController: UIViewController {
                 owner.modificationView.dragStarSlider(rating)
             })
             .disposed(by: disposeBag)
+    private func configureEditButton() {
+        navigationItem.rightBarButtonItem = saveBarButton
     }
 }
