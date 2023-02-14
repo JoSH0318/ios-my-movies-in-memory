@@ -14,6 +14,7 @@ final class ModificationViewModel {
     struct Input {
         let didShowView: Observable<Void>
         let didDragStarRating: Observable<Float>
+        let didTapSaveButton: Observable<EditViewModelItem>
     }
     
     // MARK: - Output
@@ -21,6 +22,7 @@ final class ModificationViewModel {
     struct Output {
         let reviewWithPoster: Observable<(UIImage?, Review)>
         let starRating: Observable<Int>
+        let popModificationViewTrigger: Observable<Void>
     }
     
     // MARK: - Properties
@@ -65,9 +67,31 @@ final class ModificationViewModel {
                 Int(rating)
             }
                 
+        let popModificationViewTrigger = input.didTapSaveButton
+            .withUnretained(self)
+            .map { owner, data in
+                let dataToUpdate = Review(
+                    id: String(owner.review.id),
+                    title: owner.review.title,
+                    originalTitle: owner.review.originalTitle,
+                    posterPath: owner.review.posterPath,
+                    genres: owner.review.genres,
+                    releaseDate: owner.review.releaseDate,
+                    userRating: owner.review.userRating,
+                    originalLanguage: owner.review.originalLanguage,
+                    overview: owner.review.overview,
+                    personalRating: Double(data.personalRating),
+                    shortComment: data.shortComment ?? "",
+                    comment: data.comment ?? "",
+                    recordDate: MMIMDateFormatter.shared.toDateString(Date())
+                )
+                owner.reviewUseCase.update(dataToUpdate)
+            }
+        
         return Output(
             reviewWithPoster: reviewWithPoster,
-            starRating: starRating
+            starRating: starRating,
+            popModificationViewTrigger: popModificationViewTrigger
         )
     }
 }

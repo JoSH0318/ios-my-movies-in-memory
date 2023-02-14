@@ -57,16 +57,27 @@ class ModificationViewController: UIViewController {
     
     private func bind() {
         let viewDidLoadEvent = Observable.just(())
-        let didDragStarRatingEvent = modificationView
+        let draggedValue = modificationView
             .starRatingView
             .starRatingSlider
             .rx
             .value
             .asObservable()
+        let didTapSaveButtonEvent = saveBarButton.rx.tap
+            .withUnretained(self)
+            .map { owner, _ in
+                EditViewModelItem(
+                    personalRating: owner.modificationView.starRatingView.starRatingSlider.value / 2,
+                    shortComment: owner.modificationView.shortCommentTextView.text,
+                    comment: owner.modificationView.commentTextView.text
+                )
+            }
+        
 
         let input = ModificationViewModel.Input(
             didShowView: viewDidLoadEvent,
-            didDragStarRating: didDragStarRatingEvent
+            didDragStarRating: draggedValue,
+            didTapSaveButton: didTapSaveButtonEvent
         )
         let output = viewModel.transform(input)
         
@@ -89,7 +100,7 @@ class ModificationViewController: UIViewController {
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
             .bind(onNext: { owner, rating in
-                owner.modificationView.starRatingView.starRatingSlider.value = rating
+                owner.modificationView.starRatingView.starRatingSlider.value = rating * 2
             })
             .disposed(by: disposeBag)
         
@@ -101,6 +112,19 @@ class ModificationViewController: UIViewController {
                 owner.modificationView.dragStarSlider(rating)
             })
             .disposed(by: disposeBag)
+        
+        output
+            .popModificationViewTrigger
+            .observe(on: MainScheduler.instance)
+            .withUnretained(self)
+            .bind(onNext: { owner, _ in
+                owner.coordinator.popModificationView()
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    // MARK: - Methods
+    
     private func configureEditButton() {
         navigationItem.rightBarButtonItem = saveBarButton
     }
