@@ -70,7 +70,7 @@ final class ReviewDetailViewController: UIViewController {
     // MARK: - Bind
     
     private func bind() {
-        let didShowEvent = Observable.just(())
+        let didShowEvent = self.rx.viewWillAppear.asObservable()
         let didTapDeleteButton = deleteBarButton.rx.tap
             .withUnretained(self)
             .flatMap { owner, _ in

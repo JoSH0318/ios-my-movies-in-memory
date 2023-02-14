@@ -33,7 +33,7 @@ final class HomeViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - View LifeCycle
+    // MARK: - Life Cycle
     
     override func loadView() {        
         view = homeView
@@ -41,19 +41,14 @@ final class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         
-        disposeBag = DisposeBag()
         bind()
     }
     
     // MARK: - Bind
     
     private func bind() {
-        let didShowViewEvent = Observable.just(())
+        let didShowViewEvent = self.rx.viewWillAppear.asObservable()
         let input = HomeViewModel.Input(didShowView: didShowViewEvent)
         let output = viewModel.transform(input)
         
