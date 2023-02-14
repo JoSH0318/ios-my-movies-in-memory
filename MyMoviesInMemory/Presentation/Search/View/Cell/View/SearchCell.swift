@@ -12,9 +12,6 @@ final class SearchCell: UICollectionViewCell {
     
     // MARK: - Properties
     
-    static var identifier: String {
-        return String(describing: self)
-    }
     private let summaryView = SummaryView()
     private var viewModel: SearchCellViewModel?
     private var disposeBag = DisposeBag()
