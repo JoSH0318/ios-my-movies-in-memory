@@ -10,19 +10,6 @@ import RxSwift
 
 final class ReviewCell: UICollectionViewCell {
     
-    // MARK: - Constants
-    
-    private enum FontSize {
-        static let title: CGFloat = 18.0
-        static let subtitle: CGFloat = 14.0
-        static let body: CGFloat = 12.0
-    }
-    
-    private enum Design {
-        static let inset: CGFloat = 20.0
-        static let punchHoleRadius: CGFloat = 14.0
-    }
-    
     // MARK: - Properties
     
     private let movieTicketView = TicketView()
@@ -41,19 +28,20 @@ final class ReviewCell: UICollectionViewCell {
     private let titleStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
+        stackView.spacing = 4
         return stackView
     }()
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.font = .boldSystemFont(ofSize: FontSize.title)
+        label.font = UIFont().fontWith(.large, .bold)
         label.setContentCompressionResistancePriority(.required, for: .vertical)
         return label
     }()
     
     private let originalTitleLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: FontSize.subtitle)
+        label.font = UIFont().fontWith(.small)
         label.textColor = .systemGray3
         label.setContentHuggingPriority(.init(1), for: .vertical)
         return label
@@ -74,7 +62,7 @@ final class ReviewCell: UICollectionViewCell {
     
     private let shortCommentLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: FontSize.title)
+        label.font = UIFont().fontWith(.large)
         label.textAlignment = .center
         label.numberOfLines = 0
         label.setContentHuggingPriority(.required, for: .vertical)
@@ -97,7 +85,7 @@ final class ReviewCell: UICollectionViewCell {
     
     private let recordDate: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: FontSize.body)
+        label.font = UIFont().fontWith(.large)
         label.textAlignment = .right
         label.textColor = .systemGray4
         return label
@@ -221,43 +209,58 @@ final class ReviewCell: UICollectionViewCell {
         }
         
         posterImageView.snp.makeConstraints{
-            $0.height.equalTo(movieTicketView.snp.height).multipliedBy(0.5)
+            $0.height.equalTo(movieTicketView.snp.height)
+                .multipliedBy(Design.posterSectionRadius)
             $0.leading.top.trailing.equalToSuperview()
         }
         
         titleStackView.snp.makeConstraints {
             $0.top.equalTo(movieTicketView.snp.top)
-                .offset(self.bounds.height * 0.5 + 4)
-            $0.leading.equalToSuperview().offset(32)
-            $0.trailing.equalToSuperview().offset(-32)
+                .offset(self.bounds.height * Design.posterSectionRadius + (Design.defaultMargin / 2))
+            $0.leading.equalToSuperview().offset(Design.defaultMargin * 2)
+            $0.trailing.equalToSuperview().offset(-Design.defaultMargin * 2)
             $0.bottom.equalTo(movieTicketView.snp.bottom)
-                .offset(-self.bounds.height * 0.4 - 16)
+                .offset(-self.bounds.height * (1 - Design.reviewSectionRadius) - (Design.defaultMargin / 2))
         }
         
         reviewSectionStackView.snp.makeConstraints {
             $0.top.equalTo(movieTicketView.snp.top)
-                .offset(self.bounds.height * 0.6)
-            $0.leading.equalToSuperview().offset(16)
-            $0.trailing.equalToSuperview().offset(-16)
+                .offset(self.bounds.height * Design.reviewSectionRadius)
+            $0.leading.equalToSuperview().offset(Design.defaultMargin)
+            $0.trailing.equalToSuperview().offset(-Design.defaultMargin)
             $0.bottom.equalTo(movieTicketView.snp.bottom)
-                .offset(-self.bounds.height * 0.15 - 16)
+                .offset(-self.bounds.height * (1 - Design.dateSectionRadius) - Design.defaultMargin)
         }
         
         starRatingView.snp.makeConstraints {
-            $0.height.equalToSuperview().multipliedBy(0.4)
-            $0.centerX.equalToSuperview().offset(40)
+            $0.height.equalToSuperview().multipliedBy(Design.starRatingViewRadius)
+            $0.centerX.equalToSuperview()
         }
         
         barcodeSectionStackView.snp.makeConstraints {
             $0.top.equalTo(movieTicketView.snp.top)
-                .offset(self.bounds.height * 0.85 + 32)
-            $0.leading.equalToSuperview().offset(16)
-            $0.trailing.equalToSuperview().offset(-16)
-            $0.bottom.equalToSuperview().offset(-8)
+                .offset(self.bounds.height * Design.dateSectionRadius + (Design.defaultMargin * 2))
+            $0.leading.equalToSuperview().offset(Design.defaultMargin)
+            $0.trailing.equalToSuperview().offset(-Design.defaultMargin)
+            $0.bottom.equalToSuperview().offset(-Design.defaultMargin / 2)
         }
         
         barcodeImageView.snp.makeConstraints {
-            $0.height.equalToSuperview().multipliedBy(0.4)
+            $0.height.equalToSuperview().multipliedBy(Design.barcodeRadius)
         }
+    }
+}
+
+extension ReviewCell {
+    private enum Design {
+        static let defaultMargin: CGFloat = 16.0
+        static let titleMargin: CGFloat = 20.0
+        
+        static let posterSectionRadius: CGFloat = 0.5
+        static let reviewSectionRadius: CGFloat = 0.6
+        static let dateSectionRadius: CGFloat = 0.85
+        
+        static let starRatingViewRadius: CGFloat = 0.4
+        static let barcodeRadius: CGFloat = 0.4
     }
 }
