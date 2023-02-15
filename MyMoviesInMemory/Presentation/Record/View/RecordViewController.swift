@@ -9,13 +9,6 @@ import UIKit
 import RxSwift
 
 class RecordViewController: UIViewController {
-
-    // MARK: - Contant
-    
-    private enum PlaceHolder {
-        static let shortCommentPlaceHolder = "📝 나만의 한줄평 📝"
-        static let commentPlaceHolder = "📝 나만의 영화 감상평을 작성해보세요 📝"
-    }
     
     // MARK: - Properties
     
@@ -164,5 +157,12 @@ class RecordViewController: UIViewController {
         editView.commentTextView.textColor = .systemGray
         editView.shortCommentTextView.text = PlaceHolder.shortCommentPlaceHolder
         editView.commentTextView.text = PlaceHolder.commentPlaceHolder
+    }
+}
+
+extension RecordViewController {
+    private enum PlaceHolder {
+        static let shortCommentPlaceHolder = "📝 나만의 한줄평 📝"
+        static let commentPlaceHolder = "📝 나만의 영화 감상평을 작성해보세요 📝"
     }
 }
