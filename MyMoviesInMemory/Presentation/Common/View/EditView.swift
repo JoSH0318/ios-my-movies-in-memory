@@ -9,18 +9,12 @@ import SnapKit
 
 final class EditView: UIView {
     
-    // MARK: - Constant
-    
-    private enum FontSize {
-        static let title: CGFloat = 16.0
-    }
-    
     // MARK: - Properties
     
     private let mainStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = 16
+        stackView.spacing = Design.vStackMargin
         return stackView
     }()
     
@@ -31,14 +25,14 @@ final class EditView: UIView {
     private(set) var shortCommentTextView: UITextView = {
         let textView = UITextView()
         textView.textAlignment = .left
-        textView.font = .systemFont(ofSize: FontSize.title)
+        textView.font = UIFont().fontWith(.medium)
         textView.textContainerInset = .init(
-            top: 16,
-            left: 16,
-            bottom: 16,
-            right: 16
+            top: Design.textViewInset,
+            left: Design.textViewInset,
+            bottom: Design.textViewInset,
+            right: Design.textViewInset
         )
-        textView.layer.cornerRadius = 16
+        textView.layer.cornerRadius = Design.cornerRadius
         textView.backgroundColor = .MWhite
         textView.clipsToBounds = true
         return textView
@@ -47,7 +41,7 @@ final class EditView: UIView {
     private(set) var shortCommentTextCountLabel: UILabel = {
         let label = UILabel()
         label.text = "0/20"
-        label.font = .systemFont(ofSize: FontSize.title)
+        label.font = UIFont().fontWith(.small)
         label.textColor = .systemGray3
         label.textAlignment = .center
         return label
@@ -56,14 +50,14 @@ final class EditView: UIView {
     private(set) var commentTextView: UITextView = {
         let textView = UITextView()
         textView.textAlignment = .left
-        textView.font = .systemFont(ofSize: FontSize.title)
+        textView.font = UIFont().fontWith(.medium)
         textView.textContainerInset = .init(
-            top: 16,
-            left: 16,
-            bottom: 16,
-            right: 16
+            top: Design.textViewInset,
+            left: Design.textViewInset,
+            bottom: Design.textViewInset,
+            right: Design.textViewInset
         )
-        textView.layer.cornerRadius = 16
+        textView.layer.cornerRadius = Design.cornerRadius
         textView.backgroundColor = .MWhite
         textView.clipsToBounds = true
         textView.setContentHuggingPriority(.init(1), for: .vertical)
@@ -73,7 +67,7 @@ final class EditView: UIView {
     private(set) var commentTextCountLabel: UILabel = {
         let label = UILabel()
         label.text = "0/700"
-        label.font = .systemFont(ofSize: FontSize.title)
+        label.font = UIFont().fontWith(.small)
         label.textColor = .systemGray3
         label.textAlignment = .center
         return label
@@ -124,8 +118,8 @@ final class EditView: UIView {
         
         mainStackView.snp.makeConstraints {
             $0.top.equalTo(safeAreaLayoutGuide)
-            $0.leading.equalToSuperview().offset(20)
-            $0.trailing.bottom.equalTo(self.safeAreaLayoutGuide).offset(-20)
+            $0.leading.equalToSuperview().offset(Design.mainStackMargin)
+            $0.trailing.bottom.equalTo(self.safeAreaLayoutGuide).offset(-Design.mainStackMargin)
         }
         
         summaryView.snp.makeConstraints {
@@ -141,11 +135,22 @@ final class EditView: UIView {
         }
         
         shortCommentTextCountLabel.snp.makeConstraints {
-            $0.trailing.bottom.equalToSuperview().offset(-8)
+            $0.trailing.bottom.equalToSuperview().offset(-Design.defaultMargin)
         }
         
         commentTextCountLabel.snp.makeConstraints {
-            $0.trailing.bottom.equalToSuperview().offset(-8)
+            $0.trailing.bottom.equalToSuperview().offset(-Design.defaultMargin)
         }
+    }
+}
+
+extension EditView {
+    private enum Design {
+        static let defaultMargin: CGFloat = 16.0
+        static let mainStackMargin: CGFloat = 20.0
+        
+        static let textViewInset: CGFloat = 16.0
+        static let vStackMargin: CGFloat = 16.0
+        static let cornerRadius: CGFloat = 16.0
     }
 }

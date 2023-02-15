@@ -11,7 +11,7 @@ extension CALayer {
     func applyShadow(
         _ shadowColor: CGColor = UIColor.black.cgColor,
         _ shadowOpacity: Float = 0.3,
-        _ shadowRadius: CGFloat = 5
+        _ shadowRadius: CGFloat = 8
     ) {
         self.shadowColor = shadowColor
         self.shadowOpacity = shadowOpacity

@@ -9,14 +9,6 @@ import UIKit
 
 final class CarouselLayout: UICollectionViewFlowLayout {
     
-    // MARK: - Namespace
-    
-    private enum Design {
-        static let sideItemScale: CGFloat = 0.8
-        static let sideItemAlpha: CGFloat = 0.8
-        static let spacing: CGFloat = 10
-    }
-    
     // MARK: - Properties
     
     private var isSetup: Bool = false
@@ -27,8 +19,8 @@ final class CarouselLayout: UICollectionViewFlowLayout {
         super.init()
         
         self.itemSize = CGSize(
-            width: UIScreen.main.bounds.width * 0.7,
-            height: UIScreen.main.bounds.height * 0.7
+            width: UIScreen.main.bounds.width * Design.itemWidthRadius,
+            height: UIScreen.main.bounds.height * Design.itemHeightRadius
         )
     }
     
@@ -36,7 +28,7 @@ final class CarouselLayout: UICollectionViewFlowLayout {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - LifeCycle
+    // MARK: - Life Cycle
     
     override public func prepare() {
         super.prepare()
@@ -86,7 +78,9 @@ final class CarouselLayout: UICollectionViewFlowLayout {
         }
     }
     
-    private func transformLayoutAttributes(attributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
+    private func transformLayoutAttributes(
+        attributes: UICollectionViewLayoutAttributes
+    ) -> UICollectionViewLayoutAttributes {
         
         guard let collectionView = self.collectionView else { return attributes }
         
@@ -110,7 +104,7 @@ final class CarouselLayout: UICollectionViewFlowLayout {
         )
         let dist = attributes.frame.midX - visibleRect.midX
         var transform = CATransform3DScale(CATransform3DIdentity, scale, scale, 1)
-        transform = CATransform3DTranslate(transform, 0, 0, -abs(dist/1000))
+        transform = CATransform3DTranslate(transform, 0, 0, -abs(dist / 1000))
         attributes.transform3D = transform
         
         return attributes
@@ -133,7 +127,8 @@ final class CarouselLayout: UICollectionViewFlowLayout {
         var targetContentOffset: CGPoint
         let closest = layoutAttributes
             .sorted {
-                abs($0.center.x - proposedContentOffsetCenterOrigin) < abs($1.center.x - proposedContentOffsetCenterOrigin)
+                abs($0.center.x - proposedContentOffsetCenterOrigin)
+                < abs($1.center.x - proposedContentOffsetCenterOrigin)
             }
             .first ?? UICollectionViewLayoutAttributes()
         targetContentOffset = CGPoint(
@@ -142,5 +137,16 @@ final class CarouselLayout: UICollectionViewFlowLayout {
         )
         
         return targetContentOffset
+    }
+}
+
+extension CarouselLayout {
+    private enum Design {
+        static let sideItemScale: CGFloat = 0.8
+        static let sideItemAlpha: CGFloat = 0.8
+        static let spacing: CGFloat = 10.0
+        
+        static let itemWidthRadius: CGFloat = 0.7
+        static let itemHeightRadius: CGFloat = 0.7
     }
 }

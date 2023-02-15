@@ -9,14 +9,6 @@ import SnapKit
 
 final class SummaryView: UIView {
     
-    // MARK: - Constants
-    
-    private enum FontSize {
-        static let title: CGFloat = 16.0
-        static let body: CGFloat = 14.0
-        static let body2: CGFloat = 10.0
-    }
-    
     // MARK: - Properties
     
     private(set) var posterImageView: UIImageView = {
@@ -29,21 +21,21 @@ final class SummaryView: UIView {
     private let informationStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = 4
+        stackView.spacing = Design.vStackSpacing
         return stackView
     }()
     
     private let titleStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = 2
+        stackView.spacing = Design.vStackSpacing / 2
         return stackView
     }()
     
     private(set) var titleLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
-        label.font = .systemFont(ofSize: FontSize.title, weight: .bold)
+        label.font = UIFont().fontWith(.medium, .bold)
         label.setContentCompressionResistancePriority(.required, for: .vertical)
         return label
     }()
@@ -51,14 +43,14 @@ final class SummaryView: UIView {
     private(set) var originalTitleLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
-        label.font = .systemFont(ofSize: FontSize.body2)
+        label.font = UIFont().fontWith(.extraSmall)
         label.textColor = .systemGray3
         return label
     }()
     
     private let genreStackView: UIStackView = {
         let stackView = UIStackView()
-        stackView.spacing = 16
+        stackView.spacing = Design.hStackSpacing
         return stackView
     }()
     
@@ -66,7 +58,7 @@ final class SummaryView: UIView {
         let label = UILabel()
         label.text = "장르"
         label.textAlignment = .left
-        label.font = .systemFont(ofSize: FontSize.body)
+        label.font = UIFont().fontWith(.small)
         label.textColor = .MGray
         return label
     }()
@@ -74,14 +66,14 @@ final class SummaryView: UIView {
     private(set) var genreLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
-        label.font = .systemFont(ofSize: FontSize.body)
+        label.font = UIFont().fontWith(.small)
         label.setContentHuggingPriority(.init(1), for: .horizontal)
         return label
     }()
     
     private let releaseStackView: UIStackView = {
         let stackView = UIStackView()
-        stackView.spacing = 16
+        stackView.spacing = Design.hStackSpacing
         return stackView
     }()
     
@@ -89,7 +81,7 @@ final class SummaryView: UIView {
         let label = UILabel()
         label.text = "개봉"
         label.textAlignment = .left
-        label.font = .systemFont(ofSize: FontSize.body)
+        label.font = UIFont().fontWith(.small)
         label.textColor = .MGray
         return label
     }()
@@ -97,13 +89,13 @@ final class SummaryView: UIView {
     private(set) var releaseLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
-        label.font = .systemFont(ofSize: FontSize.body)
+        label.font = UIFont().fontWith(.small)
         return label
     }()
     
     private let ratingStackView: UIStackView = {
         let stackView = UIStackView()
-        stackView.spacing = 16
+        stackView.spacing = Design.hStackSpacing
         return stackView
     }()
     
@@ -111,7 +103,7 @@ final class SummaryView: UIView {
         let label = UILabel()
         label.text = "평점"
         label.textAlignment = .left
-        label.font = .systemFont(ofSize: FontSize.body)
+        label.font = UIFont().fontWith(.small)
         label.textColor = .MGray
         return label
     }()
@@ -119,14 +111,14 @@ final class SummaryView: UIView {
     private(set) var ratingLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
-        label.font = .systemFont(ofSize: FontSize.body)
+        label.font = UIFont().fontWith(.small)
         return label
     }()
     
     private(set) var overviewLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
-        label.font = .systemFont(ofSize: FontSize.body2)
+        label.font = UIFont().fontWith(.extraSmall)
         label.numberOfLines = 0
         label.setContentHuggingPriority(.init(1), for: .vertical)
         return label
@@ -150,7 +142,7 @@ final class SummaryView: UIView {
     
     private func configureView() {
         backgroundColor = .MWhite
-        layer.cornerRadius = 16
+        layer.cornerRadius = Design.cornerRadius
         clipsToBounds = true
     }
     
@@ -184,9 +176,18 @@ final class SummaryView: UIView {
         }
         
         informationStackView.snp.makeConstraints {
-            $0.leading.equalTo(posterImageView.snp.trailing).offset(16)
-            $0.top.equalToSuperview().offset(8)
-            $0.trailing.bottom.equalToSuperview().offset(-8)
+            $0.leading.equalTo(posterImageView.snp.trailing).offset(Design.defaultMargin)
+            $0.top.equalToSuperview().offset(Design.defaultMargin / 2)
+            $0.trailing.bottom.equalToSuperview().offset(-Design.defaultMargin / 2)
         }
+    }
+}
+
+extension SummaryView {
+    private enum Design {
+        static let defaultMargin: CGFloat = 16.0
+        static let cornerRadius: CGFloat = 16.0
+        static let hStackSpacing: CGFloat = 16.0
+        static let vStackSpacing: CGFloat = 4.0
     }
 }

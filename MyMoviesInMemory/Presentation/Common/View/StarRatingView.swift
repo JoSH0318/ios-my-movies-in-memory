@@ -9,12 +9,6 @@ import SnapKit
 
 final class StarRatingView: UIView {
     
-    // MARK: - Name Space
-    
-    private enum Design {
-        static let inset = 16.0
-    }
-    
     // MARK: - Properties
     
     private let firstStarImageView: UIImageView = {
@@ -69,7 +63,7 @@ final class StarRatingView: UIView {
     
     private let starStackView: UIStackView = {
         let stackView = UIStackView()
-        stackView.spacing = 16
+        stackView.spacing = Design.hStackSpacing
         return stackView
     }()
     
@@ -105,7 +99,7 @@ final class StarRatingView: UIView {
     
     private func configureView() {
         backgroundColor = .MWhite
-        layer.cornerRadius = 16
+        layer.cornerRadius = Design.cornerRadius
     }
     
     private func configureUI() {
@@ -146,9 +140,9 @@ final class StarRatingView: UIView {
         }
         
         starStackView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(Design.inset)
+            $0.top.equalToSuperview().offset(Design.defaultMargin)
             $0.centerX.equalToSuperview()
-            $0.bottom.equalToSuperview().offset(-Design.inset)
+            $0.bottom.equalToSuperview().offset(-Design.defaultMargin)
         }
         
         starRatingSlider.snp.makeConstraints {
@@ -156,6 +150,14 @@ final class StarRatingView: UIView {
             $0.trailing.equalTo(starStackView.snp.trailing)
             $0.centerY.equalTo(starStackView.snp.centerY)
         }
+    }
+}
+
+extension StarRatingView {
+    private enum Design {
+        static let defaultMargin: CGFloat = 16.0
+        static let hStackSpacing: CGFloat = 16.0
+        static let cornerRadius: CGFloat = 16.0
     }
 }
 

@@ -28,7 +28,7 @@ final class SearchCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - PrepareForReuse
+    // MARK: - Override Methods
     
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -93,8 +93,8 @@ final class SearchCell: UICollectionViewCell {
     private func configureLayout() {
         let shadowView = ShadowView()
         
-        shadowView.addSubview(summaryView)
         contentView.addSubview(shadowView)
+        shadowView.addSubview(summaryView)
         
         shadowView.snp.makeConstraints {
             $0.edges.equalToSuperview()

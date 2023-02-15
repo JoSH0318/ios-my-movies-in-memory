@@ -18,7 +18,6 @@ final class SearchDetailView: UIView {
     private let posterImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-        imageView.layer.cornerRadius = 16
         imageView.layer.applyShadow()
         return imageView
     }()
@@ -41,15 +40,15 @@ final class SearchDetailView: UIView {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.backgroundColor = .MWhite
-        stackView.spacing = 16
-        stackView.layer.cornerRadius = 16
+        stackView.spacing = Design.vStackSpacing
+        stackView.layer.cornerRadius = Design.cornerRadius
         stackView.layer.applyShadow()
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.layoutMargins = UIEdgeInsets(
-            top: 16,
-            left: 16,
-            bottom: 16,
-            right: 16
+            top: Design.defaultMargin,
+            left: Design.defaultMargin,
+            bottom: Design.defaultMargin,
+            right: Design.defaultMargin
         )
         return stackView
     }()
@@ -57,7 +56,7 @@ final class SearchDetailView: UIView {
     private let titleStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = 4
+        stackView.spacing = Design.titleStackSpacing
         return stackView
     }()
     
@@ -78,7 +77,7 @@ final class SearchDetailView: UIView {
     
     private let genreStackView: UIStackView = {
         let stackView = UIStackView()
-        stackView.spacing = 16
+        stackView.spacing = Design.hStackSpacing
         return stackView
     }()
     
@@ -101,7 +100,7 @@ final class SearchDetailView: UIView {
     
     private let releaseStackView: UIStackView = {
         let stackView = UIStackView()
-        stackView.spacing = 16
+        stackView.spacing = Design.hStackSpacing
         return stackView
     }()
     
@@ -123,7 +122,7 @@ final class SearchDetailView: UIView {
     
     private let ratingStackView: UIStackView = {
         let stackView = UIStackView()
-        stackView.spacing = 16
+        stackView.spacing = Design.hStackSpacing
         return stackView
     }()
     
@@ -218,21 +217,35 @@ final class SearchDetailView: UIView {
         backgroundImageView.snp.makeConstraints {
             $0.leading.top.trailing.equalToSuperview()
             $0.height.lessThanOrEqualTo(detailScrollView.frameLayoutGuide.snp.height)
-                .multipliedBy(0.7)
+                .multipliedBy(Design.backgroundImageHeightRadius)
                 .priority(.low)
             $0.bottom.lessThanOrEqualTo(posterImageView.snp.bottom).priority(.high)
         }
 
         posterImageView.snp.makeConstraints {
             $0.height.equalTo(detailScrollView.frameLayoutGuide.snp.height)
-                .multipliedBy(0.6)
+                .multipliedBy(Design.posterHeightRadius)
             $0.leading.top.trailing.equalToSuperview()
         }
 
         informationStackView.snp.makeConstraints {
-            $0.top.equalTo(posterImageView.snp.bottom).offset(16)
-            $0.leading.equalToSuperview().offset(16)
-            $0.trailing.bottom.equalToSuperview().offset(-16)
+            $0.top.equalTo(posterImageView.snp.bottom).offset(Design.defaultMargin)
+            $0.leading.equalToSuperview().offset(Design.defaultMargin)
+            $0.trailing.bottom.equalToSuperview().offset(-Design.defaultMargin)
         }
+    }
+}
+
+extension SearchDetailView {
+    private enum Design {
+        static let defaultMargin: CGFloat = 16.0
+        static let vStackSpacing: CGFloat = 16.0
+        static let hStackSpacing: CGFloat = 16.0
+        static let titleStackSpacing: CGFloat = 4.0
+        
+        static let cornerRadius: CGFloat = 16.0
+        
+        static let posterHeightRadius: CGFloat = 0.6
+        static let backgroundImageHeightRadius: CGFloat = 0.7
     }
 }
