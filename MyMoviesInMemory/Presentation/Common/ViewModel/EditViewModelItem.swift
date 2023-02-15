@@ -34,7 +34,7 @@ struct EditViewModelItem {
     }
     
     var rating: String {
-        return "\(review.userRating)"
+        return MMIMNumberFormatter.shared.toRating(review.userRating)
     }
     
     var personalRatingOnTen: Int {

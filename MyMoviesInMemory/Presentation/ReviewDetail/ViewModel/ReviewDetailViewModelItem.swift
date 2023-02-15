@@ -34,7 +34,7 @@ struct ReviewDetailViewModelItem {
     }
     
     var rating: String {
-        return "\(review.userRating)"
+        return MMIMNumberFormatter.shared.toRating(review.userRating)
     }
     
     var overview: String {

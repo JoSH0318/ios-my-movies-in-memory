@@ -34,7 +34,7 @@ struct SearchCellViewModelItem {
     }
     
     var userRating: String {
-        return "\(movie.userRating)"
+        return MMIMNumberFormatter.shared.toRating(movie.userRating)
     }
     
     var overview: String {
