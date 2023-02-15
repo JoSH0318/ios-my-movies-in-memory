@@ -20,7 +20,11 @@ final class EditView: UIView {
     
     private let summaryView = SummaryView()
     
-    private(set) var starRatingView = StarRatingView()
+    private(set) var starRatingView: StarRatingView = {
+        let view = StarRatingView()
+        view.layer.applyShadow()
+        return view
+    }()
     
     private(set) var shortCommentTextView: UITextView = {
         let textView = UITextView()
@@ -33,8 +37,9 @@ final class EditView: UIView {
             right: Design.textViewInset
         )
         textView.layer.cornerRadius = Design.cornerRadius
+        textView.layer.applyShadow()
         textView.backgroundColor = .MWhite
-        textView.clipsToBounds = true
+        textView.clipsToBounds = false
         return textView
     }()
     
@@ -58,8 +63,9 @@ final class EditView: UIView {
             right: Design.textViewInset
         )
         textView.layer.cornerRadius = Design.cornerRadius
+        textView.layer.applyShadow()
         textView.backgroundColor = .MWhite
-        textView.clipsToBounds = true
+        textView.clipsToBounds = false
         textView.setContentHuggingPriority(.init(1), for: .vertical)
         return textView
     }()
@@ -106,9 +112,12 @@ final class EditView: UIView {
     private func configureLayout() {
         backgroundColor = .MBeige
         
-        addSubview(mainStackView)
+        let shadowView = ShadowView()
         
-        mainStackView.addArrangedSubview(summaryView)
+        addSubview(mainStackView)
+        shadowView.addSubview(summaryView)
+        
+        mainStackView.addArrangedSubview(shadowView)
         mainStackView.addArrangedSubview(starRatingView)
         mainStackView.addArrangedSubview(shortCommentTextView)
         mainStackView.addArrangedSubview(commentTextView)
@@ -119,11 +128,16 @@ final class EditView: UIView {
         mainStackView.snp.makeConstraints {
             $0.top.equalTo(safeAreaLayoutGuide)
             $0.leading.equalToSuperview().offset(Design.mainStackMargin)
-            $0.trailing.bottom.equalTo(self.safeAreaLayoutGuide).offset(-Design.mainStackMargin)
+            $0.trailing.bottom.equalTo(self.safeAreaLayoutGuide)
+                .offset(-Design.mainStackMargin)
+        }
+        
+        shadowView.snp.makeConstraints {
+            $0.height.equalTo(self.snp.height).multipliedBy(0.2)
         }
         
         summaryView.snp.makeConstraints {
-            $0.height.equalTo(self.snp.height).multipliedBy(0.2)
+            $0.edges.equalToSuperview()
         }
         
         starRatingView.snp.makeConstraints {
