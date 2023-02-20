@@ -29,7 +29,7 @@ final class SearchDetailCoordinator: Coordinator {
     func start(with movie: Movie) {
         let searchDetailViewModel = SearchDetailViewModel(
             movieUseCase: movieUseCase,
-            movie: movie
+            movieID: movie.id
         )
         let searchDetailViewController = SearchDetailViewController(
             searchDetailViewModel,
@@ -41,13 +41,13 @@ final class SearchDetailCoordinator: Coordinator {
         )
     }
     
-    func presentRecordView(movie: Movie) {
+    func presentRecordView(movieDetail: MovieDetail) {
         let recordCoordinator = RecordCoordinator(
             navigationController: self.navigationController,
             parentCoordinator: self,
             reviewUseCase: reviewUseCase
         )
-        let defaultReview = movie.toDefaultReview()
+        let defaultReview = movieDetail.toDefaultReview()
         
         self.childCoordinators.append(recordCoordinator)
         recordCoordinator.start(with: defaultReview)

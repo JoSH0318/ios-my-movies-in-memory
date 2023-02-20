@@ -11,39 +11,67 @@ struct SearchDetailViewModelItem {
     
     // MARK: - Properties
     
-    private let movie: Movie
+    private let movieDetail: MovieDetail
     
     var posterPath: String {
-        return movie.posterPath
+        return movieDetail.posterPath
     }
         
     var title: String {
-        return movie.title
+        return movieDetail.title
     }
     
     var originalTitle: String {
-        return movie.originalTitle
+        return movieDetail.originalTitle
     }
     
-    var genres: String {
-        return movie.genres
+    var summary: String {
+        return "\(movieDetail.genres)  |  \(movieDetail.runTime)h"
     }
     
-    var release: String {
-        return "\(movie.releaseDate) | \(movie.originalLanguage)"
+    var director: String {
+        return movieDetail.director
+    }
+    
+    var actors: String {
+        return movieDetail.actors
+    }
+    
+    var releaseDate: String {
+        return movieDetail.releaseDate
     }
     
     var rating: String {
-        return "\(movie.userRating)"
+        return MMIMNumberFormatter.shared.toRating(movieDetail.userRating / 2)
     }
     
     var overview: String {
-        return movie.overview
+        return movieDetail.overview
     }
     
     // MARK: - Initializer
     
-    init(movie: Movie) {
-        self.movie = movie
+    init(movieDetail: MovieDetail) {
+        self.movieDetail = movieDetail
     }
+    
+    // MARK: - Methods
+    
+//    func toDefaultReview() -> Review {
+//        return Review(
+//            id: String(movieDetail.id),
+//            title: movieDetail.title,
+//            originalTitle: <#T##String#>,
+//            posterPath: <#T##String#>,
+//            genres: <#T##String#>,
+//            releaseDate: <#T##String#>,
+//            userRating: <#T##Double#>,
+//            originalLanguage: <#T##String#>,
+//            overview: <#T##String#>,
+//            personalRating: <#T##Double#>,
+//            shortComment: <#T##String#>,
+//            comment: <#T##String#>,
+//            recordDate: <#T##String#>
+//        )
+//    }
 }

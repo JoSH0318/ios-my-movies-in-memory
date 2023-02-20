@@ -36,6 +36,13 @@ final class SearchDetailView: UIView {
         return imageView
     }()
     
+    private let adultImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(systemName: "19.square.fill")
+        imageView.tintColor = .systemRed
+        return imageView
+    }()
+    
     private let informationStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -75,26 +82,71 @@ final class SearchDetailView: UIView {
         return label
     }()
     
-    private let genreStackView: UIStackView = {
+    private let summaryStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.spacing = Design.hStackSpacing
         return stackView
     }()
     
-    private let genreTagLabel: UILabel = {
+    private let summaryTagLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
         label.font = UIFont().fontWith(.medium, .bold)
         label.textColor = .systemGray
-        label.text = "장르"
+        label.text = "개요"
         label.setContentHuggingPriority(.required, for: .horizontal)
         return label
     }()
     
-    private let genreLabel: UILabel = {
+    private let summaryLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
         label.font = UIFont().fontWith(.medium)
+        return label
+    }()
+    
+    private let directorStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.spacing = Design.hStackSpacing
+        return stackView
+    }()
+    
+    private let directorTagLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .left
+        label.font = UIFont().fontWith(.medium, .bold)
+        label.textColor = .systemGray
+        label.text = "감독"
+        return label
+    }()
+    
+    private let directorLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .left
+        label.font = UIFont().fontWith(.medium)
+        return label
+    }()
+    
+    private let actorsStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.spacing = Design.hStackSpacing
+        return stackView
+    }()
+    
+    private let actorsTagLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .left
+        label.font = UIFont().fontWith(.medium, .bold)
+        label.textColor = .systemGray
+        label.text = "출연"
+        return label
+    }()
+    
+    private let actorsLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .left
+        label.font = UIFont().fontWith(.medium)
+        label.numberOfLines = 2
         return label
     }()
     
@@ -169,8 +221,10 @@ final class SearchDetailView: UIView {
         backgroundImageView.image = posterImageView.image
         titleLabel.text = item.title
         originalTitleLabel.text = item.originalTitle
-        genreLabel.text = item.genres
-        releaseLabel.text = item.release
+        summaryLabel.text = item.summary
+        directorLabel.text = item.director
+        actorsLabel.text = item.actors
+        releaseLabel.text = item.releaseDate
         ratingLabel.text = item.rating
         overviewLabel.text = item.overview
     }
@@ -186,8 +240,12 @@ final class SearchDetailView: UIView {
         detailContentView.addSubview(posterImageView)
         detailContentView.addSubview(informationStackView)
         
+        posterImageView.addSubview(adultImageView)
+        
         informationStackView.addArrangedSubview(titleStackView)
-        informationStackView.addArrangedSubview(genreStackView)
+        informationStackView.addArrangedSubview(summaryStackView)
+        informationStackView.addArrangedSubview(directorStackView)
+        informationStackView.addArrangedSubview(actorsStackView)
         informationStackView.addArrangedSubview(releaseStackView)
         informationStackView.addArrangedSubview(ratingStackView)
         informationStackView.addArrangedSubview(overviewLabel)
@@ -195,8 +253,14 @@ final class SearchDetailView: UIView {
         titleStackView.addArrangedSubview(titleLabel)
         titleStackView.addArrangedSubview(originalTitleLabel)
         
-        genreStackView.addArrangedSubview(genreTagLabel)
-        genreStackView.addArrangedSubview(genreLabel)
+        summaryStackView.addArrangedSubview(summaryTagLabel)
+        summaryStackView.addArrangedSubview(summaryLabel)
+        
+        actorsStackView.addArrangedSubview(actorsTagLabel)
+        actorsStackView.addArrangedSubview(actorsLabel)
+        
+        directorStackView.addArrangedSubview(directorTagLabel)
+        directorStackView.addArrangedSubview(directorLabel)
         
         releaseStackView.addArrangedSubview(releaseTagLabel)
         releaseStackView.addArrangedSubview(releaseLabel)
@@ -227,7 +291,7 @@ final class SearchDetailView: UIView {
                 .multipliedBy(Design.posterHeightRadius)
             $0.leading.top.trailing.equalToSuperview()
         }
-
+        
         informationStackView.snp.makeConstraints {
             $0.top.equalTo(posterImageView.snp.bottom).offset(Design.defaultMargin)
             $0.leading.equalToSuperview().offset(Design.defaultMargin)

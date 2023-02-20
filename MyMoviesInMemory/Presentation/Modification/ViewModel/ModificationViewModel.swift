@@ -57,15 +57,17 @@ final class ModificationViewModel {
             .withUnretained(self)
             .map { owner, data in
                 let dataToUpdate = Review(
-                    id: String(owner.review.id),
+                    id: owner.review.id,
                     title: owner.review.title,
                     originalTitle: owner.review.originalTitle,
                     posterPath: owner.review.posterPath,
                     genres: owner.review.genres,
+                    runTime: owner.review.runTime,
                     releaseDate: owner.review.releaseDate,
                     userRating: owner.review.userRating,
-                    originalLanguage: owner.review.originalLanguage,
                     overview: owner.review.overview,
+                    director: owner.review.director,
+                    actors: owner.review.actors,
                     personalRating: Double(data.0 / 2),
                     shortComment: data.1 ?? "",
                     comment: data.2 ?? "",

@@ -30,7 +30,7 @@ struct ReviewDetailViewModelItem {
     }
     
     var release: String {
-        return "\(review.releaseDate) | \(review.originalLanguage)"
+        return review.releaseDate
     }
     
     var rating: String {

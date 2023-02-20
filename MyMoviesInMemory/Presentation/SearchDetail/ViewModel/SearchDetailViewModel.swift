@@ -20,43 +20,49 @@ final class SearchDetailViewModel {
     // MARK: - Output
     
     struct Output {
-        let searchDetailViewModelItem: Observable<SearchDetailViewModelItem>
-        let movieToSend: Observable<Movie>
+        let movieDetailItem: Observable<SearchDetailViewModelItem>
+        let detailToSend: Observable<MovieDetail>
     }
     
     // MARK: - Properties
     
     private let movieUseCase: MovieUseCaseType
-    private let movie: Movie
+    private let movieID: Int
     
     // MARK: - Initializer
     
     init(
         movieUseCase: MovieUseCaseType,
-        movie: Movie
+        movieID: Int
     ) {
         self.movieUseCase = movieUseCase
-        self.movie = movie
+        self.movieID = movieID
     }
     
     // MARK: - Methods
     
     func transform(_ input: Input) -> Output {
-        let searchDetailViewModelItem = input.didShowView
+        let movieDetail = input.didShowView
             .withUnretained(self)
-            .map { owner, _ in
-                SearchDetailViewModelItem(movie: owner.movie)
+            .flatMap { owner, detail in
+                owner.movieUseCase
+                    .fetchMovieDetail(id: owner.movieID)
+            }
+            .share()
+        
+        let movieDetailItem = movieDetail
+            .map { detail in
+                SearchDetailViewModelItem(movieDetail: detail)
             }
         
-        let movieToSend = input.didTapEditButton
-            .withUnretained(self)
-            .map { owner, _ in
-                owner.movie
+        let detailToSend = input.didTapEditButton
+            .flatMap {
+                movieDetail
             }
         
         return Output(
-            searchDetailViewModelItem: searchDetailViewModelItem,
-            movieToSend: movieToSend
+            movieDetailItem: movieDetailItem,
+            detailToSend: detailToSend
         )
     }
 }

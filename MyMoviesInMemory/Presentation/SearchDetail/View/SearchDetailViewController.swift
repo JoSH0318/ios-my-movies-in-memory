@@ -63,7 +63,7 @@ final class SearchDetailViewController: UIViewController {
         let output = viewModel.transform(input)
         
         output
-            .searchDetailViewModelItem
+            .movieDetailItem
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
             .bind(onNext: { owner, item in
@@ -73,12 +73,12 @@ final class SearchDetailViewController: UIViewController {
             .disposed(by: disposeBag)
         
         output
-            .movieToSend
+            .detailToSend
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
             .bind(onNext: { owner, movieToSend in
                 owner.coordinator
-                    .presentRecordView(movie: movieToSend)
+                    .presentRecordView(movieDetail: movieToSend)
             })
             .disposed(by: disposeBag)
     }
