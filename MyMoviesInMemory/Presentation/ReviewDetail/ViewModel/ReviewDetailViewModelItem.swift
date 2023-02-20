@@ -63,16 +63,3 @@ struct ReviewDetailViewModelItem {
         self.review = review
     }
 }
-
-//posterImageView.image = posterImage
-//backgroundImageView.image = posterImage
-//titleLabel.text = review.title
-//originalTitleLabel.text = review.originalTitle
-//genreLabel.text = review.genres
-//releaseLabel.text = "\(review.releaseDate) | \(review.originalLanguage)"
-//ratingLabel.text = "\(review.userRating)"
-//overviewLabel.text = review.overview
-//
-//starRatingView.dragStarSlider(Int(review.personalRating * 2))
-//shortCommentLabel.text = review.shortComment
-//commentLabel.text = review.comment
