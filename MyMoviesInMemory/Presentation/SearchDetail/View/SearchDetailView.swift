@@ -36,13 +36,6 @@ final class SearchDetailView: UIView {
         return imageView
     }()
     
-    private let adultImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "19.square.fill")
-        imageView.tintColor = .systemRed
-        return imageView
-    }()
-    
     private let informationStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
