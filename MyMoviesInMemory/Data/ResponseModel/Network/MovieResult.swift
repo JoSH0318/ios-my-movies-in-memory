@@ -55,8 +55,8 @@ extension MovieResult {
         let firstGenreID = genreIDs[safe: 0]
         let secondGenreID = genreIDs[safe: 1]
         
-        guard let firstGenre = Genre(rawValue: firstGenreID ?? -1)?.description else { return "" }
-        guard let secondGenre = Genre(rawValue: secondGenreID ?? -1)?.description else { return "" }
+        guard let firstGenre = GenreID(rawValue: firstGenreID ?? -1)?.description else { return "" }
+        guard let secondGenre = GenreID(rawValue: secondGenreID ?? -1)?.description else { return "" }
         
         return firstGenre + " " + secondGenre
     }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Genre: Int {
+enum GenreID: Int {
     case action = 28
     case animated = 16
     case documentary = 99
