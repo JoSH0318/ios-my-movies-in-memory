@@ -149,12 +149,6 @@ final class ReviewDetailView: UIView {
         return stackView
     }()
     
-    private let releaseStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.spacing = Design.hStackSpacing
-        return stackView
-    }()
-    
     private let releaseTagLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
@@ -285,19 +279,21 @@ final class ReviewDetailView: UIView {
     
     // MARK: - Methods
     
-    func setupContents(_ review: ReviewDetailViewModelItem) {
-        posterImageView.setImage(urlString: review.posterPath)
+    func setupContents(_ item: ReviewDetailViewModelItem) {
+        posterImageView.setImage(urlString: item.posterPath)
         backgroundImageView.image = posterImageView.image
-        titleLabel.text = review.title
-        originalTitleLabel.text = review.originalTitle
-        genreLabel.text = review.genres
-        releaseLabel.text = review.release
-        ratingLabel.text = review.rating
-        overviewLabel.text = review.overview
+        titleLabel.text = item.title
+        originalTitleLabel.text = item.originalTitle
+        summaryLabel.text = item.summary
+        directorLabel.text = item.director
+        actorsLabel.text = item.actors
+        releaseLabel.text = item.release
+        ratingLabel.text = item.rating
+        overviewLabel.text = item.overview
 
-        starRatingView.dragStarSlider(review.personalRatingOnTen)
-        shortCommentLabel.text = review.shortComment
-        commentLabel.text = review.comment
+        starRatingView.dragStarSlider(item.personalRatingOnTen)
+        shortCommentLabel.text = item.shortComment
+        commentLabel.text = item.comment
     }
     
     private func configureLayout() {
@@ -314,7 +310,9 @@ final class ReviewDetailView: UIView {
         detailContentView.addSubview(reviewStackView)
         
         informationStackView.addArrangedSubview(titleStackView)
-        informationStackView.addArrangedSubview(genreStackView)
+        informationStackView.addArrangedSubview(summaryStackView)
+        informationStackView.addArrangedSubview(directorStackView)
+        informationStackView.addArrangedSubview(actorsStackView)
         informationStackView.addArrangedSubview(releaseStackView)
         informationStackView.addArrangedSubview(ratingStackView)
         informationStackView.addArrangedSubview(overviewLabel)
@@ -322,8 +320,14 @@ final class ReviewDetailView: UIView {
         titleStackView.addArrangedSubview(titleLabel)
         titleStackView.addArrangedSubview(originalTitleLabel)
         
-        genreStackView.addArrangedSubview(genreTagLabel)
-        genreStackView.addArrangedSubview(genreLabel)
+        summaryStackView.addArrangedSubview(summaryTagLabel)
+        summaryStackView.addArrangedSubview(summaryLabel)
+        
+        directorStackView.addArrangedSubview(directorTagLabel)
+        directorStackView.addArrangedSubview(directorLabel)
+        
+        actorsStackView.addArrangedSubview(actorsTagLabel)
+        actorsStackView.addArrangedSubview(actorsLabel)
         
         releaseStackView.addArrangedSubview(releaseTagLabel)
         releaseStackView.addArrangedSubview(releaseLabel)

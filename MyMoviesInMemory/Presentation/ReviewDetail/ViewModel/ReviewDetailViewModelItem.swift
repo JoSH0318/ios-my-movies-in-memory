@@ -13,6 +13,10 @@ struct ReviewDetailViewModelItem {
     
     private let review: Review
     
+    var posterPath: String {
+        return review.posterPath
+    }
+    
     var title: String {
         return review.title
     }
@@ -21,12 +25,20 @@ struct ReviewDetailViewModelItem {
         return review.originalTitle
     }
     
-    var posterPath: String {
-        return review.posterPath
+    var summary: String {
+        return "\(review.genres)  |  \(review.runTime)h"
     }
     
-    var genres: String {
-        return review.genres
+    var director: String {
+        return review.director
+    }
+    
+    var actors: String {
+        return review.actors
+    }
+    
+    var releaseDate: String {
+        return review.releaseDate
     }
     
     var release: String {
