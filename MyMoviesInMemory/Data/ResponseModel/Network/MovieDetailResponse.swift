@@ -63,7 +63,7 @@ extension MovieDetailResponse {
             genres: selectMainGenres(self.genres),
             runTime: String(self.runtime),
             releaseDate: self.releaseDate,
-            userRating: self.voteAverage,
+            userRating: self.voteAverage / 2,
             overview: self.overview,
             director: director,
             actors: actors

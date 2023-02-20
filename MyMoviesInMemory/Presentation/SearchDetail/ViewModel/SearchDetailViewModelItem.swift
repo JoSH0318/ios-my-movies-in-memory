@@ -42,7 +42,7 @@ struct SearchDetailViewModelItem {
     }
     
     var rating: String {
-        return MMIMNumberFormatter.shared.toRating(movieDetail.userRating / 2)
+        return MMIMNumberFormatter.shared.toRating(movieDetail.userRating)
     }
     
     var overview: String {
