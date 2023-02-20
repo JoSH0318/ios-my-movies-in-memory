@@ -54,24 +54,4 @@ struct SearchDetailViewModelItem {
     init(movieDetail: MovieDetail) {
         self.movieDetail = movieDetail
     }
-    
-    // MARK: - Methods
-    
-//    func toDefaultReview() -> Review {
-//        return Review(
-//            id: String(movieDetail.id),
-//            title: movieDetail.title,
-//            originalTitle: <#T##String#>,
-//            posterPath: <#T##String#>,
-//            genres: <#T##String#>,
-//            releaseDate: <#T##String#>,
-//            userRating: <#T##Double#>,
-//            originalLanguage: <#T##String#>,
-//            overview: <#T##String#>,
-//            personalRating: <#T##Double#>,
-//            shortComment: <#T##String#>,
-//            comment: <#T##String#>,
-//            recordDate: <#T##String#>
-//        )
-//    }
 }

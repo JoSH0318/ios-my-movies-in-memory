@@ -233,8 +233,6 @@ final class SearchDetailView: UIView {
         detailContentView.addSubview(posterImageView)
         detailContentView.addSubview(informationStackView)
         
-        posterImageView.addSubview(adultImageView)
-        
         informationStackView.addArrangedSubview(titleStackView)
         informationStackView.addArrangedSubview(summaryStackView)
         informationStackView.addArrangedSubview(directorStackView)
