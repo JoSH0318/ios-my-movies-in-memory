@@ -16,6 +16,7 @@ final class MMIMNumberFormatter {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
         formatter.maximumFractionDigits = 2
+        formatter.roundingMode = .floor
         return formatter
     }()
     
