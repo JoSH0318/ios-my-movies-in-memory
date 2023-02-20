@@ -28,4 +28,41 @@ final class MovieRepository: NetworkRepository {
                 return movies.compactMap { $0.toDomain() }
             }
     }
+    
+    func fetchMovieDetail(id: Int) -> Observable<MovieDetail> {
+        let movieDetail = Observable
+            .zip(
+                fetchDetail(id: id),
+                fetchCredits(id: id)
+            )
+            .map { detail, credits in
+                let movieOfficial = credits.toMovieOfficial()
+                return detail.toDomain(
+                    movieOfficial.director,
+                    movieOfficial.actors
+                )
+            }
+        
+        return movieDetail
+    }
+}
+
+extension MovieRepository {
+    private func fetchDetail(id: Int) -> Observable<MovieDetailResponse> {
+        let endpoint = EndpointStorage
+            .searchMovieDetail(id)
+            .asEndpoint
+        
+        return networkProvider.execute(endpoint: endpoint)
+            .decode(type: MovieDetailResponse.self, decoder: JSONDecoder())
+    }
+    
+    private func fetchCredits(id: Int) -> Observable<CreditsResponse> {
+        let endpoint = EndpointStorage
+            .searchCredits(id)
+            .asEndpoint
+        
+        return networkProvider.execute(endpoint: endpoint)
+            .decode(type: CreditsResponse.self, decoder: JSONDecoder())
+    }
 }
