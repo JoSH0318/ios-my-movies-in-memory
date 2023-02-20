@@ -13,10 +13,12 @@ struct Review {
     let originalTitle: String
     let posterPath: String
     let genres: String
+    let runTime: String
     let releaseDate: String
     let userRating: Double
-    let originalLanguage: String
     let overview: String
+    let director: String
+    let actors: String
     let personalRating: Double
     let shortComment: String
     let comment: String
