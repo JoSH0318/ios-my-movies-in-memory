@@ -75,27 +75,78 @@ final class ReviewDetailView: UIView {
         return label
     }()
     
-    private let genreStackView: UIStackView = {
+    private let summaryStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.spacing = Design.hStackSpacing
         return stackView
     }()
     
-    private let genreTagLabel: UILabel = {
+    private let summaryTagLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
         label.font = UIFont().fontWith(.medium, .bold)
         label.textColor = .systemGray
-        label.text = "장르"
+        label.text = "개요"
+        label.setContentHuggingPriority(.required, for: .horizontal)
         return label
     }()
     
-    private let genreLabel: UILabel = {
+    private let summaryLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
         label.font = UIFont().fontWith(.medium)
-        label.setContentHuggingPriority(.init(1), for: .horizontal)
         return label
+    }()
+    
+    private let directorStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.spacing = Design.hStackSpacing
+        return stackView
+    }()
+    
+    private let directorTagLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .left
+        label.font = UIFont().fontWith(.medium, .bold)
+        label.textColor = .systemGray
+        label.text = "감독"
+        return label
+    }()
+    
+    private let directorLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .left
+        label.font = UIFont().fontWith(.medium)
+        return label
+    }()
+    
+    private let actorsStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.spacing = Design.hStackSpacing
+        return stackView
+    }()
+    
+    private let actorsTagLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .left
+        label.font = UIFont().fontWith(.medium, .bold)
+        label.textColor = .systemGray
+        label.text = "출연"
+        return label
+    }()
+    
+    private let actorsLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .left
+        label.font = UIFont().fontWith(.medium)
+        label.numberOfLines = 2
+        return label
+    }()
+    
+    private let releaseStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.spacing = Design.hStackSpacing
+        return stackView
     }()
     
     private let releaseStackView: UIStackView = {
