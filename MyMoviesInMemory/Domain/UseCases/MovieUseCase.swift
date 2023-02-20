@@ -18,4 +18,8 @@ final class MovieUseCase: MovieUseCaseType {
     func fetchMovies(title: String) -> Observable<[Movie]> {
         return repository.fetchMovies(title: title)
     }
+    
+    func fetchMovieDetail(id: Int) -> Observable<MovieDetail> {
+        return repository.fetchMovieDetail(id: id)
+    }
 }

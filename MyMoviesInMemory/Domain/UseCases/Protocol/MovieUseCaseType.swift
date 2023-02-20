@@ -10,4 +10,5 @@ import RxSwift
 
 protocol MovieUseCaseType {
     func fetchMovies(title: String) -> Observable<[Movie]>
+    func fetchMovieDetail(id: Int) -> Observable<MovieDetail>
 }
