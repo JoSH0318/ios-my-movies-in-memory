@@ -117,6 +117,7 @@ final class ReviewDetailView: UIView {
         let label = UILabel()
         label.textAlignment = .left
         label.font = UIFont().fontWith(.medium)
+        label.setContentHuggingPriority(.init(1), for: .horizontal)
         return label
     }()
     
