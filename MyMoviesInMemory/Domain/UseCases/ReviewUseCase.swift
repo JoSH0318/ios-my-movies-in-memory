@@ -23,6 +23,10 @@ final class ReviewUseCase: ReviewUseCaseType {
         return repository.fetchReviews()
     }
     
+    func fetchReview(_ id: String) -> Observable<Review> {
+        return repository.fetchReview(id)
+    }
+    
     func update(_ review: Review) {
         repository.update(review)
     }

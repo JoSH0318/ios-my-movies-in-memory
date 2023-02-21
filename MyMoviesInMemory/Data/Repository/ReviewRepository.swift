@@ -20,10 +20,15 @@ final class ReviewRepository: CoreDataRepository {
     }
     
     func fetchReviews() -> Observable<[Review]> {
-        return coreDataManager.fetch()
+        return coreDataManager.fetchAll()
             .map {
                 $0.map { $0.toDomain() }
             }
+    }
+    
+    func fetchReview(_ id: String) -> Observable<Review> {
+        return coreDataManager.fetchOne(id)
+            .map { $0.toDomain() }
     }
     
     func update(_ review: Review) {

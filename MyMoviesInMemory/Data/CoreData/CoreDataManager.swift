@@ -99,7 +99,7 @@ extension CoreDataManager {
         saveContext()
     }
     
-    func fetch() -> Observable<[ReviewDAO]> {
+    func fetchAll() -> Observable<[ReviewDAO]> {
         return Observable.create { [weak self] emitter in
             let request = ReviewDAO.fetchRequest()
             guard let movies = try? self?.context.fetch(request).reversed() else {
@@ -109,6 +109,22 @@ extension CoreDataManager {
             let moviesArray = Array(movies)
             
             emitter.onNext(moviesArray)
+            emitter.onCompleted()
+            
+            return Disposables.create()
+        }
+    }
+    
+    func fetchOne(_ id: String) -> Observable<ReviewDAO> {
+        return Observable.create { [weak self] emitter in
+            guard let request = self?.generateRequest(by: id),
+                  let fetchResult = self?.fetchResult(from: request)
+            else {
+                emitter.onError(CoreDataError.readFail)
+                return Disposables.create()
+            }
+            
+            emitter.onNext(fetchResult)
             emitter.onCompleted()
             
             return Disposables.create()

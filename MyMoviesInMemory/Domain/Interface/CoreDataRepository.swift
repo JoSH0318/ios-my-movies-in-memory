@@ -11,6 +11,7 @@ import RxSwift
 protocol CoreDataRepository {
     func save(_ review: Review)
     func fetchReviews() -> Observable<[Review]>
+    func fetchReview(_ id: String) -> Observable<Review>
     func update(_ review: Review)
     func delete(_ review: Review)
 }
