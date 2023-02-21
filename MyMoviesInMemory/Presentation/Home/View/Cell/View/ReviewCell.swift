@@ -224,8 +224,8 @@ final class ReviewCell: UICollectionViewCell {
         titleStackView.snp.makeConstraints {
             $0.top.equalTo(movieTicketView.snp.top)
                 .offset(self.bounds.height * Design.posterSectionRadius + (Design.defaultMargin / 2))
-            $0.leading.equalToSuperview().offset(Design.defaultMargin * 2)
-            $0.trailing.equalToSuperview().offset(-Design.defaultMargin * 2)
+            $0.leading.equalToSuperview().offset(Design.titleMargin)
+            $0.trailing.equalToSuperview().offset(-Design.titleMargin)
             $0.bottom.equalTo(movieTicketView.snp.bottom)
                 .offset(-self.bounds.height * (1 - Design.reviewSectionRadius) - (Design.defaultMargin / 2))
         }
@@ -261,7 +261,7 @@ final class ReviewCell: UICollectionViewCell {
 extension ReviewCell {
     private enum Design {
         static let defaultMargin: CGFloat = 16.0
-        static let titleMargin: CGFloat = 20.0
+        static let titleMargin: CGFloat = 18.0
         
         static let posterSectionRadius: CGFloat = 0.5
         static let reviewSectionRadius: CGFloat = 0.6
