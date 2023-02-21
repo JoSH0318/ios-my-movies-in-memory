@@ -234,11 +234,13 @@ final class SearchDetailView: UIView {
         detailContentView.addSubview(informationStackView)
         
         informationStackView.addArrangedSubview(titleStackView)
+        informationStackView.addArrangedSubview(DividerLineView())
         informationStackView.addArrangedSubview(summaryStackView)
         informationStackView.addArrangedSubview(directorStackView)
         informationStackView.addArrangedSubview(actorsStackView)
         informationStackView.addArrangedSubview(releaseStackView)
         informationStackView.addArrangedSubview(ratingStackView)
+        informationStackView.addArrangedSubview(DividerLineView())
         informationStackView.addArrangedSubview(overviewLabel)
         
         titleStackView.addArrangedSubview(titleLabel)
