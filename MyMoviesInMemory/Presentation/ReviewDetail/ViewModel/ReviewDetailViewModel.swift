@@ -43,28 +43,34 @@ final class ReviewDetailViewModel {
     // MARK: - Methods
     
     func transform(_ input: Input) -> Output {
-        
-        let reviewCellViewModelItem = input.didShowView
+        let fetchedReview = input.didShowView
             .withUnretained(self)
-            .map { owner, _ in
-                ReviewDetailViewModelItem(review: owner.review)
+            .flatMap { owner, _ in
+                owner
+                    .reviewUseCase
+                    .fetchReview(owner.review.id)
+            }
+            .share()
+        
+        let reviewCellViewModelItem = fetchedReview
+            .map { review in
+                ReviewDetailViewModelItem(review: review)
             }
         
         let deleteAlertAction = input.didTapDeleteButton
             .withUnretained(self)
             .map { owner, action in
                 if action == .delete {
-                    owner.reviewUseCase.delete(owner.review)
+                    owner
+                        .reviewUseCase
+                        .delete(owner.review)
                 }
                 
                 return action
             }
         
         let reviewToSend = input.didTapModificationButton
-            .withUnretained(self)
-            .map { owner, _ in
-                owner.review
-            }
+            .withLatestFrom(fetchedReview)
         
         return Output(
             reviewCellViewModelItem: reviewCellViewModelItem,
