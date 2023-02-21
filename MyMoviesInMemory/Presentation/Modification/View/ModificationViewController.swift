@@ -56,7 +56,7 @@ class ModificationViewController: UIViewController {
     // MARK: - Bind
     
     private func bind() {
-        let viewDidLoadEvent = Observable.just(())
+        let viewDidLoadEvent = self.rx.viewWillAppear.asObservable()
         let draggedValue = modificationView
             .starRatingView
             .starRatingSlider
