@@ -101,6 +101,7 @@ final class EditView: UIView {
         summaryView.releaseLabel.text = item.release
         summaryView.ratingLabel.text = item.rating
         summaryView.overviewLabel.text = item.overview
+        starRatingView.dragStarSlider(item.personalRatingOnTen)
         shortCommentTextView.text = item.shortComment
         commentTextView.text = item.comment
     }
