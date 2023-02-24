@@ -7,6 +7,7 @@
 
 import UIKit
 import RxSwift
+import RxCocoa
 
 final class ReviewDetailViewController: UIViewController {
     
@@ -78,11 +79,14 @@ final class ReviewDetailViewController: UIViewController {
             }
         let didTapModificationButton = modificationBarButton.rx.tap
             .asObservable()
+        let didScrollEvent = reviewDetailView.detailScrollView.rx.contentOffset
+            .asObservable()
         
         let input = ReviewDetailViewModel.Input(
             didShowView: didShowEvent,
             didTapDeleteButton: didTapDeleteButton,
-            didTapModificationButton: didTapModificationButton
+            didTapModificationButton: didTapModificationButton,
+            didScroll: didScrollEvent
         )
         let output = viewModel.transform(input)
         
@@ -114,6 +118,19 @@ final class ReviewDetailViewController: UIViewController {
                 owner.coordinator.presentModificationView(review: reviewToSend)
             })
             .disposed(by: disposeBag)
+        
+        output.contentOffsetY
+            .observe(on: MainScheduler.instance)
+            .withUnretained(self)
+            .bind(onNext: { owner, contentOffsetY in
+                let isReachContentOffset = owner
+                    .reviewDetailView
+                    .posterImageView
+                    .bounds
+                    .height < contentOffsetY
+                owner.changeNavigationBarColor(isReachContentOffset)
+            })
+            .disposed(by: disposeBag)
     }
     
     // MARK: - Methods
@@ -123,5 +140,13 @@ final class ReviewDetailViewController: UIViewController {
             modificationBarButton,
             deleteBarButton
         ]
+    }
+    
+    private func changeNavigationBarColor(_ isScrollUp: Bool) {
+        UIView.animate(withDuration: 0.2) { [weak self] in
+            self?.navigationController?
+                .navigationBar
+                .backgroundColor = isScrollUp ? .MBeige : .clear
+        }
     }
 }

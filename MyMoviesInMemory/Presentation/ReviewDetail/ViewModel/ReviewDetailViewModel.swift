@@ -15,6 +15,7 @@ final class ReviewDetailViewModel {
         let didShowView: Observable<Void>
         let didTapDeleteButton: Observable<AlertActionType>
         let didTapModificationButton: Observable<Void>
+        let didScroll: Observable<CGPoint>
     }
     
     // MARK: - Output
@@ -23,6 +24,7 @@ final class ReviewDetailViewModel {
         let reviewCellViewModelItem: Observable<ReviewDetailViewModelItem>
         let deleteAlertAction: Observable<AlertActionType>
         let reviewToSend: Observable<Review>
+        let contentOffsetY: Observable<CGFloat>
     }
     
     // MARK: - Properties
@@ -72,10 +74,14 @@ final class ReviewDetailViewModel {
         let reviewToSend = input.didTapModificationButton
             .withLatestFrom(fetchedReview)
         
+        let contentOffsetY = input.didScroll
+            .map { $0.y }
+        
         return Output(
             reviewCellViewModelItem: reviewCellViewModelItem,
             deleteAlertAction: deleteAlertAction,
-            reviewToSend: reviewToSend
+            reviewToSend: reviewToSend,
+            contentOffsetY: contentOffsetY
         )
     }
 }

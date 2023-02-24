@@ -46,7 +46,6 @@ final class SearchDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureConstraints()
         configureEditButton()
         bind()
     }
@@ -56,9 +55,13 @@ final class SearchDetailViewController: UIViewController {
     func bind() {
         let didShowViewEvent = Observable.just(())
         let didTapEditButtonEvent = editBarButton.rx.tap.asObservable()
+        let didScrollEvent = searchDetailView.detailScrollView.rx.contentOffset
+            .asObservable()
+        
         let input = SearchDetailViewModel.Input(
             didShowView: didShowViewEvent,
-            didTapEditButton: didTapEditButtonEvent
+            didTapEditButton: didTapEditButtonEvent,
+            didScroll: didScrollEvent
         )
         let output = viewModel.transform(input)
         
@@ -81,6 +84,19 @@ final class SearchDetailViewController: UIViewController {
                     .presentRecordView(movieDetail: movieToSend)
             })
             .disposed(by: disposeBag)
+        
+        output.contentOffsetY
+            .observe(on: MainScheduler.instance)
+            .withUnretained(self)
+            .bind(onNext: { owner, contentOffsetY in
+                let isReachContentOffset = owner
+                    .searchDetailView
+                    .posterImageView
+                    .bounds
+                    .height < contentOffsetY
+                owner.changeNavigationBarColor(isReachContentOffset)
+            })
+            .disposed(by: disposeBag)
     }
     
     // MARK: - Methods
@@ -89,8 +105,11 @@ final class SearchDetailViewController: UIViewController {
         navigationItem.rightBarButtonItem = editBarButton
     }
     
-    private func configureConstraints() {
-        
-        
+    private func changeNavigationBarColor(_ isScrollUp: Bool) {
+        UIView.animate(withDuration: 0.2) { [weak self] in
+            self?.navigationController?
+                .navigationBar
+                .backgroundColor = isScrollUp ? .MBeige : .clear
+        }
     }
 }

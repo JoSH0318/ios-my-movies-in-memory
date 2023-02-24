@@ -15,6 +15,7 @@ final class SearchDetailViewModel {
     struct Input {
         let didShowView: Observable<Void>
         let didTapEditButton: Observable<Void>
+        let didScroll: Observable<CGPoint>
     }
     
     // MARK: - Output
@@ -22,6 +23,7 @@ final class SearchDetailViewModel {
     struct Output {
         let movieDetailItem: Observable<SearchDetailViewModelItem>
         let detailToSend: Observable<MovieDetail>
+        let contentOffsetY: Observable<CGFloat>
     }
     
     // MARK: - Properties
@@ -60,9 +62,13 @@ final class SearchDetailViewModel {
                 movieDetail
             }
         
+        let contentOffsetY = input.didScroll
+            .map { $0.y }
+        
         return Output(
             movieDetailItem: movieDetailItem,
-            detailToSend: detailToSend
+            detailToSend: detailToSend,
+            contentOffsetY: contentOffsetY
         )
     }
 }

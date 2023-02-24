@@ -11,11 +11,11 @@ final class ReviewDetailView: UIView {
     
     // MARK: - Properties
     
-    private let detailScrollView = UIScrollView()
+    private(set) var detailScrollView = UIScrollView()
     
     private let detailContentView = UIView()
     
-    private let posterImageView: UIImageView = {
+    private(set) var posterImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.layer.applyShadow()
