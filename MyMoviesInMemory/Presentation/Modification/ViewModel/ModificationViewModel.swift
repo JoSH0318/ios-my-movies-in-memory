@@ -71,7 +71,7 @@ final class ModificationViewModel {
                     personalRating: Double(data.0 / 2),
                     shortComment: data.1 ?? "",
                     comment: data.2 ?? "",
-                    recordDate: MMIMDateFormatter.shared.toDateString(Date())
+                    recordDate: MMIMDateFormatter.shared.toString(from: Date())
                 )
                 owner.reviewUseCase.update(dataToUpdate)
             }

@@ -14,12 +14,12 @@ final class MMIMDateFormatter {
     
     private let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
+        formatter.dateFormat = "yyyy.MM.dd"
         
         return formatter
     }()
     
-    func toDateString(_ date: Date) -> String {
+    func toString(from date: Date) -> String {
         return dateFormatter.string(from: date)
     }
 }

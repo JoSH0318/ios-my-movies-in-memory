@@ -85,7 +85,7 @@ final class RecordViewModel {
                     personalRating: Double(data.0 / 2),
                     shortComment: data.1 ?? "",
                     comment: data.2 ?? "",
-                    recordDate: MMIMDateFormatter.shared.toDateString(Date())
+                    recordDate: MMIMDateFormatter.shared.toString(from: Date())
                 )
                 owner.reviewUseCase.save(dataToSave)
             }
