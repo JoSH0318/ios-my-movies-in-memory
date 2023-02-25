@@ -28,7 +28,7 @@ final class ReviewCell: UICollectionViewCell {
     private let titleStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = 4
+        stackView.spacing = Design.defaultMargin / 4
         return stackView
     }()
     
@@ -72,7 +72,7 @@ final class ReviewCell: UICollectionViewCell {
     private let barcodeSectionStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = 8
+        stackView.spacing = Design.defaultMargin / 8
         return stackView
     }()
     
@@ -80,12 +80,13 @@ final class ReviewCell: UICollectionViewCell {
         let imageView = UIImageView()
         imageView.image = .barcode
         imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         return imageView
     }()
     
     private let recordDate: UILabel = {
         let label = UILabel()
-        label.font = UIFont().fontWith(.large)
+        label.font = UIFont().fontWith(.medium)
         label.textAlignment = .right
         label.textColor = .systemGray4
         return label
@@ -246,7 +247,7 @@ final class ReviewCell: UICollectionViewCell {
         
         barcodeSectionStackView.snp.makeConstraints {
             $0.top.equalTo(movieTicketView.snp.top)
-                .offset(self.bounds.height * Design.dateSectionRadius + (Design.defaultMargin * 2))
+                .offset(self.bounds.height * Design.dateSectionRadius + Design.defaultMargin)
             $0.leading.equalToSuperview().offset(Design.defaultMargin)
             $0.trailing.equalToSuperview().offset(-Design.defaultMargin)
             $0.bottom.equalToSuperview().offset(-Design.defaultMargin / 2)
@@ -268,6 +269,6 @@ extension ReviewCell {
         static let dateSectionRadius: CGFloat = 0.85
         
         static let starRatingViewRadius: CGFloat = 0.4
-        static let barcodeRadius: CGFloat = 0.4
+        static let barcodeRadius: CGFloat = 0.6
     }
 }
