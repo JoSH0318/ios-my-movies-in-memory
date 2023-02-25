@@ -9,15 +9,6 @@ import UIKit
 
 final class TicketView: UIView {
     
-    // MARK: - Constants
-    
-    private enum Design {
-        static let punchHoleRadius: CGFloat = 14.0
-        static let firstSectionRatio: CGFloat = 0.6
-        static let secondSectionRatio: CGFloat = 0.85
-        static let lineDashLength: CGFloat = 10
-    }
-    
     // MARK: - Initializer
     
     override init(frame: CGRect) {
@@ -111,7 +102,8 @@ final class TicketView: UIView {
             count: 2,
             phase: 0
         )
-        UIColor.systemGray4.set()
+        UIColor.systemGray5.set()
+        dotLine.lineWidth = Design.dotLineWidth
         dotLine.stroke()
     }
     
@@ -121,11 +113,15 @@ final class TicketView: UIView {
         self.backgroundColor = .clear
         self.layer.cornerRadius = Design.punchHoleRadius
         self.clipsToBounds = true
-        
-        self.layer.shadowColor = UIColor.systemGray.cgColor
-        self.layer.shadowOpacity = 0.3
-        self.layer.shadowRadius = 10
-        self.layer.shadowOffset = .zero
     }
 }
 
+extension TicketView {
+    private enum Design {
+        static let punchHoleRadius: CGFloat = 14.0
+        static let firstSectionRatio: CGFloat = 0.6
+        static let secondSectionRatio: CGFloat = 0.85
+        static let lineDashLength: CGFloat = 5.0
+        static let dotLineWidth: CGFloat = 2.0
+    }
+}
