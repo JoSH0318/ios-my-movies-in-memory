@@ -15,6 +15,7 @@ final class ModificationViewModel {
         let didShowView: Observable<Void>
         let didDragStarRating: Observable<Float>
         let didTapSaveButton: Observable<(Float, String?, String?)>
+        let willShowKeyboard: Observable<Notification>
     }
     
     // MARK: - Output
@@ -23,6 +24,7 @@ final class ModificationViewModel {
         let modificationViewModelItem: Observable<EditViewModelItem>
         let starRating: Observable<Int>
         let popModificationViewTrigger: Observable<Void>
+        let keyboardHeight: Observable<CGFloat>
     }
     
     // MARK: - Properties
@@ -75,11 +77,22 @@ final class ModificationViewModel {
                 )
                 owner.reviewUseCase.update(dataToUpdate)
             }
+
+        let keyboardHeight = input.willShowKeyboard
+            .map { notification in
+                if notification.name == UIResponder.keyboardWillShowNotification {
+                    let userInfo = notification.userInfo
+                    let keyboardInfo = userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue
+                    return keyboardInfo?.cgRectValue.height ?? 0
+                }
+                return 0
+            }
         
         return Output(
             modificationViewModelItem: modificationViewModelItem,
             starRating: starRating,
-            popModificationViewTrigger: popModificationViewTrigger
+            popModificationViewTrigger: popModificationViewTrigger,
+            keyboardHeight: keyboardHeight
         )
     }
 }

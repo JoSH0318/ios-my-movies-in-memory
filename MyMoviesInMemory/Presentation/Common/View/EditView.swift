@@ -11,6 +11,8 @@ final class EditView: UIView {
     
     // MARK: - Properties
     
+    private let editScrollView = UIScrollView()
+    
     private let mainStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -115,7 +117,8 @@ final class EditView: UIView {
         
         let shadowView = ShadowView()
         
-        addSubview(mainStackView)
+        addSubview(editScrollView)
+        editScrollView.addSubview(mainStackView)
         shadowView.addSubview(summaryView)
         
         mainStackView.addArrangedSubview(shadowView)
@@ -126,11 +129,16 @@ final class EditView: UIView {
         shortCommentTextView.addSubview(shortCommentTextCountLabel)
         commentTextView.addSubview(commentTextCountLabel)
         
+        editScrollView.snp.makeConstraints {
+            $0.edges.equalTo(safeAreaLayoutGuide)
+        }
+        
         mainStackView.snp.makeConstraints {
-            $0.top.equalTo(safeAreaLayoutGuide)
+            $0.top.equalToSuperview().offset(Design.defaultMargin)
+            $0.bottom.equalToSuperview().offset(-Design.defaultMargin)
             $0.leading.equalToSuperview().offset(Design.mainStackMargin)
-            $0.trailing.bottom.equalTo(self.safeAreaLayoutGuide)
-                .offset(-Design.mainStackMargin)
+            $0.trailing.equalToSuperview().offset(-Design.mainStackMargin)
+            $0.width.equalToSuperview().offset(-Design.mainStackMargin * 2)
         }
         
         shadowView.snp.makeConstraints {
@@ -149,12 +157,33 @@ final class EditView: UIView {
             $0.height.equalTo(self.snp.height).multipliedBy(0.1)
         }
         
+        commentTextView.snp.makeConstraints {
+            $0.height.equalTo(self.snp.height).multipliedBy(0.3)
+        }
+        
         shortCommentTextCountLabel.snp.makeConstraints {
             $0.trailing.bottom.equalToSuperview().offset(-Design.defaultMargin)
         }
         
         commentTextCountLabel.snp.makeConstraints {
             $0.trailing.bottom.equalToSuperview().offset(-Design.defaultMargin)
+        }
+    }
+    
+    func changeBottomConstraint(_ keyboardHeight: CGFloat) {
+        let contentInsets = UIEdgeInsets(
+            top: 0,
+            left: 0,
+            bottom: keyboardHeight,
+            right: 0
+        )
+        
+        editScrollView.contentInset = contentInsets
+        editScrollView.scrollIndicatorInsets = contentInsets
+        editScrollView.contentOffset = CGPoint(x: .zero, y: keyboardHeight)
+        
+        UIView.animate(withDuration: 0.1) { [weak self] in
+            self?.layoutIfNeeded()
         }
     }
 }

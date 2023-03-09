@@ -72,11 +72,20 @@ class ModificationViewController: UIViewController {
                     owner.modificationView.commentTextView.text
                 )
             }
+        let willShowKeyboardEvent = Observable
+            .from([
+                NotificationCenter.default.rx
+                    .notification(UIResponder.keyboardWillShowNotification),
+                NotificationCenter.default.rx
+                    .notification(UIResponder.keyboardWillHideNotification)
+            ])
+            .merge()
         
         let input = ModificationViewModel.Input(
             didShowView: viewDidLoadEvent,
             didDragStarRating: draggedValue,
-            didTapSaveButton: didTapSaveButtonEvent
+            didTapSaveButton: didTapSaveButtonEvent,
+            willShowKeyboard: willShowKeyboardEvent
         )
         let output = viewModel.transform(input)
         
@@ -114,6 +123,17 @@ class ModificationViewController: UIViewController {
             .withUnretained(self)
             .bind(onNext: { owner, _ in
                 owner.coordinator.popModificationView()
+            })
+            .disposed(by: disposeBag)
+        
+        output
+            .keyboardHeight
+            .observe(on: MainScheduler.instance)
+            .withUnretained(self)
+            .bind(onNext: { owner, keyboardHeight in
+                let safeAreaBottom = owner.modificationView.safeAreaInsets.bottom
+                let height = keyboardHeight > 0.0 ? (keyboardHeight - safeAreaBottom) : 0.0
+                owner.modificationView.changeBottomConstraint(height)
             })
             .disposed(by: disposeBag)
     }
