@@ -12,7 +12,7 @@ class RecordViewController: UIViewController {
     
     // MARK: - Properties
     
-    private let editView = EditView()
+    private let recordView = EditView()
     private let viewModel: RecordViewModel
     private let coordinator: RecordCoordinator
     private let disposeBag = DisposeBag()
@@ -44,7 +44,7 @@ class RecordViewController: UIViewController {
     // MARK: - LifeCycle
     
     override func loadView() {
-        view = editView
+        view = recordView
     }
     
     override func viewDidLoad() {
@@ -59,45 +59,50 @@ class RecordViewController: UIViewController {
     
     private func bind() {
         let didShowViewEvent = Observable.just(())
-        
-        let draggedValue = editView.starRatingView
+        let draggedValue = recordView.starRatingView
             .starRatingSlider.rx.value
             .asObservable()
-        
         let didTapSaveButtonEvent = saveBarButton.rx.tap
             .withUnretained(self)
             .map { owner, _ in
                 (
-                    owner.editView.starRatingView.starRatingSlider.value,
-                    owner.editView.shortCommentTextView.text,
-                    owner.editView.commentTextView.text
+                    owner.recordView.starRatingView.starRatingSlider.value,
+                    owner.recordView.shortCommentTextView.text,
+                    owner.recordView.commentTextView.text
                 )
             }
-        
-        let didEditCommentViewEvent = editView
+        let didEditCommentViewEvent = recordView
             .commentTextView.rx.didBeginEditing
             .withUnretained(self)
             .map { owner, _ in
-                let commentText = owner.editView.commentTextView.text
+                let commentText = owner.recordView.commentTextView.text
                 let placeHolder = PlaceHolder.commentPlaceHolder
                 return (commentText, placeHolder)
             }
-        
-        let didEditShortCommentViewEvent = editView
+        let didEditShortCommentViewEvent = recordView
             .shortCommentTextView.rx.didBeginEditing
             .withUnretained(self)
             .map { owner, _ in
-                let shortCommentText = owner.editView.commentTextView.text
+                let shortCommentText = owner.recordView.commentTextView.text
                 let placeHolder = PlaceHolder.commentPlaceHolder
                 return (shortCommentText, placeHolder)
             }
+        let willShowKeyboardEvent = Observable
+            .from([
+                NotificationCenter.default.rx
+                    .notification(UIResponder.keyboardWillShowNotification),
+                NotificationCenter.default.rx
+                    .notification(UIResponder.keyboardWillHideNotification)
+            ])
+            .merge()
         
         let input = RecordViewModel.Input(
             didShowView: didShowViewEvent,
             didDragStarRating: draggedValue,
             didTapSaveButton: didTapSaveButtonEvent,
             didEditCommentView: didEditCommentViewEvent,
-            didEditShortCommentView: didEditShortCommentViewEvent
+            didEditShortCommentView: didEditShortCommentViewEvent,
+            willShowKeyboard: willShowKeyboardEvent
         )
         let output = viewModel.transform(input)
         
@@ -106,7 +111,7 @@ class RecordViewController: UIViewController {
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
             .bind(onNext: { owner, item in
-                owner.editView.setupContents(item)
+                owner.recordView.setupContents(item)
             })
             .disposed(by: disposeBag)
         
@@ -115,7 +120,7 @@ class RecordViewController: UIViewController {
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
             .bind(onNext: { owner, rating in
-                owner.editView.dragStarSlider(rating)
+                owner.recordView.dragStarSlider(rating)
             })
             .disposed(by: disposeBag)
         
@@ -123,8 +128,8 @@ class RecordViewController: UIViewController {
             .commentViewEditingStatus
             .withUnretained(self)
             .bind(onNext: { owner, _ in
-                owner.editView.commentTextView.text = nil
-                owner.editView.commentTextView.textColor = .black
+                owner.recordView.commentTextView.text = nil
+                owner.recordView.commentTextView.textColor = .black
             })
             .disposed(by: disposeBag)
         
@@ -132,8 +137,8 @@ class RecordViewController: UIViewController {
             .shortCommentViewEditingStatus
             .withUnretained(self)
             .bind(onNext: { owner, _ in
-                owner.editView.shortCommentTextView.text = nil
-                owner.editView.shortCommentTextView.textColor = .black
+                owner.recordView.shortCommentTextView.text = nil
+                owner.recordView.shortCommentTextView.textColor = .black
             })
             .disposed(by: disposeBag)
         
@@ -142,6 +147,17 @@ class RecordViewController: UIViewController {
             .withUnretained(self)
             .bind(onNext: { owner, _ in
                 owner.coordinator.popEditView()
+            })
+            .disposed(by: disposeBag)
+        
+        output
+            .keyboardHeight
+            .observe(on: MainScheduler.instance)
+            .withUnretained(self)
+            .bind(onNext: { owner, keyboardHeight in
+                let safeAreaBottom = owner.recordView.safeAreaInsets.bottom
+                let height = keyboardHeight > 0.0 ? (keyboardHeight - safeAreaBottom) : 0.0
+                owner.recordView.changeBottomConstraint(height)
             })
             .disposed(by: disposeBag)
     }
@@ -153,10 +169,10 @@ class RecordViewController: UIViewController {
     }
     
     private func setupPlaceHolder() {
-        editView.shortCommentTextView.textColor = .systemGray
-        editView.commentTextView.textColor = .systemGray
-        editView.shortCommentTextView.text = PlaceHolder.shortCommentPlaceHolder
-        editView.commentTextView.text = PlaceHolder.commentPlaceHolder
+        recordView.shortCommentTextView.textColor = .systemGray
+        recordView.commentTextView.textColor = .systemGray
+        recordView.shortCommentTextView.text = PlaceHolder.shortCommentPlaceHolder
+        recordView.commentTextView.text = PlaceHolder.commentPlaceHolder
     }
 }
 

@@ -17,6 +17,7 @@ final class RecordViewModel {
         let didTapSaveButton: Observable<(Float, String?, String?)>
         let didEditCommentView: Observable<(String?, String)>
         let didEditShortCommentView: Observable<(String?, String)>
+        let willShowKeyboard: Observable<Notification>
     }
     
     // MARK: - Output
@@ -27,6 +28,7 @@ final class RecordViewModel {
         let commentViewEditingStatus: Observable<Void>
         let shortCommentViewEditingStatus: Observable<Void>
         let popRecordViewTrigger: Observable<Void>
+        let keyboardHeight: Observable<CGFloat>
     }
     
     // MARK: - Properties
@@ -90,12 +92,23 @@ final class RecordViewModel {
                 owner.reviewUseCase.save(dataToSave)
             }
         
+        let keyboardHeight = input.willShowKeyboard
+            .map { notification in
+                if notification.name == UIResponder.keyboardWillShowNotification {
+                    let userInfo = notification.userInfo
+                    let keyboardInfo = userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue
+                    return keyboardInfo?.cgRectValue.height ?? 0
+                }
+                return 0
+            }
+        
         return Output(
             editViewModelItem: editViewModelItem,
             starRating: rating,
             commentViewEditingStatus: isBeginEditingCommentView,
             shortCommentViewEditingStatus: isBeginEditingShortCommentView,
-            popRecordViewTrigger: popRecordViewTrigger
+            popRecordViewTrigger: popRecordViewTrigger,
+            keyboardHeight: keyboardHeight
         )
     }
 }
