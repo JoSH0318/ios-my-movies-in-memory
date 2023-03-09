@@ -49,6 +49,7 @@ final class HomeViewController: UIViewController {
     
     private func bind() {
         let didShowViewEvent = self.rx.viewWillAppear.asObservable()
+        
         let input = HomeViewModel.Input(didShowView: didShowViewEvent)
         let output = viewModel.transform(input)
         
