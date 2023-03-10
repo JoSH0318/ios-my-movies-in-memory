@@ -12,4 +12,5 @@ extension UIImage {
     static let emptyStar = UIImage(named: "EmptyStar")
     static let halfStar = UIImage(named: "HalfStar")
     static let fullStar = UIImage(named: "FullStar")
+    static let keyboardHideButtonImage = UIImage(systemName: "chevron.down")
 }
