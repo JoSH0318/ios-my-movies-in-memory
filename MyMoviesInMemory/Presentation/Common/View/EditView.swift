@@ -28,8 +28,8 @@ final class EditView: UIView {
         return view
     }()
     
-    private(set) var shortCommentTextView: UITextView = {
-        let textView = UITextView()
+    private(set) var shortCommentTextView: ContentTextView = {
+        let textView = ContentTextView()
         textView.textAlignment = .left
         textView.font = UIFont().fontWith(.medium)
         textView.textContainerInset = .init(
@@ -54,8 +54,8 @@ final class EditView: UIView {
         return label
     }()
     
-    private(set) var commentTextView: UITextView = {
-        let textView = UITextView()
+    private(set) var commentTextView: ContentTextView = {
+        let textView = ContentTextView()
         textView.textAlignment = .left
         textView.font = UIFont().fontWith(.medium)
         textView.textContainerInset = .init(
