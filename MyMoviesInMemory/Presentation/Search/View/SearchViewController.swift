@@ -16,7 +16,13 @@ class SearchViewController: UIViewController {
     private let coordinator: SearchCoordinator
     private let viewModel: SearchViewModel
     private let disposeBag = DisposeBag()
-    private let searchBar = UISearchBar()
+    private let searchController: UISearchController = {
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchBar.placeholder = "Search Movies"
+        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.searchBar.showsCancelButton = false
+        return searchController
+    }()
     private lazy var searchCollectionView = UICollectionView(
         frame: .zero,
         collectionViewLayout: configureCollectionViewLayout()
@@ -44,19 +50,22 @@ class SearchViewController: UIViewController {
         
         registerCell()
         configureLayout()
-        configureNavigationItem()
+        setUpSearchViewController()
         bind()
     }
     
     // MARK: - Bind
     
     private func bind() {
-        let searchedMovie = searchBar.rx.text.orEmpty
-            .debounce(
-                RxTimeInterval.microseconds(10),
-                scheduler: MainScheduler.instance
+        let searchedMovie = searchController.searchBar.rx
+            .searchButtonClicked
+            .withLatestFrom(
+                searchController.searchBar.rx
+                    .text
+                    .orEmpty
             )
-            .distinctUntilChanged()
+            .map { $0 }
+        
         let input = SearchViewModel.Input(didEndSearching: searchedMovie)
         let output = viewModel.transform(input)
         
@@ -80,6 +89,15 @@ class SearchViewController: UIViewController {
     
     // MARK: - Methods
     
+    private func configureCollectionViewLayout() -> UICollectionViewFlowLayout {
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.itemSize = CGSize(
+            width: UIScreen.main.bounds.width - 40,
+            height: UIScreen.main.bounds.height * 0.2
+        )
+        return flowLayout
+    }
+    
     private func registerCell() {
         searchCollectionView.register(
             SearchCell.self,
@@ -97,17 +115,9 @@ class SearchViewController: UIViewController {
         }
     }
     
-    private func configureCollectionViewLayout() -> UICollectionViewFlowLayout {
-        let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.itemSize = CGSize(
-            width: UIScreen.main.bounds.width - 40,
-            height: UIScreen.main.bounds.height * 0.2
-        )
-        return flowLayout
-    }
-    
-    private func configureNavigationItem() {
-        searchBar.placeholder = "Search Movie"
-        self.navigationItem.titleView = searchBar
+    private func setUpSearchViewController() {
+        self.navigationItem.searchController = searchController
+        self.navigationItem.title = "영화 찾기"
+        self.navigationItem.hidesSearchBarWhenScrolling = false
     }
 }
