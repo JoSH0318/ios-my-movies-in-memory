@@ -8,8 +8,11 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import RxDataSources
 
 final class HomeViewController: UIViewController {
+    
+    typealias DataSource = RxCollectionViewSectionedReloadDataSource<ReviewSection>
     
     // MARK: - Properties
     
@@ -17,6 +20,14 @@ final class HomeViewController: UIViewController {
     private let viewModel: HomeViewModel
     private var disposeBag = DisposeBag()
     private let coordinator: HomeCoordinator
+    private var dataSource = DataSource { _, collectionView, indexPath, item in
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: ReviewCell.identifier, for: indexPath
+        ) as? ReviewCell else { return ReviewCell() }
+        
+        cell.bind(item)
+        return cell
+    }
     
     // MARK: - Initializer
     
@@ -55,14 +66,12 @@ final class HomeViewController: UIViewController {
         
         output
             .reviews
-            .bind(to: homeView.reviewCollectionView.rx.items(
-                cellIdentifier: ReviewCell.identifier,
-                cellType: ReviewCell.self
-            )) { index, item, cell in
-                cell.bind(item)
+            .map { reviews in
+                [ReviewSection(items: reviews)]
             }
+            .bind(to: homeView.reviewCollectionView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
-
+        
         homeView.reviewCollectionView.rx.modelSelected(Review.self)
             .observe(on: MainScheduler.instance)
             .withUnretained(self)
@@ -70,5 +79,18 @@ final class HomeViewController: UIViewController {
                 owner.coordinator.presentSearchDetailView(with: item)
             })
             .disposed(by: disposeBag)
+    }
+}
+
+struct ReviewSection {
+    var items: [Review]
+}
+
+extension ReviewSection: SectionModelType {
+    typealias Item = Review
+    
+    init(original: ReviewSection, items: [Review]) {
+        self = original
+        self.items = items
     }
 }

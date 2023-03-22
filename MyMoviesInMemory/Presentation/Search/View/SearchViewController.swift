@@ -8,8 +8,11 @@
 import SnapKit
 import RxSwift
 import RxCocoa
+import RxDataSources
 
 class SearchViewController: UIViewController {
+    
+    typealias DataSource = RxCollectionViewSectionedReloadDataSource<MovieSection>
     
     // MARK: - Properties
     
@@ -27,6 +30,14 @@ class SearchViewController: UIViewController {
         frame: .zero,
         collectionViewLayout: configureCollectionViewLayout()
     )
+    private var dataSource = DataSource {_, collectionView, indexPath, item in
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: SearchCell.identifier, for: indexPath
+        ) as? SearchCell else { return SearchCell() }
+        
+        cell.bind(item)
+        return cell
+    }
     
     // MARK: - Initializer
     
@@ -71,12 +82,10 @@ class SearchViewController: UIViewController {
         
         output
             .movies
-            .bind(to: searchCollectionView.rx.items(
-                cellIdentifier: SearchCell.identifier,
-                cellType: SearchCell.self
-            )) { index, item, cell in
-                cell.bind(item)
+            .map { movies in
+                [MovieSection(items: movies)]
             }
+            .bind(to: searchCollectionView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
         
         searchCollectionView.rx.modelSelected(Movie.self)
@@ -92,8 +101,8 @@ class SearchViewController: UIViewController {
     private func configureCollectionViewLayout() -> UICollectionViewFlowLayout {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.itemSize = CGSize(
-            width: UIScreen.main.bounds.width - 40,
-            height: UIScreen.main.bounds.height * 0.2
+            width: UIScreen.main.bounds.width - (Design.defaultMargin * 2),
+            height: UIScreen.main.bounds.height * Design.itemCountRatio
         )
         return flowLayout
     }
@@ -119,5 +128,25 @@ class SearchViewController: UIViewController {
         self.navigationItem.searchController = searchController
         self.navigationItem.title = "영화 찾기"
         self.navigationItem.hidesSearchBarWhenScrolling = false
+    }
+}
+
+extension SearchViewController {
+    private enum Design {
+        static let defaultMargin: CGFloat = 20.0
+        static let itemCountRatio: CGFloat = 0.2
+    }
+}
+
+struct MovieSection {
+    var items: [Movie]
+}
+
+extension MovieSection: SectionModelType {
+    typealias Item = Movie
+    
+    init(original: MovieSection, items: [Movie]) {
+        self = original
+        self.items = items
     }
 }
