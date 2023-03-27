@@ -69,17 +69,17 @@ final class SearchCell: UICollectionViewCell {
         
         output?
             .map { $0.genres }
-            .bind(to: summaryView.genreLabel.rx.text)
+            .bind(to: summaryView.genreStackView.contentLabel.rx.text)
             .disposed(by: disposeBag)
         
         output?
             .map { $0.release }
-            .bind(to: summaryView.releaseLabel.rx.text)
+            .bind(to: summaryView.releaseStackView.contentLabel.rx.text)
             .disposed(by: disposeBag)
 
         output?
             .map { $0.userRating }
-            .bind(to: summaryView.ratingLabel.rx.text)
+            .bind(to: summaryView.ratingStackView.contentLabel.rx.text)
             .disposed(by: disposeBag)
         
         output?
