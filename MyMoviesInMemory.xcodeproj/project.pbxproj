@@ -11,6 +11,7 @@
 		03124783295B739000106F21 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03124782295B739000106F21 /* NetworkError.swift */; };
 		03124785295B74DC00106F21 /* NetworkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03124784295B74DC00106F21 /* NetworkProvider.swift */; };
 		03124787295B892100106F21 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03124786295B892100106F21 /* HTTPMethod.swift */; };
+		036EF8CB29CE042A00CB6987 /* ContentStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036EF8CA29CE042A00CB6987 /* ContentStackView.swift */; };
 		03806B4B29733C3200235282 /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03806B4A29733C3200235282 /* SearchCell.swift */; };
 		03806B4F29733CA300235282 /* SearchCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03806B4E29733CA300235282 /* SearchCellViewModel.swift */; };
 		03806B572976EECC00235282 /* ReviewDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03806B562976EECC00235282 /* ReviewDetailCoordinator.swift */; };
@@ -100,6 +101,7 @@
 		03124782295B739000106F21 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		03124784295B74DC00106F21 /* NetworkProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProvider.swift; sourceTree = "<group>"; };
 		03124786295B892100106F21 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
+		036EF8CA29CE042A00CB6987 /* ContentStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentStackView.swift; sourceTree = "<group>"; };
 		03806B4A29733C3200235282 /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
 		03806B4E29733CA300235282 /* SearchCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCellViewModel.swift; sourceTree = "<group>"; };
 		03806B562976EECC00235282 /* ReviewDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDetailCoordinator.swift; sourceTree = "<group>"; };
@@ -428,6 +430,7 @@
 			isa = PBXGroup;
 			children = (
 				03C89865298856EF008E1F84 /* SummaryView.swift */,
+				036EF8CA29CE042A00CB6987 /* ContentStackView.swift */,
 				03C8986329881C62008E1F84 /* StarRatingView.swift */,
 				03C89883299522E6008E1F84 /* ShadowView.swift */,
 				03C8986729898EF1008E1F84 /* EditView.swift */,
@@ -987,6 +990,7 @@
 				03FFCC08299C0103005F74B8 /* UIImageView.swift in Sources */,
 				03FD02E5295D8DF600BC72D7 /* MovieRepository.swift in Sources */,
 				03C8986429881C62008E1F84 /* StarRatingView.swift in Sources */,
+				036EF8CB29CE042A00CB6987 /* ContentStackView.swift in Sources */,
 				03124785295B74DC00106F21 /* NetworkProvider.swift in Sources */,
 				03C8985C2986E552008E1F84 /* RecordCoordinator.swift in Sources */,
 			);
