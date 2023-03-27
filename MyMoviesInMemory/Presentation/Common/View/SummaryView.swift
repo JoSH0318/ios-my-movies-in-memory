@@ -36,7 +36,6 @@ final class SummaryView: UIView {
         let label = UILabel()
         label.textAlignment = .left
         label.font = UIFont().fontWith(.medium, .bold)
-        label.setContentCompressionResistancePriority(.required, for: .vertical)
         return label
     }()
     
@@ -45,74 +44,26 @@ final class SummaryView: UIView {
         label.textAlignment = .left
         label.font = UIFont().fontWith(.extraSmall)
         label.textColor = .systemGray3
+        label.setContentHuggingPriority(.init(1), for: .vertical)
         return label
     }()
     
-    private let genreStackView: UIStackView = {
-        let stackView = UIStackView()
+    private(set) var genreStackView: ContentStackView = {
+        let stackView = ContentStackView(Constant.genreTagName)
         stackView.spacing = Design.hStackSpacing
         return stackView
     }()
     
-    private let genreTagLabel: UILabel = {
-        let label = UILabel()
-        label.text = "장르"
-        label.textAlignment = .left
-        label.font = UIFont().fontWith(.small)
-        label.textColor = .MGray
-        return label
-    }()
-    
-    private(set) var genreLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .left
-        label.font = UIFont().fontWith(.small)
-        label.setContentHuggingPriority(.init(1), for: .horizontal)
-        return label
-    }()
-    
-    private let releaseStackView: UIStackView = {
-        let stackView = UIStackView()
+    private(set) var releaseStackView: ContentStackView = {
+        let stackView = ContentStackView(Constant.releaseTagName)
         stackView.spacing = Design.hStackSpacing
         return stackView
     }()
     
-    private let releaseTagLabel: UILabel = {
-        let label = UILabel()
-        label.text = "개봉"
-        label.textAlignment = .left
-        label.font = UIFont().fontWith(.small)
-        label.textColor = .MGray
-        return label
-    }()
-    
-    private(set) var releaseLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .left
-        label.font = UIFont().fontWith(.small)
-        return label
-    }()
-    
-    private let ratingStackView: UIStackView = {
-        let stackView = UIStackView()
+    private(set) var ratingStackView: ContentStackView = {
+        let stackView = ContentStackView(Constant.ratingTagName)
         stackView.spacing = Design.hStackSpacing
         return stackView
-    }()
-    
-    private let ratingTagLabel: UILabel = {
-        let label = UILabel()
-        label.text = "평점"
-        label.textAlignment = .left
-        label.font = UIFont().fontWith(.small)
-        label.textColor = .MGray
-        return label
-    }()
-    
-    private(set) var ratingLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .left
-        label.font = UIFont().fontWith(.small)
-        return label
     }()
     
     private(set) var overviewLabel: UILabel = {
@@ -158,15 +109,6 @@ final class SummaryView: UIView {
         
         titleStackView.addArrangedSubview(titleLabel)
         titleStackView.addArrangedSubview(originalTitleLabel)
-        
-        genreStackView.addArrangedSubview(genreTagLabel)
-        genreStackView.addArrangedSubview(genreLabel)
-        
-        releaseStackView.addArrangedSubview(releaseTagLabel)
-        releaseStackView.addArrangedSubview(releaseLabel)
-        
-        ratingStackView.addArrangedSubview(ratingTagLabel)
-        ratingStackView.addArrangedSubview(ratingLabel)
     }
     
     private func configureConstraints() {
@@ -180,6 +122,10 @@ final class SummaryView: UIView {
             $0.top.equalToSuperview().offset(Design.defaultMargin / 2)
             $0.trailing.bottom.equalToSuperview().offset(-Design.defaultMargin / 2)
         }
+        
+        titleStackView.snp.makeConstraints {
+            $0.height.equalToSuperview().multipliedBy(0.25)
+        }
     }
 }
 
@@ -189,5 +135,11 @@ extension SummaryView {
         static let cornerRadius: CGFloat = 16.0
         static let hStackSpacing: CGFloat = 16.0
         static let vStackSpacing: CGFloat = 4.0
+    }
+    
+    private enum Constant {
+        static let genreTagName: String = "장르"
+        static let releaseTagName: String = "개봉"
+        static let ratingTagName: String = "평점"
     }
 }
