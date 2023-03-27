@@ -45,15 +45,6 @@ final class EditView: UIView {
         return textView
     }()
     
-    private(set) var shortCommentTextCountLabel: UILabel = {
-        let label = UILabel()
-        label.text = "0/20"
-        label.font = UIFont().fontWith(.small)
-        label.textColor = .systemGray3
-        label.textAlignment = .center
-        return label
-    }()
-    
     private(set) var commentTextView: ContentTextView = {
         let textView = ContentTextView()
         textView.textAlignment = .left
@@ -70,15 +61,6 @@ final class EditView: UIView {
         textView.clipsToBounds = false
         textView.setContentHuggingPriority(.init(1), for: .vertical)
         return textView
-    }()
-        
-    private(set) var commentTextCountLabel: UILabel = {
-        let label = UILabel()
-        label.text = "0/700"
-        label.font = UIFont().fontWith(.small)
-        label.textColor = .systemGray3
-        label.textAlignment = .center
-        return label
     }()
     
     // MARK: - Initializer
@@ -99,9 +81,9 @@ final class EditView: UIView {
         summaryView.posterImageView.setImage(urlString: item.posterPath)
         summaryView.titleLabel.text = item.title
         summaryView.originalTitleLabel.text = item.originalTitle
-        summaryView.genreLabel.text = item.genres
-        summaryView.releaseLabel.text = item.release
-        summaryView.ratingLabel.text = item.rating
+        summaryView.genreStackView.contentLabel.text = item.genres
+        summaryView.releaseStackView.contentLabel.text = item.release
+        summaryView.ratingStackView.contentLabel.text = item.rating
         summaryView.overviewLabel.text = item.overview
         starRatingView.dragStarSlider(item.personalRatingOnTen)
         shortCommentTextView.text = item.shortComment
@@ -125,9 +107,6 @@ final class EditView: UIView {
         mainStackView.addArrangedSubview(starRatingView)
         mainStackView.addArrangedSubview(shortCommentTextView)
         mainStackView.addArrangedSubview(commentTextView)
-        
-        shortCommentTextView.addSubview(shortCommentTextCountLabel)
-        commentTextView.addSubview(commentTextCountLabel)
         
         editScrollView.snp.makeConstraints {
             $0.edges.equalTo(safeAreaLayoutGuide)
@@ -159,14 +138,6 @@ final class EditView: UIView {
         
         commentTextView.snp.makeConstraints {
             $0.height.equalTo(self.snp.height).multipliedBy(0.3)
-        }
-        
-        shortCommentTextCountLabel.snp.makeConstraints {
-            $0.trailing.bottom.equalToSuperview().offset(-Design.defaultMargin)
-        }
-        
-        commentTextCountLabel.snp.makeConstraints {
-            $0.trailing.bottom.equalToSuperview().offset(-Design.defaultMargin)
         }
     }
     
