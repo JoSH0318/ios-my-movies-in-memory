@@ -81,16 +81,3 @@ final class HomeViewController: UIViewController {
             .disposed(by: disposeBag)
     }
 }
-
-struct ReviewSection {
-    var items: [Review]
-}
-
-extension ReviewSection: SectionModelType {
-    typealias Item = Review
-    
-    init(original: ReviewSection, items: [Review]) {
-        self = original
-        self.items = items
-    }
-}

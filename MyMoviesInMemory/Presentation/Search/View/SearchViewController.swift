@@ -137,16 +137,3 @@ extension SearchViewController {
         static let itemCountRatio: CGFloat = 0.2
     }
 }
-
-struct MovieSection {
-    var items: [Movie]
-}
-
-extension MovieSection: SectionModelType {
-    typealias Item = Movie
-    
-    init(original: MovieSection, items: [Movie]) {
-        self = original
-        self.items = items
-    }
-}
