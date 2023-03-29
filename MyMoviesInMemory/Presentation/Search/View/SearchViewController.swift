@@ -21,7 +21,7 @@ class SearchViewController: UIViewController {
     private let disposeBag = DisposeBag()
     private let searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
-        searchController.searchBar.placeholder = "Search Movies"
+        searchController.searchBar.placeholder = Constant.searchBarPlaceholder
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.searchBar.showsCancelButton = false
         return searchController
@@ -126,7 +126,7 @@ class SearchViewController: UIViewController {
     
     private func setUpSearchViewController() {
         self.navigationItem.searchController = searchController
-        self.navigationItem.title = "영화 찾기"
+        self.navigationItem.title = Constant.navigationTitle
         self.navigationItem.hidesSearchBarWhenScrolling = false
     }
 }
@@ -135,5 +135,10 @@ extension SearchViewController {
     private enum Design {
         static let defaultMargin: CGFloat = 20.0
         static let itemCountRatio: CGFloat = 0.2
+    }
+    
+    private enum Constant {
+        static let searchBarPlaceholder = "Search Movies"
+        static let navigationTitle = "영화 찾기"
     }
 }
