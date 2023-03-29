@@ -8,10 +8,10 @@
 import Foundation
 
 enum HTTPMethod {
-  case get
-  case post
-  case patch
-  case delete
+    case get
+    case post
+    case patch
+    case delete
 }
 
 extension HTTPMethod {

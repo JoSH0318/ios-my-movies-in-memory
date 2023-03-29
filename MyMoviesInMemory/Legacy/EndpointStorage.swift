@@ -21,7 +21,6 @@ enum EndpointStorage {
 }
 
 extension EndpointStorage {
-    
     var asEndpoint: Endpoint {
         switch self {
         case .searchMovie(let title):
