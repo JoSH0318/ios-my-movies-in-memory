@@ -101,8 +101,6 @@ final class StarRatingView: UIView {
     
     private func configureView() {
         backgroundColor = .MWhite
-        clipsToBounds = true
-        layer.cornerRadius = Design.cornerRadius
     }
     
     private func configureUI() {
@@ -156,7 +154,6 @@ final class StarRatingView: UIView {
 extension StarRatingView {
     private enum Design {
         static let defaultMargin: CGFloat = 16.0
-        static let cornerRadius: CGFloat = 16.0
     }
 }
 
