@@ -75,119 +75,35 @@ final class ReviewDetailView: UIView {
         return label
     }()
     
-    private let summaryStackView: UIStackView = {
-        let stackView = UIStackView()
+    private let summaryStackView: ContentStackView = {
+        let stackView = ContentStackView("개요", .medium)
         stackView.spacing = Design.hStackSpacing
         return stackView
     }()
     
-    private let summaryTagLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .left
-        label.font = UIFont().fontWith(.medium, .bold)
-        label.textColor = .systemGray
-        label.text = "개요"
-        label.setContentHuggingPriority(.required, for: .horizontal)
-        return label
-    }()
-    
-    private let summaryLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .left
-        label.font = UIFont().fontWith(.medium)
-        return label
-    }()
-    
-    private let directorStackView: UIStackView = {
-        let stackView = UIStackView()
+    private let directorStackView: ContentStackView = {
+        let stackView = ContentStackView("감독", .medium)
         stackView.spacing = Design.hStackSpacing
         return stackView
     }()
     
-    private let directorTagLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .left
-        label.font = UIFont().fontWith(.medium, .bold)
-        label.textColor = .systemGray
-        label.text = "감독"
-        return label
-    }()
-    
-    private let directorLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .left
-        label.font = UIFont().fontWith(.medium)
-        label.setContentHuggingPriority(.init(1), for: .horizontal)
-        return label
-    }()
-    
-    private let actorsStackView: UIStackView = {
-        let stackView = UIStackView()
+    private let actorsStackView: ContentStackView = {
+        let stackView = ContentStackView("출연", .medium)
+        stackView.contentLabel.numberOfLines = 2
         stackView.spacing = Design.hStackSpacing
         return stackView
     }()
     
-    private let actorsTagLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .left
-        label.font = UIFont().fontWith(.medium, .bold)
-        label.textColor = .systemGray
-        label.text = "출연"
-        return label
-    }()
-    
-    private let actorsLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .left
-        label.font = UIFont().fontWith(.medium)
-        label.numberOfLines = 2
-        return label
-    }()
-    
-    private let releaseStackView: UIStackView = {
-        let stackView = UIStackView()
+    private let releaseStackView: ContentStackView = {
+        let stackView = ContentStackView("개봉", .medium)
         stackView.spacing = Design.hStackSpacing
         return stackView
     }()
     
-    private let releaseTagLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .left
-        label.font = UIFont().fontWith(.medium, .bold)
-        label.textColor = .systemGray
-        label.text = "개봉"
-        return label
-    }()
-    
-    private let releaseLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .left
-        label.font = UIFont().fontWith(.medium)
-        label.setContentHuggingPriority(.init(1), for: .horizontal)
-        return label
-    }()
-    
-    private let ratingStackView: UIStackView = {
-        let stackView = UIStackView()
+    private let ratingStackView: ContentStackView = {
+        let stackView = ContentStackView("평점", .medium)
         stackView.spacing = Design.hStackSpacing
         return stackView
-    }()
-    
-    private let ratingTagLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .left
-        label.font = UIFont().fontWith(.medium, .bold)
-        label.textColor = .systemGray
-        label.text = "평점"
-        return label
-    }()
-    
-    private let ratingLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .left
-        label.font = UIFont().fontWith(.medium)
-        label.setContentHuggingPriority(.init(1), for: .horizontal)
-        return label
     }()
     
     private let overviewLabel: UILabel = {
@@ -198,26 +114,14 @@ final class ReviewDetailView: UIView {
         return label
     }()
     
-    private let starRatingStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.spacing = Design.vStackSpacing / 2
-        return stackView
+    private let starRatingBackgroundView: ShadowBackgroundView = {
+        let view = ShadowBackgroundView()
+        view.backgroundColor = .MWhite
+        view.layer.cornerRadius = Design.cornerRadius
+        return view
     }()
     
-    private let starRatingTagLabel: UILabel = {
-        let label = UILabel()
-        label.text = "내 영화 점수:"
-        label.font = UIFont().fontWith(.small)
-        label.textColor = .systemGray
-        return label
-    }()
-    
-    private let starRatingView: StarRatingView = {
-        let starRatingView = StarRatingView()
-        starRatingView.layer.applyShadow()
-        return starRatingView
-    }()
+    private let starRatingView = StarRatingView()
     
     private let reviewStackView: UIStackView = {
         let stackView = UIStackView()
@@ -285,11 +189,11 @@ final class ReviewDetailView: UIView {
         backgroundImageView.image = posterImageView.image
         titleLabel.text = item.title
         originalTitleLabel.text = item.originalTitle
-        summaryLabel.text = item.summary
-        directorLabel.text = item.director
-        actorsLabel.text = item.actors
-        releaseLabel.text = item.release
-        ratingLabel.text = item.rating
+        summaryStackView.contentLabel.text = item.summary
+        directorStackView.contentLabel.text = item.director
+        actorsStackView.contentLabel.text = item.actors
+        releaseStackView.contentLabel.text = item.release
+        ratingStackView.contentLabel.text = item.rating
         overviewLabel.text = item.overview
 
         starRatingView.dragStarSlider(item.personalRatingOnTen)
@@ -307,7 +211,7 @@ final class ReviewDetailView: UIView {
         
         detailContentView.addSubview(posterImageView)
         detailContentView.addSubview(informationStackView)
-        detailContentView.addSubview(starRatingView)
+        detailContentView.addSubview(starRatingBackgroundView)
         detailContentView.addSubview(reviewStackView)
         
         informationStackView.addArrangedSubview(titleStackView)
@@ -320,23 +224,10 @@ final class ReviewDetailView: UIView {
         informationStackView.addArrangedSubview(DividerLineView())
         informationStackView.addArrangedSubview(overviewLabel)
         
+        starRatingBackgroundView.addSubview(starRatingView)
+        
         titleStackView.addArrangedSubview(titleLabel)
         titleStackView.addArrangedSubview(originalTitleLabel)
-        
-        summaryStackView.addArrangedSubview(summaryTagLabel)
-        summaryStackView.addArrangedSubview(summaryLabel)
-        
-        directorStackView.addArrangedSubview(directorTagLabel)
-        directorStackView.addArrangedSubview(directorLabel)
-        
-        actorsStackView.addArrangedSubview(actorsTagLabel)
-        actorsStackView.addArrangedSubview(actorsLabel)
-        
-        releaseStackView.addArrangedSubview(releaseTagLabel)
-        releaseStackView.addArrangedSubview(releaseLabel)
-        
-        ratingStackView.addArrangedSubview(ratingTagLabel)
-        ratingStackView.addArrangedSubview(ratingLabel)
         
         reviewStackView.addArrangedSubview(shortCommentTagLabel)
         reviewStackView.addArrangedSubview(shortCommentLabel)
@@ -373,17 +264,23 @@ final class ReviewDetailView: UIView {
             $0.trailing.equalToSuperview().offset(-Design.defaultMargin)
         }
         
-        starRatingView.snp.makeConstraints {
-            $0.height.equalTo(starRatingView.snp.width).multipliedBy(Design.starRatingViewRadius)
+        starRatingBackgroundView.snp.makeConstraints {
+            $0.height.equalTo(starRatingBackgroundView.snp.width).multipliedBy(Design.starRatingViewRadius)
             $0.top.equalTo(informationStackView.snp.bottom).offset(Design.defaultMargin)
             $0.leading.equalToSuperview().offset(Design.defaultMargin)
             $0.trailing.equalToSuperview().offset(-Design.defaultMargin)
         }
         
         reviewStackView.snp.makeConstraints {
-            $0.top.equalTo(starRatingView.snp.bottom).offset(Design.defaultMargin)
+            $0.top.equalTo(starRatingBackgroundView.snp.bottom).offset(Design.defaultMargin)
             $0.leading.equalToSuperview().offset(Design.defaultMargin)
             $0.trailing.bottom.equalToSuperview().offset(-Design.defaultMargin)
+        }
+        
+        starRatingView.snp.makeConstraints {
+            $0.height.equalToSuperview().multipliedBy(0.4)
+            $0.width.equalToSuperview()
+            $0.center.equalToSuperview()
         }
     }
 }
@@ -397,7 +294,7 @@ extension ReviewDetailView {
         
         static let cornerRadius: CGFloat = 16.0
         
-        static let starRatingViewRadius: CGFloat = 0.15
+        static let starRatingViewRadius: CGFloat = 0.2
         static let posterHeightRadius: CGFloat = 0.6
         static let backgroundImageHeightRadius: CGFloat = 0.7
     }
