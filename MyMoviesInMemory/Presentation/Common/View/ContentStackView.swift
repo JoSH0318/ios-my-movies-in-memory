@@ -14,23 +14,23 @@ final class ContentStackView: UIStackView {
     private let tagLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
-        label.font = UIFont().fontWith(.small)
+        label.textColor = .systemGray
         return label
     }()
     
     private(set) var contentLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
-        label.font = UIFont().fontWith(.small)
         label.setContentHuggingPriority(.init(1), for: .horizontal)
         return label
     }()
     
     // MARK: - Initializer
     
-    init(_ tagName: String) {
+    init(_ tagName: String, _ fontSize: FontSize) {
         super.init(frame: .zero)
         configureContentStackView(tagName)
+        setupFont(fontSize)
     }
     
     required init(coder: NSCoder) {
@@ -47,5 +47,10 @@ final class ContentStackView: UIStackView {
     private func configureLayout() {
         addArrangedSubview(tagLabel)
         addArrangedSubview(contentLabel)
+    }
+    
+    private func setupFont(_ fontSize: FontSize) {
+        tagLabel.font = UIFont().fontWith(fontSize, .bold)
+        contentLabel.font = UIFont().fontWith(fontSize)
     }
 }

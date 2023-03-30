@@ -49,19 +49,19 @@ final class SummaryView: UIView {
     }()
     
     private(set) var genreStackView: ContentStackView = {
-        let stackView = ContentStackView(Constant.genreTagName)
+        let stackView = ContentStackView(Constant.genreTagName, .small)
         stackView.spacing = Design.hStackSpacing
         return stackView
     }()
     
     private(set) var releaseStackView: ContentStackView = {
-        let stackView = ContentStackView(Constant.releaseTagName)
+        let stackView = ContentStackView(Constant.releaseTagName, .small)
         stackView.spacing = Design.hStackSpacing
         return stackView
     }()
     
     private(set) var ratingStackView: ContentStackView = {
-        let stackView = ContentStackView(Constant.ratingTagName)
+        let stackView = ContentStackView(Constant.ratingTagName, .small)
         stackView.spacing = Design.hStackSpacing
         return stackView
     }()
