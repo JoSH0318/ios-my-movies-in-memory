@@ -22,11 +22,14 @@ final class EditView: UIView {
     
     private let summaryView = SummaryView()
     
-    private(set) var starRatingView: StarRatingView = {
-        let view = StarRatingView()
-        view.layer.applyShadow()
+    private let starRatingBackgroundView: ShadowBackgroundView = {
+        let view = ShadowBackgroundView()
+        view.backgroundColor = .MWhite
+        view.layer.cornerRadius = Design.cornerRadius
         return view
     }()
+    
+    private(set) var starRatingView = StarRatingView()
     
     private(set) var shortCommentTextView: ContentTextView = {
         let textView = ContentTextView()
@@ -97,14 +100,15 @@ final class EditView: UIView {
     private func configureLayout() {
         backgroundColor = .MLight
         
-        let shadowView = ShadowView()
+        let summaryBackgroundView = ShadowBackgroundView()
         
         addSubview(editScrollView)
         editScrollView.addSubview(mainStackView)
-        shadowView.addSubview(summaryView)
+        summaryBackgroundView.addSubview(summaryView)
+        starRatingBackgroundView.addSubview(starRatingView)
         
-        mainStackView.addArrangedSubview(shadowView)
-        mainStackView.addArrangedSubview(starRatingView)
+        mainStackView.addArrangedSubview(summaryBackgroundView)
+        mainStackView.addArrangedSubview(starRatingBackgroundView)
         mainStackView.addArrangedSubview(shortCommentTextView)
         mainStackView.addArrangedSubview(commentTextView)
         
@@ -120,7 +124,7 @@ final class EditView: UIView {
             $0.width.equalToSuperview().offset(-Design.mainStackMargin * 2)
         }
         
-        shadowView.snp.makeConstraints {
+        summaryBackgroundView.snp.makeConstraints {
             $0.height.equalTo(self.snp.height).multipliedBy(0.2)
         }
         
@@ -128,8 +132,8 @@ final class EditView: UIView {
             $0.edges.equalToSuperview()
         }
         
-        starRatingView.snp.makeConstraints {
-            $0.height.equalTo(self.snp.height).multipliedBy(0.07)
+        starRatingBackgroundView.snp.makeConstraints {
+            $0.height.equalTo(self.snp.height).multipliedBy(0.1)
         }
         
         shortCommentTextView.snp.makeConstraints {
@@ -138,6 +142,12 @@ final class EditView: UIView {
         
         commentTextView.snp.makeConstraints {
             $0.height.equalTo(self.snp.height).multipliedBy(0.3)
+        }
+        
+        starRatingView.snp.makeConstraints {
+            $0.height.equalToSuperview().multipliedBy(0.4)
+            $0.width.equalToSuperview()
+            $0.center.equalToSuperview()
         }
     }
     
