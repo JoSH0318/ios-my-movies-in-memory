@@ -42,7 +42,7 @@
 		03C8987C299020D7008E1F84 /* ReviewDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C8987B299020D7008E1F84 /* ReviewDetailView.swift */; };
 		03C8987E2992CFCA008E1F84 /* CALayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C8987D2992CFCA008E1F84 /* CALayer.swift */; };
 		03C898802992D260008E1F84 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C8987F2992D260008E1F84 /* UIFont.swift */; };
-		03C89884299522E6008E1F84 /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C89883299522E6008E1F84 /* ShadowView.swift */; };
+		03C89884299522E6008E1F84 /* ShadowBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C89883299522E6008E1F84 /* ShadowBackgroundView.swift */; };
 		03CC1FDD299E1415009E286A /* MovieDetailResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CC1FDC299E1415009E286A /* MovieDetailResponse.swift */; };
 		03CC1FDF299E9AEC009E286A /* MovieDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CC1FDE299E9AEC009E286A /* MovieDetail.swift */; };
 		03CC1FE129A0C52D009E286A /* CreditsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CC1FE029A0C52D009E286A /* CreditsResponse.swift */; };
@@ -136,7 +136,7 @@
 		03C8987B299020D7008E1F84 /* ReviewDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDetailView.swift; sourceTree = "<group>"; };
 		03C8987D2992CFCA008E1F84 /* CALayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CALayer.swift; sourceTree = "<group>"; };
 		03C8987F2992D260008E1F84 /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
-		03C89883299522E6008E1F84 /* ShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
+		03C89883299522E6008E1F84 /* ShadowBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowBackgroundView.swift; sourceTree = "<group>"; };
 		03CC1FDC299E1415009E286A /* MovieDetailResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailResponse.swift; sourceTree = "<group>"; };
 		03CC1FDE299E9AEC009E286A /* MovieDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetail.swift; sourceTree = "<group>"; };
 		03CC1FE029A0C52D009E286A /* CreditsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsResponse.swift; sourceTree = "<group>"; };
@@ -438,7 +438,7 @@
 				036EF8CA29CE042A00CB6987 /* ContentStackView.swift */,
 				03D1185E29BBA61B0090148B /* ContentTextView.swift */,
 				03C8986329881C62008E1F84 /* StarRatingView.swift */,
-				03C89883299522E6008E1F84 /* ShadowView.swift */,
+				03C89883299522E6008E1F84 /* ShadowBackgroundView.swift */,
 				03C8986729898EF1008E1F84 /* EditView.swift */,
 				03CC1FEA29A4EDA3009E286A /* DividerLineView.swift */,
 			);
@@ -946,7 +946,7 @@
 				03FD02FD295DA35E00BC72D7 /* CoreDataManager.swift in Sources */,
 				03806B5B2976EF0700235282 /* ReviewDetailViewModel.swift in Sources */,
 				03C89866298856EF008E1F84 /* SummaryView.swift in Sources */,
-				03C89884299522E6008E1F84 /* ShadowView.swift in Sources */,
+				03C89884299522E6008E1F84 /* ShadowBackgroundView.swift in Sources */,
 				03FD0373296F0AD900BC72D7 /* UIColor.swift in Sources */,
 				03FFCC01299BC90D005F74B8 /* SearchCellViewModelItem.swift in Sources */,
 				03FD0335296C1B5B00BC72D7 /* ReviewCell.swift in Sources */,

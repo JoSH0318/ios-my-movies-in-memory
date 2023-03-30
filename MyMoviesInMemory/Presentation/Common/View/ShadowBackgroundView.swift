@@ -7,7 +7,7 @@
 
 import SnapKit
 
-final class ShadowView: UIView {
+final class ShadowBackgroundView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
