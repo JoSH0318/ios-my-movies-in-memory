@@ -12,10 +12,11 @@ final class ReviewCell: UICollectionViewCell {
     
     // MARK: - Properties
     
-    private let movieTicketView = TicketView()
     private var viewModel: ReviewCellViewModel?
     private var disposeBag = DisposeBag()
     private var task: URLSessionDataTask?
+    
+    private let movieTicketView = TicketView()
     
     private let posterImageView: UIImageView = {
         let imageView = UIImageView()
@@ -86,7 +87,7 @@ final class ReviewCell: UICollectionViewCell {
     
     private let recordDate: UILabel = {
         let label = UILabel()
-        label.font = UIFont().fontWith(.medium)
+        label.font = UIFont().fontWith(.small)
         label.textAlignment = .right
         label.textColor = .systemGray4
         return label
@@ -233,7 +234,7 @@ final class ReviewCell: UICollectionViewCell {
         
         reviewSectionStackView.snp.makeConstraints {
             $0.top.equalTo(movieTicketView.snp.top)
-                .offset(self.bounds.height * Design.reviewSectionRadius)
+                .offset(self.bounds.height * Design.reviewSectionRadius + Design.defaultMargin)
             $0.leading.equalToSuperview().offset(Design.defaultMargin)
             $0.trailing.equalToSuperview().offset(-Design.defaultMargin)
             $0.bottom.equalTo(movieTicketView.snp.bottom)
@@ -248,8 +249,8 @@ final class ReviewCell: UICollectionViewCell {
         barcodeSectionStackView.snp.makeConstraints {
             $0.top.equalTo(movieTicketView.snp.top)
                 .offset(self.bounds.height * Design.dateSectionRadius + Design.defaultMargin)
-            $0.leading.equalToSuperview().offset(Design.defaultMargin)
-            $0.trailing.equalToSuperview().offset(-Design.defaultMargin)
+            $0.leading.equalToSuperview().offset(Design.defaultMargin * 2)
+            $0.trailing.equalToSuperview().offset(-Design.defaultMargin * 2)
             $0.bottom.equalToSuperview().offset(-Design.defaultMargin / 2)
         }
         
@@ -268,7 +269,7 @@ extension ReviewCell {
         static let reviewSectionRadius: CGFloat = 0.6
         static let dateSectionRadius: CGFloat = 0.85
         
-        static let starRatingViewRadius: CGFloat = 0.4
-        static let barcodeRadius: CGFloat = 0.6
+        static let starRatingViewRadius: CGFloat = 0.2
+        static let barcodeRadius: CGFloat = 0.5
     }
 }
