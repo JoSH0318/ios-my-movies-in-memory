@@ -115,7 +115,7 @@ class SearchViewController: UIViewController {
     }
     
     private func configureLayout() {
-        searchCollectionView.backgroundColor = .MBeige
+        searchCollectionView.backgroundColor = .MLight
         
         view.addSubview(searchCollectionView)
         

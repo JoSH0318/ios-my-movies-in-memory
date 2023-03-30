@@ -18,7 +18,7 @@ final class SearchDetailViewController: UIViewController {
     private let searchDetailView = SearchDetailView()
     private let editBarButton: UIBarButtonItem = {
         let barButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: nil, action: nil)
-        barButtonItem.tintColor = .MGreen
+        barButtonItem.tintColor = .MGray
         return barButtonItem
     }()
     
@@ -109,7 +109,7 @@ final class SearchDetailViewController: UIViewController {
         UIView.animate(withDuration: 0.2) { [weak self] in
             self?.navigationController?
                 .navigationBar
-                .backgroundColor = isScrollUp ? .MBeige : .clear
+                .backgroundColor = isScrollUp ? .MLight : .clear
         }
     }
 }

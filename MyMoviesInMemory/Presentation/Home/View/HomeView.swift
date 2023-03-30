@@ -40,8 +40,8 @@ final class HomeView: UIView {
     }
     
     private func configureLayout() {
-        backgroundColor = .MBeige
-        reviewCollectionView.backgroundColor = .MBeige
+        backgroundColor = .MLight
+        reviewCollectionView.backgroundColor = .MLight
         
         addSubview(reviewCollectionView)
         

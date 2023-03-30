@@ -8,8 +8,8 @@
 import UIKit
 
 extension UIColor {
-    static let MBeige = UIColor(named: "MBeige")
+    static let MLight = UIColor(named: "MLight")
+    static let MDark = UIColor(named: "MDark")
     static let MGray = UIColor(named: "MGray")
-    static let MGreen = UIColor(named: "MGreen")
     static let MWhite = UIColor(named: "MWhite")
 }

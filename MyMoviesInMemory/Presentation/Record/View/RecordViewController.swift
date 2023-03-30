@@ -22,7 +22,7 @@ class RecordViewController: UIViewController {
             target: nil,
             action: nil
         )
-        barButtonItem.tintColor = .MGreen
+        barButtonItem.tintColor = .MGray
         return barButtonItem
     }()
     

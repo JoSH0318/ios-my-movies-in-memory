@@ -298,7 +298,7 @@ final class ReviewDetailView: UIView {
     }
     
     private func configureLayout() {
-        backgroundColor = .MBeige
+        backgroundColor = .MLight
         
         addSubview(backgroundImageView)
         addSubview(detailScrollView)

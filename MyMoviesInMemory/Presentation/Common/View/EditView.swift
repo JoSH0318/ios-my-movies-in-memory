@@ -95,7 +95,7 @@ final class EditView: UIView {
     }
     
     private func configureLayout() {
-        backgroundColor = .MBeige
+        backgroundColor = .MLight
         
         let shadowView = ShadowView()
         
