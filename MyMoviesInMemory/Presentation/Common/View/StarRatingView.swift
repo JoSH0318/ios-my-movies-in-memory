@@ -63,7 +63,9 @@ final class StarRatingView: UIView {
     
     private let starStackView: UIStackView = {
         let stackView = UIStackView()
-        stackView.spacing = Design.hStackSpacing
+        stackView.alignment = .center
+        stackView.distribution = .equalCentering
+        stackView.spacing = Design.defaultMargin / 2
         return stackView
     }()
     
@@ -99,6 +101,7 @@ final class StarRatingView: UIView {
     
     private func configureView() {
         backgroundColor = .MWhite
+        clipsToBounds = true
         layer.cornerRadius = Design.cornerRadius
     }
     
@@ -140,15 +143,12 @@ final class StarRatingView: UIView {
         }
         
         starStackView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(Design.defaultMargin)
+            $0.top.bottom.equalToSuperview()
             $0.centerX.equalToSuperview()
-            $0.bottom.equalToSuperview().offset(-Design.defaultMargin)
         }
         
         starRatingSlider.snp.makeConstraints {
-            $0.leading.equalTo(starStackView.snp.leading)
-            $0.trailing.equalTo(starStackView.snp.trailing)
-            $0.centerY.equalTo(starStackView.snp.centerY)
+            $0.edges.equalTo(starStackView)
         }
     }
 }
@@ -156,7 +156,6 @@ final class StarRatingView: UIView {
 extension StarRatingView {
     private enum Design {
         static let defaultMargin: CGFloat = 16.0
-        static let hStackSpacing: CGFloat = 16.0
         static let cornerRadius: CGFloat = 16.0
     }
 }
