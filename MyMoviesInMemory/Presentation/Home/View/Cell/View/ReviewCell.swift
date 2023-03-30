@@ -190,10 +190,10 @@ final class ReviewCell: UICollectionViewCell {
     private func configureLayout() {
         backgroundColor = .clear
         
-        let shadowView = ShadowView()
+        let ticketBackgroundView = ShadowBackgroundView()
         
-        contentView.addSubview(shadowView)
-        shadowView.addSubview(movieTicketView)
+        contentView.addSubview(ticketBackgroundView)
+        ticketBackgroundView.addSubview(movieTicketView)
         
         movieTicketView.addSubview(posterImageView)
         movieTicketView.addSubview(titleStackView)
@@ -209,7 +209,7 @@ final class ReviewCell: UICollectionViewCell {
         barcodeSectionStackView.addArrangedSubview(barcodeImageView)
         barcodeSectionStackView.addArrangedSubview(recordDate)
         
-        shadowView.snp.makeConstraints {
+        ticketBackgroundView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
         
