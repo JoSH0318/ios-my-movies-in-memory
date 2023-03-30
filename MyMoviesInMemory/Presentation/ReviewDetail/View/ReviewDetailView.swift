@@ -76,32 +76,32 @@ final class ReviewDetailView: UIView {
     }()
     
     private let summaryStackView: ContentStackView = {
-        let stackView = ContentStackView("개요", .medium)
+        let stackView = ContentStackView(Constant.summaryTagName, .medium)
         stackView.spacing = Design.hStackSpacing
         return stackView
     }()
     
     private let directorStackView: ContentStackView = {
-        let stackView = ContentStackView("감독", .medium)
+        let stackView = ContentStackView(Constant.directorTagName, .medium)
         stackView.spacing = Design.hStackSpacing
         return stackView
     }()
     
     private let actorsStackView: ContentStackView = {
-        let stackView = ContentStackView("출연", .medium)
+        let stackView = ContentStackView(Constant.actorsTagName, .medium)
         stackView.contentLabel.numberOfLines = 2
         stackView.spacing = Design.hStackSpacing
         return stackView
     }()
     
     private let releaseStackView: ContentStackView = {
-        let stackView = ContentStackView("개봉", .medium)
+        let stackView = ContentStackView(Constant.releaseTagName, .medium)
         stackView.spacing = Design.hStackSpacing
         return stackView
     }()
     
     private let ratingStackView: ContentStackView = {
-        let stackView = ContentStackView("평점", .medium)
+        let stackView = ContentStackView(Constant.ratingTagName, .medium)
         stackView.spacing = Design.hStackSpacing
         return stackView
     }()
@@ -142,7 +142,7 @@ final class ReviewDetailView: UIView {
     
     private let shortCommentTagLabel: UILabel = {
         let label = UILabel()
-        label.text = "영화 한줄평:"
+        label.text = Constant.shortCommentTagName
         label.font = UIFont().fontWith(.small)
         label.textColor = .systemGray
         return label
@@ -157,7 +157,7 @@ final class ReviewDetailView: UIView {
     
     private let commentTagLabel: UILabel = {
         let label = UILabel()
-        label.text = "영화 감상평:"
+        label.text = Constant.commentTagName
         label.font = UIFont().fontWith(.small)
         label.textColor = .systemGray
         return label
@@ -297,5 +297,16 @@ extension ReviewDetailView {
         static let starRatingViewRadius: CGFloat = 0.2
         static let posterHeightRadius: CGFloat = 0.6
         static let backgroundImageHeightRadius: CGFloat = 0.7
+    }
+    
+    private enum Constant {
+        static let summaryTagName: String = "개요"
+        static let directorTagName: String = "감독"
+        static let actorsTagName: String = "출연"
+        static let releaseTagName: String = "개봉"
+        static let ratingTagName: String = "평점"
+        
+        static let commentTagName: String = "영화 한줄평"
+        static let shortCommentTagName: String = "영화 감상평"
     }
 }
