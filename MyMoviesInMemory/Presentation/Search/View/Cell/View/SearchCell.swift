@@ -91,12 +91,12 @@ final class SearchCell: UICollectionViewCell {
     // MARK: - Methods
     
     private func configureLayout() {
-        let shadowView = ShadowView()
+        let summaryBackgroundView = ShadowBackgroundView()
         
-        contentView.addSubview(shadowView)
-        shadowView.addSubview(summaryView)
+        contentView.addSubview(summaryBackgroundView)
+        summaryBackgroundView.addSubview(summaryView)
         
-        shadowView.snp.makeConstraints {
+        summaryBackgroundView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
         
