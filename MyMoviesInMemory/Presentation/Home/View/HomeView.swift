@@ -66,6 +66,10 @@ final class HomeView: UIView {
         }
     }
     
+    func presentInitialNotice() {
+        initialNoticeLabel.isHidden = false
+    }
+    
     func hideInitialNotice() {
         initialNoticeLabel.isHidden = true
     }

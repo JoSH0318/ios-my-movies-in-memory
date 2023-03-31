@@ -68,7 +68,9 @@ final class HomeViewController: UIViewController {
             .reviews
             .withUnretained(self)
             .map { owner, reviews in
-                if !reviews.isEmpty {
+                if reviews.isEmpty {
+                    owner.homeView.presentInitialNotice()
+                } else {
                     owner.homeView.hideInitialNotice()
                 }
                 return [ReviewSection(items: reviews)]
