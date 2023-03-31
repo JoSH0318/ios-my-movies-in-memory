@@ -66,8 +66,12 @@ final class HomeViewController: UIViewController {
         
         output
             .reviews
-            .map { reviews in
-                [ReviewSection(items: reviews)]
+            .withUnretained(self)
+            .map { owner, reviews in
+                if !reviews.isEmpty {
+                    owner.homeView.hideInitialNotice()
+                }
+                return [ReviewSection(items: reviews)]
             }
             .bind(to: homeView.reviewCollectionView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)

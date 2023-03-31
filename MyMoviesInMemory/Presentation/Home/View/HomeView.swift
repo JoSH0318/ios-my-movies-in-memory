@@ -12,6 +12,15 @@ final class HomeView: UIView {
     
     // MARK: - Properties
     
+    private let initialNoticeLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont().fontWith(.extraLarge, .bold)
+        label.textColor = .MGray
+        label.text = "저장한 영화가 없습니다."
+        label.numberOfLines = 0
+        return label
+    }()
+    
     private(set) var reviewCollectionView = UICollectionView(
         frame: .zero,
         collectionViewLayout: CarouselLayout()
@@ -44,11 +53,20 @@ final class HomeView: UIView {
         reviewCollectionView.backgroundColor = .MLight
         
         addSubview(reviewCollectionView)
+        addSubview(initialNoticeLabel)
+        
+        initialNoticeLabel.snp.makeConstraints {
+            $0.center.equalToSuperview()
+        }
         
         reviewCollectionView.snp.makeConstraints{
             $0.leading.trailing.equalTo(safeAreaLayoutGuide)
             $0.top.equalToSuperview().offset(UIScreen.main.bounds.height * 0.1)
             $0.bottom.equalToSuperview().offset(-UIScreen.main.bounds.height * 0.1)
         }
+    }
+    
+    func hideInitialNotice() {
+        initialNoticeLabel.isHidden = true
     }
 }

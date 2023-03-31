@@ -40,7 +40,6 @@ final class HomeViewModel {
             .flatMap { owner, _ in
                 owner.reviewUseCase.fetchReviews()
             }
-            .filter { !$0.isEmpty }
         
         return Output(reviews: reviews)
     }
