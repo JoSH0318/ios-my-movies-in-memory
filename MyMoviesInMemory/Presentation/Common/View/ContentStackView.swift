@@ -45,6 +45,8 @@ final class ContentStackView: UIStackView {
     }
     
     private func configureLayout() {
+        self.alignment = .top
+        
         addArrangedSubview(tagLabel)
         addArrangedSubview(contentLabel)
     }
