@@ -254,8 +254,8 @@
 		03806B542976EEA600235282 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				03806B582976EEF800235282 /* ReviewDetailViewController.swift */,
 				03C8987B299020D7008E1F84 /* ReviewDetailView.swift */,
+				03806B582976EEF800235282 /* ReviewDetailViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -291,8 +291,8 @@
 		03806B5E2977D38300235282 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				03806B622977D3E800235282 /* SearchDetailViewController.swift */,
 				03806B6B297EC73C00235282 /* SearchDetailView.swift */,
+				03806B622977D3E800235282 /* SearchDetailViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
