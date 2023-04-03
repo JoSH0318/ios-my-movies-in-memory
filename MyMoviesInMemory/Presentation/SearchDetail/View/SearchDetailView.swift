@@ -75,116 +75,35 @@ final class SearchDetailView: UIView {
         return label
     }()
     
-    private let summaryStackView: UIStackView = {
-        let stackView = UIStackView()
+    private let summaryStackView: ContentStackView = {
+        let stackView = ContentStackView(Constant.summaryTagName, .medium)
         stackView.spacing = Design.hStackSpacing
         return stackView
     }()
     
-    private let summaryTagLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .left
-        label.font = UIFont().fontWith(.medium, .bold)
-        label.textColor = .systemGray
-        label.text = "개요"
-        label.setContentHuggingPriority(.required, for: .horizontal)
-        return label
-    }()
-    
-    private let summaryLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .left
-        label.font = UIFont().fontWith(.medium)
-        return label
-    }()
-    
-    private let directorStackView: UIStackView = {
-        let stackView = UIStackView()
+    private let directorStackView: ContentStackView = {
+        let stackView = ContentStackView(Constant.directorTagName, .medium)
         stackView.spacing = Design.hStackSpacing
         return stackView
     }()
     
-    private let directorTagLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .left
-        label.font = UIFont().fontWith(.medium, .bold)
-        label.textColor = .systemGray
-        label.text = "감독"
-        return label
-    }()
-    
-    private let directorLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .left
-        label.font = UIFont().fontWith(.medium)
-        return label
-    }()
-    
-    private let actorsStackView: UIStackView = {
-        let stackView = UIStackView()
+    private let actorsStackView: ContentStackView = {
+        let stackView = ContentStackView(Constant.actorsTagName, .medium)
+        stackView.contentLabel.numberOfLines = 2
         stackView.spacing = Design.hStackSpacing
         return stackView
     }()
     
-    private let actorsTagLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .left
-        label.font = UIFont().fontWith(.medium, .bold)
-        label.textColor = .systemGray
-        label.text = "출연"
-        return label
-    }()
-    
-    private let actorsLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .left
-        label.font = UIFont().fontWith(.medium)
-        label.numberOfLines = 2
-        return label
-    }()
-    
-    private let releaseStackView: UIStackView = {
-        let stackView = UIStackView()
+    private let releaseStackView: ContentStackView = {
+        let stackView = ContentStackView(Constant.releaseTagName, .medium)
         stackView.spacing = Design.hStackSpacing
         return stackView
     }()
     
-    private let releaseTagLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .left
-        label.font = UIFont().fontWith(.medium, .bold)
-        label.textColor = .systemGray
-        label.text = "개봉"
-        return label
-    }()
-    
-    private let releaseLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .left
-        label.font = UIFont().fontWith(.medium)
-        return label
-    }()
-    
-    private let ratingStackView: UIStackView = {
-        let stackView = UIStackView()
+    private let ratingStackView: ContentStackView = {
+        let stackView = ContentStackView(Constant.ratingTagName, .medium)
         stackView.spacing = Design.hStackSpacing
         return stackView
-    }()
-    
-    private let ratingTagLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .left
-        label.font = UIFont().fontWith(.medium, .bold)
-        label.textColor = .systemGray
-        label.text = "평점"
-        return label
-    }()
-    
-    private let ratingLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .left
-        label.font = UIFont().fontWith(.medium)
-        return label
     }()
     
     private let overviewLabel: UILabel = {
@@ -192,6 +111,7 @@ final class SearchDetailView: UIView {
         label.textAlignment = .left
         label.font = UIFont().fontWith(.medium)
         label.numberOfLines = 0
+        label.setContentHuggingPriority(.init(1), for: .vertical)
         return label
     }()
     
@@ -214,11 +134,11 @@ final class SearchDetailView: UIView {
         backgroundImageView.image = posterImageView.image
         titleLabel.text = item.title
         originalTitleLabel.text = item.originalTitle
-        summaryLabel.text = item.summary
-        directorLabel.text = item.director
-        actorsLabel.text = item.actors
-        releaseLabel.text = item.releaseDate
-        ratingLabel.text = item.rating
+        summaryStackView.contentLabel.text = item.summary
+        directorStackView.contentLabel.text = item.director
+        actorsStackView.contentLabel.text = item.actors
+        releaseStackView.contentLabel.text = item.releaseDate
+        ratingStackView.contentLabel.text = item.rating
         overviewLabel.text = item.overview
     }
     
@@ -245,21 +165,6 @@ final class SearchDetailView: UIView {
         
         titleStackView.addArrangedSubview(titleLabel)
         titleStackView.addArrangedSubview(originalTitleLabel)
-        
-        summaryStackView.addArrangedSubview(summaryTagLabel)
-        summaryStackView.addArrangedSubview(summaryLabel)
-        
-        actorsStackView.addArrangedSubview(actorsTagLabel)
-        actorsStackView.addArrangedSubview(actorsLabel)
-        
-        directorStackView.addArrangedSubview(directorTagLabel)
-        directorStackView.addArrangedSubview(directorLabel)
-        
-        releaseStackView.addArrangedSubview(releaseTagLabel)
-        releaseStackView.addArrangedSubview(releaseLabel)
-        
-        ratingStackView.addArrangedSubview(ratingTagLabel)
-        ratingStackView.addArrangedSubview(ratingLabel)
         
         detailScrollView.snp.makeConstraints {
             $0.edges.equalTo(self.safeAreaLayoutGuide.snp.edges)
@@ -304,5 +209,13 @@ extension SearchDetailView {
         
         static let posterHeightRadius: CGFloat = 0.6
         static let backgroundImageHeightRadius: CGFloat = 0.7
+    }
+    
+    private enum Constant {
+        static let summaryTagName: String = "개요"
+        static let directorTagName: String = "감독"
+        static let actorsTagName: String = "출연"
+        static let releaseTagName: String = "개봉"
+        static let ratingTagName: String = "평점"
     }
 }
