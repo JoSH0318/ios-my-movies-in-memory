@@ -15,6 +15,7 @@ final class ContentStackView: UIStackView {
         let label = UILabel()
         label.textAlignment = .left
         label.textColor = .systemGray
+        label.setContentCompressionResistancePriority(.required, for: .horizontal)
         return label
     }()
     
